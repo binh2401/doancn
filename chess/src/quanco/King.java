@@ -1,3 +1,5 @@
+package quanco;
+
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
@@ -7,7 +9,7 @@ public class King extends Piece {
 
     public King(int x, int y, boolean isRed) {
         super(x, y, isRed);
-        icon = new ImageIcon(isRed ? "src/img/vuado.gif" : "src/img/vua.gif"); // Đường dẫn ảnh
+        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/vuado.gif" : "img/vua.gif"));
     }
 
     @Override

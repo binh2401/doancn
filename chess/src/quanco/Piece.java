@@ -1,3 +1,5 @@
+package quanco;
+
 import java.awt.Graphics;
 
 public abstract class Piece {

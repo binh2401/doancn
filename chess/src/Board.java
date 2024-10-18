@@ -1,5 +1,9 @@
+import quanco.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +12,7 @@ public class Board extends JPanel {
     private final int boardHeight = 11; // Số hàng
     private final int cellSize = 80;   // Kích thước của mỗi ô
     private List<Piece> pieces;  // Danh sách các quân cờ
+    private Image boardImage;  // Hình ảnh bàn cờ
 
     // Constructor khởi tạo bàn cờ và quân cờ
     public Board() {
@@ -17,8 +22,58 @@ public class Board extends JPanel {
         pieces = new ArrayList<>();
 
         // Thêm quân Tướng Đỏ và Đen vào danh sách
-        pieces.add(new King(4, 9, true));  // Tướng Đỏ ở vị trí (4, 9)
-        pieces.add(new King(7/2, 0, false)); // Tướng Đen ở vị trí (4, 0)
+        pieces.add(new King(4, 10, true));  // Tướng Đỏ ở vị trí (4, 9)
+        pieces.add(new King(4, 0, false)); // Tướng Đen ở vị trí (4, 0)
+
+        // quan chốt
+        pieces.add(new chot(0,7,true));
+        pieces.add(new chot(0,3,false));
+
+        pieces.add(new chot(2,7,true));
+        pieces.add(new chot(2,3,false));
+
+        pieces.add(new chot(4,7,true));
+        pieces.add(new chot(4,3,false));
+
+        pieces.add(new chot(6,7,true));
+        pieces.add(new chot(6,3,false));
+
+        pieces.add(new chot(8,7,true));
+        pieces.add(new chot(8,3,false));
+
+        // quan xe
+        pieces.add((new xe(0,10,true)));
+        pieces.add(new xe(0,0,false));
+
+        pieces.add((new xe(8,10,true)));
+        pieces.add(new xe(8,0,false));
+        // ma
+
+        pieces.add(new ma(1,10,true));
+        pieces.add(new ma(1,0,false));
+
+        pieces.add(new ma(7,10,true));
+        pieces.add(new ma(7,0,false));
+
+        // tuong
+
+        pieces.add(new tuong(2,10,true));
+        pieces.add(new tuong(2,0 ,false));
+
+        pieces.add(new tuong(6,10,true));
+        pieces.add(new tuong(6,0,false));
+
+
+        // Tải hình ảnh bàn cờ
+        try {
+            boardImage = ImageIO.read(getClass().getResourceAsStream("/img/board.gif")); // Sử dụng "/" để chỉ đường dẫn từ thư mục gốc
+            if (boardImage == null) {
+                System.out.println("Hình ảnh bàn cờ không thể tải!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     // Phương thức vẽ bàn cờ
@@ -26,32 +81,10 @@ public class Board extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Vẽ các đường ngang
-        for (int row = 0; row < boardHeight; row++) {
-            if (row != 5) { // Không vẽ đường ngang ở Sông
-                g.drawLine(0, row * cellSize, (boardWidth - 1) * cellSize, row * cellSize);
-            } else { // Vẽ đường sông, bỏ trống
-                g.drawLine(0, row * cellSize, 2 * cellSize, row * cellSize); // Đoạn đầu
-                g.drawLine(7 * cellSize, row * cellSize, (boardWidth - 1) * cellSize, row * cellSize); // Đoạn cuối
-            }
+        // Vẽ hình bàn cờ nếu nó không null
+        if (boardImage != null) {
+            g.drawImage(boardImage, 0, 0, boardWidth * cellSize, boardHeight * cellSize, this);
         }
-
-        // Vẽ các đường dọc
-        for (int col = 0; col < boardWidth; col++) {
-            g.drawLine(col * cellSize, 0, col * cellSize, 4 * cellSize); // Phần trên của bàn cờ
-            g.drawLine(col * cellSize, 6 * cellSize, col * cellSize, (boardHeight - 1) * cellSize); // Phần dưới của bàn cờ
-        }
-
-        // Vẽ đường chéo trong cung của Đỏ
-        g.drawLine(3 * cellSize, 8 * cellSize, 5 * cellSize, 10 * cellSize);
-        g.drawLine(5 * cellSize, 8 * cellSize, 3 * cellSize, 10 * cellSize);
-
-        // Vẽ đường chéo trong cung của Đen
-        g.drawLine(3 * cellSize, 0, 5 * cellSize, 2 * cellSize);
-        g.drawLine(5 * cellSize, 0, 3 * cellSize, 2 * cellSize);
-
-        // Thêm nhãn hoặc ký hiệu khác (như "Sông")
-        g.drawString("Sông", 4 * cellSize - 10, 5 * cellSize - 5);
 
         // Vẽ các quân cờ
         for (Piece piece : pieces) {
