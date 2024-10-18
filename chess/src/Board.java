@@ -3,6 +3,8 @@ import quanco.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,8 @@ public class Board extends JPanel {
     private List<Piece> pieces;  // Danh sách các quân cờ
     private Image boardImage;  // Hình ảnh bàn cờ
 
+    private Piece selectedPiece; // Quân cờ đang được chọn
+    private int mouseX, mouseY; // Vị trí chuột khi kéo
     // Constructor khởi tạo bàn cờ và quân cờ
     public Board() {
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
@@ -78,7 +82,52 @@ public class Board extends JPanel {
         pieces.add(new phao(7,8,true));
         pieces.add(new phao(7,2,false));
 
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // Tìm vị trí ô dựa trên tọa độ chuột
+                int x = e.getX() / cellSize;
+                int y = e.getY() / cellSize;
 
+                // Kiểm tra xem có quân cờ nào tại ô đó không
+                for (Piece piece : pieces) {
+                    if (piece.getX() == x && piece.getY() == y) {
+                        selectedPiece = piece; // Lưu quân cờ được chọn
+                        break;
+                    }
+                }
+                mouseX = e.getX();
+                mouseY = e.getY();
+                repaint(); // Vẽ lại bảng cờ
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (selectedPiece != null) {
+                    // Lấy tọa độ mới
+                    int newX = e.getX() / cellSize;
+                    int newY = e.getY() / cellSize;
+
+                    // Kiểm tra nếu nước đi hợp lệ
+                    if (selectedPiece.isValidMove(newX, newY)) {
+                        selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
+                    }
+
+                    selectedPiece = null; // Đặt lại quân cờ được chọn
+                    repaint(); // Vẽ lại bảng cờ
+                }
+            }
+        });
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (selectedPiece != null) {
+                    mouseX = e.getX();
+                    mouseY = e.getY();
+                    repaint(); // Vẽ lại để quân cờ di chuyển theo chuột
+                }
+            }
+        });
         // Tải hình ảnh bàn cờ
         try {
             boardImage = ImageIO.read(getClass().getResourceAsStream("/img/board.gif")); // Sử dụng "/" để chỉ đường dẫn từ thư mục gốc
@@ -88,6 +137,8 @@ public class Board extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
     }
 
@@ -105,5 +156,11 @@ public class Board extends JPanel {
         for (Piece piece : pieces) {
             piece.draw(g, cellSize);
         }
+        if (selectedPiece != null) {
+            g.setColor(new Color(255, 0, 0, 100)); // Màu nền mờ
+            g.fillRect(mouseX - cellSize / 2, mouseY - cellSize / 2, cellSize, cellSize); // Vẽ ô mờ cho quân cờ
+            selectedPiece.draw(g, cellSize); // Vẽ quân cờ tại vị trí chuột
+        }
     }
+
 }

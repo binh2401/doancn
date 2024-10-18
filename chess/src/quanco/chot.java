@@ -9,8 +9,15 @@ public class chot extends Piece {
 
     }
     @Override
-    public boolean isValidMove( int newX, int newY){
-        return true;
+    public boolean isValidMove(int newX, int newY) {
+        // Kiểm tra điều kiện di chuyển qua sông
+        if (this.isRed) {
+            // Ví dụ: Quân cờ đỏ không thể đi xuống dưới hàng 5
+            return newY <= 5;
+        } else {
+            // Ví dụ: Quân cờ đen không thể đi lên trên hàng 5
+            return newY >= 5;
+        }
     }
     public  void draw(Graphics g, int cellSize){
         int imageWidth = icon.getIconWidth();
