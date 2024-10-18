@@ -63,6 +63,21 @@ public class Board extends JPanel {
         pieces.add(new tuong(6,10,true));
         pieces.add(new tuong(6,0,false));
 
+        //si
+        pieces.add(new si(3,10,true));
+        pieces.add(new si(3,0,false));
+
+        pieces.add(new si(5,10,true));
+        pieces.add(new si(5,0,false));
+
+        //phao
+
+        pieces.add(new phao(1,8,true));
+        pieces.add(new phao(1,2,false));
+
+        pieces.add(new phao(7,8,true));
+        pieces.add(new phao(7,2,false));
+
 
         // Tải hình ảnh bàn cờ
         try {
