@@ -10,14 +10,7 @@ public class chot extends Piece {
     }
     @Override
     public boolean isValidMove(int newX, int newY) {
-        // Kiểm tra điều kiện di chuyển qua sông
-        if (this.isRed) {
-            // Ví dụ: Quân cờ đỏ không thể đi xuống dưới hàng 5
-            return newY <= 5;
-        } else {
-            // Ví dụ: Quân cờ đen không thể đi lên trên hàng 5
-            return newY >= 5;
-        }
+     return true;
     }
     public  void draw(Graphics g, int cellSize){
         int imageWidth = icon.getIconWidth();
@@ -28,12 +21,20 @@ public class chot extends Piece {
         int drawY = y * cellSize + (cellSize - imageHeight) /2; // Căn giữa theo trục Y
         // Điều chỉnh tọa độ để căn giữa chính xác
         // Điều chỉnh tọa độ cho quân cờ đỏ nếu cần
-        if (isRed) {
-            drawY -= 25; // Điều chỉnh giá trị này cho phù hợp
-        } else {
-            drawY += 25; // Điều chỉnh cho quân cờ đen
+        if (this.isRed) {
+            drawY -= 0.35 * cellSize; // Giảm 0.25 ô cho quân đỏ
+        }
+        if ((this.isRed && y <= 5) || (!this.isRed && y >= 5)) {
+            drawY -= 0.35 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
         }
 
+        if (!this.isRed) {
+            if (y < 5) {
+                drawY += 0.35 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
+            } else {
+                drawY -= 0.35 * cellSize; // Giảm 0.25 ô nếu quân đen đã qua sông
+            }
+        }
 
         icon.paintIcon(null, g, drawX, drawY);
     }

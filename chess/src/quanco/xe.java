@@ -29,10 +29,19 @@ public class xe extends Piece {
         int drawY = y * cellSize + (cellSize - imageHeight) /2; // Căn giữa theo trục Y
         // Điều chỉnh tọa độ để căn giữa chính xác
         // Điều chỉnh tọa độ cho quân cờ đỏ nếu cần
-        if (isRed) {
-            drawY -= 0; // Điều chỉnh giá trị này cho phù hợp
-        } else {
-            drawY += 0; // Điều chỉnh cho quân cờ đen
+        if (this.isRed) {
+            drawY -= 0.35 * cellSize; // Giảm 0.25 ô cho quân đỏ
+        }
+        if ((this.isRed && y <= 5) || (!this.isRed && y >= 5)) {
+            drawY -= 0.35 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
+        }
+
+        if (!this.isRed) {
+            if (y < 5) {
+                drawY += 0.35 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
+            } else {
+                drawY -= 0.35 * cellSize; // Giảm 0.25 ô nếu quân đen đã qua sông
+            }
         }
 
 
