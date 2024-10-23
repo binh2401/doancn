@@ -24,7 +24,7 @@ public class si extends Piece{
         // Điều chỉnh tọa độ để căn giữa chính xác
         // Điều chỉnh tọa độ cho quân cờ đỏ nếu cần
         if (this.isRed) {
-            drawY -= 0.35 * cellSize; // Giảm 0.25 ô cho quân đỏ
+            drawY -= 0.15 * cellSize; // Giảm 0.25 ô cho quân đỏ
         }
         if ((this.isRed && y <= 5) || (!this.isRed && y >= 5)) {
             drawY -= 0.35 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông

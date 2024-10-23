@@ -33,7 +33,9 @@ public class King extends Piece {
         }
         if ((this.isRed && y <= 5) || (!this.isRed && y >= 5)) {
             drawY -= 0.25 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
+
         }
+
 
         if (!this.isRed) {
             if (y < 5) {
