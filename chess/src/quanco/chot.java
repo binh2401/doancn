@@ -56,7 +56,7 @@ public class chot extends Piece {
             }
         }
         if ( (!this.isRed && y >= 6)) {
-            drawY -=1* cellSize;
+            drawY -=0.5* cellSize;
         }
         if ( (!this.isRed && y >= 7)) {
             drawY +=0.1* cellSize;
