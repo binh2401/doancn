@@ -29,19 +29,14 @@ public class King extends Piece {
         int drawX = x * cellSize + (cellSize - imageWidth) /2;  // Căn giữa theo trục X
         int drawY = y * cellSize + (cellSize - imageHeight) /2; // Căn giữa theo trục Y
         if (this.isRed) {
-            drawY -= 0.25 * cellSize; // Giảm 0.25 ô cho quân đỏ
+            drawY -= 0 * cellSize; // Giảm 0.25 ô cho quân đỏ
         }
-        if ((this.isRed && y <= 5) || (!this.isRed && y >= 5)) {
-            drawY -= 0.25 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
 
-        }
 
 
         if (!this.isRed) {
             if (y < 5) {
-                drawY += 0.25 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
-            } else {
-                drawY -= 0.25 * cellSize; // Giảm 0.25 ô nếu quân đen đã qua sông
+                drawY += 0 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
             }
         }
         // Vẽ hình ảnh quân cờ tại vị trí đã tính toán

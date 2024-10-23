@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Board extends JPanel {
     private final int boardWidth = 9;  // Số cột
-    private final int boardHeight = 11; // Số hàng
+    private final int boardHeight = 10; // Số hàng
     private final int cellSize = 70;   // Kích thước của mỗi ô
     private List<Piece> pieces;  // Danh sách các quân cờ
     private Image boardImage;  // Hình ảnh bàn cờ
@@ -25,60 +25,60 @@ public class Board extends JPanel {
         pieces = new ArrayList<>();
 
         // Thêm quân Tướng Đỏ và Đen vào danh sách
-        pieces.add(new King(4, 10, true));  // Tướng Đỏ ở vị trí (4, 9)
+        pieces.add(new King(4, 9, true));  // Tướng Đỏ ở vị trí (4, 9)
         pieces.add(new King(4, 0, false)); // Tướng Đen ở vị trí (4, 0)
 
         // quan chốt
-        pieces.add(new chot(0,7,true));
+        pieces.add(new chot(0,6,true));
         pieces.add(new chot(0,3,false));
 
-        pieces.add(new chot(2,7,true));
+        pieces.add(new chot(2,6,true));
         pieces.add(new chot(2,3,false));
 
-        pieces.add(new chot(4,7,true));
+        pieces.add(new chot(4,6,true));
         pieces.add(new chot(4,3,false));
 
-        pieces.add(new chot(6,7,true));
+        pieces.add(new chot(6,6,true));
         pieces.add(new chot(6,3,false));
 
-        pieces.add(new chot(8,7,true));
+        pieces.add(new chot(8,6,true));
         pieces.add(new chot(8,3,false));
 
         // quan xe
-        pieces.add((new xe(0,10,true)));
+        pieces.add((new xe(0,9,true)));
         pieces.add(new xe(0,0,false));
 
-        pieces.add((new xe(8,10,true)));
+        pieces.add((new xe(8,9,true)));
         pieces.add(new xe(8,0,false));
         // ma
 
-        pieces.add(new ma(1,10,true));
+        pieces.add(new ma(1,9,true));
         pieces.add(new ma(1,0,false));
 
-        pieces.add(new ma(7,10,true));
+        pieces.add(new ma(7,9,true));
         pieces.add(new ma(7,0,false));
 
         // tuong
 
-        pieces.add(new tuong(2,10,true));
+        pieces.add(new tuong(2,9,true));
         pieces.add(new tuong(2,0 ,false));
 
-        pieces.add(new tuong(6,10,true));
+        pieces.add(new tuong(6,9,true));
         pieces.add(new tuong(6,0,false));
 
         //si
-        pieces.add(new si(3,10,true));
+        pieces.add(new si(3,9,true));
         pieces.add(new si(3,0,false));
 
-        pieces.add(new si(5,10,true));
+        pieces.add(new si(5,9,true));
         pieces.add(new si(5,0,false));
 
         //phao
 
-        pieces.add(new phao(1,8,true));
+        pieces.add(new phao(1,7,true));
         pieces.add(new phao(1,2,false));
 
-        pieces.add(new phao(7,8,true));
+        pieces.add(new phao(7,7,true));
         pieces.add(new phao(7,2,false));
 
         addMouseListener(new MouseAdapter() {
@@ -109,7 +109,7 @@ public class Board extends JPanel {
 
                     // Kiểm tra nếu nước đi hợp lệ
                     // Kiểm tra nếu nước đi hợp lệ và không di chuyển đến hàng 5 hoặc 11
-                    if (selectedPiece.isValidMove(newX, newY)  && newY != 11) {
+                    if (selectedPiece.isValidMove(newX, newY)   && newY != 11) {
                         selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
                     }
 
