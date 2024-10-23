@@ -2,12 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
-    public static void main(String[] args) {
-        // Tạo cửa sổ JFrame
-        JFrame frame = new JFrame("Đồ án cờ tướng AI");
+    private JFrame frame; // Để lưu trữ JFrame chính
 
-        // Đặt layout của JFrame là GridBagLayout để có thể canh giữa
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Main().createAndShowGUI());
+    }
+
+    private void createAndShowGUI() {
+        frame = new JFrame("Đồ án cờ tướng AI");
         frame.setLayout(new GridBagLayout());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(false); // Ẩn frame chính ban đầu
+
+        StartWindow startWindow = new StartWindow(this); // Truyền Main vào StartWindow
+        startWindow.setVisible(true); // Hiển thị cửa sổ StartWindow
+    }
+
+    public void startGame() {
+        // Xóa cửa sổ hiện tại
+        frame.getContentPane().removeAll();
+        frame.repaint(); // Xóa mọi thứ trong JFrame
 
         // Tạo đối tượng Board để vẽ bàn cờ
         Board board = new Board();
@@ -23,11 +37,6 @@ public class Main {
 
         // Sử dụng pack() để tự động điều chỉnh kích thước cửa sổ phù hợp với bàn cờ
         frame.pack();
-
-        // Đảm bảo chương trình dừng khi đóng cửa sổ
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Hiển thị cửa sổ
-        frame.setVisible(true);
+        frame.setVisible(true); // Hiện cửa sổ chính
     }
 }
