@@ -12,7 +12,11 @@ import java.util.List;
 public class Board extends JPanel {
     private final int boardWidth = 9;  // Số cột
     private final int boardHeight = 11; // Số hàng
+<<<<<<< HEAD
     private final int cellSize = 90;   // Kích thước của mỗi ô
+=======
+    private final int cellSize = 70;   // Kích thước của mỗi ô
+>>>>>>> 231506dfae34830fa21a758b70a84a450fd0546c
     private List<Piece> pieces;  // Danh sách các quân cờ
     private Image boardImage;  // Hình ảnh bàn cờ
 
