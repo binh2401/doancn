@@ -15,7 +15,6 @@ public class Board extends JPanel {
     private final int cellSize = 70;   // Kích thước của mỗi ô
     private List<Piece> pieces;  // Danh sách các quân cờ
     private Image boardImage;  // Hình ảnh bàn cờ
-
     private Piece selectedPiece; // Quân cờ đang được chọn
     private int mouseX, mouseY; // Vị trí chuột khi kéo
     // Constructor khởi tạo bàn cờ và quân cờ

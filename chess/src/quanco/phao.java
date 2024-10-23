@@ -27,14 +27,36 @@ public class phao extends  Piece{
             drawY -= 0.35 * cellSize; // Giảm 0.25 ô cho quân đỏ
         }
         if ((this.isRed && y <= 5) || (!this.isRed && y >= 5)) {
-            drawY -= 0.35 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
+            drawY -= 0.15 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
+        }
+        if ((this.isRed && y <= 4) || (!this.isRed && y >= 4)) {
+            drawY -= 0.15 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
+        }
+        if ((this.isRed && y <= 3) || (!this.isRed && y >= 3)) {
+            drawY -= 0.05 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
+        }
+        if ((this.isRed && y <= 2) || (!this.isRed && y >= 3)) {
+            drawY -= 0.05 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
+        }
+        if ((this.isRed && y <= 1) || (!this.isRed && y >= 3)) {
+            drawY -= 0.05 * cellSize; // Giảm 0.25 ô nếu quân đã qua sông
         }
 
         if (!this.isRed) {
             if (y < 5) {
                 drawY += 0.35 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
-            } else {
-                drawY -= 0.35 * cellSize; // Giảm 0.25 ô nếu quân đen đã qua sông
+            }
+            if ( (!this.isRed && y >= 6)) {
+                drawY +=0.05 *cellSize;
+            }
+            if ( (!this.isRed && y >= 7)) {
+                drawY +=0.05 *cellSize;
+            }
+            if ( (!this.isRed && y >= 8)) {
+                drawY +=0.1 *cellSize;
+            }
+            if ( (!this.isRed && y >= 9)) {
+                drawY +=0.2 *cellSize;
             }
         }
 
