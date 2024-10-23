@@ -109,7 +109,7 @@ public class Board extends JPanel {
 
                     // Kiểm tra nếu nước đi hợp lệ
                     // Kiểm tra nếu nước đi hợp lệ và không di chuyển đến hàng 5 hoặc 11
-                    if (selectedPiece.isValidMove(newX, newY) && newY != 5 && newY != 11) {
+                    if (selectedPiece.isValidMove(newX, newY)  && newY != 11) {
                         selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
                     }
 
