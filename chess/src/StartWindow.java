@@ -1,11 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 public class StartWindow extends JFrame {
     private JButton startButton;
-    private Image backgroundImage; // Thêm biến hình nền
+    private JButton playWithComputerButton;
+    private JButton createRoomButton;
+    private JButton findTableButton;
+    private JButton loginButton; // Nút đăng nhập
+    private JButton registerButton; // Nút đăng ký
+    private Image backgroundImage;
 
     public StartWindow(Main main) {
         setTitle("Chào mừng đến với Cờ Tướng AI");
@@ -15,41 +21,116 @@ public class StartWindow extends JFrame {
 
         // Tải hình nền
         try {
-            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/img/HinhNen/choi-co-tuong-voi-may.jpg")); // Đảm bảo đường dẫn đúng
-            if (backgroundImage == null) {
-                System.out.println("Hình ảnh bàn cờ không thể tải!");
+            InputStream input = getClass().getResourceAsStream("/img/HinhNen/choi-co-tuong-voi-may.jpg");
+            if (input == null) {
+                throw new IOException("Không tìm thấy hình ảnh: /img/HinhNen/choi-co-tuong-voi-may.jpg");
             }
+            backgroundImage = ImageIO.read(input);
         } catch (IOException e) {
+            System.out.println("Không thể tải hình ảnh nền");
             e.printStackTrace();
         }
 
         JLabel title = new JLabel("Cờ Tướng AI", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
-        add(title, BorderLayout.NORTH); // Đặt tiêu đề ở phía trên
+        add(title, BorderLayout.NORTH);
 
-        // Khởi tạo nút bắt đầu
-        startButton = new JButton("Bắt đầu chơi");
-        startButton.setPreferredSize(new Dimension(200, 50)); // Đặt kích thước cho nút
+        // Khởi tạo các nút với văn bản và hình nền
+        startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi ngay");
+        playWithComputerButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi với máy");
+        createRoomButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tạo phòng");
+        findTableButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tìm bàn chơi");
+
+        // Đặt kích thước cho các nút
+        Dimension buttonSize = new Dimension(200, 50);
+        startButton.setPreferredSize(buttonSize);
+        playWithComputerButton.setPreferredSize(buttonSize);
+        createRoomButton.setPreferredSize(buttonSize);
+        findTableButton.setPreferredSize(buttonSize);
+
+        // Thêm hành động cho các nút
         startButton.addActionListener(e -> {
-            setVisible(false); // Ẩn cửa sổ bắt đầu
-            main.startGame(); // Gọi phương thức startGame trong Main
+            setVisible(false);
+            main.startGame();
         });
+//        playWithComputerButton.addActionListener(e -> {
+//            main.playWithComputer(); // Gọi phương thức chơi với máy
+//        });
+//
+//        createRoomButton.addActionListener(e -> {
+//            main.createRoom(); // Gọi phương thức tạo phòng
+//        });
+//
+//        findTableButton.addActionListener(e -> {
+//            main.findTable(); // Gọi phương thức tìm bàn chơi
+//        });
 
-        // Thay đổi vị trí nút
-        JPanel buttonPanel = new JPanel(); // Tạo một JPanel để chứa nút
-        buttonPanel.setLayout(new GridBagLayout()); // Sử dụng GridBagLayout
-
-        // Thay đổi GridBagConstraints để căn giữa
+        // Tạo panel chứa các nút và đặt chúng vào giữa cửa sổ
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER; // Căn giữa
-        buttonPanel.add(startButton, gbc); // Thêm nút vào panel
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.insets = new Insets(10, 0, 10, 0); // Khoảng cách giữa các nút
 
-        add(buttonPanel, BorderLayout.CENTER); // Thêm panel vào giữa cửa sổ
+        buttonPanel.add(startButton, gbc);
+        buttonPanel.add(playWithComputerButton, gbc);
+        buttonPanel.add(createRoomButton, gbc);
+        buttonPanel.add(findTableButton, gbc);
 
-        setLocationRelativeTo(null); // Đặt cửa sổ ở giữa màn hình
+        add(buttonPanel, BorderLayout.CENTER);
+
+        // Tạo panel cho các nút đăng nhập và đăng ký
+        JPanel authPanel = new JPanel();
+        authPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Bố trí ở bên trái
+        loginButton = new JButton("Đăng nhập");
+        registerButton = new JButton("Đăng ký");
+
+        // Đặt kích thước cho các nút đăng nhập và đăng ký
+        loginButton.setPreferredSize(new Dimension(100, 30));
+        registerButton.setPreferredSize(new Dimension(100, 30));
+
+        // Thêm nút vào panel
+        authPanel.add(loginButton);
+        authPanel.add(registerButton);
+
+        // Đặt panel đăng nhập và đăng ký vào góc dưới bên trái
+        add(authPanel, BorderLayout.SOUTH);
+
+        setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    // Phương thức tạo nút với hình nền và văn bản
+    private JButton createButtonWithBackground(String imagePath, String text) {
+        JButton button = new JButton();
+        try {
+            InputStream input = getClass().getResourceAsStream(imagePath);
+            if (input == null) {
+                throw new IOException("Không tìm thấy hình ảnh: " + imagePath);
+            }
+            ImageIcon icon = new ImageIcon(ImageIO.read(input));
+
+            // Điều chỉnh kích thước hình ảnh theo kích thước nút
+            Image scaledImage = icon.getImage().getScaledInstance(200, 50, Image.SCALE_SMOOTH);
+            button.setIcon(new ImageIcon(scaledImage));
+
+            // Thiết lập văn bản cho nút
+            button.setText(text);
+            button.setHorizontalTextPosition(SwingConstants.CENTER); // Đặt vị trí văn bản
+            button.setVerticalTextPosition(SwingConstants.CENTER);   // Đặt vị trí văn bản
+            button.setFont(new Font("Arial", Font.BOLD, 16)); // Cỡ chữ
+            button.setForeground(Color.WHITE); // Màu chữ
+
+            button.setPreferredSize(new Dimension(200, 50));
+            button.setContentAreaFilled(false); // Không tô màu nền cho nút
+            button.setBorderPainted(false); // Không vẽ viền cho nút
+            button.setFocusPainted(false); // Không tô viền khi chọn nút
+        } catch (Exception e) {
+            System.out.println("Không thể tải hình ảnh: " + imagePath);
+            e.printStackTrace();
+        }
+        return button;
     }
 
     // Phương thức vẽ hình nền
