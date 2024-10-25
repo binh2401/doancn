@@ -4,26 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71b9cc8d-b5b1-423b-a7bc-2defa8eaf7f6" name="Changes" comment="">
+    <list default="true" id="735147cf-4ebd-4b57-8b55-3209279a0241" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/chot.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/chot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/ma.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/ma.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/phao.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/phao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/si.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/si.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/tuong.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/tuong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/xe.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/xe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,11 +27,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="2nw3bk508yS9XAkqOdgntOkv3cl" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2nwAVsLKTozt4AvqOeQOE86MrgY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,7 +40,7 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241025_0002",
+    "com.google.cloudcode.ide_session_index": "20241025_0000",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true"
   }
@@ -68,11 +62,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="71b9cc8d-b5b1-423b-a7bc-2defa8eaf7f6" name="Changes" comment="" />
-      <created>1729870386990</created>
+      <changelist id="735147cf-4ebd-4b57-8b55-3209279a0241" name="Changes" comment="" />
+      <created>1729873793839</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1729870386990</updated>
+      <updated>1729873793839</updated>
     </task>
     <servers />
   </component>
