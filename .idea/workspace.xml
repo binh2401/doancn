@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa152422-381d-4049-85c4-ed425e51472d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
+    <list default="true" id="f3fed0c2-6833-49b6-a792-b102deabfbba" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/phao.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/phao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/quanco/ma.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/ma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/quanco/tuong.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/tuong.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/quanco/xe.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/xe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +27,7 @@
   "customColor": "",
   "associatedIndex": 6
 }]]></component>
-  <component name="ProjectId" id="2nvqBI8GnSGDXjUUB34JHPXT1qG" />
+  <component name="ProjectId" id="2nvwtlg58tS1heEgQglgbBWNNld" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -34,7 +36,6 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.google.cloudcode.ide_session_index": "20241025_0000",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true"
@@ -57,11 +58,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="aa152422-381d-4049-85c4-ed425e51472d" name="Changes" comment="" />
-      <created>1729863762197</created>
+      <changelist id="f3fed0c2-6833-49b6-a792-b102deabfbba" name="Changes" comment="" />
+      <created>1729867076108</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1729863762197</updated>
+      <updated>1729867076108</updated>
     </task>
     <servers />
   </component>
