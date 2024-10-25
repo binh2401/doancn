@@ -1,0 +1,180 @@
+Index: .idea/workspace.xml
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+deleted file mode 100644
+--- a/.idea/workspace.xml	(revision a1ed30e9d731ae179724db19cd79dbbd14734188)
++++ /dev/null	(revision a1ed30e9d731ae179724db19cd79dbbd14734188)
+@@ -1,72 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AutoImportSettings">
+-    <option name="autoReloadType" value="SELECTIVE" />
+-  </component>
+-  <component name="ChangeListManager">
+-    <list default="true" id="99809da5-eee5-4183-878b-66ca2cda78bd" name="Changes" comment="" />
+-    <option name="SHOW_DIALOG" value="false" />
+-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-    <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="Git.Settings">
+-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-  </component>
+-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+-  "lastFilter": {
+-    "state": "OPEN",
+-    "assignee": "SeamussK"
+-  }
+-}]]></component>
+-  <component name="GithubPullRequestsUISettings"><![CDATA[{
+-  "selectedUrlAndAccountId": {
+-    "url": "https://github.com/binh2401/doancn.git",
+-    "accountId": "f1471a14-9cc3-47a2-b4b9-accb54996364"
+-  }
+-}]]></component>
+-  <component name="ProjectColorInfo">{
+-  &quot;customColor&quot;: &quot;&quot;,
+-  &quot;associatedIndex&quot;: 6
+-}</component>
+-  <component name="ProjectId" id="2nvk46XAyUxfvLpA8n41lAB4QJt" />
+-  <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+-    <option name="showLibraryContents" value="true" />
+-  </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20241025_0000&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+-  }
+-}</component>
+-  <component name="RunManager">
+-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="Main" />
+-      <module name="doancn" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <recent_temporary>
+-      <list>
+-        <item itemvalue="Application.Main" />
+-      </list>
+-    </recent_temporary>
+-  </component>
+-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-  <component name="TaskManager">
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="99809da5-eee5-4183-878b-66ca2cda78bd" name="Changes" comment="" />
+-      <created>1729860744064</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1729860744064</updated>
+-    </task>
+-    <servers />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH_[Changes]/shelved.patch	(revision a1ed30e9d731ae179724db19cd79dbbd14734188)
++++ /dev/null	(revision a1ed30e9d731ae179724db19cd79dbbd14734188)
+@@ -1,81 +0,0 @@
+-Index: .idea/workspace.xml
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+-deleted file mode 100644
+---- a/.idea/workspace.xml	(revision 34f3a349dd47244372086ce44938afc45d5eae52)
+-+++ /dev/null	(revision 34f3a349dd47244372086ce44938afc45d5eae52)
+-@@ -1,73 +0,0 @@
+--<?xml version="1.0" encoding="UTF-8"?>
+--<project version="4">
+--  <component name="AutoImportSettings">
+--    <option name="autoReloadType" value="SELECTIVE" />
+--  </component>
+--  <component name="ChangeListManager">
+--    <list default="true" id="99809da5-eee5-4183-878b-66ca2cda78bd" name="Changes" comment="">
+--      <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/chess/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Board.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/chess/src/quanco/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/King.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/chess/src/quanco/chot.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/chot.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/chess/src/quanco/si.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/si.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$1.class" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$2.class" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board.class" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" afterDir="false" />
+--    </list>
+--    <option name="SHOW_DIALOG" value="false" />
+--    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+--    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+--    <option name="LAST_RESOLUTION" value="IGNORE" />
+--  </component>
+--  <component name="Git.Settings">
+--    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+--  </component>
+--  <component name="ProjectColorInfo"><![CDATA[{
+--  "customColor": "",
+--  "associatedIndex": 6
+--}]]></component>
+--  <component name="ProjectId" id="2nvk46XAyUxfvLpA8n41lAB4QJt" />
+--  <component name="ProjectViewState">
+--    <option name="hideEmptyMiddlePackages" value="true" />
+--    <option name="showLibraryContents" value="true" />
+--  </component>
+--  <component name="PropertiesComponent"><![CDATA[{
+--  "keyToString": {
+--    "Application.Main.executor": "Run",
+--    "RunOnceActivity.ShowReadmeOnStart": "true",
+--    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+--    "com.google.cloudcode.ide_session_index": "20241025_0000",
+--    "git-widget-placeholder": "main",
+--    "kotlin-language-version-configured": "true"
+--  }
+--}]]></component>
+--  <component name="RunManager">
+--    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+--      <option name="MAIN_CLASS_NAME" value="Main" />
+--      <module name="doancn" />
+--      <method v="2">
+--        <option name="Make" enabled="true" />
+--      </method>
+--    </configuration>
+--    <recent_temporary>
+--      <list>
+--        <item itemvalue="Application.Main" />
+--      </list>
+--    </recent_temporary>
+--  </component>
+--  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+--  <component name="TaskManager">
+--    <task active="true" id="Default" summary="Default task">
+--      <changelist id="99809da5-eee5-4183-878b-66ca2cda78bd" name="Changes" comment="" />
+--      <created>1729860744064</created>
+--      <option name="number" value="Default" />
+--      <option name="presentableId" value="Default" />
+--      <updated>1729860744064</updated>
+--    </task>
+--    <servers />
+--  </component>
+--</project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH__Changes_.xml	(revision a1ed30e9d731ae179724db19cd79dbbd14734188)
++++ /dev/null	(revision a1ed30e9d731ae179724db19cd79dbbd14734188)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH_[Changes]" date="1729868943754" recycled="false" toDelete="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2024_10_09_CH_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 25/10/2024 10:09 CH [Changes]" />
+-</changelist>
+\ No newline at end of file
