@@ -41,26 +41,26 @@ public class Board extends JPanel {
         pieces.add(new chot(8, 3, false));
 
         // Thêm quân xe, mã, tướng, si, pháo...
-        pieces.add(new xe(0, 9, true));
-        pieces.add(new xe(0, 0, false));
-        pieces.add(new xe(8, 9, true));
-        pieces.add(new xe(8, 0, false));
-        pieces.add(new ma(1, 9, true));
-        pieces.add(new ma(1, 0, false));
-        pieces.add(new ma(7,9,true));
-        pieces.add(new ma(7,0,false));
-        pieces.add(new tuong(2, 9, true));
-        pieces.add(new tuong(2, 0, false));
-        pieces.add(new tuong(6,9,true));
-        pieces.add(new tuong(6,0,false));
+        pieces.add(new xe(0, 9, true,pieces));
+        pieces.add(new xe(0, 0, false,pieces));
+        pieces.add(new xe(8, 9, true,pieces));
+        pieces.add(new xe(8, 0, false,pieces));
+        pieces.add(new ma(1, 9, true,pieces));
+        pieces.add(new ma(1, 0, false,pieces));
+        pieces.add(new ma(7,9,true,pieces));
+        pieces.add(new ma(7,0,false,pieces));
+        pieces.add(new tuong(2, 9, true, pieces));
+        pieces.add(new tuong(2, 0, false, pieces));
+        pieces.add(new tuong(6,9,true, pieces));
+        pieces.add(new tuong(6,0,false, pieces));
         pieces.add(new si(3, 9, true));
         pieces.add(new si(3, 0, false));
         pieces.add(new si(5,9,true));
         pieces.add(new si(5,0,false));
-        pieces.add(new phao(1, 7, true));
-        pieces.add(new phao(1, 2, false));
-        pieces.add(new phao(7, 7, true));
-        pieces.add(new phao(7, 2, false));
+        pieces.add(new phao(1, 7, true,pieces));
+        pieces.add(new phao(1, 2, false,pieces));
+        pieces.add(new phao(7, 7, true,pieces));
+        pieces.add(new phao(7, 2, false,pieces));
 
         addMouseListener(new MouseAdapter() {
             @Override

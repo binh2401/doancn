@@ -2,40 +2,72 @@ package quanco;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
-public class phao extends  Piece{
+public class phao extends Piece {
     private ImageIcon icon;
-    public phao (int x, int y, boolean isRed){
-        super(x,y,isRed);
-        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/phaodo.gif":"img/phoaden.gif"));
+    private List<Piece> pieces; // Thêm biến `pieces` để lưu danh sách quân cờ từ lớp Board
+
+    public phao(int x, int y, boolean isRed, List<Piece> pieces) {
+        super(x, y, isRed);
+        this.pieces = pieces;
+        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/phaodo.gif" : "img/phoaden.gif"));
     }
+
     @Override
-    public boolean isValidMove( int newX, int newY){
-        return true;
+    public boolean isValidMove(int newX, int newY) {
+        // Nếu không di chuyển theo hàng hoặc cột thì không hợp lệ
+        if (x != newX && y != newY) {
+            return false;
+        }
+
+        // Đếm số quân cờ giữa vị trí hiện tại và vị trí đích
+        int countBetween = 0;
+        if (x == newX) { // Di chuyển dọc
+            int start = Math.min(y, newY) + 1;
+            int end = Math.max(y, newY);
+            for (int i = start; i < end; i++) {
+                if (getPieceAt(x, i) != null) { // Kiểm tra quân cờ trên hàng dọc
+                    countBetween++;
+                }
+            }
+        } else if (y == newY) { // Di chuyển ngang
+            int start = Math.min(x, newX) + 1;
+            int end = Math.max(x, newX);
+            for (int i = start; i < end; i++) {
+                if (getPieceAt(i, y) != null) { // Kiểm tra quân cờ trên hàng ngang
+                    countBetween++;
+                }
+            }
+        }
+
+        // Kiểm tra tính hợp lệ của nước đi
+        Piece destinationPiece = getPieceAt(newX, newY);
+        if (countBetween == 0) {
+            return destinationPiece == null; // Không có quân nào giữa -> nước đi hợp lệ nếu đích không có quân
+        } else if (countBetween == 1 && destinationPiece != null && destinationPiece.isRed != this.isRed) {
+            return true; // Đúng một quân cờ giữa và đích có quân đối thủ -> ăn quân hợp lệ
+        }
+
+        return false; // Không hợp lệ nếu có nhiều hơn một quân ở giữa hoặc không thỏa điều kiện
     }
-    public  void draw(Graphics g, int cellSize){
+
+    private Piece getPieceAt(int x, int y) {
+        for (Piece piece : pieces) {
+            if (piece.getX() == x && piece.getY() == y) {
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void draw(Graphics g, int cellSize) {
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
-
-        // Tính toán tọa độ để căn giữa quân cờ trong ô
-        int drawX = x * cellSize + (cellSize - imageWidth) /2;  // Căn giữa theo trục X
-        int drawY = y * cellSize + (cellSize - imageHeight) /2; // Căn giữa theo trục Y
-        // Điều chỉnh tọa độ để căn giữa chính xác
-        // Điều chỉnh tọa độ cho quân cờ đỏ nếu cần
-
-        if (this.isRed) {
-            drawY -= 0 * cellSize; // Giảm 0.25 ô cho quân đỏ
-        }
-
-
-        if (!this.isRed) {
-            if (y < 5) {
-                drawY += 0 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
-            }
-
-        }
+        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
 
         icon.paintIcon(null, g, drawX, drawY);
     }
-
 }

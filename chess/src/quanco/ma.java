@@ -2,41 +2,59 @@ package quanco;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
-public class ma  extends  Piece{
+public class ma extends Piece {
     private ImageIcon icon;
-    public ma( int x, int y, boolean isRed){
-        super(x,y,isRed);
-        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/Mado.gif" : "img/Maden.gif"));
+    private List<Piece> pieces;
 
+    public ma(int x, int y, boolean isRed, List<Piece> pieces) {
+        super(x, y, isRed);
+        this.pieces = pieces;
+        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/Mado.gif" : "img/Maden.gif"));
     }
+
     @Override
-    public boolean isValidMove( int newX, int newY){
-        return true;
+    public boolean isValidMove(int newX, int newY) {
+        // Tính toán độ lệch giữa vị trí hiện tại và vị trí đích
+        int dx = Math.abs(newX - x);
+        int dy = Math.abs(newY - y);
+
+        // Kiểm tra điều kiện nước đi hình chữ "L" của quân Mã
+        if ((dx == 2 && dy == 1) || (dx == 1 && dy == 2)) {
+            // Kiểm tra quân chặn theo hướng ban đầu
+            int blockX = x + (dx == 2 ? (newX - x) / 2 : 0);
+            int blockY = y + (dy == 2 ? (newY - y) / 2 : 0);
+
+            // Nếu có quân cờ chặn đường, nước đi không hợp lệ
+            if (getPieceAt(blockX, blockY) != null) {
+                return false;
+            }
+            // Nước đi hợp lệ nếu không có quân chặn
+            return true;
+        }
+        return false;
     }
-    public  void draw(Graphics g, int cellSize){
+
+    // Kiểm tra quân cờ tại vị trí cụ thể
+    private Piece getPieceAt(int x, int y) {
+        for (Piece piece : pieces) {
+            if (piece.getX() == x && piece.getY() == y) {
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void draw(Graphics g, int cellSize) {
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
 
         // Tính toán tọa độ để căn giữa quân cờ trong ô
-        int drawX = x * cellSize + (cellSize - imageWidth) /2;  // Căn giữa theo trục X
-        int drawY = y * cellSize + (cellSize - imageHeight) /2; // Căn giữa theo trục Y
-        // Điều chỉnh tọa độ để căn giữa chính xác
-        // Điều chỉnh tọa độ cho quân cờ đỏ nếu cần
-        if (this.isRed) {
-            drawY -= 0 * cellSize; // Giảm 0.25 ô cho quân đỏ
-        }
-
-
-        if (!this.isRed) {
-            if (y < 5) {
-                drawY += 0 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
-            }
-
-        }
-
+        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
 
         icon.paintIcon(null, g, drawX, drawY);
     }
-
 }

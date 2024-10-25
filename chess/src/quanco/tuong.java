@@ -1,42 +1,57 @@
 package quanco;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
-public class tuong extends Piece{
+public class tuong extends Piece {
     private ImageIcon icon;
-    public tuong (int x ,int y, boolean isRead){
-        super(x,y,isRead);
-        icon = new ImageIcon(getClass().getClassLoader().getResource( isRead ? "img/Tuongdo.gif":"img/Tuongden.gif"));
+    private List<Piece> pieces;  // Danh sách các quân cờ để kiểm tra chặn
 
+    public tuong(int x, int y, boolean isRed, List<Piece> pieces) {
+        super(x, y, isRed);
+        this.pieces = pieces;
+        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/Tuongdo.gif" : "img/Tuongden.gif"));
     }
+
     @Override
     public boolean isValidMove(int newX, int newY) {
-        // Logic kiểm tra nước đi
-        // ...
-        return true;  // Dummy return, bạn có thể giữ logic như ban đầu
+        // Kiểm tra di chuyển theo đường chéo 2 ô
+        int dx = Math.abs(newX - x);
+        int dy = Math.abs(newY - y);
+
+        if (dx == 2 && dy == 2) {
+            // Kiểm tra giới hạn sân
+            if ((isRed && newY >= 5) || (!isRed && newY < 5)) {
+                // Kiểm tra chặn đường di chuyển
+                int blockX = (newX + x) / 2;
+                int blockY = (newY + y) / 2;
+                if (getPieceAt(blockX, blockY) == null) {
+                    return true;  // Hợp lệ nếu không bị chặn
+                }
+            }
+        }
+        return false;  // Không hợp lệ nếu không thỏa điều kiện
     }
+
+    // Kiểm tra xem có quân cờ nào tại vị trí cụ thể
+    private Piece getPieceAt(int x, int y) {
+        for (Piece piece : pieces) {
+            if (piece.getX() == x && piece.getY() == y) {
+                return piece;
+            }
+        }
+        return null;
+    }
+
     @Override
-    public  void draw(Graphics g, int cellSize){
+    public void draw(Graphics g, int cellSize) {
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
 
         // Tính toán tọa độ để căn giữa quân cờ trong ô
-        int drawX = x * cellSize + (cellSize - imageWidth) /2;  // Căn giữa theo trục X
-        int drawY = y * cellSize + (cellSize - imageHeight) /2; // Căn giữa theo trục Y
-        // Điều chỉnh tọa độ để căn giữa chính xác
-        // Điều chỉnh tọa độ cho quân cờ đỏ nếu cần
-        if (this.isRed) {
-            drawY -= 0 * cellSize; // Giảm 0.25 ô cho quân đỏ
-        }
-
-        if (!this.isRed) {
-            if (y < 5) {
-                drawY += 0 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
-            }
-        }
-
+        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
 
         icon.paintIcon(null, g, drawX, drawY);
     }
