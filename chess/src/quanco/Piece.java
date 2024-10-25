@@ -13,7 +13,7 @@ public abstract class Piece {
     public Piece(int x, int y, boolean isRed, List<Piece> pieces) {
         this.x = x;
         this.y = y;
-        this.isRed = isRed;
+        this.isRed = isRed; // Gán màu cho quân cờ
         this.pieces = pieces; // Gán danh sách quân cờ
     }
 
@@ -28,6 +28,10 @@ public abstract class Piece {
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public boolean isRed() { // Thêm phương thức này
+        return isRed;
     }
 
     public abstract boolean isValidMove(int newX, int newY);
