@@ -23,6 +23,9 @@ public abstract class Piece {
         this.x = x;
         this.y = y;
     }
+    public boolean isRed() {  // Thêm phương thức này
+        return isRed;
+    }
     public abstract boolean isValidMove(int newX, int newY);
 
     public abstract void draw(Graphics g, int cellSize);
