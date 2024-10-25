@@ -14,32 +14,40 @@ public class King extends Piece {
 
     @Override
     public boolean isValidMove(int newX, int newY) {
-        // Logic kiểm tra nước đi
-        // ...
-        return true;  // Dummy return, bạn có thể giữ logic như ban đầu
+        // Kiểm tra nếu di chuyển nằm ngoài bàn cờ
+        if (newX < 0 || newX >= 9 || newY < 0 || newY >= 10) {
+            return false;
+        }
+
+        // Kiểm tra di chuyển một ô ngang hoặc dọc
+        int dx = Math.abs(newX - x);
+        int dy = Math.abs(newY - y);
+        if (dx + dy != 1) {
+            return false; // Tướng chỉ có thể di chuyển 1 ô theo chiều ngang hoặc dọc
+        }
+
+        // Kiểm tra phạm vi Cửu cung
+        if (isRed) {
+            return newX >= 3 && newX <= 5 && newY >= 7 && newY <= 9;
+        } else {
+            return newX >= 3 && newX <= 5 && newY >= 0 && newY <= 2;
+        }
     }
 
     @Override
     public void draw(Graphics g, int cellSize) {
-        // Lấy kích thước của ảnh quân cờ
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
 
-        // Tính toán tọa độ để căn giữa quân cờ trong ô
-        int drawX = x * cellSize + (cellSize - imageWidth) /2;  // Căn giữa theo trục X
-        int drawY = y * cellSize + (cellSize - imageHeight) /2; // Căn giữa theo trục Y
-        if (this.isRed) {
-            drawY -= 0 * cellSize; // Giảm 0.25 ô cho quân đỏ
+        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
+
+        if (this.isRed && y >= 7) {
+            drawY -= 0.05 * cellSize;
+        } else if (!this.isRed && y <= 2) {
+            drawY += 0.05 * cellSize;
         }
 
-
-
-        if (!this.isRed) {
-            if (y < 5) {
-                drawY += 0 * cellSize; // Tăng 0.25 ô nếu quân đen chưa qua sông
-            }
-        }
-        // Vẽ hình ảnh quân cờ tại vị trí đã tính toán
         icon.paintIcon(null, g, drawX, drawY);
     }
 }
