@@ -123,6 +123,7 @@ public class Board extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     // Phương thức vẽ bàn cờ
