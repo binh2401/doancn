@@ -6,17 +6,15 @@ import java.util.List;
 
 public class phao extends Piece {
     private ImageIcon icon;
-    private List<Piece> pieces; // Thêm biến `pieces` để lưu danh sách quân cờ từ lớp Board
 
     public phao(int x, int y, boolean isRed, List<Piece> pieces) {
-        super(x, y, isRed);
-        this.pieces = pieces;
+        super(x, y, isRed, pieces); // Đã sửa ở đây để gọi đến constructor của lớp cha
         icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/phaodo.gif" : "img/phoaden.gif"));
     }
 
     @Override
     public boolean isValidMove(int newX, int newY) {
-        // Nếu không di chuyển theo hàng hoặc cột thì không hợp lệ
+        // Kiểm tra xem di chuyển có theo hàng hoặc cột không
         if (x != newX && y != newY) {
             return false;
         }
@@ -27,7 +25,7 @@ public class phao extends Piece {
             int start = Math.min(y, newY) + 1;
             int end = Math.max(y, newY);
             for (int i = start; i < end; i++) {
-                if (getPieceAt(x, i) != null) { // Kiểm tra quân cờ trên hàng dọc
+                if (getPieceAt(x, i) != null) {
                     countBetween++;
                 }
             }
@@ -35,7 +33,7 @@ public class phao extends Piece {
             int start = Math.min(x, newX) + 1;
             int end = Math.max(x, newX);
             for (int i = start; i < end; i++) {
-                if (getPieceAt(i, y) != null) { // Kiểm tra quân cờ trên hàng ngang
+                if (getPieceAt(i, y) != null) {
                     countBetween++;
                 }
             }
@@ -44,29 +42,20 @@ public class phao extends Piece {
         // Kiểm tra tính hợp lệ của nước đi
         Piece destinationPiece = getPieceAt(newX, newY);
         if (countBetween == 0) {
-            return destinationPiece == null; // Không có quân nào giữa -> nước đi hợp lệ nếu đích không có quân
-        } else if (countBetween == 1 && destinationPiece != null && destinationPiece.isRed != this.isRed) {
-            return true; // Đúng một quân cờ giữa và đích có quân đối thủ -> ăn quân hợp lệ
+            return destinationPiece == null; // Nước đi hợp lệ nếu không có quân nào ở giữa và đích không có quân
+        } else if (countBetween == 1 && destinationPiece != null && destinationPiece.isRed) {
+            return true; // Nước đi hợp lệ nếu có một quân ở giữa và đích có quân đối thủ
         }
 
-        return false; // Không hợp lệ nếu có nhiều hơn một quân ở giữa hoặc không thỏa điều kiện
-    }
-
-    private Piece getPieceAt(int x, int y) {
-        for (Piece piece : pieces) {
-            if (piece.getX() == x && piece.getY() == y) {
-                return piece;
-            }
-        }
-        return null;
+        return false; // Nước đi không hợp lệ
     }
 
     @Override
     public void draw(Graphics g, int cellSize) {
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
-        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
-        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
+        int drawX = x * cellSize + (cellSize - imageWidth) / 2; // Căn giữa theo trục X
+        int drawY = y * cellSize + (cellSize - imageHeight) / 2; // Căn giữa theo trục Y
 
         icon.paintIcon(null, g, drawX, drawY);
     }

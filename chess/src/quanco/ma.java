@@ -6,11 +6,9 @@ import java.util.List;
 
 public class ma extends Piece {
     private ImageIcon icon;
-    private List<Piece> pieces;
 
     public ma(int x, int y, boolean isRed, List<Piece> pieces) {
-        super(x, y, isRed);
-        this.pieces = pieces;
+        super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đầy đủ tham số
         icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/Mado.gif" : "img/Maden.gif"));
     }
 
@@ -36,8 +34,9 @@ public class ma extends Piece {
         return false;
     }
 
-    // Kiểm tra quân cờ tại vị trí cụ thể
-    private Piece getPieceAt(int x, int y) {
+    // Phương thức kiểm tra quân cờ tại vị trí cụ thể
+    @Override
+    protected Piece getPieceAt(int x, int y) {
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
                 return piece;

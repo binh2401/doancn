@@ -6,11 +6,9 @@ import java.util.List;
 
 public class xe extends Piece {
     private ImageIcon icon;
-    private List<Piece> pieces;  // Danh sách các quân cờ để kiểm tra chặn
 
     public xe(int x, int y, boolean isRed, List<Piece> pieces) {
-        super(x, y, isRed);
-        this.pieces = pieces;
+        super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đầy đủ tham số
         icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/xedo.gif" : "img/Xeden.gif"));
     }
 
@@ -42,8 +40,9 @@ public class xe extends Piece {
         return true;  // Nước đi hợp lệ nếu không bị cản
     }
 
-    // Kiểm tra xem có quân cờ nào tại vị trí cụ thể
-    private Piece getPieceAt(int x, int y) {
+    // Phương thức kiểm tra quân cờ tại vị trí cụ thể
+    @Override
+    protected Piece getPieceAt(int x, int y) {
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
                 return piece;

@@ -25,43 +25,44 @@ public class Board extends JPanel {
         pieces = new ArrayList<>();
 
         // Thêm quân Tướng Đỏ và Đen vào danh sách
-        pieces.add(new King(4, 9, true));  // Tướng Đỏ ở vị trí (4, 9)
-        pieces.add(new King(4, 0, false)); // Tướng Đen ở vị trí (4, 0)
+        pieces.add(new King(4, 9, true, pieces));  // Tướng Đỏ ở vị trí (4, 9)
+        pieces.add(new King(4, 0, false, pieces)); // Tướng Đen ở vị trí (4, 0)
 
         // Thêm các quân cờ khác...
-        pieces.add(new chot(0, 6, true));
-        pieces.add(new chot(0, 3, false));
-        pieces.add(new chot(2, 6, true));
-        pieces.add(new chot(2, 3, false));
-        pieces.add(new chot(4, 6, true));
-        pieces.add(new chot(4, 3, false));
-        pieces.add(new chot(6, 6, true));
-        pieces.add(new chot(6, 3, false));
-        pieces.add(new chot(8, 6, true));
-        pieces.add(new chot(8, 3, false));
+        pieces.add(new chot(0, 6, true, pieces));
+        pieces.add(new chot(0, 3, false, pieces));
+        pieces.add(new chot(2, 6, true, pieces));
+        pieces.add(new chot(2, 3, false, pieces));
+        pieces.add(new chot(4, 6, true, pieces));
+        pieces.add(new chot(4, 3, false, pieces));
+        pieces.add(new chot(6, 6, true, pieces));
+        pieces.add(new chot(6, 3, false, pieces));
+        pieces.add(new chot(8, 6, true, pieces));
+        pieces.add(new chot(8, 3, false, pieces));
 
         // Thêm quân xe, mã, tướng, si, pháo...
-        pieces.add(new xe(0, 9, true,pieces));
-        pieces.add(new xe(0, 0, false,pieces));
-        pieces.add(new xe(8, 9, true,pieces));
-        pieces.add(new xe(8, 0, false,pieces));
-        pieces.add(new ma(1, 9, true,pieces));
-        pieces.add(new ma(1, 0, false,pieces));
-        pieces.add(new ma(7,9,true,pieces));
-        pieces.add(new ma(7,0,false,pieces));
+        pieces.add(new xe(0, 9, true, pieces));
+        pieces.add(new xe(0, 0, false, pieces));
+        pieces.add(new xe(8, 9, true, pieces));
+        pieces.add(new xe(8, 0, false, pieces));
+        pieces.add(new ma(1, 9, true, pieces));
+        pieces.add(new ma(1, 0, false, pieces));
+        pieces.add(new ma(7, 9, true, pieces));
+        pieces.add(new ma(7, 0, false, pieces));
         pieces.add(new tuong(2, 9, true, pieces));
         pieces.add(new tuong(2, 0, false, pieces));
-        pieces.add(new tuong(6,9,true, pieces));
-        pieces.add(new tuong(6,0,false, pieces));
-        pieces.add(new si(3, 9, true));
-        pieces.add(new si(3, 0, false));
-        pieces.add(new si(5,9,true));
-        pieces.add(new si(5,0,false));
-        pieces.add(new phao(1, 7, true,pieces));
-        pieces.add(new phao(1, 2, false,pieces));
-        pieces.add(new phao(7, 7, true,pieces));
-        pieces.add(new phao(7, 2, false,pieces));
+        pieces.add(new tuong(6, 9, true, pieces));
+        pieces.add(new tuong(6, 0, false, pieces));
+        pieces.add(new si(3, 9, true, pieces));
+        pieces.add(new si(3, 0, false, pieces));
+        pieces.add(new si(5, 9, true, pieces));
+        pieces.add(new si(5, 0, false, pieces));
+        pieces.add(new phao(1, 7, true, pieces));
+        pieces.add(new phao(1, 2, false, pieces));
+        pieces.add(new phao(7, 7, true, pieces));
+        pieces.add(new phao(7, 2, false, pieces));
 
+        // Thêm các sự kiện chuột
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -135,8 +136,19 @@ public class Board extends JPanel {
         for (Piece piece : pieces) {
             piece.draw(g, cellSize);
         }
+
+        // Vẽ gợi ý đường đi nếu có quân cờ được chọn
         if (selectedPiece != null) {
             g.setColor(new Color(255, 0, 0, 100)); // Màu nền mờ
+            List<int[]> validMoves = selectedPiece.getValidMoves(); // Lấy các nước đi hợp lệ
+            for (int[] move : validMoves) {
+                int drawX = move[0] * cellSize;
+                int drawY = move[1] * cellSize;
+                g.fillRect(drawX, drawY, cellSize, cellSize); // Vẽ ô gợi ý
+            }
+
+            // Vẽ quân cờ được chọn
+            g.setColor(new Color(255, 0, 0, 150)); // Màu nền cho quân cờ đang kéo
             g.fillRect(mouseX - cellSize / 2, mouseY - cellSize / 2, cellSize, cellSize); // Vẽ ô mờ cho quân cờ
             selectedPiece.draw(g, cellSize); // Vẽ quân cờ tại vị trí chuột
         }

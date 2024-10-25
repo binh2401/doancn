@@ -1,14 +1,14 @@
 package quanco;
 
-import java.awt.Graphics;
-import javax.swing.ImageIcon;
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
 public class King extends Piece {
-
     private ImageIcon icon;
 
-    public King(int x, int y, boolean isRed) {
-        super(x, y, isRed);
+    public King(int x, int y, boolean isRed, List<Piece> pieces) {
+        super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đầy đủ tham số
         icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/vuado.gif" : "img/vua.gif"));
     }
 
@@ -39,6 +39,7 @@ public class King extends Piece {
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
 
+        // Tính toán tọa độ để căn giữa quân cờ trong ô
         int drawX = x * cellSize + (cellSize - imageWidth) / 2;
         int drawY = y * cellSize + (cellSize - imageHeight) / 2;
 

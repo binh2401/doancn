@@ -2,12 +2,13 @@ package quanco;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class si extends Piece {
     private ImageIcon icon;
 
-    public si(int x, int y, boolean isRed) {
-        super(x, y, isRed);
+    public si(int x, int y, boolean isRed, List<Piece> pieces) {
+        super(x, y, isRed, pieces); // Gọi constructor của lớp cha
         icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/sido.gif" : "img/siden.gif"));
     }
 
@@ -29,12 +30,17 @@ public class si extends Piece {
         // Kiểm tra di chuyển chéo
         if ((newX == x - 1 && newY == y - 1) || (newX == x + 1 && newY == y - 1) ||
                 (newX == x - 1 && newY == y + 1) || (newX == x + 1 && newY == y + 1)) {
+            // Kiểm tra có quân nào cản đường không (nếu cần)
+            if (getPieceAt(newX, newY) != null) {
+                return false; // Có quân cản đường
+            }
             return true; // Nước đi hợp lệ
         }
 
         return false; // Nước đi không hợp lệ
     }
 
+    @Override
     public void draw(Graphics g, int cellSize) {
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
@@ -42,17 +48,6 @@ public class si extends Piece {
         // Tính toán tọa độ để căn giữa quân cờ trong ô
         int drawX = x * cellSize + (cellSize - imageWidth) / 2; // Căn giữa theo trục X
         int drawY = y * cellSize + (cellSize - imageHeight) / 2; // Căn giữa theo trục Y
-
-        // Điều chỉnh tọa độ cho quân cờ đỏ nếu cần
-        if (this.isRed) {
-            drawY -= 0 * cellSize; // Giảm 0 ô cho quân đỏ
-        }
-
-        if (!this.isRed) {
-            if (y < 5) {
-                drawY += 0 * cellSize; // Tăng 0 ô nếu quân đen chưa qua sông
-            }
-        }
 
         icon.paintIcon(null, g, drawX, drawY);
     }

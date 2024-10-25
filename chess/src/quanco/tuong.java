@@ -6,11 +6,9 @@ import java.util.List;
 
 public class tuong extends Piece {
     private ImageIcon icon;
-    private List<Piece> pieces;  // Danh sách các quân cờ để kiểm tra chặn
 
     public tuong(int x, int y, boolean isRed, List<Piece> pieces) {
-        super(x, y, isRed);
-        this.pieces = pieces;
+        super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đủ tham số
         icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/Tuongdo.gif" : "img/Tuongden.gif"));
     }
 
@@ -35,7 +33,8 @@ public class tuong extends Piece {
     }
 
     // Kiểm tra xem có quân cờ nào tại vị trí cụ thể
-    private Piece getPieceAt(int x, int y) {
+    @Override
+    protected Piece getPieceAt(int x, int y) { // Thay đổi quyền truy cập thành protected
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
                 return piece;
