@@ -8,7 +8,7 @@ public class phao extends Piece {
     private ImageIcon icon;
 
     public phao(int x, int y, boolean isRed, List<Piece> pieces) {
-        super(x, y, isRed, pieces); // Đã sửa ở đây để gọi đến constructor của lớp cha
+        super(x, y, isRed, pieces); // Gọi constructor của lớp cha
         icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? "img/phaodo.gif" : "img/phoaden.gif"));
     }
 
@@ -16,7 +16,7 @@ public class phao extends Piece {
     public boolean isValidMove(int newX, int newY) {
         // Kiểm tra xem di chuyển có theo hàng hoặc cột không
         if (x != newX && y != newY) {
-            return false;
+            return false; // Nước đi không hợp lệ nếu không theo hàng hoặc cột
         }
 
         // Đếm số quân cờ giữa vị trí hiện tại và vị trí đích
@@ -42,9 +42,11 @@ public class phao extends Piece {
         // Kiểm tra tính hợp lệ của nước đi
         Piece destinationPiece = getPieceAt(newX, newY);
         if (countBetween == 0) {
-            return destinationPiece == null; // Nước đi hợp lệ nếu không có quân nào ở giữa và đích không có quân
-        } else if (countBetween == 1 && destinationPiece != null && destinationPiece.isRed) {
-            return true; // Nước đi hợp lệ nếu có một quân ở giữa và đích có quân đối thủ
+            // Nếu không có quân nào ở giữa và đích không có quân
+            return destinationPiece == null;
+        } else if (countBetween == 1 && destinationPiece != null && destinationPiece.isRed != isRed) {
+            // Nếu có một quân ở giữa và đích có quân đối thủ
+            return true;
         }
 
         return false; // Nước đi không hợp lệ
