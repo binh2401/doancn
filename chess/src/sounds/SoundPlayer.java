@@ -7,7 +7,6 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 
 public class SoundPlayer {
-
     public void playSound(String soundPath) {
         try {
             // Sử dụng getResourceAsStream() để lấy tệp âm thanh từ đường dẫn

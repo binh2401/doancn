@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
+import sounds.BackgroundMusicPlayer; // Đảm bảo bạn đã import lớp này
 
 public class StartWindow extends JFrame {
     private JButton startButton;
@@ -12,6 +13,7 @@ public class StartWindow extends JFrame {
     private JButton loginButton; // Nút đăng nhập
     private JButton registerButton; // Nút đăng ký
     private Image backgroundImage;
+    private BackgroundMusicPlayer musicPlayer; // Biến cho lớp âm thanh
 
     public StartWindow(Main main) {
         setTitle("Chào mừng đến với Cờ Tướng AI");
@@ -30,6 +32,10 @@ public class StartWindow extends JFrame {
             System.out.println("Không thể tải hình ảnh nền");
             e.printStackTrace();
         }
+
+        // Khởi tạo âm thanh nền
+        musicPlayer = new BackgroundMusicPlayer();
+        musicPlayer.playBackgroundMusic("/sounds/nhacNen.wav"); // Đường dẫn đến âm thanh nền
 
         JLabel title = new JLabel("Cờ Tướng AI", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
@@ -53,17 +59,16 @@ public class StartWindow extends JFrame {
             setVisible(false);
             main.startGame();
         });
-//        playWithComputerButton.addActionListener(e -> {
-//            main.playWithComputer(); // Gọi phương thức chơi với máy
-//        });
-//
-//        createRoomButton.addActionListener(e -> {
-//            main.createRoom(); // Gọi phương thức tạo phòng
-//        });
-//
-//        findTableButton.addActionListener(e -> {
-//            main.findTable(); // Gọi phương thức tìm bàn chơi
-//        });
+        // Uncomment and implement these actions if needed
+        // playWithComputerButton.addActionListener(e -> {
+        //     main.playWithComputer(); // Gọi phương thức chơi với máy
+        // });
+        // createRoomButton.addActionListener(e -> {
+        //     main.createRoom(); // Gọi phương thức tạo phòng
+        // });
+        // findTableButton.addActionListener(e -> {
+        //     main.findTable(); // Gọi phương thức tìm bàn chơi
+        // });
 
         // Tạo panel chứa các nút và đặt chúng vào giữa cửa sổ
         JPanel buttonPanel = new JPanel();
@@ -139,6 +144,15 @@ public class StartWindow extends JFrame {
         super.paint(g);
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
+    // Phương thức đóng cửa sổ, dừng nhạc nền
+    @Override
+    public void dispose() {
+        super.dispose();
+        if (musicPlayer != null) {
+            musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền khi cửa sổ bị đóng
         }
     }
 }
