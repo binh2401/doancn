@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import sounds.SoundPlayer;
 
 public class Board extends JPanel {
     private final int boardWidth = 9;  // Số cột
@@ -92,6 +93,13 @@ public class Board extends JPanel {
                     // Kiểm tra nếu nước đi hợp lệ
                     if (selectedPiece.isValidMove(newX, newY) && newY >= 0 && newY < boardHeight) {
                         selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
+                    }
+                    // Phát âm thanh khi di chuyển quân cờ
+                    SoundPlayer soundPlayer = new SoundPlayer();
+                    if (selectedPiece.isRed()) { // Kiểm tra màu quân cờ
+                        soundPlayer.playSound("/sounds/move.wav"); // Âm thanh cho quân đỏ
+                    } else {
+                        soundPlayer.playSound("/sounds/move2.wav"); // Âm thanh cho quân đen
                     }
 
                     selectedPiece = null; // Đặt lại quân cờ được chọn
