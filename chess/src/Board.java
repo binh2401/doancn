@@ -21,8 +21,6 @@ public class Board extends JPanel {
     // Constructor khởi tạo bàn cờ và quân cờ
     public Board() {
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
-
-        // Khởi tạo danh sách quân cờ
         pieces = new ArrayList<>();
 
         // Thêm quân Tướng Đỏ và Đen vào danh sách
@@ -67,11 +65,9 @@ public class Board extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                // Tìm vị trí ô dựa trên tọa độ chuột
                 int x = e.getX() / cellSize;
                 int y = e.getY() / cellSize;
 
-                // Kiểm tra xem có quân cờ nào tại ô đó không
                 for (Piece piece : pieces) {
                     if (piece.getX() == x && piece.getY() == y) {
                         selectedPiece = piece; // Lưu quân cờ được chọn
@@ -86,17 +82,16 @@ public class Board extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (selectedPiece != null) {
-                    // Lấy tọa độ mới
                     int newX = e.getX() / cellSize;
                     int newY = e.getY() / cellSize;
 
-                    // Kiểm tra nếu nước đi hợp lệ
                     if (selectedPiece.isValidMove(newX, newY) && newY >= 0 && newY < boardHeight) {
                         selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
                     }
+
                     // Phát âm thanh khi di chuyển quân cờ
                     SoundPlayer soundPlayer = new SoundPlayer();
-                    if (selectedPiece.isRed()) { // Kiểm tra màu quân cờ
+                    if (selectedPiece.isRed()) {
                         soundPlayer.playSound("/sounds/move.wav"); // Âm thanh cho quân đỏ
                     } else {
                         soundPlayer.playSound("/sounds/move2.wav"); // Âm thanh cho quân đen
@@ -135,27 +130,46 @@ public class Board extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Vẽ hình bàn cờ nếu nó không null
         if (boardImage != null) {
             g.drawImage(boardImage, 0, 0, boardWidth * cellSize, boardHeight * cellSize, this);
         }
 
-        // Vẽ các quân cờ
-        for (Piece piece : pieces) {
-            piece.draw(g, cellSize);
-        }
-
-        // Vẽ gợi ý đường đi nếu có quân cờ được chọn
+        // Nếu có quân cờ được chọn, vẽ dấu chấm vàng và các nước đi hợp lệ
         if (selectedPiece != null) {
-            g.setColor(new Color(255, 0, 0, 100)); // Màu nền mờ
-            List<int[]> validMoves = selectedPiece.getValidMoves(); // Lấy các nước đi hợp lệ
+            // Vẽ dấu chấm vàng cho quân cờ được chọn
+            g.setColor(new Color(255, 215, 0)); // Màu vàng sáng hơn
+            int centerX = selectedPiece.getX() * cellSize + cellSize / 2; // Vị trí của quân cờ
+            int centerY = selectedPiece.getY() * cellSize + cellSize / 2;
+            g.fillOval(centerX - 10, centerY - 10, 20, 20); // Vẽ dấu chấm vàng
+
+            // Vẽ dấu X cho các nước đi hợp lệ
+            g.setColor(Color.GREEN); // Đổi màu cho dấu X thành xanh lá cây
+            List<int[]> validMoves = selectedPiece.getValidMoves();
             for (int[] move : validMoves) {
                 int drawX = move[0] * cellSize;
                 int drawY = move[1] * cellSize;
-                g.fillRect(drawX, drawY, cellSize, cellSize); // Vẽ ô gợi ý
-            }
 
-            // Vẽ quân cờ được chọn
+                // Độ dài của dấu X
+                int lineLength = cellSize / 3; // Ngắn hơn
+
+                // Độ dày của dấu X
+                int lineWidth = 10; // Đậm hơn
+
+                // Vẽ dấu X
+                ((Graphics2D) g).setStroke(new BasicStroke(lineWidth)); // Đặt độ dày
+                g.drawLine(drawX + (cellSize - lineLength) / 2, drawY + (cellSize - lineLength) / 2,
+                        drawX + (cellSize + lineLength) / 2, drawY + (cellSize + lineLength) / 2); // Đường chéo
+                g.drawLine(drawX + (cellSize + lineLength) / 2, drawY + (cellSize - lineLength) / 2,
+                        drawX + (cellSize - lineLength) / 2, drawY + (cellSize + lineLength) / 2); // Đường chéo
+            }
+        }
+
+        for (Piece piece : pieces) {
+            piece.draw(g, cellSize); // Vẽ quân cờ
+        }
+
+        // Nếu có quân cờ đang kéo, vẽ ô mờ cho quân cờ
+        if (selectedPiece != null) {
             g.setColor(new Color(255, 0, 0, 150)); // Màu nền cho quân cờ đang kéo
             g.fillRect(mouseX - cellSize / 2, mouseY - cellSize / 2, cellSize, cellSize); // Vẽ ô mờ cho quân cờ
             selectedPiece.draw(g, cellSize); // Vẽ quân cờ tại vị trí chuột
