@@ -57,10 +57,10 @@ public class Board extends JPanel {
         pieces.add(new si(3, 0, false));
         pieces.add(new si(5,9,true));
         pieces.add(new si(5,0,false));
-        pieces.add(new phao(1, 7, true));
-        pieces.add(new phao(1, 2, false));
-        pieces.add(new phao(7, 7, true));
-        pieces.add(new phao(7, 2, false));
+        pieces.add(new phao(1, 7, true,pieces));
+        pieces.add(new phao(1, 2, false,pieces));
+        pieces.add(new phao(7, 7, true,pieces));
+        pieces.add(new phao(7, 2, false,pieces));
 
         addMouseListener(new MouseAdapter() {
             @Override

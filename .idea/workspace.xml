@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99809da5-eee5-4183-878b-66ca2cda78bd" name="Changes" comment="">
+    <list default="true" id="aa152422-381d-4049-85c4-ed425e51472d" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/chot.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/chot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/si.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/si.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/quanco/phao.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/phao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +25,7 @@
   "customColor": "",
   "associatedIndex": 6
 }]]></component>
-  <component name="ProjectId" id="2nvk46XAyUxfvLpA8n41lAB4QJt" />
+  <component name="ProjectId" id="2nvqBI8GnSGDXjUUB34JHPXT1qG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -62,11 +57,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="99809da5-eee5-4183-878b-66ca2cda78bd" name="Changes" comment="" />
-      <created>1729860744064</created>
+      <changelist id="aa152422-381d-4049-85c4-ed425e51472d" name="Changes" comment="" />
+      <created>1729863762197</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1729860744064</updated>
+      <updated>1729863762197</updated>
     </task>
     <servers />
   </component>
