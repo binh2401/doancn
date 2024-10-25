@@ -37,6 +37,7 @@ public class StartWindow extends JFrame {
         musicPlayer = new BackgroundMusicPlayer();
         musicPlayer.playBackgroundMusic("/sounds/nhacNen.wav"); // Đường dẫn đến âm thanh nền
 
+
         JLabel title = new JLabel("Cờ Tướng AI", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
         add(title, BorderLayout.NORTH);
@@ -56,9 +57,11 @@ public class StartWindow extends JFrame {
 
         // Thêm hành động cho các nút
         startButton.addActionListener(e -> {
-            setVisible(false);
-            main.startGame();
+            musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
+            setVisible(false); // Ẩn StartWindow
+            main.startGame(); // Khởi động trò chơi
         });
+
         // Uncomment and implement these actions if needed
         // playWithComputerButton.addActionListener(e -> {
         //     main.playWithComputer(); // Gọi phương thức chơi với máy
@@ -147,12 +150,10 @@ public class StartWindow extends JFrame {
         }
     }
 
-    // Phương thức đóng cửa sổ, dừng nhạc nền
+    // Phương thức đóng cửa sổ
     @Override
     public void dispose() {
         super.dispose();
-        if (musicPlayer != null) {
-            musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền khi cửa sổ bị đóng
-        }
+        // Không cần dừng nhạc nền ở đây nữa
     }
 }

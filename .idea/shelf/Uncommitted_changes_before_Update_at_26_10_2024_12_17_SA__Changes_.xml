@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_26_10_2024_12_17_SA_[Changes]" date="1729876635898" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_10_2024_12_17_SA_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 26/10/2024 12:17 SA [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/doancn/sounds/BackgroundMusicPlayer.class" />
+    <option name="AFTER_PATH" value="out/production/doancn/sounds/BackgroundMusicPlayer.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_10_2024_12_17_SA_[Changes]/BackgroundMusicPlayer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/doancn/StartWindow.class" />
+    <option name="AFTER_PATH" value="out/production/doancn/StartWindow.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_10_2024_12_17_SA_[Changes]/StartWindow.class" />
+  </binary>
+</changelist>
