@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9689967-78a5-4198-bb21-709ab0b9d052" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chess/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/ma.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/ma.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/tuong.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/tuong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/quanco/xe.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/xe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

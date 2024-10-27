@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Timer;
 import sounds.SoundPlayer;
 
 public class Board extends JPanel {
@@ -17,6 +18,10 @@ public class Board extends JPanel {
     private Image boardImage;            // Hình ảnh bàn cờ
     private Piece selectedPiece;          // Quân cờ đang được chọn
     private int mouseX, mouseY;          // Vị trí chuột khi kéo
+    private boolean isRedTurn = true;    // Biến xác định lượt
+    private Timer timer;                  // Bộ đếm thời gian
+    private int timeLeft = 60;            // Thời gian còn lại
+    private JLabel timerLabel;            // Nhãn hiển thị thời gian
 
     // Constructor khởi tạo bàn cờ và quân cờ
     public Board() {
@@ -61,6 +66,15 @@ public class Board extends JPanel {
         pieces.add(new phao(7, 7, true, pieces));
         pieces.add(new phao(7, 2, false, pieces));
 
+        // Khởi tạo nhãn thời gian
+        timerLabel = new JLabel("Time left: " + timeLeft);
+        timerLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        timerLabel.setForeground(Color.RED);
+        add(timerLabel, BorderLayout.NORTH); // Thêm nhãn vào JPanel
+
+        // Khởi động bộ đếm thời gian
+        startTimer();
+
         // Thêm các sự kiện chuột
         addMouseListener(new MouseAdapter() {
             @Override
@@ -69,7 +83,7 @@ public class Board extends JPanel {
                 int y = e.getY() / cellSize;
 
                 for (Piece piece : pieces) {
-                    if (piece.getX() == x && piece.getY() == y) {
+                    if (piece.getX() == x && piece.getY() == y && piece.isRed() == isRedTurn) {
                         selectedPiece = piece; // Lưu quân cờ được chọn
                         break;
                     }
@@ -95,6 +109,9 @@ public class Board extends JPanel {
                                 pieces.remove(targetPiece); // Loại bỏ quân địch
                             }
                             selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
+                            // Đổi lượt
+                            isRedTurn = !isRedTurn;
+                            timeLeft = 60; // Reset thời gian
                         }
                     }
 
@@ -134,6 +151,20 @@ public class Board extends JPanel {
         }
     }
 
+    private void startTimer() {
+        timer = new Timer(1000, e -> {
+            if (timeLeft > 0) {
+                timeLeft--;
+                timerLabel.setText("Time left: " + timeLeft);
+            } else {
+                // Nếu thời gian hết, thông báo và kết thúc trò chơi
+                JOptionPane.showMessageDialog(this, (isRedTurn ? "Đỏ" : "Đen") + " đã hết thời gian!", "Game Over", JOptionPane.WARNING_MESSAGE);
+                System.exit(0); // Thoát trò chơi
+            }
+        });
+        timer.start();
+    }
+
     // Phương thức vẽ bàn cờ
     @Override
     protected void paintComponent(Graphics g) {
@@ -170,6 +201,13 @@ public class Board extends JPanel {
                         drawX + (cellSize + lineLength) / 2, drawY + (cellSize + lineLength) / 2); // Đường chéo
                 g.drawLine(drawX + (cellSize + lineLength) / 2, drawY + (cellSize - lineLength) / 2,
                         drawX + (cellSize - lineLength) / 2, drawY + (cellSize + lineLength) / 2); // Đường chéo
+
+                // Đánh dấu quân cờ đối phương có thể ăn được
+                Piece enemyPiece = getPieceAt(move[0], move[1]);
+                if (enemyPiece != null && enemyPiece.isRed() != selectedPiece.isRed()) {
+                    g.setColor(Color.RED); // Đánh dấu quân đối phương
+                    g.fillOval(drawX + cellSize / 2 - 10, drawY + cellSize / 2 - 10, 20, 20); // Vẽ dấu tròn đỏ
+                }
             }
         }
 
