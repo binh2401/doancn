@@ -7,9 +7,9 @@
     <list default="true" id="b9689967-78a5-4198-bb21-709ab0b9d052" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chess/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

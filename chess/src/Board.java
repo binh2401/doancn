@@ -23,7 +23,6 @@ public class Board extends JPanel {
     private int timeLeft = 60;            // Thời gian còn lại
     private JLabel timerLabel;            // Nhãn hiển thị thời gian
 
-    // Constructor khởi tạo bàn cờ và quân cờ
     public Board() {
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
         pieces = new ArrayList<>();
@@ -109,6 +108,20 @@ public class Board extends JPanel {
                                 pieces.remove(targetPiece); // Loại bỏ quân địch
                             }
                             selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
+
+                            // Kiểm tra chiếu tướng
+                            if (isCheck(!isRedTurn)) {
+                                JOptionPane.showMessageDialog(Board.this,
+                                        (isRedTurn ? "Đỏ" : "Đen") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                            }
+
+                            // Kiểm tra chiếu tướng
+                            if (isCheckmate(!isRedTurn)) {
+                                JOptionPane.showMessageDialog(Board.this,
+                                        (isRedTurn ? "Đỏ" : "Đen") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
+                                System.exit(0); // Kết thúc trò chơi
+                            }
+
                             // Đổi lượt
                             isRedTurn = !isRedTurn;
                             timeLeft = 60; // Reset thời gian
@@ -170,6 +183,7 @@ public class Board extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        // Vẽ hình ảnh bàn cờ
         if (boardImage != null) {
             g.drawImage(boardImage, 0, 0, boardWidth * cellSize, boardHeight * cellSize, this);
         }
@@ -177,63 +191,85 @@ public class Board extends JPanel {
         // Nếu có quân cờ được chọn, vẽ dấu chấm vàng và các nước đi hợp lệ
         if (selectedPiece != null) {
             // Vẽ dấu chấm vàng cho quân cờ được chọn
-            g.setColor(new Color(255, 215, 0)); // Màu vàng sáng hơn
-            int centerX = selectedPiece.getX() * cellSize + cellSize / 2; // Vị trí của quân cờ
-            int centerY = selectedPiece.getY() * cellSize + cellSize / 2;
-            g.fillOval(centerX - 10, centerY - 10, 20, 20); // Vẽ dấu chấm vàng
+            g.setColor(Color.YELLOW);
+            g.fillOval(mouseX - cellSize / 4, mouseY - cellSize / 4, cellSize / 2, cellSize / 2);
 
-            // Vẽ dấu X cho các nước đi hợp lệ
-            g.setColor(Color.GREEN); // Đổi màu cho dấu X thành xanh lá cây
-            List<int[]> validMoves = selectedPiece.getValidMoves();
-            for (int[] move : validMoves) {
-                int drawX = move[0] * cellSize;
-                int drawY = move[1] * cellSize;
-
-                // Độ dài của dấu X
-                int lineLength = cellSize / 3; // Ngắn hơn
-
-                // Độ dày của dấu X
-                int lineWidth = 10; // Đậm hơn
-
-                // Vẽ dấu X
-                ((Graphics2D) g).setStroke(new BasicStroke(lineWidth)); // Đặt độ dày
-                g.drawLine(drawX + (cellSize - lineLength) / 2, drawY + (cellSize - lineLength) / 2,
-                        drawX + (cellSize + lineLength) / 2, drawY + (cellSize + lineLength) / 2); // Đường chéo
-                g.drawLine(drawX + (cellSize + lineLength) / 2, drawY + (cellSize - lineLength) / 2,
-                        drawX + (cellSize - lineLength) / 2, drawY + (cellSize + lineLength) / 2); // Đường chéo
-
-                // Đánh dấu quân cờ đối phương có thể ăn được
-                Piece enemyPiece = getPieceAt(move[0], move[1]);
-                if (enemyPiece != null && enemyPiece.isRed() != selectedPiece.isRed()) {
-                    g.setColor(Color.RED); // Đánh dấu quân đối phương
-                    g.fillOval(drawX + cellSize / 2 - 10, drawY + cellSize / 2 - 10, 20, 20); // Vẽ dấu tròn đỏ
-                }
+            // Vẽ các nước đi hợp lệ
+            for (int[] move : selectedPiece.getValidMoves()) {
+                g.setColor(Color.GREEN);
+                g.fillOval(move[0] * cellSize + cellSize / 4, move[1] * cellSize + cellSize / 4, cellSize / 2, cellSize / 2);
             }
         }
 
+        // Vẽ tất cả các quân cờ
         for (Piece piece : pieces) {
-            piece.draw(g, cellSize); // Vẽ quân cờ
-        }
-
-        // Nếu có quân cờ đang kéo, vẽ ô mờ cho quân cờ
-        if (selectedPiece != null) {
-            g.setColor(new Color(255, 0, 0, 150)); // Màu đỏ trong suốt
-            g.fillRect(mouseX - cellSize / 2, mouseY - cellSize / 2, cellSize, cellSize); // Vẽ ô mờ
-
-            // Vẽ quân cờ đang kéo tại vị trí chuột
-            int drawX = mouseX / cellSize * cellSize;
-            int drawY = mouseY / cellSize * cellSize;
-            selectedPiece.draw(g, cellSize); // Vẽ quân cờ tại vị trí chuột
+            piece.draw(g, cellSize); // Thêm tham số cellSize
         }
     }
 
-    // Phương thức lấy quân cờ tại vị trí (x, y)
+    // Kiểm tra xem quân cờ có ở vị trí nào đó hay không
     private Piece getPieceAt(int x, int y) {
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
-                return piece; // Trả về quân cờ tại vị trí (x, y)
+                return piece;
             }
         }
-        return null; // Không tìm thấy quân cờ
+        return null; // Không có quân ở vị trí
+    }
+
+    // Kiểm tra xem một bên có bị chiếu hay không
+    private boolean isCheck(boolean isRed) {
+        // Tìm kiếm quân Tướng
+        Piece king = null;
+        for (Piece piece : pieces) {
+            if (piece instanceof King && piece.isRed() == isRed) {
+                king = piece;
+                break;
+            }
+        }
+
+        if (king == null) {
+            return false; // Không tìm thấy Tướng
+        }
+
+        // Kiểm tra xem có quân cờ nào có thể tấn công quân Tướng không
+        for (Piece piece : pieces) {
+            if (piece.isRed() != isRed && piece.isValidMove(king.getX(), king.getY())) {
+                return true; // Có quân cờ tấn công
+            }
+        }
+        return false; // Không có quân cờ nào tấn công
+    }
+
+    // Kiểm tra xem có chiếu tướng hay không
+    private boolean isCheckmate(boolean isRed) {
+        // Nếu bên này bị chiếu
+        if (!isCheck(isRed)) {
+            return false; // Không bị chiếu
+        }
+
+        // Kiểm tra xem có nước đi hợp lệ nào không
+        for (Piece piece : pieces) {
+            if (piece.isRed() == isRed) {
+                for (int[] move : piece.getValidMoves()) {
+                    // Lưu vị trí hiện tại của quân cờ
+                    int originalX = piece.getX();
+                    int originalY = piece.getY();
+
+                    // Di chuyển quân cờ
+                    piece.setPosition(move[0], move[1]);
+
+                    // Kiểm tra xem quân Tướng có bị chiếu không
+                    if (!isCheck(isRed)) {
+                        piece.setPosition(originalX, originalY); // Hoàn tác di chuyển
+                        return false; // Có nước đi hợp lệ
+                    }
+
+                    // Hoàn tác di chuyển
+                    piece.setPosition(originalX, originalY);
+                }
+            }
+        }
+        return true; // Không có nước đi hợp lệ, tức là chiếu tướng
     }
 }
