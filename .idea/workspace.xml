@@ -4,14 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5fe8c17-a818-4477-863c-df7d76d0a2e8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_10_2024_12_17_SA_[Changes]/BackgroundMusicPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_10_2024_12_17_SA_[Changes]/StartWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_10_2024_12_17_SA_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_10_2024_12_17_SA__Changes_.xml" beforeDir="false" />
+    <list default="true" id="b9689967-78a5-4198-bb21-709ab0b9d052" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chess/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/quanco/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/quanco/ma.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/ma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/quanco/tuong.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/tuong.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/quanco/xe.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/xe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,49 +31,56 @@
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
     "state": "OPEN",
-    "assignee": "SeamussK"
+    "assignee": "meowwon"
   }
 }]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/binh2401/doancn.git",
-    "accountId": "f1471a14-9cc3-47a2-b4b9-accb54996364"
+    "accountId": "8187ac63-3546-445a-828c-4e61cbce94a8"
   }
 }]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
   "associatedIndex": 6
 }]]></component>
-  <component name="ProjectId" id="2nwGTPEoUqctTuOJKsUdmf0OwJF" />
+  <component name="ProjectId" id="2o1a8JFSXyvLYdPFUw7FiBN6Kbr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Unnamed.executor": "Run",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.google.cloudcode.ide_session_index": "20241027_0000",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="doancn" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d5fe8c17-a818-4477-863c-df7d76d0a2e8" name="Changes" comment="" />
-      <created>1729876732774</created>
+      <changelist id="b9689967-78a5-4198-bb21-709ab0b9d052" name="Changes" comment="" />
+      <created>1730039376676</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1729876732774</updated>
+      <updated>1730039376676</updated>
     </task>
     <servers />
   </component>

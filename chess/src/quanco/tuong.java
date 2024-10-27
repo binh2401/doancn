@@ -34,7 +34,7 @@ public class tuong extends Piece {
 
     // Kiểm tra xem có quân cờ nào tại vị trí cụ thể
     @Override
-    protected Piece getPieceAt(int x, int y) { // Thay đổi quyền truy cập thành protected
+    public Piece getPieceAt(int x, int y) { // Đổi quyền truy cập thành public
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
                 return piece;

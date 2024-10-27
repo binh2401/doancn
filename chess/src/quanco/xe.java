@@ -42,7 +42,7 @@ public class xe extends Piece {
 
     // Phương thức kiểm tra quân cờ tại vị trí cụ thể
     @Override
-    protected Piece getPieceAt(int x, int y) {
+    public Piece getPieceAt(int x, int y) {
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
                 return piece;

@@ -85,8 +85,17 @@ public class Board extends JPanel {
                     int newX = e.getX() / cellSize;
                     int newY = e.getY() / cellSize;
 
+                    // Kiểm tra xem di chuyển có hợp lệ không
                     if (selectedPiece.isValidMove(newX, newY) && newY >= 0 && newY < boardHeight) {
-                        selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
+                        Piece targetPiece = getPieceAt(newX, newY); // Kiểm tra quân ở vị trí mới
+
+                        if (targetPiece == null || targetPiece.isRed() != selectedPiece.isRed()) {
+                            // Nếu không có quân cờ hoặc có quân địch
+                            if (targetPiece != null) {
+                                pieces.remove(targetPiece); // Loại bỏ quân địch
+                            }
+                            selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
+                        }
                     }
 
                     // Phát âm thanh khi di chuyển quân cờ
@@ -123,7 +132,6 @@ public class Board extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     // Phương thức vẽ bàn cờ
@@ -171,9 +179,23 @@ public class Board extends JPanel {
 
         // Nếu có quân cờ đang kéo, vẽ ô mờ cho quân cờ
         if (selectedPiece != null) {
-            g.setColor(new Color(255, 0, 0, 150)); // Màu nền cho quân cờ đang kéo
-            g.fillRect(mouseX - cellSize / 2, mouseY - cellSize / 2, cellSize, cellSize); // Vẽ ô mờ cho quân cờ
+            g.setColor(new Color(255, 0, 0, 150)); // Màu đỏ trong suốt
+            g.fillRect(mouseX - cellSize / 2, mouseY - cellSize / 2, cellSize, cellSize); // Vẽ ô mờ
+
+            // Vẽ quân cờ đang kéo tại vị trí chuột
+            int drawX = mouseX / cellSize * cellSize;
+            int drawY = mouseY / cellSize * cellSize;
             selectedPiece.draw(g, cellSize); // Vẽ quân cờ tại vị trí chuột
         }
+    }
+
+    // Phương thức lấy quân cờ tại vị trí (x, y)
+    private Piece getPieceAt(int x, int y) {
+        for (Piece piece : pieces) {
+            if (piece.getX() == x && piece.getY() == y) {
+                return piece; // Trả về quân cờ tại vị trí (x, y)
+            }
+        }
+        return null; // Không tìm thấy quân cờ
     }
 }
