@@ -1,3 +1,5 @@
+import network.Server;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -5,6 +7,7 @@ public class Main {
     private JFrame frame; // Để lưu trữ JFrame chính
 
     public static void main(String[] args) {
+        new Thread(() -> Server.startServer()).start();
         SwingUtilities.invokeLater(() -> new Main().createAndShowGUI());
     }
 
@@ -19,9 +22,14 @@ public class Main {
     }
 
     public void startGame() {
-        // Xóa cửa sổ hiện tại
-        frame.getContentPane().removeAll();
-        frame.repaint(); // Xóa mọi thứ trong JFrame
+        // Kiểm tra xem frame có được khởi tạo không
+        if (frame == null) {
+            frame = new JFrame("Đồ án cờ tướng AI"); // Khởi tạo frame nếu chưa có
+            frame.setLayout(new GridBagLayout());
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } else {
+            frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
+        }
 
         // Tạo đối tượng Board để vẽ bàn cờ
         Board board = new Board();

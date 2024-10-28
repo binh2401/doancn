@@ -149,7 +149,12 @@ public class StartWindow extends JFrame {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
     }
-
+    public void updateBoard(String move) {
+        // Logic cập nhật bàn cờ ở đây
+        // Ví dụ: parse move và cập nhật GUI
+        System.out.println("Cập nhật bàn cờ với nước đi: " + move);
+        // Bạn có thể thêm mã để cập nhật các thành phần giao diện của bàn cờ tại đây
+    }
     // Phương thức đóng cửa sổ
     @Override
     public void dispose() {
