@@ -22,7 +22,6 @@ public class Board extends JPanel {
     private Timer timer;                  // Bộ đếm thời gian
     private int timeLeft = 60;            // Thời gian còn lại
     private JLabel timerLabel;            // Nhãn hiển thị thời gian
-    private Image backgroundImage;       // Hình ảnh nền
 
     public Board() {
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
@@ -154,17 +153,11 @@ public class Board extends JPanel {
             }
         });
 
-        // Tải hình ảnh bàn cờ và hình nền
+        // Tải hình ảnh bàn cờ
         try {
             boardImage = ImageIO.read(getClass().getResourceAsStream("/img/board.gif")); // Sử dụng "/" để chỉ đường dẫn từ thư mục gốc
             if (boardImage == null) {
                 System.out.println("Hình ảnh bàn cờ không thể tải!");
-            }
-            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/img/HinhNen/hinhNenBanCo.png"));
-            if (backgroundImage == null) {
-                System.out.println("Hình nền không thể tải!");
-            } else {
-                System.out.println("Hình nền đã tải thành công.");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -190,13 +183,6 @@ public class Board extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Vẽ hình nền trước
-        if (backgroundImage != null) {
-            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); // Sử dụng kích thước của JPanel
-        } else {
-            System.out.println("Hình nền là null."); // Thêm thông báo debug
-        }
-
         // Vẽ hình ảnh bàn cờ
         if (boardImage != null) {
             g.drawImage(boardImage, 0, 0, boardWidth * cellSize, boardHeight * cellSize, this);
@@ -221,24 +207,69 @@ public class Board extends JPanel {
         }
     }
 
+    // Kiểm tra xem quân cờ có ở vị trí nào đó hay không
     private Piece getPieceAt(int x, int y) {
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
-                return piece; // Trả về quân cờ tại vị trí (x, y)
+                return piece;
             }
         }
-        return null; // Không có quân cờ tại vị trí đó
+        return null; // Không có quân ở vị trí
     }
 
-    // Phương thức kiểm tra chiếu tướng
-    private boolean isCheck(boolean red) {
-        // Logic kiểm tra chiếu tướng
-        return false; // Thay thế bằng logic thực tế
+    // Kiểm tra xem một bên có bị chiếu hay không
+    private boolean isCheck(boolean isRed) {
+        // Tìm kiếm quân Tướng
+        Piece king = null;
+        for (Piece piece : pieces) {
+            if (piece instanceof King && piece.isRed() == isRed) {
+                king = piece;
+                break;
+            }
+        }
+
+        if (king == null) {
+            return false; // Không tìm thấy Tướng
+        }
+
+        // Kiểm tra xem có quân cờ nào có thể tấn công quân Tướng không
+        for (Piece piece : pieces) {
+            if (piece.isRed() != isRed && piece.isValidMove(king.getX(), king.getY())) {
+                return true; // Có quân cờ tấn công
+            }
+        }
+        return false; // Không có quân cờ nào tấn công
     }
 
-    // Phương thức kiểm tra chiếu tướng
-    private boolean isCheckmate(boolean red) {
-        // Logic kiểm tra chiếu tướng
-        return false; // Thay thế bằng logic thực tế
+    // Kiểm tra xem có chiếu tướng hay không
+    private boolean isCheckmate(boolean isRed) {
+        // Nếu bên này bị chiếu
+        if (!isCheck(isRed)) {
+            return false; // Không bị chiếu
+        }
+
+        // Kiểm tra xem có nước đi hợp lệ nào không
+        for (Piece piece : pieces) {
+            if (piece.isRed() == isRed) {
+                for (int[] move : piece.getValidMoves()) {
+                    // Lưu vị trí hiện tại của quân cờ
+                    int originalX = piece.getX();
+                    int originalY = piece.getY();
+
+                    // Di chuyển quân cờ
+                    piece.setPosition(move[0], move[1]);
+
+                    // Kiểm tra xem quân Tướng có bị chiếu không
+                    if (!isCheck(isRed)) {
+                        piece.setPosition(originalX, originalY); // Hoàn tác di chuyển
+                        return false; // Có nước đi hợp lệ
+                    }
+
+                    // Hoàn tác di chuyển
+                    piece.setPosition(originalX, originalY);
+                }
+            }
+        }
+        return true; // Không có nước đi hợp lệ, tức là chiếu tướng
     }
 }
