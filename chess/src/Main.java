@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class Main {
     private JFrame frame; // Để lưu trữ JFrame chính
+    private Client client;
 
     public static void main(String[] args) {
-        new Thread(() -> Server.startServer()).start();
         SwingUtilities.invokeLater(() -> new Main().createAndShowGUI());
     }
 
@@ -19,6 +19,17 @@ public class Main {
 
         StartWindow startWindow = new StartWindow(this); // Truyền Main vào StartWindow
         startWindow.setVisible(true); // Hiển thị cửa sổ StartWindow
+    }
+
+    // Constructor không nhận tham số
+    public Main() {
+        // Khởi tạo các thành phần cần thiết khác nếu có
+    }
+
+    // Constructor nhận Client làm tham số
+    public Main(Client client) {
+        this.client = client;
+        // Khởi tạo các thành phần cần thiết khác nếu có
     }
 
     public void startGame() {

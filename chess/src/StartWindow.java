@@ -14,8 +14,14 @@ public class StartWindow extends JFrame {
     private JButton registerButton; // Nút đăng ký
     private Image backgroundImage;
     private BackgroundMusicPlayer musicPlayer; // Biến cho lớp âm thanh
-
+    private Client client;
+    public StartWindow(Client client) {
+        this.client = client;
+        setTitle("Chào mừng đến với Cờ Tướng AI");
+        // ... các đoạn mã khác
+    }
     public StartWindow(Main main) {
+        this.client = client;
         setTitle("Chào mừng đến với Cờ Tướng AI");
         setSize(700, 700);
         setLayout(new BorderLayout());
@@ -44,6 +50,12 @@ public class StartWindow extends JFrame {
 
         // Khởi tạo các nút với văn bản và hình nền
         startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi ngay");
+
+        startButton.addActionListener(e -> {
+            // Logic thực hiện khi bấm "Chơi ngay"
+            System.out.println("Chơi ngay");
+            // Ví dụ: client.sendMove("Vị trí nước đi"); // Thay bằng nước đi cụ thể
+        });
         playWithComputerButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi với máy");
         createRoomButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tạo phòng");
         findTableButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tìm bàn chơi");
@@ -149,11 +161,12 @@ public class StartWindow extends JFrame {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
     }
+    public void enablePlayButton() {
+        startButton.setEnabled(true); // Bật nút khi nhận được tín hiệu "READY_TO_START"
+    }
     public void updateBoard(String move) {
-        // Logic cập nhật bàn cờ ở đây
-        // Ví dụ: parse move và cập nhật GUI
         System.out.println("Cập nhật bàn cờ với nước đi: " + move);
-        // Bạn có thể thêm mã để cập nhật các thành phần giao diện của bàn cờ tại đây
+        // Cập nhật GUI hoặc bàn cờ ở đây
     }
     // Phương thức đóng cửa sổ
     @Override
