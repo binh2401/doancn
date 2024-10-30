@@ -112,36 +112,52 @@ public class Board extends JPanel {
                             if (targetPiece != null) {
                                 pieces.remove(targetPiece); // Loại bỏ quân địch
                             }
-                            Move move = new Move(selectedPiece, selectedPiece.getX(), selectedPiece.getY(), newX, newY, targetPiece);
 
-                            if (isRedTurn) {
-                                lastRedMove = move;
-                            } else {
-                                lastBlackMove = move;
-                                if (lastRedMove != null) {
-                                    moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));
-                                    lastRedMove = null;
-                                    lastBlackMove = null;
+                            // Lưu vị trí cũ để khôi phục nếu cần
+                            int originalX = selectedPiece.getX();
+                            int originalY = selectedPiece.getY();
+
+                            // Thực hiện di chuyển tạm thời
+                            selectedPiece.setPosition(newX, newY);
+
+                            // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này
+                            if (isCheck(isRedTurn)) {
+                                // Nếu nước đi không thoát khỏi chiếu, hoàn tác di chuyển
+                                selectedPiece.setPosition(originalX, originalY);
+                                if (targetPiece != null) {
+                                    pieces.add(targetPiece); // Khôi phục quân cờ địch
                                 }
-                            }
-                            selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
+                            } else {
+                                // Nước đi hợp lệ vì đã thoát khỏi chiếu
+                                Move move = new Move(selectedPiece, originalX, originalY, newX, newY, targetPiece);
+                                if (isRedTurn) {
+                                    lastRedMove = move;
+                                } else {
+                                    lastBlackMove = move;
+                                    if (lastRedMove != null) {
+                                        moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));
+                                        lastRedMove = null;
+                                        lastBlackMove = null;
+                                    }
+                                }
 
-                            // Kiểm tra chiếu tướng
-                            if (isCheck(!isRedTurn)) {
-                                JOptionPane.showMessageDialog(Board.this,
-                                        (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-                            }
+                                // Kiểm tra chiếu sau khi di chuyển
+                                if (isCheck(!isRedTurn)) {
+                                    JOptionPane.showMessageDialog(Board.this,
+                                            (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                                }
 
-                            // Kiểm tra chiếu tướng
-                            if (isCheckmate(!isRedTurn)) {
-                                JOptionPane.showMessageDialog(Board.this,
-                                        (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
-                                System.exit(0); // Kết thúc trò chơi
-                            }
+                                // Kiểm tra chiếu tướng
+                                if (isCheckmate(!isRedTurn)) {
+                                    JOptionPane.showMessageDialog(Board.this,
+                                            (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
+                                    System.exit(0); // Kết thúc trò chơi
+                                }
 
-                            // Đổi lượt
-                            isRedTurn = !isRedTurn;
-                            timeLeft = 60; // Reset thời gian
+                                // Đổi lượt
+                                isRedTurn = !isRedTurn;
+                                timeLeft = 60; // Reset thời gian
+                            }
                         }
                     }
 
@@ -157,6 +173,7 @@ public class Board extends JPanel {
                     repaint(); // Vẽ lại bảng cờ
                 }
             }
+
         });
 
         addMouseMotionListener(new MouseAdapter() {
