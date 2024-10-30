@@ -8,10 +8,16 @@ public class Client {
     private PrintWriter out; // Khai báo biến out
     private Runnable onOpponentFound;
     private Main main;
+
+
+
     public static void main(String[] args) {
         Client client = new Client();
+
         client.start();
     }
+
+
 
     private void start() {
         try (Socket socket = new Socket(SERVER_ADDRESS, PORT);
@@ -24,7 +30,8 @@ public class Client {
 
             // Mở cửa sổ StartWindow khi kết nối thành công
             SwingUtilities.invokeLater(() -> {
-                startWindow = new StartWindow(main, this); // Truyền Clientnew  vào Main
+                this.main= new Main();
+                startWindow = new StartWindow(this.main, this); // Truyền Clientnew  vào Main
                 startWindow.setVisible(true); // Hiển thị StartWindow
             });
 
@@ -36,7 +43,9 @@ public class Client {
                         if (message.equals("READY_TO_START")) {
                             SwingUtilities.invokeLater(() -> {
                                 startWindow.enablePlayButton(); // Kích hoạt nút
-                                System.out.println("Nút 'Chơi ngay' đã được kích hoạt.");
+                                if (this.onOpponentFound != null) {
+                                    this.onOpponentFound.run(); // Gọi phương thức onOpponentFound
+                                }
                             });
                         } else {
                             System.out.println("Opponent move: " + message);

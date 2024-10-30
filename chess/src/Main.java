@@ -4,31 +4,25 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
-    private JFrame frame; // Để lưu trữ JFrame chính
+    private JFrame frame;
     private Client client; // Khách hàng để kết nối với máy chủ (nếu có)
+    private StartWindow startWindow;
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Main().createAndShowGUI());
+        SwingUtilities.invokeLater(() -> {
+            Main main = new Main(); // Khởi tạo Main
+            main.createAndShowGUI(); // Gọi phương thức để hiển thị GUI
+        });
     }
 
     private void createAndShowGUI() {
         frame = new JFrame("Đồ án cờ tướng AI");
-        frame.setLayout(new BorderLayout()); // Sử dụng BorderLayout
+        frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(false); // Ẩn frame chính ban đầu
-        StartWindow startWindow = new StartWindow(this, client); // Truyền Main và Client
+        frame.setVisible(false); // Ẩn frame chính ban
+
+        startWindow = new StartWindow(this,this.client); // Truyền Main và Client
         startWindow.setVisible(true); // Hiển thị StartWindow
-    }
-
-    // Constructor không nhận tham số
-    public Main() {
-        // Khởi tạo các thành phần cần thiết khác nếu có
-    }
-
-    // Constructor nhận Client làm tham số
-    public Main(Client client) {
-        this.client = client;
-        // Khởi tạo các thành phần cần thiết khác nếu có
     }
 
     public void startGame() {

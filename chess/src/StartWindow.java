@@ -20,6 +20,9 @@ public class StartWindow extends JFrame {
     public StartWindow(Main main, Client client) {
         this.client = client;
         this.main = main;
+        initialize();
+    }
+    private void initialize() {
         setTitle("Chào mừng đến với Cờ Tướng AI");
         setSize(700, 700);
         setLayout(new BorderLayout());
