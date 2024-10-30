@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Main {
     private JFrame frame; // Để lưu trữ JFrame chính
-    private Client client;
+    private Client client; // Khách hàng để kết nối với máy chủ (nếu có)
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Main().createAndShowGUI());
@@ -13,7 +13,7 @@ public class Main {
 
     private void createAndShowGUI() {
         frame = new JFrame("Đồ án cờ tướng AI");
-        frame.setLayout(new BorderLayout()); // Sử dụng BorderLayout thay vì GridBagLayout
+        frame.setLayout(new BorderLayout()); // Sử dụng BorderLayout
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(false); // Ẩn frame chính ban đầu
         StartWindow startWindow = new StartWindow(this, client); // Truyền Main và Client
@@ -45,7 +45,7 @@ public class Main {
         Board board = new Board();
 
         // Tạo đối tượng FunctionPanel
-        FunctionPanel functionPanel = new FunctionPanel(); // Tạo FunctionPanel
+        FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel
 
         // Thêm đối tượng Board và FunctionPanel vào JFrame
         frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
