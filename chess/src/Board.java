@@ -193,6 +193,15 @@ public class Board extends JPanel {
             // Vẽ dấu chấm vàng cho quân cờ được chọn
             g.setColor(Color.YELLOW);
             g.fillOval(mouseX - cellSize / 4, mouseY - cellSize / 4, cellSize / 2, cellSize / 2);
+
+            // Vẽ các nước đi hợp lệ
+            List<int[]> validMoves = selectedPiece.getValidMoves();
+            g.setColor(new Color(0, 255, 0, 128)); // Màu xanh với độ trong suốt
+            for (int[] move : validMoves) {
+                int validX = move[0];
+                int validY = move[1];
+                g.fillRect(validX * cellSize + 10, validY * cellSize + 10, cellSize - 20, cellSize - 20); // Vẽ ô cho nước đi hợp lệ
+            }
         }
 
         // Vẽ các quân cờ
