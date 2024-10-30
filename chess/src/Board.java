@@ -112,13 +112,13 @@ public class Board extends JPanel {
                             // Kiểm tra chiếu tướng
                             if (isCheck(!isRedTurn)) {
                                 JOptionPane.showMessageDialog(Board.this,
-                                        (isRedTurn ? "Đỏ" : "Đen") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                                        (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                             }
 
                             // Kiểm tra chiếu tướng
                             if (isCheckmate(!isRedTurn)) {
                                 JOptionPane.showMessageDialog(Board.this,
-                                        (isRedTurn ? "Đỏ" : "Đen") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
+                                        (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
                                 System.exit(0); // Kết thúc trò chơi
                             }
 
@@ -193,33 +193,25 @@ public class Board extends JPanel {
             // Vẽ dấu chấm vàng cho quân cờ được chọn
             g.setColor(Color.YELLOW);
             g.fillOval(mouseX - cellSize / 4, mouseY - cellSize / 4, cellSize / 2, cellSize / 2);
-
-            // Vẽ các nước đi hợp lệ
-            for (int[] move : selectedPiece.getValidMoves()) {
-                g.setColor(Color.GREEN);
-                g.fillOval(move[0] * cellSize + cellSize / 4, move[1] * cellSize + cellSize / 4, cellSize / 2, cellSize / 2);
-            }
         }
 
-        // Vẽ tất cả các quân cờ
+        // Vẽ các quân cờ
         for (Piece piece : pieces) {
-            piece.draw(g, cellSize); // Thêm tham số cellSize
+            piece.draw(g, cellSize);
         }
     }
 
-    // Kiểm tra xem quân cờ có ở vị trí nào đó hay không
     private Piece getPieceAt(int x, int y) {
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
                 return piece;
             }
         }
-        return null; // Không có quân ở vị trí
+        return null;
     }
 
-    // Kiểm tra xem một bên có bị chiếu hay không
+    // Hàm kiểm tra chiếu
     private boolean isCheck(boolean isRed) {
-        // Tìm kiếm quân Tướng
         Piece king = null;
         for (Piece piece : pieces) {
             if (piece instanceof King && piece.isRed() == isRed) {
@@ -227,49 +219,36 @@ public class Board extends JPanel {
                 break;
             }
         }
+        if (king == null) return true;
 
-        if (king == null) {
-            return false; // Không tìm thấy Tướng
-        }
-
-        // Kiểm tra xem có quân cờ nào có thể tấn công quân Tướng không
         for (Piece piece : pieces) {
             if (piece.isRed() != isRed && piece.isValidMove(king.getX(), king.getY())) {
-                return true; // Có quân cờ tấn công
+                return true;
             }
         }
-        return false; // Không có quân cờ nào tấn công
+        return false;
     }
 
-    // Kiểm tra xem có chiếu tướng hay không
+    // Hàm kiểm tra chiếu tướng
     private boolean isCheckmate(boolean isRed) {
-        // Nếu bên này bị chiếu
-        if (!isCheck(isRed)) {
-            return false; // Không bị chiếu
-        }
+        if (!isCheck(isRed)) return false;
 
-        // Kiểm tra xem có nước đi hợp lệ nào không
         for (Piece piece : pieces) {
             if (piece.isRed() == isRed) {
                 for (int[] move : piece.getValidMoves()) {
-                    // Lưu vị trí hiện tại của quân cờ
                     int originalX = piece.getX();
                     int originalY = piece.getY();
 
-                    // Di chuyển quân cờ
                     piece.setPosition(move[0], move[1]);
 
-                    // Kiểm tra xem quân Tướng có bị chiếu không
                     if (!isCheck(isRed)) {
-                        piece.setPosition(originalX, originalY); // Hoàn tác di chuyển
-                        return false; // Có nước đi hợp lệ
+                        piece.setPosition(originalX, originalY);
+                        return false;
                     }
-
-                    // Hoàn tác di chuyển
                     piece.setPosition(originalX, originalY);
                 }
             }
         }
-        return true; // Không có nước đi hợp lệ, tức là chiếu tướng
+        return true;
     }
 }
