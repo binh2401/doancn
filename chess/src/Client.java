@@ -6,7 +6,8 @@ public class Client {
     private static final int PORT = 12345;
     private StartWindow startWindow;
     private PrintWriter out; // Khai báo biến out
-
+    private Runnable onOpponentFound;
+    private Main main;
     public static void main(String[] args) {
         Client client = new Client();
         client.start();
@@ -23,7 +24,7 @@ public class Client {
 
             // Mở cửa sổ StartWindow khi kết nối thành công
             SwingUtilities.invokeLater(() -> {
-                startWindow = new StartWindow(new Main(this)); // Truyền Client vào Main
+                startWindow = new StartWindow(main, this); // Truyền Clientnew  vào Main
                 startWindow.setVisible(true); // Hiển thị StartWindow
             });
 
@@ -57,7 +58,26 @@ public class Client {
             e.printStackTrace();
         }
     }
+    public void sendMessage(String message) {
+        if (out != null) {
+            out.println(message);
+        }
+    }
+    public void findOpponent() {
+        // Gửi yêu cầu tìm đối thủ đến server
+        sendMessage("FIND_OPPONENT");
+    }
 
+    public void setOnOpponentFound(Runnable onOpponentFound) {
+        this.onOpponentFound = onOpponentFound;
+    }
+
+    // Gọi phương thức này khi nhận được thông báo từ server về việc tìm thấy đối thủ
+    public void notifyOpponentFound() {
+        if (onOpponentFound != null) {
+            onOpponentFound.run();
+        }
+    }
     // Phương thức gửi nước đi tới server
     public void sendMove(String move) {
         out.println("MOVE " + move); // Gửi nước đi tới server

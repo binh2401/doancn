@@ -16,9 +16,8 @@ public class Main {
         frame.setLayout(new GridBagLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(false); // Ẩn frame chính ban đầu
-
-        StartWindow startWindow = new StartWindow(this); // Truyền Main vào StartWindow
-        startWindow.setVisible(true); // Hiển thị cửa sổ StartWindow
+        StartWindow startWindow = new StartWindow(this, client); // Truyền Main và Client
+        startWindow.setVisible(true); // Hiển thị StartWindow
     }
 
     // Constructor không nhận tham số

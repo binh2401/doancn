@@ -15,13 +15,11 @@ public class StartWindow extends JFrame {
     private Image backgroundImage;
     private BackgroundMusicPlayer musicPlayer; // Biến cho lớp âm thanh
     private Client client;
-    public StartWindow(Client client) {
+    private  Main main;
+
+    public StartWindow(Main main, Client client) {
         this.client = client;
-        setTitle("Chào mừng đến với Cờ Tướng AI");
-        // ... các đoạn mã khác
-    }
-    public StartWindow(Main main) {
-        this.client = client;
+        this.main = main;
         setTitle("Chào mừng đến với Cờ Tướng AI");
         setSize(700, 700);
         setLayout(new BorderLayout());
@@ -52,9 +50,24 @@ public class StartWindow extends JFrame {
         startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi ngay");
 
         startButton.addActionListener(e -> {
-            // Logic thực hiện khi bấm "Chơi ngay"
-            System.out.println("Chơi ngay");
-            // Ví dụ: client.sendMove("Vị trí nước đi"); // Thay bằng nước đi cụ thể
+            startButton.setEnabled(false); // Tạm thời vô hiệu hóa nút
+            startButton.setText("Vui lòng chờ..."); // Thay đổi văn bản nút
+
+            // Gửi yêu cầu đến server để tìm đối thủ
+            client.findOpponent();
+
+            // Xử lý khi người chơi khác đã kết nối
+            client.setOnOpponentFound(() -> {
+                startButton.setText("Chơi ngay"); // Đổi lại văn bản
+                startButton.setEnabled(true); // Bật lại nút
+                musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
+                setVisible(false); // Ẩn StartWindow
+                if (main != null) { // Kiểm tra xem main có phải là null không
+                    main.startGame(); // Khởi động trò chơi
+                } else {
+                    System.out.println("Main is null!");
+                }
+            });
         });
         playWithComputerButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi với máy");
         createRoomButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tạo phòng");
@@ -68,11 +81,11 @@ public class StartWindow extends JFrame {
         findTableButton.setPreferredSize(buttonSize);
 
         // Thêm hành động cho các nút
-        startButton.addActionListener(e -> {
-            musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
-            setVisible(false); // Ẩn StartWindow
-            main.startGame(); // Khởi động trò chơi
-        });
+//        startButton.addActionListener(e -> {
+//            musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
+//            setVisible(false); // Ẩn StartWindow
+//            main.startGame(); // Khởi động trò chơi
+//        });
 
         // Uncomment and implement these actions if needed
         // playWithComputerButton.addActionListener(e -> {
