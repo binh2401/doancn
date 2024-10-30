@@ -30,17 +30,11 @@ public class si extends Piece {
         // Kiểm tra di chuyển chéo
         if ((newX == x - 1 && newY == y - 1) || (newX == x + 1 && newY == y - 1) ||
                 (newX == x - 1 && newY == y + 1) || (newX == x + 1 && newY == y + 1)) {
-            // Kiểm tra có quân nào cản đường không
-            if (getPieceAt(newX, newY) != null) {
-                return false; // Có quân cản đường
-            }
-
             // Kiểm tra xem quân cờ có nằm trong khu vực cung không
             if ((isRed && (newX < 3 || newX > 5 || newY < 7)) ||
                     (!isRed && (newX < 3 || newX > 5 || newY > 2))) {
                 return false; // Nước đi ra ngoài cung
             }
-
             return true; // Nước đi hợp lệ
         }
 

@@ -232,7 +232,7 @@ public class Board extends JPanel {
 
         for (Piece piece : pieces) {
             if (piece.isRed() != isRed && piece.isValidMove(king.getX(), king.getY())) {
-                return true;
+                return true; // Quân địch có thể ăn Tướng
             }
         }
         return false;
