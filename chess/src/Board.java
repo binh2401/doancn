@@ -22,10 +22,15 @@ public class Board extends JPanel {
     private Timer timer;                  // Bộ đếm thời gian
     private int timeLeft = 60;            // Thời gian còn lại
     private JLabel timerLabel;            // Nhãn hiển thị thời gian
+    private List<MovePair> moveHistoryPairs;
+    private Move lastRedMove = null;
+    private Move lastBlackMove = null;
+
 
     public Board() {
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
         pieces = new ArrayList<>();
+        moveHistoryPairs = new ArrayList<>(); // Khởi tạo danh sách lịch sử nước đi
 
         // Thêm quân Tướng Đỏ và Đen vào danh sách
         pieces.add(new King(4, 9, true, pieces));  // Tướng Đỏ ở vị trí (4, 9)
@@ -107,6 +112,18 @@ public class Board extends JPanel {
                             if (targetPiece != null) {
                                 pieces.remove(targetPiece); // Loại bỏ quân địch
                             }
+                            Move move = new Move(selectedPiece, selectedPiece.getX(), selectedPiece.getY(), newX, newY, targetPiece);
+
+                            if (isRedTurn) {
+                                lastRedMove = move;
+                            } else {
+                                lastBlackMove = move;
+                                if (lastRedMove != null) {
+                                    moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));
+                                    lastRedMove = null;
+                                    lastBlackMove = null;
+                                }
+                            }
                             selectedPiece.setPosition(newX, newY); // Cập nhật vị trí quân cờ
 
                             // Kiểm tra chiếu tướng
@@ -163,6 +180,34 @@ public class Board extends JPanel {
             e.printStackTrace();
         }
     }
+    // Phương thức hoàn tác nước đi cuối cùng
+    // Phương thức hoàn tác nước đi cuối cùng
+    public boolean undoLastMovePair() {
+        if (moveHistoryPairs.isEmpty()) {
+            return false;
+        }
+
+        MovePair lastPair = moveHistoryPairs.remove(moveHistoryPairs.size() - 1);
+
+        if (lastPair.getRedMove() != null) {
+            lastPair.getRedMove().getPiece().setPosition(lastPair.getRedMove().getOldX(), lastPair.getRedMove().getOldY());
+            if (lastPair.getRedMove().getCapturedPiece() != null) {
+                pieces.add(lastPair.getRedMove().getCapturedPiece());
+            }
+        }
+
+        if (lastPair.getBlackMove() != null) {
+            lastPair.getBlackMove().getPiece().setPosition(lastPair.getBlackMove().getOldX(), lastPair.getBlackMove().getOldY());
+            if (lastPair.getBlackMove().getCapturedPiece() != null) {
+                pieces.add(lastPair.getBlackMove().getCapturedPiece());
+            }
+        }
+
+        isRedTurn = !isRedTurn;
+        repaint();
+        return true;
+    }
+
 
     private void startTimer() {
         timer = new Timer(1000, e -> {
@@ -259,5 +304,55 @@ public class Board extends JPanel {
             }
         }
         return true;
+    }
+    // Lớp Move để lưu trữ thông tin của mỗi nước đi
+    class Move {
+        private final Piece piece;
+        private final int oldX, oldY;
+        private final int newX, newY;
+        private final Piece capturedPiece;
+
+        public Move(Piece piece, int oldX, int oldY, int newX, int newY, Piece capturedPiece) {
+            this.piece = piece;
+            this.oldX = oldX;
+            this.oldY = oldY;
+            this.newX = newX;
+            this.newY = newY;
+            this.capturedPiece = capturedPiece;
+        }
+
+        public Piece getPiece() {
+            return piece;
+        }
+
+        public int getOldX() {
+            return oldX;
+        }
+
+        public int getOldY() {
+            return oldY;
+        }
+
+        public Piece getCapturedPiece() {
+            return capturedPiece;
+        }
+    }
+
+    class MovePair {
+        private final Move redMove;
+        private final Move blackMove;
+
+        public MovePair(Move redMove, Move blackMove) {
+            this.redMove = redMove;
+            this.blackMove = blackMove;
+        }
+
+        public Move getRedMove() {
+            return redMove;
+        }
+
+        public Move getBlackMove() {
+            return blackMove;
+        }
     }
 }
