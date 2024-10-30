@@ -70,6 +70,11 @@ public class StartWindow extends JFrame {
             });
         });
         playWithComputerButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi với máy");
+        playWithComputerButton.addActionListener(e->{
+            musicPlayer.stopBackgroundMusic();
+            setVisible(false);
+            main.startGame();
+        });
         createRoomButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tạo phòng");
         findTableButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tìm bàn chơi");
 
