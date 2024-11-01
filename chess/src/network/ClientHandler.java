@@ -20,24 +20,16 @@ public class ClientHandler implements Runnable{
         try {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
-            synchronized (clientWriters) {
-                clientWriters.add(out);
-            }
 
             String message;
             while ((message = in.readLine()) != null) {
                 if (message.equals("FIND_OPPONENT")) {
-                    // Kiểm tra xem có người chơi khác đã kết nối hay không
-                    if (clientWriters.size() > 1) {
-                        // Gửi tín hiệu cho cả hai người chơi rằng họ đã được ghép đôi
-                        out.println("READY_TO_START");
-                        // Bạn có thể tùy chỉnh gửi thông điệp cho đối thủ tại đây nếu cần
-                    } else {
-                        // Nếu không có đối thủ, thông báo cho client
-                        out.println("WAIT_FOR_OPPONENT");
+                    server.findOpponent(this); // Tìm đối thủ thông qua server
+                } else if (message.startsWith("MOVE")) {
+                    if (opponent != null) {
+                        opponent.sendMessage(message); // Chuyển nước đi cho đối thủ
                     }
                 }
-                // Xử lý các thông điệp khác tại đây
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,9 +39,7 @@ public class ClientHandler implements Runnable{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            synchronized (clientWriters) {
-                clientWriters.remove(out);
-            }
+          //  server.removeClient(this); // Xóa client khỏi server khi ngắt kết nối
         }
     }
 

@@ -33,16 +33,13 @@ public class Server {
 
     public synchronized void findOpponent(ClientHandler clientHandler) {
         if (waitingClients.isEmpty()) {
-            // Không có client chờ sẵn, thêm vào hàng đợi
             waitingClients.add(clientHandler);
             clientHandler.sendMessage("Vui lòng chờ đối thủ...");
         } else {
-            // Ghép cặp với client đang chờ
-            ClientHandler opponent = waitingClients.remove(0); // Lấy client từ hàng đợi
+            ClientHandler opponent = waitingClients.remove(0);
             clientHandler.setOpponent(opponent);
             opponent.setOpponent(clientHandler);
 
-            // Gửi tín hiệu bắt đầu trò chơi cho cả hai client
             clientHandler.sendMessage("GAME_START");
             opponent.sendMessage("GAME_START");
         }

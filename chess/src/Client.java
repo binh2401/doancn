@@ -40,7 +40,7 @@ public class Client {
                 String message;
                 try {
                     while ((message = in.readLine()) != null) {
-                        if (message.equals("READY_TO_START")) {
+                        if (message.equals("GAME_START")) {
                             SwingUtilities.invokeLater(() -> {
                                 startWindow.enablePlayButton(); // Kích hoạt nút
                                 if (this.onOpponentFound != null) {
