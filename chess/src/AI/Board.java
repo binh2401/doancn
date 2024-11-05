@@ -1,3 +1,5 @@
+package AI;
+
 import quanco.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -103,62 +105,78 @@ public class Board extends JPanel {
                     int newX = e.getX() / cellSize;
                     int newY = e.getY() / cellSize;
 
-                    // Kiểm tra xem di chuyển có hợp lệ không
-                    if (selectedPiece.isValidMove(newX, newY) && newY >= 0 && newY < boardHeight) {
-                        Piece targetPiece = getPieceAt(newX, newY); // Kiểm tra quân ở vị trí mới
+                    if (isRedTurn) { // Nếu lượt là của người chơi đỏ
+                        // Kiểm tra xem di chuyển có hợp lệ không
+                        if (selectedPiece.isValidMove(newX, newY) && newY >= 0 && newY < boardHeight) {
+                            Piece targetPiece = getPieceAt(newX, newY); // Kiểm tra quân ở vị trí mới
 
-                        if (targetPiece == null || targetPiece.isRed() != selectedPiece.isRed()) {
-                            // Nếu không có quân cờ hoặc có quân địch
-                            if (targetPiece != null) {
-                                pieces.remove(targetPiece); // Loại bỏ quân địch
-                            }
-
-                            // Lưu vị trí cũ để khôi phục nếu cần
-                            int originalX = selectedPiece.getX();
-                            int originalY = selectedPiece.getY();
-
-                            // Thực hiện di chuyển tạm thời
-                            selectedPiece.setPosition(newX, newY);
-
-                            // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này
-                            if (isCheck(isRedTurn)) {
-                                // Nếu nước đi không thoát khỏi chiếu, hoàn tác di chuyển
-                                selectedPiece.setPosition(originalX, originalY);
+                            if (targetPiece == null || targetPiece.isRed() != selectedPiece.isRed()) {
+                                // Nếu không có quân cờ hoặc có quân địch
                                 if (targetPiece != null) {
-                                    pieces.add(targetPiece); // Khôi phục quân cờ địch
+                                    pieces.remove(targetPiece); // Loại bỏ quân địch
                                 }
-                            } else {
-                                // Nước đi hợp lệ vì đã thoát khỏi chiếu
-                                Move move = new Move(selectedPiece, originalX, originalY, newX, newY, targetPiece);
-                                if (isRedTurn) {
-                                    lastRedMove = move;
-                                } else {
-                                    lastBlackMove = move;
-                                    if (lastRedMove != null) {
-                                        moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));
-                                        lastRedMove = null;
-                                        lastBlackMove = null;
+
+                                // Lưu vị trí cũ để khôi phục nếu cần
+                                int originalX = selectedPiece.getX();
+                                int originalY = selectedPiece.getY();
+
+                                // Thực hiện di chuyển
+                                selectedPiece.setPosition(newX, newY);
+
+                                // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này
+                                if (isCheck(isRedTurn)) {
+                                    // Nếu nước đi không thoát khỏi chiếu, hoàn tác di chuyển
+                                    selectedPiece.setPosition(originalX, originalY);
+                                    if (targetPiece != null) {
+                                        pieces.add(targetPiece); // Khôi phục quân cờ địch
                                     }
-                                }
+                                } else {
+                                    // Nước đi hợp lệ
+                                    Move move = new Move(selectedPiece, originalX, originalY, newX, newY, targetPiece);
+                                    if (isRedTurn) {
+                                        lastRedMove = move;
+                                    } else {
+                                        lastBlackMove = move;
+                                        if (lastRedMove != null) {
+                                            moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));
+                                            lastRedMove = null;
+                                            lastBlackMove = null;
+                                        }
+                                    }
 
-                                // Kiểm tra chiếu sau khi di chuyển
-                                if (isCheck(!isRedTurn)) {
-                                    JOptionPane.showMessageDialog(Board.this,
-                                            (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-                                }
+                                    // Kiểm tra chiếu sau khi di chuyển
+                                    if (isCheck(!isRedTurn)) {
+                                        JOptionPane.showMessageDialog(Board.this,
+                                                (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                                    }
 
-                                // Kiểm tra chiếu tướng
-                                if (isCheckmate(!isRedTurn)) {
-                                    JOptionPane.showMessageDialog(Board.this,
-                                            (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
-                                    System.exit(0); // Kết thúc trò chơi
-                                }
+                                    // Kiểm tra chiếu tướng
+                                    if (isCheckmate(!isRedTurn)) {
+                                        JOptionPane.showMessageDialog(Board.this,
+                                                (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
+                                        System.exit(0); // Kết thúc trò chơi
+                                    }
 
-                                // Đổi lượt
-                                isRedTurn = !isRedTurn;
-                                timeLeft = 60; // Reset thời gian
+                                    isRedTurn = false; // Đổi lượt cho AI
+                                    timeLeft = 60; // Reset thời gian
+
+                                    // Nếu lượt của AI, thực hiện nước đi của AI
+                                    AIPlayer aiPlayer = new AIPlayer();
+                                    Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn);
+                                    if (aiMove != null) {
+                                        makeMove(aiMove);
+                                    }
+
+                                    // Đổi lượt trở lại cho người chơi
+                                    isRedTurn = true;
+
+                                    // Vẽ lại bàn cờ sau khi di chuyển
+                                    repaint(); // Gọi repaint để cập nhật bàn cờ
+                                }
                             }
                         }
+
+
                     }
 
                     // Phát âm thanh khi di chuyển quân cờ
@@ -225,7 +243,31 @@ public class Board extends JPanel {
         return true;
     }
 
+    public List<Move> getAllPossibleMoves(boolean isRed) {
+        List<Move> moves = new ArrayList<>();
+        for (Piece piece : pieces) {
+            if (piece.isRed() == isRed) {
+                for (int[] validMove : piece.getValidMoves()) {
+                    moves.add(new Move(piece, piece.getX(), piece.getY(), validMove[0], validMove[1], getPieceAt(validMove[0], validMove[1])));
+                }
+            }
+        }
+        return moves;
+    }
 
+    public void makeMove(Move move) {
+        Piece targetPiece = getPieceAt(move.getNewX(), move.getNewY());
+        if (targetPiece != null) {
+            pieces.remove(targetPiece); // Xóa quân cờ bị ăn
+        }
+        Piece movedPiece = move.getPiece(); // Lấy quân cờ cần di chuyển
+        if (movedPiece != null) {
+            movedPiece.setPosition(move.getNewX(), move.getNewY()); // Di chuyển quân cờ
+        } else {
+            System.out.println("Quân cờ không tồn tại.");
+        }
+        repaint(); // Vẽ lại bàn cờ
+    }
     private void startTimer() {
         timer = new Timer(1000, e -> {
             if (timeLeft > 0) {
@@ -323,37 +365,7 @@ public class Board extends JPanel {
         return true;
     }
     // Lớp Move để lưu trữ thông tin của mỗi nước đi
-    class Move {
-        private final Piece piece;
-        private final int oldX, oldY;
-        private final int newX, newY;
-        private final Piece capturedPiece;
 
-        public Move(Piece piece, int oldX, int oldY, int newX, int newY, Piece capturedPiece) {
-            this.piece = piece;
-            this.oldX = oldX;
-            this.oldY = oldY;
-            this.newX = newX;
-            this.newY = newY;
-            this.capturedPiece = capturedPiece;
-        }
-
-        public Piece getPiece() {
-            return piece;
-        }
-
-        public int getOldX() {
-            return oldX;
-        }
-
-        public int getOldY() {
-            return oldY;
-        }
-
-        public Piece getCapturedPiece() {
-            return capturedPiece;
-        }
-    }
 
     class MovePair {
         private final Move redMove;
@@ -372,4 +384,49 @@ public class Board extends JPanel {
             return blackMove;
         }
     }
+    public boolean isGameOver() {
+        // Kiểm tra nếu một trong hai tướng đã bị bắt
+        for (Piece piece : pieces) {
+            if (piece instanceof King && piece.isCaptured()) {
+                return true; // Trò chơi kết thúc vì một bên bị mất tướng
+            }
+        }
+        // Kiểm tra nếu không còn nước đi hợp lệ cho người chơi hiện tại
+
+        return false; // Trò chơi chưa kết thúc
+    }
+
+    public void undoMove(Move move) {
+        if (move != null) {
+            Piece movedPiece = move.getMovedPiece();
+            if (movedPiece != null) {
+                movedPiece.setPosition(move.getStartPosition());
+                if (move.getCapturedPiece() != null) {
+                    pieces.add(move.getCapturedPiece());
+                }
+                // Cập nhật lại các trạng thái khác nếu cần
+            } else {
+                System.out.println("movedPiece is null. Check the logic when creating Move.");
+            }
+        }
+
+    }
+
+    public List<Piece> getPieces() {
+        // Trả về danh sách các quân cờ hiện tại
+        return new ArrayList<>(pieces);
+    }
+    public List<Move> getAllValidMoves() {
+        List<Move> validMoves = new ArrayList<>();
+
+        for (Piece piece : pieces) {
+            if (!piece.isCaptured()) { // Kiểm tra xem quân cờ có đang trên bàn cờ hay không
+                List<Move> moves = piece.getValidMoves(this); // Giả sử Piece có phương thức getValidMoves
+                validMoves.addAll(moves);
+            }
+        }
+
+        return validMoves;
+    }
+
 }

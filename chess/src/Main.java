@@ -1,4 +1,4 @@
-import network.Server;
+import AI.Board;
 
 import javax.swing.*;
 import java.awt.*;

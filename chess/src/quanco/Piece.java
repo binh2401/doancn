@@ -1,5 +1,8 @@
 package quanco;
 
+import AI.Board;
+import AI.Move;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,7 +12,15 @@ public abstract class Piece {
     protected int x, y; // Tọa độ quân cờ
     protected boolean isRed; // True nếu quân cờ đỏ, false nếu quân cờ đen
     protected List<Piece> pieces; // Danh sách các quân cờ
+    private boolean captured = false; // Trạng thái bị bắt
 
+    public boolean isCaptured() {
+        return captured;
+    }
+
+    public void setCaptured(boolean captured) {
+        this.captured = captured;
+    }
     public Piece(int x, int y, boolean isRed, List<Piece> pieces) {
         this.x = x;
         this.y = y;
@@ -65,5 +76,15 @@ public abstract class Piece {
             }
         }
         return null; // Không có quân cờ tại vị trí
+    }
+    public List<Move> getValidMoves(Board board) {
+        List<Move> validMoves = new ArrayList<>();
+        // Logic để tính toán các nước đi hợp lệ dựa trên trạng thái của bàn cờ
+        return validMoves;
+    }
+
+    public void setPosition(Move.Position startPosition) {
+        this.x = startPosition.getX(); // Lấy tọa độ x từ startPosition
+        this.y = startPosition.getY();
     }
 }
