@@ -25,7 +25,7 @@ public class Main {
         startWindow.setVisible(true); // Hiển thị StartWindow
     }
 
-    public void startGame() {
+    public void startGame(boolean isAIEnabled) {
         // Kiểm tra xem frame có được khởi tạo không
         if (frame == null) {
             frame = new JFrame("Đồ án cờ tướng AI"); // Khởi tạo frame nếu chưa có
@@ -36,7 +36,7 @@ public class Main {
         }
 
         // Tạo đối tượng Board để vẽ bàn cờ
-        Board board = new Board();
+        Board board = new Board(isAIEnabled);
 
         // Tạo đối tượng FunctionPanel
         FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel

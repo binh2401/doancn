@@ -27,9 +27,10 @@ public class Board extends JPanel {
     private List<MovePair> moveHistoryPairs;
     private Move lastRedMove = null;
     private Move lastBlackMove = null;
+    private boolean isAIEnabled;
 
-
-    public Board() {
+    public Board(boolean isAIEnabled) {
+        this.isAIEnabled = isAIEnabled;
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
         pieces = new ArrayList<>();
         moveHistoryPairs = new ArrayList<>(); // Khởi tạo danh sách lịch sử nước đi
@@ -159,14 +160,14 @@ public class Board extends JPanel {
 
                                     isRedTurn = false; // Đổi lượt cho AI
                                     timeLeft = 60; // Reset thời gian
-
-                                    // Nếu lượt của AI, thực hiện nước đi của AI
-                                    AIPlayer aiPlayer = new AIPlayer();
-                                    Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn);
-                                    if (aiMove != null) {
-                                        makeMove(aiMove);
+                                    if (isAIEnabled) {
+                                        // Nếu lượt của AI, thực hiện nước đi của AI
+                                        AIPlayer aiPlayer = new AIPlayer();
+                                        Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn);
+                                        if (aiMove != null) {
+                                            makeMove(aiMove);
+                                        }
                                     }
-
                                     // Đổi lượt trở lại cho người chơi
                                     isRedTurn = true;
 

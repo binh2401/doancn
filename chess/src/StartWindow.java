@@ -16,6 +16,7 @@ public class StartWindow extends JFrame {
     private BackgroundMusicPlayer musicPlayer; // Biến cho lớp âm thanh
     private Client client;
     private  Main main;
+    private boolean isAIEnabled;
 
     public StartWindow(Main main, Client client) {
         this.client = client;
@@ -50,7 +51,7 @@ public class StartWindow extends JFrame {
         add(title, BorderLayout.NORTH);
 
         // Khởi tạo các nút với văn bản và hình nền
-        startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi ngay");
+        startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "play now");
 
         startButton.addActionListener(e -> {
             startButton.setEnabled(false); // Tạm thời vô hiệu hóa nút
@@ -66,7 +67,7 @@ public class StartWindow extends JFrame {
                 musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
                 setVisible(false); // Ẩn StartWindow
                 if (main != null) { // Kiểm tra xem main có phải là null không
-                    main.startGame(); // Khởi động trò chơi
+                    main.startGame(isAIEnabled ==true); // Khởi động trò chơi
                 } else {
                     System.out.println("Main is null!");
                 }
@@ -76,7 +77,7 @@ public class StartWindow extends JFrame {
         playWithComputerButton.addActionListener(e->{
             musicPlayer.stopBackgroundMusic();
             setVisible(false);
-            main.startGame();
+            main.startGame(isAIEnabled==false);
         });
         createRoomButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tạo phòng");
         findTableButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tìm bàn chơi");

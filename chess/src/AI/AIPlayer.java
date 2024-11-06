@@ -58,18 +58,80 @@ public class AIPlayer {
     }
 
     private int evaluateBoard(Board board, boolean isRed) {
-        // Thực hiện đánh giá bàn cờ cho AI
         int score = 0;
-
-        // Đánh giá dựa trên giá trị quân cờ
         for (Piece piece : board.getPieces()) {
-            if (piece.isRed() == isRed) {
-                score += getPieceValue(piece);
-            } else {
-                score -= getPieceValue(piece);
-            }
+            int pieceValue = getPieceValue(piece);
+            score += piece.isRed() == isRed ? pieceValue : -pieceValue;
+
+            // Thêm lợi thế vị trí
+            score += getPositionScore(piece);
         }
         return score;
+    }
+
+    private int getPositionScore(Piece piece) {
+        int[][] positionScores;
+
+        // Đặt các giá trị đánh giá vị trí dựa trên loại quân
+        if (piece instanceof King) {
+            positionScores = new int[][] {
+                    {0, 0, 0, 10, 10, 10, 0, 0, 0},
+                    {0, 0, 0, 10, 20, 10, 0, 0, 0},
+                    {0, 0, 0, 10, 30, 10, 0, 0, 0},
+                    {0, 0, 0, 10, 20, 10, 0, 0, 0},
+                    {0, 0, 0, 10, 10, 10, 0, 0, 0}
+            };
+        } else if (piece instanceof xe) {
+            positionScores = new int[][] {
+                    {5, 10, 10, 10, 10, 10, 10, 10, 5},
+                    {5, 10, 20, 20, 20, 20, 20, 10, 5},
+                    {5, 10, 10, 10, 10, 10, 10, 10, 5},
+                    {5, 10, 20, 30, 30, 30, 20, 10, 5},
+                    {5, 10, 20, 30, 40, 30, 20, 10, 5},
+                    {5, 10, 20, 30, 40, 30, 20, 10, 5},
+                    {5, 10, 20, 30, 30, 30, 20, 10, 5},
+                    {5, 10, 10, 10, 10, 10, 10, 10, 5},
+                    {5, 10, 20, 20, 20, 20, 20, 10, 5},
+                    {5, 10, 10, 10, 10, 10, 10, 10, 5}
+            };
+        } else if (piece instanceof ma) {
+            positionScores = new int[][] {
+                    {0, 4, 8, 12, 16, 12, 8, 4, 0},
+                    {4, 8, 12, 16, 20, 16, 12, 8, 4},
+                    {8, 12, 16, 20, 24, 20, 16, 12, 8},
+                    {12, 16, 20, 24, 28, 24, 20, 16, 12},
+                    {16, 20, 24, 28, 32, 28, 24, 20, 16},
+                    {16, 20, 24, 28, 32, 28, 24, 20, 16},
+                    {12, 16, 20, 24, 28, 24, 20, 16, 12},
+                    {8, 12, 16, 20, 24, 20, 16, 12, 8},
+                    {4, 8, 12, 16, 20, 16, 12, 8, 4},
+                    {0, 4, 8, 12, 16, 12, 8, 4, 0}
+            };
+        } else if (piece instanceof chot) {
+            positionScores = new int[][] {
+                    {0, 0, 0, 5, 10, 5, 0, 0, 0},
+                    {0, 0, 0, 5, 10, 5, 0, 0, 0},
+                    {0, 0, 0, 5, 10, 5, 0, 0, 0},
+                    {0, 0, 0, 5, 10, 5, 0, 0, 0},
+                    {0, 0, 0, 5, 10, 5, 0, 0, 0},
+                    {0, 0, 0, 10, 20, 10, 0, 0, 0},
+                    {0, 0, 0, 10, 20, 10, 0, 0, 0},
+                    {0, 0, 0, 15, 30, 15, 0, 0, 0},
+                    {0, 0, 0, 15, 30, 15, 0, 0, 0},
+                    {0, 0, 0, 20, 40, 20, 0, 0, 0}
+            };
+        } else {
+            // Mặc định cho các quân khác hoặc khi chưa xác định
+            positionScores = new int[10][9];
+        }
+
+        if (piece.getX() >= 0 && piece.getX() < positionScores.length &&
+                piece.getY() >= 0 && piece.getY() < positionScores[0].length) {
+            return positionScores[piece.getX()][piece.getY()];
+        } else {
+            // Trường hợp tọa độ không hợp lệ
+            return 0; // Hoặc một giá trị mặc định nào đó
+        }
     }
 
     private int getPieceValue(Piece piece) {
