@@ -45,10 +45,12 @@ public class FunctionPanel extends JPanel {
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Reset game logic here
+                // Gọi phương thức reset game
+                board.resetGame();
                 notificationLabel.setText("Trò chơi đã được khởi động lại.");
             }
         });
+
 
         saveButton.addActionListener(new ActionListener() {
             @Override

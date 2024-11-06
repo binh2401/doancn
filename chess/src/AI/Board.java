@@ -438,5 +438,54 @@ public class Board extends JPanel {
 
         return validMoves;
     }
+    public void resetGame() {
+        pieces.clear();
+        moveHistoryPairs.clear();
+        lastRedMove = null;
+        lastBlackMove = null;
+        isRedTurn = true;
+        timeLeft = 60;
 
+        // Thêm lại các quân cờ vào bàn
+        pieces.add(new King(4, 9, true, pieces));  // Tướng Đỏ ở vị trí (4, 9)
+        pieces.add(new King(4, 0, false, pieces)); // Tướng Đen ở vị trí (4, 0)
+
+        // Thêm các quân cờ khác...
+        pieces.add(new chot(0, 6, true, pieces));
+        pieces.add(new chot(0, 3, false, pieces));
+        pieces.add(new chot(2, 6, true, pieces));
+        pieces.add(new chot(2, 3, false, pieces));
+        pieces.add(new chot(4, 6, true, pieces));
+        pieces.add(new chot(4, 3, false, pieces));
+        pieces.add(new chot(6, 6, true, pieces));
+        pieces.add(new chot(6, 3, false, pieces));
+        pieces.add(new chot(8, 6, true, pieces));
+        pieces.add(new chot(8, 3, false, pieces));
+
+        pieces.add(new xe(0, 9, true, pieces));
+        pieces.add(new xe(0, 0, false, pieces));
+        pieces.add(new xe(8, 9, true, pieces));
+        pieces.add(new xe(8, 0, false, pieces));
+        pieces.add(new ma(1, 9, true, pieces));
+        pieces.add(new ma(1, 0, false, pieces));
+        pieces.add(new ma(7, 9, true, pieces));
+        pieces.add(new ma(7, 0, false, pieces));
+        pieces.add(new tuong(2, 9, true, pieces));
+        pieces.add(new tuong(2, 0, false, pieces));
+        pieces.add(new tuong(6, 9, true, pieces));
+        pieces.add(new tuong(6, 0, false, pieces));
+        pieces.add(new si(3, 9, true, pieces));
+        pieces.add(new si(3, 0, false, pieces));
+        pieces.add(new si(5, 9, true, pieces));
+        pieces.add(new si(5, 0, false, pieces));
+        pieces.add(new phao(1, 7, true, pieces));
+        pieces.add(new phao(1, 2, false, pieces));
+        pieces.add(new phao(7, 7, true, pieces));
+        pieces.add(new phao(7, 2, false, pieces));
+
+        // Reset lại thời gian và nhãn
+        timerLabel.setText("Time left: " + timeLeft);
+
+        repaint(); // Vẽ lại bàn cờ
+    }
 }
