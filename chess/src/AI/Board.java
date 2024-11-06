@@ -140,6 +140,7 @@ public class Board extends JPanel {
                                         lastBlackMove = move;
                                         if (lastRedMove != null) {
                                             moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));
+
                                             lastRedMove = null;
                                             lastBlackMove = null;
                                         }
@@ -161,11 +162,19 @@ public class Board extends JPanel {
                                     isRedTurn = false; // Đổi lượt cho AI
                                     timeLeft = 60; // Reset thời gian
                                     if (isAIEnabled) {
-                                        // Nếu lượt của AI, thực hiện nước đi của AI
                                         AIPlayer aiPlayer = new AIPlayer();
                                         Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn);
+
                                         if (aiMove != null) {
-                                            makeMove(aiMove);
+                                            makeMove(aiMove); // Thực hiện nước đi của AI
+                                            lastBlackMove = aiMove; // Lưu lại nước đi của AI
+
+                                            // Thêm vào lịch sử nước đi nếu cả người và AI đều có nước đi
+                                            if (lastRedMove != null) {
+                                                moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));
+                                                lastRedMove = null;
+                                                lastBlackMove = null;
+                                            }
                                         }
                                     }
                                     // Đổi lượt trở lại cho người chơi
