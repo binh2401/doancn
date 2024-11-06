@@ -10,7 +10,7 @@ import quanco.chot;
 import quanco.Piece;
 
 public class AIPlayer {
-    private final int MAX_DEPTH = 3;
+    private final int MAX_DEPTH = 3;  // Đặt độ sâu tối đa là 5
 
     public Move getBestMove(Board board, boolean isRed) {
         return minimax(board, MAX_DEPTH, Integer.MIN_VALUE, Integer.MAX_VALUE, isRed).move;
@@ -70,7 +70,7 @@ public class AIPlayer {
     }
 
     private int getPositionScore(Piece piece) {
-        int[][] positionScores;
+        int[][] positionScores = new int[10][9];
 
         // Đặt các giá trị đánh giá vị trí dựa trên loại quân
         if (piece instanceof King) {
@@ -120,30 +120,60 @@ public class AIPlayer {
                     {0, 0, 0, 15, 30, 15, 0, 0, 0},
                     {0, 0, 0, 20, 40, 20, 0, 0, 0}
             };
-        } else {
-            // Mặc định cho các quân khác hoặc khi chưa xác định
-            positionScores = new int[10][9];
+        } else if (piece instanceof si) {
+            positionScores = new int[][] {
+                    {0, 5, 10, 15, 20, 15, 10, 5, 0},
+                    {5, 10, 15, 20, 30, 20, 15, 10, 5},
+                    {10, 15, 20, 25, 35, 25, 20, 15, 10},
+                    {15, 20, 25, 30, 40, 30, 25, 20, 15},
+                    {20, 30, 35, 40, 50, 40, 35, 30, 20},
+                    {20, 30, 35, 40, 50, 40, 35, 30, 20},
+                    {15, 20, 25, 30, 40, 30, 25, 20, 15},
+                    {10, 15, 20, 25, 35, 25, 20, 15, 10},
+                    {5, 10, 15, 20, 30, 20, 15, 10, 5},
+                    {0, 5, 10, 15, 20, 15, 10, 5, 0}
+            };
+        } else if (piece instanceof phao) {
+            positionScores = new int[][] {
+                    {10, 20, 20, 30, 40, 30, 20, 20, 10},
+                    {20, 30, 30, 40, 50, 40, 30, 30, 20},
+                    {30, 40, 40, 50, 60, 50, 40, 40, 30},
+                    {40, 50, 50, 60, 70, 60, 50, 50, 40},
+                    {50, 60, 60, 70, 80, 70, 60, 60, 50},
+                    {50, 60, 60, 70, 80, 70, 60, 60, 50},
+                    {40, 50, 50, 60, 70, 60, 50, 50, 40},
+                    {30, 40, 40, 50, 60, 50, 40, 40, 30},
+                    {20, 30, 30, 40, 50, 40, 30, 30, 20},
+                    {10, 20, 20, 30, 40, 30, 20, 20, 10}
+            };
         }
 
-        if (piece.getX() >= 0 && piece.getX() < positionScores.length &&
-                piece.getY() >= 0 && piece.getY() < positionScores[0].length) {
-            return positionScores[piece.getX()][piece.getY()];
-        } else {
-            // Trường hợp tọa độ không hợp lệ
-            return 0; // Hoặc một giá trị mặc định nào đó
+        int x = piece.getX();
+        int y = piece.getY();
+
+        if (x >= 0 && x < positionScores.length && y >= 0 && y < positionScores[0].length) {
+            return positionScores[x][y];
         }
+
+        return 0;
     }
 
     private int getPieceValue(Piece piece) {
-        // Đặt giá trị cho từng quân cờ (có thể thay đổi tùy thuộc vào luật chơi)
-        if (piece instanceof King) return 1000;
-        if (piece instanceof xe) return 50;
-        if (piece instanceof ma) return 30;
-        if (piece instanceof si) return 30;
-        if (piece instanceof tuong) return 20;
-        if (piece instanceof phao) return 40;
-        if (piece instanceof chot) return 10;
-        return 0;
+        if (piece instanceof King) {
+            return 1000;
+        } else if (piece instanceof xe) {
+            return 500;
+        } else if (piece instanceof ma) {
+            return 300;
+        } else if (piece instanceof si) {
+            return 150;
+        } else if (piece instanceof phao) {
+            return 300;
+        } else if (piece instanceof chot) {
+            return 200;
+        } else {
+            return 0;
+        }
     }
 
     private class MoveEvaluation {
