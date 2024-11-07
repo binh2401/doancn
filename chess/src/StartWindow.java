@@ -132,6 +132,17 @@ public class StartWindow extends JFrame {
         // Đặt kích thước cho các nút đăng nhập và đăng ký
         loginButton.setPreferredSize(new Dimension(100, 30));
         registerButton.setPreferredSize(new Dimension(100, 30));
+        // Thêm các hành động cho nút đăng nhập
+        loginButton.addActionListener(e -> {
+            // Mở cửa sổ đăng nhập
+            new auth.LoginWindow().setVisible(true);
+        });
+
+// Tương tự cho nút đăng ký
+        registerButton.addActionListener(e -> {
+            // Mở cửa sổ đăng ký
+            new auth.RegisterWindow().setVisible(true);
+        });
 
         // Thêm nút vào panel
         authPanel.add(loginButton);
