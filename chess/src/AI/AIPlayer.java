@@ -9,6 +9,10 @@ import quanco.tuong;
 import quanco.chot;
 import quanco.Piece;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class AIPlayer {
     private int maxDepth = 3; // Mặc định là trung bình
 
@@ -29,22 +33,33 @@ public class AIPlayer {
     }  // Đặt độ sâu tối đa là 5
 
 
-    public Move getBestMove(Board board, boolean isRed) {
-        return minimax(board, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE, isRed).move;
+    public Move getBestMove(Board board, boolean isRed, long timeLimit ) {
+        long startTime = System.currentTimeMillis();  // Lưu thời gian bắt đầu
+        return minimax(board, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE, isRed, startTime, timeLimit).move;
     }
 
-    private MoveEvaluation minimax(Board board, int depth, int alpha, int beta, boolean isMaximizing) {
+    private MoveEvaluation minimax(Board board, int depth, int alpha, int beta, boolean isMaximizing, long startTime, long timeLimit) {
+        // Kiểm tra thời gian thực thi
+        if (System.currentTimeMillis() - startTime > timeLimit) {
+            return new MoveEvaluation(null, evaluateBoard(board, isMaximizing));
+        }
+
         if (depth == 0 || board.isGameOver()) {
             return new MoveEvaluation(null, evaluateBoard(board, isMaximizing));
         }
 
+        List<Move> possibleMoves = board.getAllPossibleMoves(isMaximizing);
+        possibleMoves.sort((move1, move2) -> evaluateMove(board, move2) - evaluateMove(board, move1));
+
         Move bestMove = null;
+
         if (isMaximizing) {
             int maxEval = Integer.MIN_VALUE;
-            for (Move move : board.getAllPossibleMoves(isMaximizing)) {
+            for (Move move : possibleMoves) {
                 board.makeMove(move);
-                MoveEvaluation eval = minimax(board, depth - 1, alpha, beta, false);
+                MoveEvaluation eval = minimax(board, depth - 1, alpha, beta, false, startTime, timeLimit);
                 board.undoMove(move);
+
                 if (eval.value > maxEval) {
                     maxEval = eval.value;
                     bestMove = move;
@@ -57,10 +72,11 @@ public class AIPlayer {
             return new MoveEvaluation(bestMove, maxEval);
         } else {
             int minEval = Integer.MAX_VALUE;
-            for (Move move : board.getAllPossibleMoves(isMaximizing)) {
+            for (Move move : possibleMoves) {
                 board.makeMove(move);
-                MoveEvaluation eval = minimax(board, depth - 1, alpha, beta, true);
+                MoveEvaluation eval = minimax(board, depth - 1, alpha, beta, true, startTime, timeLimit);
                 board.undoMove(move);
+
                 if (eval.value < minEval) {
                     minEval = eval.value;
                     bestMove = move;
@@ -73,18 +89,24 @@ public class AIPlayer {
             return new MoveEvaluation(bestMove, minEval);
         }
     }
+    private int evaluateMove(Board board, Move move) {
+        Piece capturedPiece = board.getPieceAt(move.getOldX(), move.getOldY());
+        if (capturedPiece != null) {
+            return getPieceValue(capturedPiece) * 10; // Ưu tiên nước đi ăn quân
+        }
+        return 0; // Không ăn quân, giá trị mặc định
+    }
 
     private int evaluateBoard(Board board, boolean isRed) {
         int score = 0;
         for (Piece piece : board.getPieces()) {
             int pieceValue = getPieceValue(piece);
             score += piece.isRed() == isRed ? pieceValue : -pieceValue;
-
-            // Thêm lợi thế vị trí
-            score += getPositionScore(piece);
+            score += getPositionScore(piece);  // Cộng thêm giá trị vị trí
         }
         return score;
     }
+
 
     private int getPositionScore(Piece piece) {
         int[][] positionScores = new int[10][9];

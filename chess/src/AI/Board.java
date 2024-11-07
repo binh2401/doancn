@@ -28,9 +28,11 @@ public class Board extends JPanel {
     private Move lastRedMove = null;
     private Move lastBlackMove = null;
     private boolean isAIEnabled;
+    private Piece[][] board;
 
     public Board(boolean isAIEnabled,String difficulty) {
         this.isAIEnabled = isAIEnabled;
+        board = new Piece[10][9];
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
         pieces = new ArrayList<>();
         moveHistoryPairs = new ArrayList<>(); // Khởi tạo danh sách lịch sử nước đi
@@ -164,7 +166,9 @@ public class Board extends JPanel {
                                     if (isAIEnabled) {
                                         AIPlayer aiPlayer = new AIPlayer();
                                         aiPlayer.setDifficultyLevel(difficulty);
-                                        Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn);
+                                        long timeLimit = 1000;  // 1 second
+                                        Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn, timeLimit);
+
 
                                         if (aiMove != null) {
                                             makeMove(aiMove); // Thực hiện nước đi của AI
@@ -225,6 +229,17 @@ public class Board extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public List<Piece> getAllPieces() {
+        List<Piece> pieces = new ArrayList<>();
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] != null) {
+                    pieces.add(board[row][col]);
+                }
+            }
+        }
+        return pieces;
     }
     // Phương thức hoàn tác nước đi cuối cùng
     // Phương thức hoàn tác nước đi cuối cùng
@@ -325,7 +340,7 @@ public class Board extends JPanel {
         }
     }
 
-    private Piece getPieceAt(int x, int y) {
+    Piece getPieceAt(int x, int y) {
         for (Piece piece : pieces) {
             if (piece.getX() == x && piece.getY() == y) {
                 return piece;
@@ -489,4 +504,5 @@ public class Board extends JPanel {
 
         repaint(); // Vẽ lại bàn cờ
     }
+
 }
