@@ -10,10 +10,27 @@ import quanco.chot;
 import quanco.Piece;
 
 public class AIPlayer {
-    private final int MAX_DEPTH = 3;  // Đặt độ sâu tối đa là 5
+    private int maxDepth = 3; // Mặc định là trung bình
+
+    public void setDifficultyLevel(String difficulty) {
+        switch (difficulty.toLowerCase()) {
+            case "easy":
+                maxDepth = 1; // Dễ
+                break;
+            case "medium":
+                maxDepth = 3; // Trung bình
+                break;
+            case "hard":
+                maxDepth = 5; // Khó
+                break;
+            default:
+                maxDepth = 3; // Mặc định là trung bình
+        }
+    }  // Đặt độ sâu tối đa là 5
+
 
     public Move getBestMove(Board board, boolean isRed) {
-        return minimax(board, MAX_DEPTH, Integer.MIN_VALUE, Integer.MAX_VALUE, isRed).move;
+        return minimax(board, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE, isRed).move;
     }
 
     private MoveEvaluation minimax(Board board, int depth, int alpha, int beta, boolean isMaximizing) {

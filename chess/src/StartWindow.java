@@ -17,6 +17,7 @@ public class StartWindow extends JFrame {
     private Client client;
     private  Main main;
     private boolean isAIEnabled;
+    private String difficulty;
 
     public StartWindow(Main main, Client client) {
         this.client = client;
@@ -67,7 +68,7 @@ public class StartWindow extends JFrame {
                 musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
                 setVisible(false); // Ẩn StartWindow
                 if (main != null) { // Kiểm tra xem main có phải là null không
-                    main.startGame(isAIEnabled ==true); // Khởi động trò chơi
+                    main.startGameForPlayer(difficulty); // Khởi động trò chơi
                 } else {
                     System.out.println("Main is null!");
                 }
@@ -77,7 +78,7 @@ public class StartWindow extends JFrame {
         playWithComputerButton.addActionListener(e->{
             musicPlayer.stopBackgroundMusic();
             setVisible(false);
-            main.startGame(isAIEnabled==false);
+            main.startGameForAI();
         });
         createRoomButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tạo phòng");
         findTableButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tìm bàn chơi");

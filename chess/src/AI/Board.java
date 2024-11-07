@@ -29,7 +29,7 @@ public class Board extends JPanel {
     private Move lastBlackMove = null;
     private boolean isAIEnabled;
 
-    public Board(boolean isAIEnabled) {
+    public Board(boolean isAIEnabled,String difficulty) {
         this.isAIEnabled = isAIEnabled;
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
         pieces = new ArrayList<>();
@@ -163,6 +163,7 @@ public class Board extends JPanel {
                                     timeLeft = 60; // Reset thời gian
                                     if (isAIEnabled) {
                                         AIPlayer aiPlayer = new AIPlayer();
+                                        aiPlayer.setDifficultyLevel(difficulty);
                                         Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn);
 
                                         if (aiMove != null) {
