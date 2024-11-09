@@ -44,7 +44,7 @@ public class StartWindow extends JFrame {
 
         // Khởi tạo âm thanh nền
         musicPlayer = new BackgroundMusicPlayer();
-        musicPlayer.playBackgroundMusic("/sounds/nhacNen.wav"); // Đường dẫn đến âm thanh nền
+        musicPlayer.playBackgroundMusic("/sounds/nhacnen2.wav"); // Đường dẫn đến âm thanh nền
 
 
         JLabel title = new JLabel("Cờ Tướng AI", JLabel.CENTER);

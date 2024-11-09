@@ -29,6 +29,8 @@ public class Board extends JPanel {
     private Move lastBlackMove = null;
     private boolean isAIEnabled;
     private Piece[][] board;
+    private boolean gameOver = false;
+
 
     public Board(boolean isAIEnabled,String difficulty) {
         this.isAIEnabled = isAIEnabled;
@@ -241,7 +243,7 @@ public class Board extends JPanel {
         }
         return pieces;
     }
-    // Phương thức hoàn tác nước đi cuối cùng
+
     // Phương thức hoàn tác nước đi cuối cùng
     public boolean undoLastMovePair() {
         if (moveHistoryPairs.isEmpty()) {
@@ -503,6 +505,16 @@ public class Board extends JPanel {
         timerLabel.setText("Time left: " + timeLeft);
 
         repaint(); // Vẽ lại bàn cờ
+    }
+    // Hàm xử lý sự kiện đầu hàng
+    public void surrender() {
+        // Kiểm tra ai là người thua cuộc và thông báo
+        String loser = isRedTurn ? "Đỏ" : "Đen";
+        String winner = isRedTurn ? "Đen" : "Đỏ";
+
+        // Hiển thị thông báo và kết thúc trò chơi
+        JOptionPane.showMessageDialog(this, loser + " đã đầu hàng. " + winner + " thắng!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0); // Kết thúc trò chơi
     }
 
 }

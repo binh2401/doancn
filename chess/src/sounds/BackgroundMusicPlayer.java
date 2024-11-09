@@ -29,7 +29,7 @@ public class BackgroundMusicPlayer {
 
             // Giảm âm lượng
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volumeControl.setValue(-30.0f); // Giảm âm lượng xuống 10dB, điều chỉnh giá trị này nếu cần
+            volumeControl.setValue(0f); // Giảm âm lượng xuống 10dB, điều chỉnh giá trị này nếu cần
 
         } catch (Exception ex) {
             ex.printStackTrace();

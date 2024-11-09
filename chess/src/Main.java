@@ -98,5 +98,9 @@ public class Main {
         // Sử dụng pack() để tự động điều chỉnh kích thước cửa sổ phù hợp
         frame.pack();
         frame.setVisible(true); // Hiện cửa sổ chính
+        // Thiết lập JFrame hiển thị toàn màn hình
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setVisible(true);
     }
+
 }
