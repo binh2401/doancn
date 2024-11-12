@@ -39,17 +39,20 @@ public class Client {
             new Thread(() -> {
                 String message;
                 try {
+
                     while ((message = in.readLine()) != null) {
+                        System.out.println("Opponent move: " + message);
                         if (message.equals("GAME_START")) {
+                            System.out.println("Opponent move: " + message);
                             SwingUtilities.invokeLater(() -> {
                                 startWindow.enablePlayButton(); // Kích hoạt nút
                                 if (this.onOpponentFound != null) {
                                     this.onOpponentFound.run(); // Gọi phương thức onOpponentFound
                                 }
                             });
-                        } else {
+                        } else if (message.startsWith("MOVE")) {
                             System.out.println("Opponent move: " + message);
-                            updateBoard(message); // Cập nhật bàn cờ với nước đi của đối thủ
+                            updateBoard(message);  // Cập nhật bàn cờ với nước đi của đối thủ
                         }
                     }
                 } catch (IOException e) {
@@ -89,10 +92,14 @@ public class Client {
     }
     // Phương thức gửi nước đi tới server
     public void sendMove(String move) {
-        out.println("MOVE " + move); // Gửi nước đi tới server
+        System.out.println("Sending move: " + move);  // Debug log
+        out.println("MOVE " + move);  // Gửi nước đi tới server
+        out.flush();
     }
 
     private void updateBoard(String move) {
-        startWindow.updateBoard(move); // Cập nhật bàn cờ trong StartWindow
+        SwingUtilities.invokeLater(() -> {
+            startWindow.updateBoard(move); // Cập nhật bàn cờ trong StartWindow
+        });
     }
 }

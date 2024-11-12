@@ -49,7 +49,12 @@ public class AIPlayer {
         }
 
         List<Move> possibleMoves = board.getAllPossibleMoves(isMaximizing);
-        possibleMoves.sort((move1, move2) -> evaluateMove(board, move2) - evaluateMove(board, move1));
+
+        possibleMoves.sort((move1, move2) -> {
+            int eval1 = evaluateMove(board, move1);
+            int eval2 = evaluateMove(board, move2);
+            return eval2 - eval1; // Sắp xếp giảm dần theo đánh giá
+        });
 
         Move bestMove = null;
 
@@ -90,11 +95,21 @@ public class AIPlayer {
         }
     }
     private int evaluateMove(Board board, Move move) {
-        Piece capturedPiece = board.getPieceAt(move.getOldX(), move.getOldY());
-        if (capturedPiece != null) {
-            return getPieceValue(capturedPiece) * 10; // Ưu tiên nước đi ăn quân
+        Piece targetPiece = board.getPieceAt(move.getNewX(), move.getNewY());
+        Piece movedPiece = board.getPieceAt(move.getOldX(), move.getOldY());
+        int score = 0;
+
+        // Nếu nước đi ăn quân
+        if (targetPiece != null) {
+            score += getPieceValue(targetPiece) * 10; // Ưu tiên ăn quân
         }
-        return 0; // Không ăn quân, giá trị mặc định
+
+        // Nếu nước đi bảo vệ quân cờ
+        if (isPieceThreatened(board, movedPiece)) {
+            score += getPieceValue(movedPiece) * 5; // Tăng điểm nếu bảo vệ quân
+        }
+
+        return score;
     }
 
     private int evaluateBoard(Board board, boolean isRed) {
@@ -102,7 +117,13 @@ public class AIPlayer {
         for (Piece piece : board.getPieces()) {
             int pieceValue = getPieceValue(piece);
             score += piece.isRed() == isRed ? pieceValue : -pieceValue;
-            score += getPositionScore(piece);  // Cộng thêm giá trị vị trí
+
+            // Thêm đánh giá nếu quân cờ đang bị đe dọa
+            if (isPieceThreatened(board, piece)) {
+                score += piece.isRed() == isRed ? -pieceValue : pieceValue;
+            }
+
+            score += getPositionScore(piece); // Giá trị vị trí
         }
         return score;
     }
@@ -214,7 +235,15 @@ public class AIPlayer {
             return 0;
         }
     }
-
+    private boolean isPieceThreatened(Board board, Piece piece) {
+        List<Move> opponentMoves = board.getAllPossibleMoves(!piece.isRed());
+        for (Move move : opponentMoves) {
+            if (move.getNewX() == piece.getX() && move.getNewY() == piece.getY()) {
+                return true; // Quân cờ bị đe dọa
+            }
+        }
+        return false;
+    }
     private class MoveEvaluation {
         Move move;
         int value;
