@@ -1,4 +1,7 @@
 import AI.Board;
+import AI.FunctionPanel;
+import auth.StartWindow;
+import network.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,50 +12,55 @@ public class Main {
     private StartWindow startWindow;
 
     public static void main(String[] args) {
+        // Khởi chạy ứng dụng bằng cách gọi phương thức khởi tạo GUI
         SwingUtilities.invokeLater(() -> {
             Main main = new Main(); // Khởi tạo Main
             main.createAndShowGUI(); // Gọi phương thức để hiển thị GUI
         });
     }
 
+    public Main() {
+        client = new Client(); // Khởi tạo client
+        // Đảm bảo truyền client vào StartWindow
+        startWindow = new StartWindow(client); // Truyền đối tượng client vào constructor của StartWindow
+    }
+
     private void createAndShowGUI() {
         frame = new JFrame("Đồ án cờ tướng AI");
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(false); // Ẩn frame chính ban
+        frame.setVisible(false); // Ẩn frame chính ban đầu
 
-        startWindow = new StartWindow(this,this.client); // Truyền Main và Client
+        // Hiển thị cửa sổ StartWindow
         startWindow.setVisible(true); // Hiển thị StartWindow
     }
 
-    public void startGameForPlayer( String difficulty) {
-        // Kiểm tra xem frame có được khởi tạo không
+    public void startGameForPlayer(String difficulty) {
         if (frame == null) {
             frame = new JFrame("Đồ án cờ tướng"); // Khởi tạo frame nếu chưa có
-            frame.setLayout(new BorderLayout()); // Sử dụng BorderLayout
+            frame.setLayout(new BorderLayout());
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } else {
             frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
         }
 
-        // Tạo đối tượng Board để vẽ bàn cờ, không sử dụng AI
-        Board board = new Board(false, "medium"); // Không có AI, độ khó mặc định là trung bình
+        // Tạo đối tượng Board và FunctionPanel
+        Board board = new Board(false, difficulty); // Không có AI, độ khó từ tham số
+        FunctionPanel functionPanel = new FunctionPanel(board);
 
-        // Tạo đối tượng FunctionPanel
-        FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel
-
-        // Thêm đối tượng Board và FunctionPanel vào JFrame
+        // Thêm các thành phần vào JFrame
         frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
-        frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng ở bên phải
+        frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng bên phải
 
-        // Sử dụng pack() để tự động điều chỉnh kích thước cửa sổ phù hợp
+        // Tự động điều chỉnh kích thước cửa sổ
         frame.pack();
-        frame.setVisible(true); // Hiện cửa sổ chính
+        frame.setVisible(true); // Hiển thị cửa sổ chính
     }
+
     public void startGameForAI() {
         if (frame == null) {
             frame = new JFrame("Đồ án cờ tướng AI"); // Khởi tạo frame nếu chưa có
-            frame.setLayout(new BorderLayout()); // Sử dụng BorderLayout
+            frame.setLayout(new BorderLayout());
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } else {
             frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
@@ -87,20 +95,15 @@ public class Main {
 
         // Tạo đối tượng Board với độ khó đã chọn
         Board board = new Board(true, difficulty); // Truyền thông tin độ khó vào Board
+        FunctionPanel functionPanel = new FunctionPanel(board); // Tạo AI.FunctionPanel
 
-        // Tạo đối tượng FunctionPanel
-        FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel
-
-        // Thêm đối tượng Board và FunctionPanel vào JFrame
+        // Thêm các thành phần vào JFrame
         frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
-        frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng ở bên phải
+        frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng bên phải
 
-        // Sử dụng pack() để tự động điều chỉnh kích thước cửa sổ phù hợp
+        // Tự động điều chỉnh kích thước cửa sổ
         frame.pack();
-        frame.setVisible(true); // Hiện cửa sổ chính
-        // Thiết lập JFrame hiển thị toàn màn hình
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setVisible(true);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Hiển thị cửa sổ toàn màn hình
+        frame.setVisible(true); // Hiển thị cửa sổ chính
     }
-
 }

@@ -49,7 +49,7 @@ public class Server {
             // Nếu không có đối thủ, thêm vào hàng đợi
             waitingClients.add(client);
             client.sendMessage("WAIT_FOR_OPPONENT");
-            System.out.println("Client added to waiting list: " + client);
+            System.out.println("network.Client added to waiting list: " + client);
         }
     }
 

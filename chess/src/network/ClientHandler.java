@@ -44,7 +44,7 @@ public class ClientHandler implements Runnable {
         } finally {
             try {
                 socket.close();
-                System.out.println("Client disconnected: " + socket.getInetAddress());  // Log khi client ngắt kết nối
+                System.out.println("network.Client disconnected: " + socket.getInetAddress());  // Log khi client ngắt kết nối
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -62,7 +62,7 @@ public class ClientHandler implements Runnable {
     // Gán phòng cho client
     public void setRoom(GameRoom room) {
         this.room = room;
-        System.out.println("Client assigned to room: " + room.getId());  // Log khi client được gán phòng
+        System.out.println("network.Client assigned to room: " + room.getId());  // Log khi client được gán phòng
     }
 
     // Trả về phòng mà client tham gia

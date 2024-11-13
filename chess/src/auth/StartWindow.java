@@ -1,8 +1,14 @@
+package auth;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
+
+import AI.Board;
+import AI.FunctionPanel;
+import network.Client;
 import sounds.BackgroundMusicPlayer;
 
 public class StartWindow extends JFrame {
@@ -15,15 +21,17 @@ public class StartWindow extends JFrame {
     private Image backgroundImage;
     private BackgroundMusicPlayer musicPlayer; // Biến cho lớp âm thanh
     private Client client;
-    private  Main main;
+    private JFrame frame; // Khai báo frame cho trò chơi AI
+
     private boolean isAIEnabled;
     private String difficulty;
 
-    public StartWindow(Main main, Client client) {
+    // Constructor chỉ nhận client và không còn phương thức main
+    public StartWindow(Client client) {
         this.client = client;
-        this.main = main;
         initialize();
     }
+
     private void initialize() {
         setTitle("Chào mừng đến với Cờ Tướng AI");
         setSize(700, 700);
@@ -46,7 +54,6 @@ public class StartWindow extends JFrame {
         musicPlayer = new BackgroundMusicPlayer();
         musicPlayer.playBackgroundMusic("/sounds/nhacnen2.wav"); // Đường dẫn đến âm thanh nền
 
-
         JLabel title = new JLabel("Cờ Tướng AI", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
         add(title, BorderLayout.NORTH);
@@ -66,20 +73,16 @@ public class StartWindow extends JFrame {
                 startButton.setText("Chơi ngay"); // Đổi lại văn bản
                 startButton.setEnabled(true); // Bật lại nút
                 musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
-                setVisible(false); // Ẩn StartWindow
-                if (main != null) { // Kiểm tra xem main có phải là null không
-                    main.startGameForPlayer(difficulty); // Khởi động trò chơi
-                } else {
-                    System.out.println("Main is null!");
-                }
+                setVisible(false); // Ẩn auth.StartWindow
             });
         });
         playWithComputerButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi với máy");
         playWithComputerButton.addActionListener(e->{
             musicPlayer.stopBackgroundMusic();
             setVisible(false);
-            main.startGameForAI();
+            startGameForAI(); // Gọi phương thức startGameForAI khi người chơi chọn "Chơi với máy"
         });
+
         createRoomButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tạo phòng");
         findTableButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Tìm bàn chơi");
 
@@ -89,24 +92,6 @@ public class StartWindow extends JFrame {
         playWithComputerButton.setPreferredSize(buttonSize);
         createRoomButton.setPreferredSize(buttonSize);
         findTableButton.setPreferredSize(buttonSize);
-
-        // Thêm hành động cho các nút
-//        startButton.addActionListener(e -> {
-//            musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
-//            setVisible(false); // Ẩn StartWindow
-//            main.startGame(); // Khởi động trò chơi
-//        });
-
-        // Uncomment and implement these actions if needed
-        // playWithComputerButton.addActionListener(e -> {
-        //     main.playWithComputer(); // Gọi phương thức chơi với máy
-        // });
-        // createRoomButton.addActionListener(e -> {
-        //     main.createRoom(); // Gọi phương thức tạo phòng
-        // });
-        // findTableButton.addActionListener(e -> {
-        //     main.findTable(); // Gọi phương thức tìm bàn chơi
-        // });
 
         // Tạo panel chứa các nút và đặt chúng vào giữa cửa sổ
         JPanel buttonPanel = new JPanel();
@@ -138,7 +123,7 @@ public class StartWindow extends JFrame {
             new auth.LoginWindow().setVisible(true);
         });
 
-// Tương tự cho nút đăng ký
+        // Tương tự cho nút đăng ký
         registerButton.addActionListener(e -> {
             // Mở cửa sổ đăng ký
             new auth.RegisterWindow().setVisible(true);
@@ -195,17 +180,61 @@ public class StartWindow extends JFrame {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
     }
+
     public void enablePlayButton() {
         startButton.setEnabled(true); // Bật nút khi nhận được tín hiệu "READY_TO_START"
     }
+
     public void updateBoard(String move) {
         System.out.println("Cập nhật bàn cờ với nước đi: " + move);
         // Cập nhật GUI hoặc bàn cờ ở đây
     }
-    // Phương thức đóng cửa sổ
-    @Override
-    public void dispose() {
-        super.dispose();
-        // Không cần dừng nhạc nền ở đây nữa
+
+    // Phương thức bắt đầu trò chơi với AI
+    public void startGameForAI() {
+        if (frame == null) {
+            frame = new JFrame("Đồ án cờ tướng AI"); // Khởi tạo frame nếu chưa có
+            frame.setLayout(new BorderLayout());
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } else {
+            frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
+        }
+
+        // Hiển thị hộp thoại chọn độ khó AI
+        String[] options = {"Dễ", "Trung bình", "Khó"};
+        int choice = JOptionPane.showOptionDialog(null,
+                "Chọn độ khó của AI:",
+                "Chọn độ khó",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[1]); // Mặc định chọn Trung bình
+
+        String difficulty = "medium"; // Mặc định là "Trung bình"
+        switch (choice) {
+            case 0:
+                difficulty = "easy";
+                break;
+            case 1:
+                difficulty = "medium";
+                break;
+            case 2:
+                difficulty = "hard";
+                break;
+        }
+        Board board = new Board(true, difficulty); // Truyền thông tin độ khó vào Board
+        // Tạo một FunctionPanel mới cho trò chơi AI
+        FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel
+        frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
+        frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng ở bên phải
+
+        // Sử dụng pack() để tự động điều chỉnh kích thước cửa sổ phù hợp
+        frame.pack();
+        frame.setVisible(true); // Hiện cửa sổ chính
+        // Thiết lập JFrame hiển thị toàn màn hình
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setVisible(true);
     }
+
 }
