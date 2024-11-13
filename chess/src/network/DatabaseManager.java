@@ -6,52 +6,37 @@ import java.sql.Statement;
 import java.sql.SQLException;
 
 public class DatabaseManager {
-    private static final String URL = "jdbc:sqlserver://localhost\\MSSQLLocalDB:1433;databaseName=master;integratedSecurity=true;trustServerCertificate=true";  // Kết nối tới SQL Server
-    private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-
     public static void main(String[] args) {
-        try {
-            // Tải JDBC driver
-            Class.forName(DRIVER);
+        // Kết nối tới MySQL với tài khoản root (hoặc tài khoản có quyền admin)
+        String rootUrl = "jdbc:mysql://localhost:3306/"; // Không cần chỉ định database
+        String rootUser = "root"; // Tài khoản admin mặc định
+        String rootPassword = ""; // Mật khẩu mặc định (trống với XAMPP)
 
-            // Kết nối tới SQL Server
-            Connection connection = DriverManager.getConnection(URL);
+        // Tên user và database sẽ được tạo
+        String newUsername = "new_user";
+        String newPassword = "password123";
+        String newDatabase = "new_database";
 
-            // Tạo đối tượng Statement để thực thi các câu lệnh SQL
-            Statement stmt = connection.createStatement();
+        try (Connection connection = DriverManager.getConnection(rootUrl, rootUser, rootPassword);
+             Statement statement = connection.createStatement()) {
 
             // Tạo user mới
-            String username = "newUser";
-            String password = "newPassword123";
-            String createLoginQuery = "CREATE LOGIN " + username + " WITH PASSWORD = '" + password + "';";
+            String createUserQuery = "CREATE USER '" + newUsername + "'@'localhost' IDENTIFIED BY '" + newPassword + "';";
+            statement.executeUpdate(createUserQuery);
+            System.out.println("Tạo user '" + newUsername + "' thành công!");
 
-            // Tạo database mới cho user
-            String databaseName = username + "DB";  // Đặt tên database theo tên user
-            String createDatabaseQuery = "CREATE DATABASE " + databaseName + ";";
+            // Tạo database mới
+            String createDatabaseQuery = "CREATE DATABASE " + newDatabase + ";";
+            statement.executeUpdate(createDatabaseQuery);
+            System.out.println("Tạo database '" + newDatabase + "' thành công!");
 
-            // Thực thi câu lệnh tạo login và database
-            stmt.executeUpdate(createLoginQuery);
-            stmt.executeUpdate(createDatabaseQuery);
+            // Gán quyền cho user trên database
+            String grantPrivilegesQuery = "GRANT ALL PRIVILEGES ON " + newDatabase + ".* TO '" + newUsername + "'@'localhost';";
+            statement.executeUpdate(grantPrivilegesQuery);
+            System.out.println("Gán quyền cho user '" + newUsername + "' trên database '" + newDatabase + "' thành công!");
 
-            // Chuyển đến database mới để cấp quyền
-            String useDatabaseQuery = "USE " + databaseName + ";";
-            stmt.executeUpdate(useDatabaseQuery);
-
-            // Tạo user cho login trong database mới
-            String createUserQuery = "CREATE USER " + username + " FOR LOGIN " + username + ";";
-            stmt.executeUpdate(createUserQuery);
-
-            // Cấp quyền cho user
-            String grantPermissionsQuery = "GRANT SELECT, INSERT, UPDATE, DELETE TO " + username + ";";
-            stmt.executeUpdate(grantPermissionsQuery);
-
-            System.out.println("User và Database đã được tạo thành công!");
-
-            // Đóng kết nối
-            stmt.close();
-            connection.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("Lỗi: " + e.getMessage());
         }
     }
 }
