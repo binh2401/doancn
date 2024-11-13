@@ -1,0 +1,333 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/shelved.patch	(revision cd5f0f3d51ade792e88b1fae9accdc3927c60bba)
++++ /dev/null	(revision cd5f0f3d51ade792e88b1fae9accdc3927c60bba)
+@@ -1,252 +0,0 @@
+-Index: .idea/workspace.xml
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+-deleted file mode 100644
+---- a/.idea/workspace.xml	(revision 2eec871257fd967b5c992676c543162b21b2392f)
+-+++ /dev/null	(revision 2eec871257fd967b5c992676c543162b21b2392f)
+-@@ -1,107 +0,0 @@
+--<?xml version="1.0" encoding="UTF-8"?>
+--<project version="4">
+--  <component name="AutoImportSettings">
+--    <option name="autoReloadType" value="SELECTIVE" />
+--  </component>
+--  <component name="ChangeListManager">
+--    <list default="true" id="656a524f-5cac-4d1e-a2b2-cc0005eeceb1" name="Changes" comment="">
+--      <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Board$1.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Board$2.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Board$MovePair.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Board.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/King.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Piece.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/chot.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/ma.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/phao.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/shelved.patch" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/si.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/tuong.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/xe.class" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH__Changes_.xml" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/chess/src/AI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/AI/Board.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board$1.class" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board$MovePair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board$MovePair.class" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board.class" afterDir="false" />
+--    </list>
+--    <option name="SHOW_DIALOG" value="false" />
+--    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+--    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+--    <option name="LAST_RESOLUTION" value="IGNORE" />
+--  </component>
+--  <component name="Git.Settings">
+--    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+--  </component>
+--  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+--  "lastFilter": {
+--    "state": "OPEN",
+--    "assignee": "SeamussK"
+--  }
+--}]]></component>
+--  <component name="GithubPullRequestsUISettings"><![CDATA[{
+--  "selectedUrlAndAccountId": {
+--    "url": "https://github.com/binh2401/doancn.git",
+--    "accountId": "f1471a14-9cc3-47a2-b4b9-accb54996364"
+--  }
+--}]]></component>
+--  <component name="ProjectColorInfo"><![CDATA[{
+--  "customColor": "",
+--  "associatedIndex": 6
+--}]]></component>
+--  <component name="ProjectId" id="2onnCvAgRSnfJJygv6X6eTtPsTK" />
+--  <component name="ProjectViewState">
+--    <option name="hideEmptyMiddlePackages" value="true" />
+--    <option name="showLibraryContents" value="true" />
+--  </component>
+--  <component name="PropertiesComponent"><![CDATA[{
+--  "keyToString": {
+--    "Application.Client.executor": "Run",
+--    "Application.Server.executor": "Run",
+--    "RunOnceActivity.ShowReadmeOnStart": "true",
+--    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+--    "git-widget-placeholder": "main",
+--    "kotlin-language-version-configured": "true"
+--  }
+--}]]></component>
+--  <component name="RunManager" selected="Application.Client">
+--    <configuration name="Client 2" type="Application" factoryName="Application">
+--      <option name="MAIN_CLASS_NAME" value="Client" />
+--      <module name="doancn" />
+--      <method v="2">
+--        <option name="Make" enabled="true" />
+--      </method>
+--    </configuration>
+--    <configuration name="Client" type="Application" factoryName="Application">
+--      <option name="MAIN_CLASS_NAME" value="Client" />
+--      <module name="doancn" />
+--      <method v="2">
+--        <option name="Make" enabled="true" />
+--      </method>
+--    </configuration>
+--    <configuration name="Server" type="Application" factoryName="Application">
+--      <option name="MAIN_CLASS_NAME" value="network.Server" />
+--      <module name="doancn" />
+--      <method v="2">
+--        <option name="Make" enabled="true" />
+--      </method>
+--    </configuration>
+--    <list>
+--      <item itemvalue="Application.Server" />
+--      <item itemvalue="Application.Client" />
+--      <item itemvalue="Application.Client 2" />
+--    </list>
+--  </component>
+--  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+--  <component name="TaskManager">
+--    <task active="true" id="Default" summary="Default task">
+--      <changelist id="656a524f-5cac-4d1e-a2b2-cc0005eeceb1" name="Changes" comment="" />
+--      <created>1731514083676</created>
+--      <option name="number" value="Default" />
+--      <option name="presentableId" value="Default" />
+--      <updated>1731514083676</updated>
+--    </task>
+--    <servers />
+--  </component>
+--</project>
+-\ No newline at end of file
+-Index: doancn.iml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/doancn.iml b/doancn.iml
+-new file mode 100644
+---- /dev/null	(date 1731524242325)
+-+++ b/doancn.iml	(date 1731524242325)
+-@@ -0,0 +1,11 @@
+-+<?xml version="1.0" encoding="UTF-8"?>
+-+<module type="JAVA_MODULE" version="4">
+-+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-+    <exclude-output />
+-+    <content url="file://$MODULE_DIR$">
+-+      <sourceFolder url="file://$MODULE_DIR$/chess/src" isTestSource="false" />
+-+    </content>
+-+    <orderEntry type="inheritedJdk" />
+-+    <orderEntry type="sourceFolder" forTests="false" />
+-+  </component>
+-+</module>
+-\ No newline at end of file
+-Index: chess/src/StartWindow.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import javax.swing.*;\r\nimport java.awt.*;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport javax.imageio.ImageIO;\r\nimport sounds.BackgroundMusicPlayer; // Đảm bảo bạn đã import lớp này\r\n\r\npublic class StartWindow extends JFrame {\r\n    private JButton startButton;\r\n    private JButton playWithComputerButton;\r\n    private JButton createRoomButton;\r\n    private JButton findTableButton;\r\n    private JButton loginButton; // Nút đăng nhập\r\n    private JButton registerButton; // Nút đăng ký\r\n    private Image backgroundImage;\r\n    private BackgroundMusicPlayer musicPlayer; // Biến cho lớp âm thanh\r\n    private Client client;\r\n    private  Main main;\r\n    private boolean isAIEnabled;\r\n    private String difficulty;\r\n\r\n    public StartWindow(Main main, Client client) {\r\n        this.client = client;\r\n        this.main = main;\r\n        initialize();\r\n    }\r\n    private void initialize() {\r\n        setTitle(\"Chào mừng đến với Cờ Tướng AI\");\r\n        setSize(700, 700);\r\n        setLayout(new BorderLayout());\r\n        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n\r\n        // Tải hình nền\r\n        try {\r\n            InputStream input = getClass().getResourceAsStream(\"/img/HinhNen/choi-co-tuong-voi-may.jpg\");\r\n            if (input == null) {\r\n                throw new IOException(\"Không tìm thấy hình ảnh: /img/HinhNen/choi-co-tuong-voi-may.jpg\");\r\n            }\r\n            backgroundImage = ImageIO.read(input);\r\n        } catch (IOException e) {\r\n            System.out.println(\"Không thể tải hình ảnh nền\");\r\n            e.printStackTrace();\r\n        }\r\n\r\n        // Khởi tạo âm thanh nền\r\n        musicPlayer = new BackgroundMusicPlayer();\r\n        musicPlayer.playBackgroundMusic(\"/sounds/nhacnen2.wav\"); // Đường dẫn đến âm thanh nền\r\n\r\n\r\n        JLabel title = new JLabel(\"Cờ Tướng AI\", JLabel.CENTER);\r\n        title.setFont(new Font(\"Serif\", Font.BOLD, 24));\r\n        add(title, BorderLayout.NORTH);\r\n\r\n        // Khởi tạo các nút với văn bản và hình nền\r\n        startButton = createButtonWithBackground(\"/img/HinhNen/btn3.jpg\", \"play now\");\r\n\r\n        startButton.addActionListener(e -> {\r\n            startButton.setEnabled(false); // Tạm thời vô hiệu hóa nút\r\n            startButton.setText(\"Vui lòng chờ...\"); // Thay đổi văn bản nút\r\n\r\n            // Gửi yêu cầu đến server để tìm đối thủ\r\n            client.findOpponent();\r\n\r\n            // Xử lý khi người chơi khác đã kết nối\r\n            client.setOnOpponentFound(() -> {\r\n                startButton.setText(\"Chơi ngay\"); // Đổi lại văn bản\r\n                startButton.setEnabled(true); // Bật lại nút\r\n                musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền\r\n                setVisible(false); // Ẩn StartWindow\r\n                if (main != null) { // Kiểm tra xem main có phải là null không\r\n                    main.startGameForPlayer(difficulty); // Khởi động trò chơi\r\n                } else {\r\n                    System.out.println(\"Main is null!\");\r\n                }\r\n            });\r\n        });\r\n        playWithComputerButton = createButtonWithBackground(\"/img/HinhNen/btn3.jpg\", \"Chơi với máy\");\r\n        playWithComputerButton.addActionListener(e->{\r\n            musicPlayer.stopBackgroundMusic();\r\n            setVisible(false);\r\n            main.startGameForAI();\r\n        });\r\n        createRoomButton = createButtonWithBackground(\"/img/HinhNen/btn3.jpg\", \"Tạo phòng\");\r\n        findTableButton = createButtonWithBackground(\"/img/HinhNen/btn3.jpg\", \"Tìm bàn chơi\");\r\n\r\n        // Đặt kích thước cho các nút\r\n        Dimension buttonSize = new Dimension(200, 50);\r\n        startButton.setPreferredSize(buttonSize);\r\n        playWithComputerButton.setPreferredSize(buttonSize);\r\n        createRoomButton.setPreferredSize(buttonSize);\r\n        findTableButton.setPreferredSize(buttonSize);\r\n\r\n        // Thêm hành động cho các nút\r\n//        startButton.addActionListener(e -> {\r\n//            musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền\r\n//            setVisible(false); // Ẩn StartWindow\r\n//            main.startGame(); // Khởi động trò chơi\r\n//        });\r\n\r\n        // Uncomment and implement these actions if needed\r\n        // playWithComputerButton.addActionListener(e -> {\r\n        //     main.playWithComputer(); // Gọi phương thức chơi với máy\r\n        // });\r\n        // createRoomButton.addActionListener(e -> {\r\n        //     main.createRoom(); // Gọi phương thức tạo phòng\r\n        // });\r\n        // findTableButton.addActionListener(e -> {\r\n        //     main.findTable(); // Gọi phương thức tìm bàn chơi\r\n        // });\r\n\r\n        // Tạo panel chứa các nút và đặt chúng vào giữa cửa sổ\r\n        JPanel buttonPanel = new JPanel();\r\n        buttonPanel.setLayout(new GridBagLayout());\r\n        GridBagConstraints gbc = new GridBagConstraints();\r\n        gbc.gridx = 0;\r\n        gbc.gridy = GridBagConstraints.RELATIVE;\r\n        gbc.insets = new Insets(10, 0, 10, 0); // Khoảng cách giữa các nút\r\n\r\n        buttonPanel.add(startButton, gbc);\r\n        buttonPanel.add(playWithComputerButton, gbc);\r\n        buttonPanel.add(createRoomButton, gbc);\r\n        buttonPanel.add(findTableButton, gbc);\r\n\r\n        add(buttonPanel, BorderLayout.CENTER);\r\n\r\n        // Tạo panel cho các nút đăng nhập và đăng ký\r\n        JPanel authPanel = new JPanel();\r\n        authPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Bố trí ở bên trái\r\n        loginButton = new JButton(\"Đăng nhập\");\r\n        registerButton = new JButton(\"Đăng ký\");\r\n\r\n        // Đặt kích thước cho các nút đăng nhập và đăng ký\r\n        loginButton.setPreferredSize(new Dimension(100, 30));\r\n        registerButton.setPreferredSize(new Dimension(100, 30));\r\n        // Thêm các hành động cho nút đăng nhập\r\n        loginButton.addActionListener(e -> {\r\n            // Mở cửa sổ đăng nhập\r\n            new auth.LoginWindow().setVisible(true);\r\n        });\r\n\r\n// Tương tự cho nút đăng ký\r\n        registerButton.addActionListener(e -> {\r\n            // Mở cửa sổ đăng ký\r\n            new auth.RegisterWindow().setVisible(true);\r\n        });\r\n\r\n        // Thêm nút vào panel\r\n        authPanel.add(loginButton);\r\n        authPanel.add(registerButton);\r\n\r\n        // Đặt panel đăng nhập và đăng ký vào góc dưới bên trái\r\n        add(authPanel, BorderLayout.SOUTH);\r\n\r\n        setLocationRelativeTo(null);\r\n        setVisible(true);\r\n    }\r\n\r\n    // Phương thức tạo nút với hình nền và văn bản\r\n    private JButton createButtonWithBackground(String imagePath, String text) {\r\n        JButton button = new JButton();\r\n        try {\r\n            InputStream input = getClass().getResourceAsStream(imagePath);\r\n            if (input == null) {\r\n                throw new IOException(\"Không tìm thấy hình ảnh: \" + imagePath);\r\n            }\r\n            ImageIcon icon = new ImageIcon(ImageIO.read(input));\r\n\r\n            // Điều chỉnh kích thước hình ảnh theo kích thước nút\r\n            Image scaledImage = icon.getImage().getScaledInstance(200, 50, Image.SCALE_SMOOTH);\r\n            button.setIcon(new ImageIcon(scaledImage));\r\n\r\n            // Thiết lập văn bản cho nút\r\n            button.setText(text);\r\n            button.setHorizontalTextPosition(SwingConstants.CENTER); // Đặt vị trí văn bản\r\n            button.setVerticalTextPosition(SwingConstants.CENTER);   // Đặt vị trí văn bản\r\n            button.setFont(new Font(\"Arial\", Font.BOLD, 16)); // Cỡ chữ\r\n            button.setForeground(Color.WHITE); // Màu chữ\r\n\r\n            button.setPreferredSize(new Dimension(200, 50));\r\n            button.setContentAreaFilled(false); // Không tô màu nền cho nút\r\n            button.setBorderPainted(false); // Không vẽ viền cho nút\r\n            button.setFocusPainted(false); // Không tô viền khi chọn nút\r\n        } catch (Exception e) {\r\n            System.out.println(\"Không thể tải hình ảnh: \" + imagePath);\r\n            e.printStackTrace();\r\n        }\r\n        return button;\r\n    }\r\n\r\n    // Phương thức vẽ hình nền\r\n    @Override\r\n    public void paint(Graphics g) {\r\n        super.paint(g);\r\n        if (backgroundImage != null) {\r\n            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);\r\n        }\r\n    }\r\n    public void enablePlayButton() {\r\n        startButton.setEnabled(true); // Bật nút khi nhận được tín hiệu \"READY_TO_START\"\r\n    }\r\n    public void updateBoard(String move) {\r\n        System.out.println(\"Cập nhật bàn cờ với nước đi: \" + move);\r\n        // Cập nhật GUI hoặc bàn cờ ở đây\r\n    }\r\n    // Phương thức đóng cửa sổ\r\n    @Override\r\n    public void dispose() {\r\n        super.dispose();\r\n        // Không cần dừng nhạc nền ở đây nữa\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/chess/src/StartWindow.java b/chess/src/StartWindow.java
+---- a/chess/src/StartWindow.java	(revision 2eec871257fd967b5c992676c543162b21b2392f)
+-+++ b/chess/src/StartWindow.java	(date 1731521319106)
+-@@ -3,7 +3,7 @@
+- import java.io.IOException;
+- import java.io.InputStream;
+- import javax.imageio.ImageIO;
+--import sounds.BackgroundMusicPlayer; // Đảm bảo bạn đã import lớp này
+-+import sounds.BackgroundMusicPlayer;
+- 
+- public class StartWindow extends JFrame {
+-     private JButton startButton;
+-Index: chess/src/AI/Board.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package AI;\r\n\r\nimport quanco.*;\r\nimport javax.imageio.ImageIO;\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.MouseAdapter;\r\nimport java.awt.event.MouseEvent;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport javax.swing.Timer;\r\nimport sounds.SoundPlayer;\r\n\r\npublic class Board extends JPanel {\r\n    private final int boardWidth = 9;  // Số cột\r\n    private final int boardHeight = 10; // Số hàng\r\n    private final int cellSize = 70;    // Kích thước của mỗi ô\r\n    private List<Piece> pieces;          // Danh sách các quân cờ\r\n    private Image boardImage;            // Hình ảnh bàn cờ\r\n    private Image backgroundImage;\r\n    private Piece selectedPiece;          // Quân cờ đang được chọn\r\n    private int mouseX, mouseY;          // Vị trí chuột khi kéo\r\n    private boolean isRedTurn = true;    // Biến xác định lượt\r\n    private Timer timer;                  // Bộ đếm thời gian\r\n    private int timeLeft = 60;            // Thời gian còn lại\r\n    private JLabel timerLabel;            // Nhãn hiển thị thời gian\r\n    private List<MovePair> moveHistoryPairs;\r\n    private Move lastRedMove = null;\r\n    private Move lastBlackMove = null;\r\n    private boolean isAIEnabled;\r\n    private Piece[][] board;\r\n    private boolean gameOver = false;\r\n\r\n\r\n    public Board(boolean isAIEnabled,String difficulty) {\r\n        this.isAIEnabled = isAIEnabled;\r\n        board = new Piece[10][9];\r\n        setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));\r\n        pieces = new ArrayList<>();\r\n        moveHistoryPairs = new ArrayList<>(); // Khởi tạo danh sách lịch sử nước đi\r\n\r\n        // Thêm quân Tướng Đỏ và Đen vào danh sách\r\n        pieces.add(new King(4, 9, true, pieces));  // Tướng Đỏ ở vị trí (4, 9)\r\n        pieces.add(new King(4, 0, false, pieces)); // Tướng Đen ở vị trí (4, 0)\r\n\r\n        // Thêm các quân cờ khác...\r\n        pieces.add(new chot(0, 6, true, pieces));\r\n        pieces.add(new chot(0, 3, false, pieces));\r\n        pieces.add(new chot(2, 6, true, pieces));\r\n        pieces.add(new chot(2, 3, false, pieces));\r\n        pieces.add(new chot(4, 6, true, pieces));\r\n        pieces.add(new chot(4, 3, false, pieces));\r\n        pieces.add(new chot(6, 6, true, pieces));\r\n        pieces.add(new chot(6, 3, false, pieces));\r\n        pieces.add(new chot(8, 6, true, pieces));\r\n        pieces.add(new chot(8, 3, false, pieces));\r\n\r\n        // Thêm quân xe, mã, tướng, si, pháo...\r\n        pieces.add(new xe(0, 9, true, pieces));\r\n        pieces.add(new xe(0, 0, false, pieces));\r\n        pieces.add(new xe(8, 9, true, pieces));\r\n        pieces.add(new xe(8, 0, false, pieces));\r\n        pieces.add(new ma(1, 9, true, pieces));\r\n        pieces.add(new ma(1, 0, false, pieces));\r\n        pieces.add(new ma(7, 9, true, pieces));\r\n        pieces.add(new ma(7, 0, false, pieces));\r\n        pieces.add(new tuong(2, 9, true, pieces));\r\n        pieces.add(new tuong(2, 0, false, pieces));\r\n        pieces.add(new tuong(6, 9, true, pieces));\r\n        pieces.add(new tuong(6, 0, false, pieces));\r\n        pieces.add(new si(3, 9, true, pieces));\r\n        pieces.add(new si(3, 0, false, pieces));\r\n        pieces.add(new si(5, 9, true, pieces));\r\n        pieces.add(new si(5, 0, false, pieces));\r\n        pieces.add(new phao(1, 7, true, pieces));\r\n        pieces.add(new phao(1, 2, false, pieces));\r\n        pieces.add(new phao(7, 7, true, pieces));\r\n        pieces.add(new phao(7, 2, false, pieces));\r\n\r\n        // Khởi tạo nhãn thời gian\r\n        timerLabel = new JLabel(\"Time left: \" + timeLeft);\r\n        timerLabel.setFont(new Font(\"Arial\", Font.BOLD, 16));\r\n        timerLabel.setForeground(Color.RED);\r\n        add(timerLabel, BorderLayout.NORTH); // Thêm nhãn vào JPanel\r\n\r\n        // Khởi động bộ đếm thời gian\r\n        startTimer();\r\n\r\n        // Thêm các sự kiện chuột\r\n        addMouseListener(new MouseAdapter() {\r\n            @Override\r\n            public void mousePressed(MouseEvent e) {\r\n                // Tính toán vị trí của chuột khi nhấn, bao gồm việc căn giữa bàn cờ\r\n                int x = (e.getX() - (getWidth() - boardWidth * cellSize) / 2) / cellSize;\r\n                int y = (e.getY() - (getHeight() - boardHeight * cellSize) / 2) / cellSize;\r\n\r\n                // Kiểm tra nếu chuột nhấn vào một ô hợp lệ trong bàn cờ (trong phạm vi 9x10)\r\n                if (x >= 0 && x < boardWidth && y >= 0 && y < boardHeight) {\r\n                    // Kiểm tra nếu quân cờ ở vị trí nhấn chuột và nếu đó là lượt của người chơi\r\n                    for (Piece piece : pieces) {\r\n                        if (piece.getX() == x && piece.getY() == y && piece.isRed() == isRedTurn) {\r\n                            selectedPiece = piece; // Lưu quân cờ được chọn\r\n                            break;\r\n                        }\r\n                    }\r\n                }\r\n\r\n                // Lưu vị trí chuột để dùng khi di chuyển quân\r\n                mouseX = e.getX();\r\n                mouseY = e.getY();\r\n                repaint(); // Vẽ lại bàn cờ\r\n            }\r\n\r\n\r\n            @Override\r\n            public void mouseReleased(MouseEvent e) {\r\n                if (selectedPiece != null) {\r\n                    // Tính toán vị trí ô mới khi thả chuột, bao gồm việc căn giữa bàn cờ\r\n                    int newX = (e.getX() - (getWidth() - boardWidth * cellSize) / 2) / cellSize;\r\n                    int newY = (e.getY() - (getHeight() - boardHeight * cellSize) / 2) / cellSize;\r\n\r\n                    if (isRedTurn) { // Nếu lượt là của người chơi đỏ\r\n                        // Kiểm tra xem di chuyển có hợp lệ không\r\n                        if (selectedPiece.isValidMove(newX, newY) && newY >= 0 && newY < boardHeight) {\r\n                            Piece targetPiece = getPieceAt(newX, newY); // Kiểm tra quân ở vị trí mới\r\n\r\n                            if (targetPiece == null || targetPiece.isRed() != selectedPiece.isRed()) {\r\n                                // Nếu không có quân cờ hoặc có quân địch\r\n                                if (targetPiece != null) {\r\n                                    pieces.remove(targetPiece); // Loại bỏ quân địch\r\n                                }\r\n\r\n                                // Lưu vị trí cũ để khôi phục nếu cần\r\n                                int originalX = selectedPiece.getX();\r\n                                int originalY = selectedPiece.getY();\r\n\r\n                                // Thực hiện di chuyển\r\n                                selectedPiece.setPosition(newX, newY);\r\n\r\n                                // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này\r\n                                if (isCheck(isRedTurn)) {\r\n                                    // Nếu nước đi không thoát khỏi chiếu, hoàn tác di chuyển\r\n                                    selectedPiece.setPosition(originalX, originalY);\r\n                                    if (targetPiece != null) {\r\n                                        pieces.add(targetPiece); // Khôi phục quân cờ địch\r\n                                    }\r\n                                } else {\r\n                                    // Nước đi hợp lệ\r\n                                    Move move = new Move(selectedPiece, originalX, originalY, newX, newY, targetPiece);\r\n                                    if (isRedTurn) {\r\n                                        lastRedMove = move;\r\n                                    } else {\r\n                                        lastBlackMove = move;\r\n                                        if (lastRedMove != null) {\r\n                                            moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));\r\n\r\n                                            lastRedMove = null;\r\n                                            lastBlackMove = null;\r\n                                        }\r\n                                    }\r\n\r\n                                    // Kiểm tra chiếu sau khi di chuyển\r\n                                    if (isCheck(!isRedTurn)) {\r\n                                        JOptionPane.showMessageDialog(Board.this,\r\n                                                (isRedTurn ? \"Đen\" : \"Đỏ\") + \" bị chiếu!\", \"Thông báo\", JOptionPane.WARNING_MESSAGE);\r\n                                    }\r\n\r\n                                    // Kiểm tra chiếu tướng\r\n                                    if (isCheckmate(!isRedTurn)) {\r\n                                        JOptionPane.showMessageDialog(Board.this,\r\n                                                (isRedTurn ? \"Đen\" : \"Đỏ\") + \" đã thua!\", \"Game Over\", JOptionPane.WARNING_MESSAGE);\r\n                                        System.exit(0); // Kết thúc trò chơi\r\n                                    }\r\n\r\n                                    isRedTurn = false; // Đổi lượt cho AI\r\n                                    timeLeft = 60; // Reset thời gian\r\n                                    if (isAIEnabled) {\r\n                                        AIPlayer aiPlayer = new AIPlayer();\r\n                                        aiPlayer.setDifficultyLevel(difficulty);\r\n                                        long timeLimit = 1000;  // 1 second\r\n                                        Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn, timeLimit);\r\n\r\n                                        if (aiMove != null) {\r\n                                            makeMove(aiMove); // Thực hiện nước đi của AI\r\n                                            lastBlackMove = aiMove; // Lưu lại nước đi của AI\r\n\r\n                                            // Thêm vào lịch sử nước đi nếu cả người và AI đều có nước đi\r\n                                            if (lastRedMove != null) {\r\n                                                moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));\r\n                                                lastRedMove = null;\r\n                                                lastBlackMove = null;\r\n                                            }\r\n                                        }\r\n                                    }\r\n                                    // Đổi lượt trở lại cho người chơi\r\n                                    isRedTurn = true;\r\n\r\n                                    // Vẽ lại bàn cờ sau khi di chuyển\r\n                                    repaint(); // Gọi repaint để cập nhật bàn cờ\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n\r\n                    // Phát âm thanh khi di chuyển quân cờ\r\n                    SoundPlayer soundPlayer = new SoundPlayer();\r\n                    if (selectedPiece.isRed()) {\r\n                        soundPlayer.playSound(\"/sounds/move.wav\"); // Âm thanh cho quân đỏ\r\n                    } else {\r\n                        soundPlayer.playSound(\"/sounds/move2.wav\"); // Âm thanh cho quân đen\r\n                    }\r\n\r\n                    selectedPiece = null; // Đặt lại quân cờ được chọn\r\n                    repaint(); // Vẽ lại bảng cờ\r\n                }\r\n            }\r\n\r\n\r\n        });\r\n\r\n        addMouseMotionListener(new MouseAdapter() {\r\n            @Override\r\n            public void mouseDragged(MouseEvent e) {\r\n                if (selectedPiece != null) {\r\n                    mouseX = e.getX();\r\n                    mouseY = e.getY();\r\n                    repaint(); // Vẽ lại để quân cờ di chuyển theo chuột\r\n                }\r\n            }\r\n        });\r\n\r\n        // Tải hình ảnh bàn cờ\r\n        try {\r\n            boardImage = ImageIO.read(getClass().getResourceAsStream(\"/img/board.gif\"));\r\n            backgroundImage = ImageIO.read(getClass().getResourceAsStream(\"/img/HinhNen/backgroundboard.jpg\"));// Sử dụng \"/\" để chỉ đường dẫn từ thư mục gốc\r\n            if (boardImage == null) {\r\n                System.out.println(\"Hình ảnh bàn cờ không thể tải!\");\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n    }\r\n    public List<Piece> getAllPieces() {\r\n        List<Piece> pieces = new ArrayList<>();\r\n        for (int row = 0; row < board.length; row++) {\r\n            for (int col = 0; col < board[row].length; col++) {\r\n                if (board[row][col] != null) {\r\n                    pieces.add(board[row][col]);\r\n                }\r\n            }\r\n        }\r\n        return pieces;\r\n    }\r\n\r\n    // Phương thức hoàn tác nước đi cuối cùng\r\n    public boolean undoLastMovePair() {\r\n        if (moveHistoryPairs.isEmpty()) {\r\n            return false;\r\n        }\r\n\r\n        MovePair lastPair = moveHistoryPairs.remove(moveHistoryPairs.size() - 1);\r\n\r\n        if (lastPair.getRedMove() != null) {\r\n            lastPair.getRedMove().getPiece().setPosition(lastPair.getRedMove().getOldX(), lastPair.getRedMove().getOldY());\r\n            if (lastPair.getRedMove().getCapturedPiece() != null) {\r\n                pieces.add(lastPair.getRedMove().getCapturedPiece());\r\n            }\r\n        }\r\n\r\n        if (lastPair.getBlackMove() != null) {\r\n            lastPair.getBlackMove().getPiece().setPosition(lastPair.getBlackMove().getOldX(), lastPair.getBlackMove().getOldY());\r\n            if (lastPair.getBlackMove().getCapturedPiece() != null) {\r\n                pieces.add(lastPair.getBlackMove().getCapturedPiece());\r\n            }\r\n        }\r\n\r\n        isRedTurn = !isRedTurn;\r\n        repaint();\r\n        return true;\r\n    }\r\n\r\n    public List<Move> getAllPossibleMoves(boolean isRed) {\r\n        List<Move> moves = new ArrayList<>();\r\n        for (Piece piece : pieces) {\r\n            if (piece.isRed() == isRed) {\r\n                for (int[] validMove : piece.getValidMoves()) {\r\n                    moves.add(new Move(piece, piece.getX(), piece.getY(), validMove[0], validMove[1], getPieceAt(validMove[0], validMove[1])));\r\n                }\r\n            }\r\n        }\r\n        return moves;\r\n    }\r\n\r\n    public void makeMove(Move move) {\r\n        Piece targetPiece = getPieceAt(move.getNewX(), move.getNewY());\r\n        if (targetPiece != null) {\r\n            pieces.remove(targetPiece); // Xóa quân cờ bị ăn\r\n        }\r\n        Piece movedPiece = move.getPiece(); // Lấy quân cờ cần di chuyển\r\n        if (movedPiece != null) {\r\n            movedPiece.setPosition(move.getNewX(), move.getNewY()); // Di chuyển quân cờ\r\n        } else {\r\n            System.out.println(\"Quân cờ không tồn tại.\");\r\n        }\r\n        repaint(); // Vẽ lại bàn cờ\r\n    }\r\n    private void startTimer() {\r\n        timer = new Timer(1000, e -> {\r\n            if (timeLeft > 0) {\r\n                timeLeft--;\r\n                timerLabel.setText(\"Time left: \" + timeLeft);\r\n            } else {\r\n                // Nếu thời gian hết, thông báo và kết thúc trò chơi\r\n                JOptionPane.showMessageDialog(this, (isRedTurn ? \"Đỏ\" : \"Đen\") + \" đã hết thời gian!\", \"Game Over\", JOptionPane.WARNING_MESSAGE);\r\n                System.exit(0); // Thoát trò chơi\r\n            }\r\n        });\r\n        timer.start();\r\n    }\r\n\r\n    // Phương thức vẽ bàn cờ\r\n    @Override\r\n    protected void paintComponent(Graphics g) {\r\n        super.paintComponent(g);\r\n\r\n        // Tính toán vị trí vẽ bàn cờ sao cho nó nằm chính giữa màn hình\r\n        int x = (getWidth() - boardWidth * cellSize) / 2;\r\n        int y = (getHeight() - boardHeight * cellSize) / 2;\r\n\r\n        // Vẽ hình nền của bàn cờ\r\n        if (backgroundImage != null) {\r\n            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null); // Vẽ hình nền nền cho bàn cờ\r\n        }\r\n\r\n        // Vẽ hình ảnh bàn cờ lên chính giữa màn hình\r\n        if (boardImage != null) {\r\n            g.drawImage(boardImage, x, y, boardWidth * cellSize, boardHeight * cellSize, null); // Vẽ bàn cờ vào vị trí căn giữa\r\n        }\r\n\r\n        // Nếu có quân cờ được chọn, vẽ dấu chấm vàng và các nước đi hợp lệ\r\n        if (selectedPiece != null) {\r\n            // Vẽ các nước đi hợp lệ\r\n            List<int[]> validMoves = selectedPiece.getValidMoves();\r\n            g.setColor(new Color(0, 255, 0, 128)); // Màu xanh với độ trong suốt\r\n            for (int[] move : validMoves) {\r\n                int validX = move[0];\r\n                int validY = move[1];\r\n                g.fillRect(validX * cellSize + x + 10, validY * cellSize + y + 10, cellSize - 20, cellSize - 20); // Vẽ ô cho nước đi hợp lệ\r\n            }\r\n        }\r\n\r\n        // Vẽ các quân cờ lên chính giữa màn hình\r\n        for (Piece piece : pieces) {\r\n            piece.draw(g, cellSize, x, y); // Đảm bảo vẽ quân cờ vào vị trí chính xác với offset\r\n        }\r\n    }\r\n\r\n\r\n    Piece getPieceAt(int x, int y) {\r\n        for (Piece piece : pieces) {\r\n            if (piece.getX() == x && piece.getY() == y) {\r\n                return piece;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    // Hàm kiểm tra chiếu\r\n    private boolean isCheck(boolean isRed) {\r\n        Piece king = null;\r\n        for (Piece piece : pieces) {\r\n            if (piece instanceof King && piece.isRed() == isRed) {\r\n                king = piece;\r\n                break;\r\n            }\r\n        }\r\n        if (king == null) return true;\r\n\r\n        for (Piece piece : pieces) {\r\n            if (piece.isRed() != isRed && piece.isValidMove(king.getX(), king.getY())) {\r\n                return true; // Quân địch có thể ăn Tướng\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    // Hàm kiểm tra chiếu tướng\r\n    private boolean isCheckmate(boolean isRed) {\r\n        if (!isCheck(isRed)) return false;\r\n\r\n        for (Piece piece : pieces) {\r\n            if (piece.isRed() == isRed) {\r\n                for (int[] move : piece.getValidMoves()) {\r\n                    int originalX = piece.getX();\r\n                    int originalY = piece.getY();\r\n\r\n                    piece.setPosition(move[0], move[1]);\r\n\r\n                    if (!isCheck(isRed)) {\r\n                        piece.setPosition(originalX, originalY);\r\n                        return false;\r\n                    }\r\n                    piece.setPosition(originalX, originalY);\r\n                }\r\n            }\r\n        }\r\n        return true;\r\n    }\r\n    // Lớp Move để lưu trữ thông tin của mỗi nước đi\r\n\r\n\r\n    class MovePair {\r\n        private final Move redMove;\r\n        private final Move blackMove;\r\n\r\n        public MovePair(Move redMove, Move blackMove) {\r\n            this.redMove = redMove;\r\n            this.blackMove = blackMove;\r\n        }\r\n\r\n        public Move getRedMove() {\r\n            return redMove;\r\n        }\r\n\r\n        public Move getBlackMove() {\r\n            return blackMove;\r\n        }\r\n    }\r\n    public boolean isGameOver() {\r\n        // Kiểm tra nếu một trong hai tướng đã bị bắt\r\n        for (Piece piece : pieces) {\r\n            if (piece instanceof King && piece.isCaptured()) {\r\n                return true; // Trò chơi kết thúc vì một bên bị mất tướng\r\n            }\r\n        }\r\n        // Kiểm tra nếu không còn nước đi hợp lệ cho người chơi hiện tại\r\n\r\n        return false; // Trò chơi chưa kết thúc\r\n    }\r\n\r\n    public void undoMove(Move move) {\r\n        if (move != null) {\r\n            Piece movedPiece = move.getMovedPiece();\r\n            if (movedPiece != null) {\r\n                movedPiece.setPosition(move.getStartPosition());\r\n                if (move.getCapturedPiece() != null) {\r\n                    pieces.add(move.getCapturedPiece());\r\n                }\r\n                // Cập nhật lại các trạng thái khác nếu cần\r\n            } else {\r\n                System.out.println(\"movedPiece is null. Check the logic when creating Move.\");\r\n            }\r\n        }\r\n\r\n    }\r\n\r\n    public List<Piece> getPieces() {\r\n        // Trả về danh sách các quân cờ hiện tại\r\n        return new ArrayList<>(pieces);\r\n    }\r\n    public List<Move> getAllValidMoves() {\r\n        List<Move> validMoves = new ArrayList<>();\r\n\r\n        for (Piece piece : pieces) {\r\n            if (!piece.isCaptured()) { // Kiểm tra xem quân cờ có đang trên bàn cờ hay không\r\n                List<Move> moves = piece.getValidMoves(this); // Giả sử Piece có phương thức getValidMoves\r\n                validMoves.addAll(moves);\r\n            }\r\n        }\r\n\r\n        return validMoves;\r\n    }\r\n    public void resetGame() {\r\n        pieces.clear();\r\n        moveHistoryPairs.clear();\r\n        lastRedMove = null;\r\n        lastBlackMove = null;\r\n        isRedTurn = true;\r\n        timeLeft = 60;\r\n\r\n        // Thêm lại các quân cờ vào bàn\r\n        pieces.add(new King(4, 9, true, pieces));  // Tướng Đỏ ở vị trí (4, 9)\r\n        pieces.add(new King(4, 0, false, pieces)); // Tướng Đen ở vị trí (4, 0)\r\n\r\n        // Thêm các quân cờ khác...\r\n        pieces.add(new chot(0, 6, true, pieces));\r\n        pieces.add(new chot(0, 3, false, pieces));\r\n        pieces.add(new chot(2, 6, true, pieces));\r\n        pieces.add(new chot(2, 3, false, pieces));\r\n        pieces.add(new chot(4, 6, true, pieces));\r\n        pieces.add(new chot(4, 3, false, pieces));\r\n        pieces.add(new chot(6, 6, true, pieces));\r\n        pieces.add(new chot(6, 3, false, pieces));\r\n        pieces.add(new chot(8, 6, true, pieces));\r\n        pieces.add(new chot(8, 3, false, pieces));\r\n\r\n        pieces.add(new xe(0, 9, true, pieces));\r\n        pieces.add(new xe(0, 0, false, pieces));\r\n        pieces.add(new xe(8, 9, true, pieces));\r\n        pieces.add(new xe(8, 0, false, pieces));\r\n        pieces.add(new ma(1, 9, true, pieces));\r\n        pieces.add(new ma(1, 0, false, pieces));\r\n        pieces.add(new ma(7, 9, true, pieces));\r\n        pieces.add(new ma(7, 0, false, pieces));\r\n        pieces.add(new tuong(2, 9, true, pieces));\r\n        pieces.add(new tuong(2, 0, false, pieces));\r\n        pieces.add(new tuong(6, 9, true, pieces));\r\n        pieces.add(new tuong(6, 0, false, pieces));\r\n        pieces.add(new si(3, 9, true, pieces));\r\n        pieces.add(new si(3, 0, false, pieces));\r\n        pieces.add(new si(5, 9, true, pieces));\r\n        pieces.add(new si(5, 0, false, pieces));\r\n        pieces.add(new phao(1, 7, true, pieces));\r\n        pieces.add(new phao(1, 2, false, pieces));\r\n        pieces.add(new phao(7, 7, true, pieces));\r\n        pieces.add(new phao(7, 2, false, pieces));\r\n\r\n        // Reset lại thời gian và nhãn\r\n        timerLabel.setText(\"Time left: \" + timeLeft);\r\n\r\n        repaint(); // Vẽ lại bàn cờ\r\n    }\r\n    // Hàm xử lý sự kiện đầu hàng\r\n    public void surrender() {\r\n        // Kiểm tra ai là người thua cuộc và thông báo\r\n        String loser = isRedTurn ? \"Đỏ\" : \"Đen\";\r\n        String winner = isRedTurn ? \"Đen\" : \"Đỏ\";\r\n\r\n        // Hiển thị thông báo và kết thúc trò chơi\r\n        JOptionPane.showMessageDialog(this, loser + \" đã đầu hàng. \" + winner + \" thắng!\", \"Game Over\", JOptionPane.INFORMATION_MESSAGE);\r\n        System.exit(0); // Kết thúc trò chơi\r\n    }\r\n\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/chess/src/AI/Board.java b/chess/src/AI/Board.java
+---- a/chess/src/AI/Board.java	(revision 2eec871257fd967b5c992676c543162b21b2392f)
+-+++ b/chess/src/AI/Board.java	(date 1731520577598)
+-@@ -532,5 +532,4 @@
+-         JOptionPane.showMessageDialog(this, loser + " đã đầu hàng. " + winner + " thắng!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+-         System.exit(0); // Kết thúc trò chơi
+-     }
+--
+- }
+-\ No newline at end of file
+-Index: chess/src/FunctionPanel.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import AI.Board;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\n\r\npublic class FunctionPanel extends JPanel {\r\n    private Board board; // Biến để lưu tham chiếu đến Board\r\n\r\n    public FunctionPanel(Board board) {\r\n        this.board = board; // Lưu tham chiếu đến Board\r\n\r\n        setLayout(new BorderLayout()); // Sử dụng BorderLayout\r\n\r\n        // Panel để chứa các nút chức năng và nhãn thông báo\r\n        JPanel buttonPanel = new JPanel();\r\n        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); // Sắp xếp theo chiều dọc\r\n\r\n        // Tạo các nút chức năng với kích thước cố định\r\n        JButton resetButton = new JButton(\"Reset Game\");\r\n        JButton surrenderButton = new JButton(\"Surrender\");\r\n        JButton drawButton = new JButton(\"Draw\");\r\n        JButton backButton = new JButton(\"Roll Back\");\r\n\r\n        // Đặt kích thước cố định cho các nút\r\n        Dimension buttonSize = new Dimension(120, 40);\r\n        resetButton.setPreferredSize(buttonSize);\r\n        backButton.setPreferredSize(buttonSize);\r\n        surrenderButton.setPreferredSize(buttonSize);\r\n        drawButton.setPreferredSize(buttonSize);\r\n\r\n        // Đảm bảo nút không bị giãn\r\n        resetButton.setMaximumSize(buttonSize);\r\n        surrenderButton.setMaximumSize(buttonSize);\r\n        drawButton.setMaximumSize(buttonSize);\r\n        backButton.setMaximumSize(buttonSize);\r\n\r\n        // Đặt căn chỉnh cho các nút (giữa theo chiều ngang)\r\n        resetButton.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n        surrenderButton.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n        drawButton.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n        // Thêm các nút vào buttonPanel\r\n        buttonPanel.add(resetButton);\r\n        buttonPanel.add(Box.createVerticalStrut(10));\r\n        buttonPanel.add(backButton);\r\n        buttonPanel.add(Box.createVerticalStrut(10));\r\n        buttonPanel.add(surrenderButton);\r\n        buttonPanel.add(Box.createVerticalStrut(10));\r\n        buttonPanel.add(drawButton);\r\n\r\n        // Tạo nhãn thông báo với kích thước cố định\r\n        JLabel notificationLabel = new JLabel(\"Thông báo sẽ hiển thị ở đây\", JLabel.CENTER);\r\n        notificationLabel.setPreferredSize(new Dimension(200, 30)); // Đặt kích thước cố định\r\n        notificationLabel.setMaximumSize(new Dimension(200, 30));\r\n        notificationLabel.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n        // Thêm nhãn thông báo vào ngay dưới các nút\r\n        buttonPanel.add(Box.createVerticalStrut(20)); // Khoảng cách giữa nút cuối và thông báo\r\n        buttonPanel.add(notificationLabel);\r\n\r\n        // Thêm bàn cờ vào giữa và buttonPanel vào bên phải\r\n        add(board, BorderLayout.CENTER); // Đảm bảo bàn cờ nằm giữa\r\n        add(buttonPanel, BorderLayout.EAST); // Đảm bảo các nút và thông báo nằm cạnh phải\r\n\r\n        // Sự kiện cho nút Roll Back\r\n        backButton.addActionListener(new ActionListener() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                if (board.undoLastMovePair()) {\r\n                    notificationLabel.setText(\"Quân cờ đã quay lại nước đi trước đó.\");\r\n                } else {\r\n                    notificationLabel.setText(\"Không thể quay lại nước đi.\");\r\n                }\r\n            }\r\n        });\r\n\r\n        // Sự kiện cho nút Reset\r\n        resetButton.addActionListener(new ActionListener() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                board.resetGame();\r\n                notificationLabel.setText(\"Trò chơi đã được khởi động lại.\");\r\n            }\r\n        });\r\n\r\n        // Sự kiện cho nút Surrender (Đầu hàng)\r\n        surrenderButton.addActionListener(new ActionListener() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                board.surrender(); // Giả sử có phương thức surrender trong Board\r\n                notificationLabel.setText(\"Bạn đã đầu hàng.\");\r\n            }\r\n        });\r\n\r\n        // Sự kiện cho nút Draw (Hòa)\r\n//        drawButton.addActionListener(new ActionListener() {\r\n//            @Override\r\n//            public void actionPerformed(ActionEvent e) {\r\n//                board.declareDraw(); // Giả sử có phương thức declareDraw trong Board\r\n//                notificationLabel.setText(\"Trận đấu đã hòa.\");\r\n//            }\r\n//        });\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/chess/src/FunctionPanel.java b/chess/src/FunctionPanel.java
+---- a/chess/src/FunctionPanel.java	(revision 2eec871257fd967b5c992676c543162b21b2392f)
+-+++ b/chess/src/FunctionPanel.java	(date 1731523117545)
+-@@ -22,6 +22,8 @@
+-         JButton surrenderButton = new JButton("Surrender");
+-         JButton drawButton = new JButton("Draw");
+-         JButton backButton = new JButton("Roll Back");
+-+        JButton saveButton = new JButton("Save Game");
+-+        JButton loadButton = new JButton("Load Game");
+- 
+-         // Đặt kích thước cố định cho các nút
+-         Dimension buttonSize = new Dimension(120, 40);
+-@@ -29,18 +31,24 @@
+-         backButton.setPreferredSize(buttonSize);
+-         surrenderButton.setPreferredSize(buttonSize);
+-         drawButton.setPreferredSize(buttonSize);
+-+        saveButton.setPreferredSize(buttonSize);
+-+        loadButton.setPreferredSize(buttonSize);
+- 
+-         // Đảm bảo nút không bị giãn
+-         resetButton.setMaximumSize(buttonSize);
+-         surrenderButton.setMaximumSize(buttonSize);
+-         drawButton.setMaximumSize(buttonSize);
+-         backButton.setMaximumSize(buttonSize);
+-+        saveButton.setPreferredSize(buttonSize);
+-+        loadButton.setPreferredSize(buttonSize);
+- 
+-         // Đặt căn chỉnh cho các nút (giữa theo chiều ngang)
+-         resetButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+-         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+-         surrenderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+-         drawButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+-+        saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+-+        loadButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+- 
+-         // Thêm các nút vào buttonPanel
+-         buttonPanel.add(resetButton);
+-@@ -50,6 +58,10 @@
+-         buttonPanel.add(surrenderButton);
+-         buttonPanel.add(Box.createVerticalStrut(10));
+-         buttonPanel.add(drawButton);
+-+        buttonPanel.add(Box.createVerticalStrut(10));
+-+        buttonPanel.add(saveButton);
+-+        buttonPanel.add(Box.createVerticalStrut(10));
+-+        buttonPanel.add(loadButton);
+- 
+-         // Tạo nhãn thông báo với kích thước cố định
+-         JLabel notificationLabel = new JLabel("Thông báo sẽ hiển thị ở đây", JLabel.CENTER);
+-@@ -102,6 +114,23 @@
+- //                board.declareDraw(); // Giả sử có phương thức declareDraw trong Board
+- //                notificationLabel.setText("Trận đấu đã hòa.");
+- //            }
+-+//        });
+-+        // Sự kiện cho nút Save
+-+//        saveButton.addActionListener(new ActionListener() {
+-+//            @Override
+-+//            public void actionPerformed(ActionEvent e) {
+-+//                board.save();
+-+//                notificationLabel.setText("Bạn đã save game.");
+-+//            }
+-+//        });
+-+//
+-+//        // Sự kiện cho nút Load
+-+//        loadButton.addActionListener(new ActionListener() {
+-+//            @Override
+-+//            public void actionPerformed(ActionEvent e) {
+-+//                board.load();
+-+//                notificationLabel.setText("Đã load game.");
+-+//            }
+- //        });
+-     }
+- }
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA__Changes_.xml	(revision cd5f0f3d51ade792e88b1fae9accdc3927c60bba)
++++ /dev/null	(revision cd5f0f3d51ade792e88b1fae9accdc3927c60bba)
+@@ -1,24 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]" date="1731524248497" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 14/11/2024 1:57 SA [Changes]" />
+-  <binary>
+-    <option name="BEFORE_PATH" value="out/production/doancn/FunctionPanel$3.class" />
+-    <option name="AFTER_PATH" value="out/production/doancn/FunctionPanel$3.class" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/FunctionPanel$3.class" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" value="out/production/doancn/FunctionPanel.class" />
+-    <option name="AFTER_PATH" value="out/production/doancn/FunctionPanel.class" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/FunctionPanel.class" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" value="out/production/doancn/FunctionPanel$1.class" />
+-    <option name="AFTER_PATH" value="out/production/doancn/FunctionPanel$1.class" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/FunctionPanel$1.class" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" value="out/production/doancn/FunctionPanel$2.class" />
+-    <option name="AFTER_PATH" value="out/production/doancn/FunctionPanel$2.class" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_1_57_SA_[Changes]/FunctionPanel$2.class" />
+-  </binary>
+-</changelist>
+\ No newline at end of file
+Index: chess/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_22\" default=\"true\" project-jdk-name=\"22\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/.idea/misc.xml b/chess/.idea/misc.xml
+--- a/chess/.idea/misc.xml	(revision cd5f0f3d51ade792e88b1fae9accdc3927c60bba)
++++ b/chess/.idea/misc.xml	(date 1731526539890)
+@@ -1,13 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="MavenProjectsManager">
+-    <option name="originalFiles">
+-      <list>
+-        <option value="$PROJECT_DIR$/pom.xml" />
+-      </list>
+-    </option>
+-  </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_22" default="true" project-jdk-name="22" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+Index: chess/.idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile name=\"Maven default annotation processors profile\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <module name=\"chess\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n  <component name=\"JavacSettings\">\r\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\r\n      <module name=\"chess\" options=\"\" />\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/.idea/compiler.xml b/chess/.idea/compiler.xml
+--- a/chess/.idea/compiler.xml	(revision cd5f0f3d51ade792e88b1fae9accdc3927c60bba)
++++ b/chess/.idea/compiler.xml	(date 1731526539896)
+@@ -6,7 +6,6 @@
+         <sourceOutputDir name="target/generated-sources/annotations" />
+         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+         <outputRelativeToContentRoot value="true" />
+-        <module name="chess" />
+       </profile>
+     </annotationProcessing>
+   </component>
