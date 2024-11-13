@@ -4,27 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="656a524f-5cac-4d1e-a2b2-cc0005eeceb1" name="Changes" comment="">
+    <list default="true" id="5a9b1452-b36b-4dc4-9c69-664b26b5838b" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Board$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Board$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Board$MovePair.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Board.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/King.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/Piece.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/chot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/ma.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/phao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/si.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/tuong.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH_[Changes]/xe.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_11_2024_10_36_CH__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chess/src/AI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/AI/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board$MovePair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board$MovePair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/network/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/network/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/network/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/network/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/network/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/network/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$Move.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board$MovePair.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Board.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/network/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/network/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/network/GameRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/network/GameRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/network/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/network/Server.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,26 +32,28 @@
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
     "state": "OPEN",
-    "assignee": "SeamussK"
+    "assignee": "binh2401"
   }
 }]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/binh2401/doancn.git",
-    "accountId": "f1471a14-9cc3-47a2-b4b9-accb54996364"
+    "accountId": "df78a172-c60b-4e92-89a6-55dc890ff87f"
   }
 }]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
   "associatedIndex": 6
 }]]></component>
-  <component name="ProjectId" id="2onnCvAgRSnfJJygv6X6eTtPsTK" />
+  <component name="ProjectId" id="2ontcf1mnQZwrvbDwQ7SDDBd7cr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.1.executor": "Run",
+    "Application.2.executor": "Run",
     "Application.Client.executor": "Run",
     "Application.Server.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -65,42 +62,56 @@
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Client">
-    <configuration name="Client 2" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.Server">
+    <configuration name="1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Client" />
       <module name="doancn" />
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration name="Client" type="Application" factoryName="Application">
+    <configuration name="2" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Client" />
       <module name="doancn" />
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="network.Server" />
       <module name="doancn" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="network.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.1" />
+      <item itemvalue="Application.2" />
       <item itemvalue="Application.Server" />
-      <item itemvalue="Application.Client" />
-      <item itemvalue="Application.Client 2" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="656a524f-5cac-4d1e-a2b2-cc0005eeceb1" name="Changes" comment="" />
-      <created>1731514083676</created>
+      <changelist id="5a9b1452-b36b-4dc4-9c69-664b26b5838b" name="Changes" comment="" />
+      <created>1731517248386</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1731514083676</updated>
+      <updated>1731517248386</updated>
     </task>
     <servers />
   </component>
