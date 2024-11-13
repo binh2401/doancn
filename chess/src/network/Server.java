@@ -14,6 +14,7 @@ public class Server {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
+                System.out.println("New client connected: " + clientSocket);
                 ClientHandler clientHandler = new ClientHandler(clientSocket);
                 new Thread(clientHandler).start();
             }
@@ -48,53 +49,8 @@ public class Server {
             room.broadcastMove(move, sender); // Gửi nước đi cho đối thủ
         }
     }
-
-
-    public static class ClientHandler implements Runnable {
-        private Socket socket;
-        private PrintWriter out;
-        private BufferedReader in;
-        private GameRoom room;
-
-        public ClientHandler(Socket socket) {
-            this.socket = socket;
-        }
-
-        @Override
-        public void run() {
-            try {
-                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                out = new PrintWriter(socket.getOutputStream(), true);
-
-                String message;
-                while ((message = in.readLine()) != null) {
-                    if (message.equals("FIND_OPPONENT")) {
-                        Server.findOpponent(this); // Tìm đối thủ
-                    } else if (message.startsWith("MOVE")) {
-                        if (room != null) {
-                            room.broadcastMove(message, this); // Chuyển nước đi cho đối thủ
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        public void sendMessage(String message) {
-            if (out != null) {
-                out.println(message);
-            }
-        }
-
-        public void setRoom(GameRoom room) {
-            this.room = room;
-        }
-    }
 }
+
+
+
+

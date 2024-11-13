@@ -42,6 +42,7 @@ public class Client {
                     while ((message = in.readLine()) != null) {
                         if (message.startsWith("GAME_START")) {
                             roomId = message.split(" ")[1]; // Lưu ID phòng
+
                             System.out.println("Game started in room: " + roomId);
                             SwingUtilities.invokeLater(() -> {
                                 startWindow.enablePlayButton(); // Kích hoạt nút
