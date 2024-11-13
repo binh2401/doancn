@@ -91,9 +91,9 @@ public class Board extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                // Tính toán vị trí ô trên bàn cờ mà chuột nhấn vào
-                int x = (e.getX()  ) / cellSize;  // Sử dụng offsetX thay vì trực tiếp e.getX()
-                int y = (e.getY() ) / cellSize;  // Sử dụng offsetY thay vì trực tiếp e.getY()
+                // Tính toán vị trí của chuột khi nhấn, bao gồm việc căn giữa bàn cờ
+                int x = (e.getX() - (getWidth() - boardWidth * cellSize) / 2) / cellSize;
+                int y = (e.getY() - (getHeight() - boardHeight * cellSize) / 2) / cellSize;
 
                 // Kiểm tra nếu chuột nhấn vào một ô hợp lệ trong bàn cờ (trong phạm vi 9x10)
                 if (x >= 0 && x < boardWidth && y >= 0 && y < boardHeight) {
@@ -112,11 +112,13 @@ public class Board extends JPanel {
                 repaint(); // Vẽ lại bàn cờ
             }
 
+
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (selectedPiece != null) {
-                    int newX = e.getX() / cellSize;
-                    int newY = e.getY() / cellSize;
+                    // Tính toán vị trí ô mới khi thả chuột, bao gồm việc căn giữa bàn cờ
+                    int newX = (e.getX() - (getWidth() - boardWidth * cellSize) / 2) / cellSize;
+                    int newY = (e.getY() - (getHeight() - boardHeight * cellSize) / 2) / cellSize;
 
                     if (isRedTurn) { // Nếu lượt là của người chơi đỏ
                         // Kiểm tra xem di chuyển có hợp lệ không
@@ -179,7 +181,6 @@ public class Board extends JPanel {
                                         long timeLimit = 1000;  // 1 second
                                         Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn, timeLimit);
 
-
                                         if (aiMove != null) {
                                             makeMove(aiMove); // Thực hiện nước đi của AI
                                             lastBlackMove = aiMove; // Lưu lại nước đi của AI
@@ -200,8 +201,6 @@ public class Board extends JPanel {
                                 }
                             }
                         }
-
-
                     }
 
                     // Phát âm thanh khi di chuyển quân cờ
@@ -216,6 +215,7 @@ public class Board extends JPanel {
                     repaint(); // Vẽ lại bảng cờ
                 }
             }
+
 
         });
 
@@ -341,10 +341,6 @@ public class Board extends JPanel {
 
         // Nếu có quân cờ được chọn, vẽ dấu chấm vàng và các nước đi hợp lệ
         if (selectedPiece != null) {
-            // Vẽ dấu chấm vàng cho quân cờ được chọn
-            g.setColor(Color.YELLOW);
-            g.fillOval(mouseX - cellSize / 4 + x, mouseY - cellSize / 4 + y, cellSize / 2, cellSize / 2);
-
             // Vẽ các nước đi hợp lệ
             List<int[]> validMoves = selectedPiece.getValidMoves();
             g.setColor(new Color(0, 255, 0, 128)); // Màu xanh với độ trong suốt
@@ -360,6 +356,7 @@ public class Board extends JPanel {
             piece.draw(g, cellSize, x, y); // Đảm bảo vẽ quân cờ vào vị trí chính xác với offset
         }
     }
+
 
     Piece getPieceAt(int x, int y) {
         for (Piece piece : pieces) {
