@@ -22,6 +22,8 @@ public class FunctionPanel extends JPanel {
         JButton surrenderButton = new JButton("Surrender");
         JButton drawButton = new JButton("Draw");
         JButton backButton = new JButton("Roll Back");
+        JButton saveButton = new JButton("Save Game");
+        JButton loadButton = new JButton("Load Game");
 
         // Đặt kích thước cố định cho các nút
         Dimension buttonSize = new Dimension(120, 40);
@@ -29,18 +31,24 @@ public class FunctionPanel extends JPanel {
         backButton.setPreferredSize(buttonSize);
         surrenderButton.setPreferredSize(buttonSize);
         drawButton.setPreferredSize(buttonSize);
+        saveButton.setPreferredSize(buttonSize);
+        loadButton.setPreferredSize(buttonSize);
 
         // Đảm bảo nút không bị giãn
         resetButton.setMaximumSize(buttonSize);
         surrenderButton.setMaximumSize(buttonSize);
         drawButton.setMaximumSize(buttonSize);
         backButton.setMaximumSize(buttonSize);
+        saveButton.setPreferredSize(buttonSize);
+        loadButton.setPreferredSize(buttonSize);
 
         // Đặt căn chỉnh cho các nút (giữa theo chiều ngang)
         resetButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         surrenderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         drawButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loadButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Thêm các nút vào buttonPanel
         buttonPanel.add(resetButton);
@@ -50,6 +58,10 @@ public class FunctionPanel extends JPanel {
         buttonPanel.add(surrenderButton);
         buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(drawButton);
+        buttonPanel.add(Box.createVerticalStrut(10));
+        buttonPanel.add(saveButton);
+        buttonPanel.add(Box.createVerticalStrut(10));
+        buttonPanel.add(loadButton);
 
         // Tạo nhãn thông báo với kích thước cố định
         JLabel notificationLabel = new JLabel("Thông báo sẽ hiển thị ở đây", JLabel.CENTER);
@@ -101,6 +113,23 @@ public class FunctionPanel extends JPanel {
 //            public void actionPerformed(ActionEvent e) {
 //                board.declareDraw(); // Giả sử có phương thức declareDraw trong Board
 //                notificationLabel.setText("Trận đấu đã hòa.");
+//            }
+//        });
+        // Sự kiện cho nút Save
+//        saveButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                board.save();
+//                notificationLabel.setText("Bạn đã save game.");
+//            }
+//        });
+//
+//        // Sự kiện cho nút Load
+//        loadButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                board.load();
+//                notificationLabel.setText("Đã load game.");
 //            }
 //        });
     }

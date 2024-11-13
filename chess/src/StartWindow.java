@@ -3,7 +3,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
-import sounds.BackgroundMusicPlayer; // Đảm bảo bạn đã import lớp này
+import sounds.BackgroundMusicPlayer;
 
 public class StartWindow extends JFrame {
     private JButton startButton;

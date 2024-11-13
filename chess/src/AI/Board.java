@@ -532,5 +532,4 @@ public class Board extends JPanel {
         JOptionPane.showMessageDialog(this, loser + " đã đầu hàng. " + winner + " thắng!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0); // Kết thúc trò chơi
     }
-
 }

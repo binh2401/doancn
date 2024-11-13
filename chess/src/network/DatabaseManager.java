@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
+
 public class DatabaseManager {
-    private static final String URL = "jdbc:sqlserver://DESKTOP-KCNRSL8\\MSSQLSERVER01:1433;databaseName=chess;integratedSecurity=true;trustServerCertificate=true";  // Kết nối tới SQL Server
+    private static final String URL = "jdbc:sqlserver://localhost\\MSSQLLocalDB:1433;databaseName=master;integratedSecurity=true;trustServerCertificate=true";  // Kết nối tới SQL Server
     private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
     public static void main(String[] args) {
@@ -22,18 +23,26 @@ public class DatabaseManager {
             // Tạo user mới
             String username = "newUser";
             String password = "newPassword123";
-            String createUserQuery = "CREATE LOGIN " + username + " WITH PASSWORD = '" + password + "';";
+            String createLoginQuery = "CREATE LOGIN " + username + " WITH PASSWORD = '" + password + "';";
 
             // Tạo database mới cho user
             String databaseName = username + "DB";  // Đặt tên database theo tên user
             String createDatabaseQuery = "CREATE DATABASE " + databaseName + ";";
 
-            // Cấp quyền cho user truy cập vào database
-            String grantPermissionsQuery = "USE " + databaseName + "; GRANT ALL PRIVILEGES TO " + username + ";";
-
-            // Thực thi các câu lệnh SQL
-            stmt.executeUpdate(createUserQuery);
+            // Thực thi câu lệnh tạo login và database
+            stmt.executeUpdate(createLoginQuery);
             stmt.executeUpdate(createDatabaseQuery);
+
+            // Chuyển đến database mới để cấp quyền
+            String useDatabaseQuery = "USE " + databaseName + ";";
+            stmt.executeUpdate(useDatabaseQuery);
+
+            // Tạo user cho login trong database mới
+            String createUserQuery = "CREATE USER " + username + " FOR LOGIN " + username + ";";
+            stmt.executeUpdate(createUserQuery);
+
+            // Cấp quyền cho user
+            String grantPermissionsQuery = "GRANT SELECT, INSERT, UPDATE, DELETE TO " + username + ";";
             stmt.executeUpdate(grantPermissionsQuery);
 
             System.out.println("User và Database đã được tạo thành công!");
