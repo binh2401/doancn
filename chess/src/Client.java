@@ -8,7 +8,7 @@ public class Client {
     private PrintWriter out; // Khai báo biến out
     private Runnable onOpponentFound;
     private Main main;
-
+    private String roomId;
 
 
     public static void main(String[] args) {
@@ -39,11 +39,10 @@ public class Client {
             new Thread(() -> {
                 String message;
                 try {
-
                     while ((message = in.readLine()) != null) {
-                        System.out.println("Opponent move: " + message);
-                        if (message.equals("GAME_START")) {
-                            System.out.println("Opponent move: " + message);
+                        if (message.startsWith("GAME_START")) {
+                            roomId = message.split(" ")[1]; // Lưu ID phòng
+                            System.out.println("Game started in room: " + roomId);
                             SwingUtilities.invokeLater(() -> {
                                 startWindow.enablePlayButton(); // Kích hoạt nút
                                 if (this.onOpponentFound != null) {
@@ -51,12 +50,10 @@ public class Client {
                                 }
                             });
                         } else if (message.startsWith("MOVE")) {
-                            System.out.println("Opponent move: " + message);
-                            updateBoard(message);  // Cập nhật bàn cờ với nước đi của đối thủ
+                            updateBoard(message.substring(5));
                         }
                     }
                 } catch (IOException e) {
-                    System.out.println("Lỗi khi đọc luồng từ đối thủ hoặc luồng bị đóng.");
                     e.printStackTrace();
                 }
             }).start();
@@ -92,8 +89,7 @@ public class Client {
     }
     // Phương thức gửi nước đi tới server
     public void sendMove(String move) {
-        System.out.println("Sending move: " + move);  // Debug log
-        out.println("MOVE " + move);  // Gửi nước đi tới server
+        out.println("MOVE " + roomId + " " + move); // Gửi nước đi kèm ID phòng
         out.flush();
     }
 

@@ -4,63 +4,60 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 public class Server {
-    private ServerSocket serverSocket;
-    private List<ClientHandler> waitingClients = new ArrayList<>();
+    private static final int PORT = 12345;
+    private static final Map<String, GameRoom> rooms = new HashMap<>(); // Quản lý các phòng chơi
+    private static final Queue<ClientHandler> waitingClients = new LinkedList<>(); // Hàng đợi tìm đối thủ
 
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+            System.out.println("Server is running...");
 
-    public Server(int port) {
-        try {
-            serverSocket = new ServerSocket(port);
-            System.out.println("Server đang chạy trên cổng " + port);
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                ClientHandler clientHandler = new ClientHandler(clientSocket);
+                new Thread(clientHandler).start();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void start() {
-        while (true) {
-            try {
-                Socket socket = serverSocket.accept();
-                System.out.println("Client đã kết nối.");
-
-                ClientHandler clientHandler = new ClientHandler(socket, this);
-                new Thread(clientHandler).start(); // Chạy ClientHandler trong một luồng mới
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public synchronized void findOpponent(ClientHandler clientHandler) {
+    // Tìm đối thủ và tạo phòng chơi
+    public static synchronized void findOpponent(ClientHandler client) {
         if (waitingClients.isEmpty()) {
-            waitingClients.add(clientHandler);
-            clientHandler.sendMessage("Vui lòng chờ đối thủ...");
+            waitingClients.add(client); // Thêm client vào hàng đợi
+            client.sendMessage("WAIT_FOR_OPPONENT");
         } else {
-            ClientHandler opponent = waitingClients.remove(0);
-            clientHandler.setOpponent(opponent);
-            opponent.setOpponent(clientHandler);
+            ClientHandler opponent = waitingClients.poll(); // Ghép cặp với đối thủ
+            String roomId = UUID.randomUUID().toString(); // Tạo ID phòng duy nhất
+            GameRoom room = new GameRoom(roomId, client, opponent);
+            rooms.put(roomId, room);
 
-            clientHandler.sendMessage("GAME_START");
-            opponent.sendMessage("GAME_START");
+            // Thông báo cho cả hai client
+            client.setRoom(room);
+            opponent.setRoom(room);
+            client.sendMessage("GAME_START " + roomId);
+            opponent.sendMessage("GAME_START " + roomId);
+        }
+    }
+
+    // Xử lý nước đi
+    public static synchronized void handleMove(String roomId, String move, ClientHandler sender) {
+        GameRoom room = rooms.get(roomId);
+        if (room != null) {
+            room.broadcastMove(move, sender); // Gửi nước đi cho đối thủ
         }
     }
 
 
-    public static void main(String[] args) {
-        int port = 12345; // Bạn có thể thay đổi cổng nếu cần
-        Server server = new Server(port);
-        server.start();
-    }
-    public class ClientHandler implements Runnable{
+    public static class ClientHandler implements Runnable {
         private Socket socket;
-        private Server server;
         private PrintWriter out;
-        private ClientHandler opponent;
         private BufferedReader in;
-        private static List<PrintWriter> clientWriters = new ArrayList<>();
-        public ClientHandler(Socket socket, Server server) {
+        private GameRoom room;
+
+        public ClientHandler(Socket socket) {
             this.socket = socket;
-            this.server = server;
         }
 
         @Override
@@ -71,13 +68,11 @@ public class Server {
 
                 String message;
                 while ((message = in.readLine()) != null) {
-                    System.out.println("Received message: " + message);
                     if (message.equals("FIND_OPPONENT")) {
-                        server.findOpponent(this); // Tìm đối thủ thông qua server
+                        Server.findOpponent(this); // Tìm đối thủ
                     } else if (message.startsWith("MOVE")) {
-                        System.out.println("Server received move: " + message);
-                        if (opponent != null) {
-                            opponent.sendMessage(message); // Chuyển nước đi cho đối thủ
+                        if (room != null) {
+                            room.broadcastMove(message, this); // Chuyển nước đi cho đối thủ
                         }
                     }
                 }
@@ -89,24 +84,17 @@ public class Server {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                //  server.removeClient(this); // Xóa client khỏi server khi ngắt kết nối
             }
         }
-
 
         public void sendMessage(String message) {
             if (out != null) {
                 out.println(message);
-                out.flush();
             }
         }
 
-        public void setOpponent(ClientHandler opponent) {
-            this.opponent = opponent;
-        }
-
-        public ClientHandler getOpponent() {
-            return opponent;
+        public void setRoom(GameRoom room) {
+            this.room = room;
         }
     }
 }
