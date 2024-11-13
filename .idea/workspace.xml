@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d11cb82b-865c-445f-844c-85ca75e22e3a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/StartWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/network/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/network/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/doancn/network/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/network/Server.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "meowwon"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/binh2401/doancn.git",
+    "accountId": "8187ac63-3546-445a-828c-4e61cbce94a8"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2ooTv25pZzzI9o2avb8ylfzf6dp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Client.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Server.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.google.cloudcode.ide_session_index": "20241114_0000",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="network.Client" />
+      <module name="doancn" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="network.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="network.Server" />
+      <module name="doancn" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="network.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d11cb82b-865c-445f-844c-85ca75e22e3a" name="Changes" comment="" />
+      <created>1731535157612</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731535157612</updated>
+    </task>
+    <servers />
+  </component>
+</project>
