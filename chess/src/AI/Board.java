@@ -18,6 +18,7 @@ public class Board extends JPanel {
     private final int cellSize = 70;    // Kích thước của mỗi ô
     private List<Piece> pieces;          // Danh sách các quân cờ
     private Image boardImage;            // Hình ảnh bàn cờ
+    private Image backgroundImage;
     private Piece selectedPiece;          // Quân cờ đang được chọn
     private int mouseX, mouseY;          // Vị trí chuột khi kéo
     private boolean isRedTurn = true;    // Biến xác định lượt
@@ -90,18 +91,25 @@ public class Board extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int x = e.getX() / cellSize;
-                int y = e.getY() / cellSize;
+                // Tính toán vị trí ô trên bàn cờ mà chuột nhấn vào
+                int x = (e.getX()  ) / cellSize;  // Sử dụng offsetX thay vì trực tiếp e.getX()
+                int y = (e.getY() ) / cellSize;  // Sử dụng offsetY thay vì trực tiếp e.getY()
 
-                for (Piece piece : pieces) {
-                    if (piece.getX() == x && piece.getY() == y && piece.isRed() == isRedTurn) {
-                        selectedPiece = piece; // Lưu quân cờ được chọn
-                        break;
+                // Kiểm tra nếu chuột nhấn vào một ô hợp lệ trong bàn cờ (trong phạm vi 9x10)
+                if (x >= 0 && x < boardWidth && y >= 0 && y < boardHeight) {
+                    // Kiểm tra nếu quân cờ ở vị trí nhấn chuột và nếu đó là lượt của người chơi
+                    for (Piece piece : pieces) {
+                        if (piece.getX() == x && piece.getY() == y && piece.isRed() == isRedTurn) {
+                            selectedPiece = piece; // Lưu quân cờ được chọn
+                            break;
+                        }
                     }
                 }
+
+                // Lưu vị trí chuột để dùng khi di chuyển quân
                 mouseX = e.getX();
                 mouseY = e.getY();
-                repaint(); // Vẽ lại bảng cờ
+                repaint(); // Vẽ lại bàn cờ
             }
 
             @Override
@@ -224,13 +232,15 @@ public class Board extends JPanel {
 
         // Tải hình ảnh bàn cờ
         try {
-            boardImage = ImageIO.read(getClass().getResourceAsStream("/img/board.gif")); // Sử dụng "/" để chỉ đường dẫn từ thư mục gốc
+            boardImage = ImageIO.read(getClass().getResourceAsStream("/img/board.gif"));
+            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/img/HinhNen/backgroundboard.jpg"));// Sử dụng "/" để chỉ đường dẫn từ thư mục gốc
             if (boardImage == null) {
                 System.out.println("Hình ảnh bàn cờ không thể tải!");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
     public List<Piece> getAllPieces() {
         List<Piece> pieces = new ArrayList<>();
@@ -315,16 +325,25 @@ public class Board extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Vẽ hình ảnh bàn cờ
+        // Tính toán vị trí vẽ bàn cờ sao cho nó nằm chính giữa màn hình
+        int x = (getWidth() - boardWidth * cellSize) / 2;
+        int y = (getHeight() - boardHeight * cellSize) / 2;
+
+        // Vẽ hình nền của bàn cờ
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null); // Vẽ hình nền nền cho bàn cờ
+        }
+
+        // Vẽ hình ảnh bàn cờ lên chính giữa màn hình
         if (boardImage != null) {
-            g.drawImage(boardImage, 0, 0, boardWidth * cellSize, boardHeight * cellSize, this);
+            g.drawImage(boardImage, x, y, boardWidth * cellSize, boardHeight * cellSize, null); // Vẽ bàn cờ vào vị trí căn giữa
         }
 
         // Nếu có quân cờ được chọn, vẽ dấu chấm vàng và các nước đi hợp lệ
         if (selectedPiece != null) {
             // Vẽ dấu chấm vàng cho quân cờ được chọn
             g.setColor(Color.YELLOW);
-            g.fillOval(mouseX - cellSize / 4, mouseY - cellSize / 4, cellSize / 2, cellSize / 2);
+            g.fillOval(mouseX - cellSize / 4 + x, mouseY - cellSize / 4 + y, cellSize / 2, cellSize / 2);
 
             // Vẽ các nước đi hợp lệ
             List<int[]> validMoves = selectedPiece.getValidMoves();
@@ -332,13 +351,13 @@ public class Board extends JPanel {
             for (int[] move : validMoves) {
                 int validX = move[0];
                 int validY = move[1];
-                g.fillRect(validX * cellSize + 10, validY * cellSize + 10, cellSize - 20, cellSize - 20); // Vẽ ô cho nước đi hợp lệ
+                g.fillRect(validX * cellSize + x + 10, validY * cellSize + y + 10, cellSize - 20, cellSize - 20); // Vẽ ô cho nước đi hợp lệ
             }
         }
 
-        // Vẽ các quân cờ
+        // Vẽ các quân cờ lên chính giữa màn hình
         for (Piece piece : pieces) {
-            piece.draw(g, cellSize);
+            piece.draw(g, cellSize, x, y); // Đảm bảo vẽ quân cờ vào vị trí chính xác với offset
         }
     }
 

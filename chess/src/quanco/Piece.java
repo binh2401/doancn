@@ -47,7 +47,7 @@ public abstract class Piece {
 
     public abstract boolean isValidMove(int newX, int newY); // Kiểm tra tính hợp lệ của nước đi
 
-    public abstract void draw(Graphics g, int cellSize); // Phương thức vẽ quân cờ
+    public abstract void draw(Graphics g, int cellSize,int boardX, int boardY); // Phương thức vẽ quân cờ
 
     // Phương thức lấy danh sách các nước đi hợp lệ
     public List<int[]> getValidMoves() {

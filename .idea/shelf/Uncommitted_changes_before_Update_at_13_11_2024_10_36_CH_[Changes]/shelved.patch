@@ -1,0 +1,492 @@
+Index: chess/src/quanco/xe.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package quanco;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.List;\r\n\r\npublic class xe extends Piece {\r\n    private ImageIcon icon;\r\n\r\n    public xe(int x, int y, boolean isRed, List<Piece> pieces) {\r\n        super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đầy đủ tham số\r\n        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? \"img/xedo.gif\" : \"img/Xeden.gif\"));\r\n    }\r\n\r\n    @Override\r\n    public boolean isValidMove(int newX, int newY) {\r\n        // Kiểm tra nếu nước đi không nằm trên cùng hàng hoặc cùng cột\r\n        if (newX != x && newY != y) {\r\n            return false;\r\n        }\r\n\r\n        // Kiểm tra xem có quân nào cản đường trên cùng hàng hoặc cột\r\n        if (newX == x) {  // Di chuyển dọc (cùng cột)\r\n            int minY = Math.min(y, newY);\r\n            int maxY = Math.max(y, newY);\r\n            for (int i = minY + 1; i < maxY; i++) {\r\n                if (getPieceAt(x, i) != null) {\r\n                    return false;  // Có quân cản\r\n                }\r\n            }\r\n        } else {  // Di chuyển ngang (cùng hàng)\r\n            int minX = Math.min(x, newX);\r\n            int maxX = Math.max(x, newX);\r\n            for (int i = minX + 1; i < maxX; i++) {\r\n                if (getPieceAt(i, y) != null) {\r\n                    return false;  // Có quân cản\r\n                }\r\n            }\r\n        }\r\n        return true;  // Nước đi hợp lệ nếu không bị cản\r\n    }\r\n\r\n    // Phương thức kiểm tra quân cờ tại vị trí cụ thể\r\n    @Override\r\n    public Piece getPieceAt(int x, int y) {\r\n        for (Piece piece : pieces) {\r\n            if (piece.getX() == x && piece.getY() == y) {\r\n                return piece;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public void draw(Graphics g, int cellSize) {\r\n        int imageWidth = icon.getIconWidth();\r\n        int imageHeight = icon.getIconHeight();\r\n\r\n        // Tính toán tọa độ để căn giữa quân cờ trong ô\r\n        int drawX = x * cellSize + (cellSize - imageWidth) / 2;\r\n        int drawY = y * cellSize + (cellSize - imageHeight) / 2;\r\n\r\n        icon.paintIcon(null, g, drawX, drawY);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/quanco/xe.java b/chess/src/quanco/xe.java
+--- a/chess/src/quanco/xe.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/quanco/xe.java	(date 1731421707811)
+@@ -6,6 +6,8 @@
+ 
+ public class xe extends Piece {
+     private ImageIcon icon;
++    private int boardX;
++    private int boardY;
+ 
+     public xe(int x, int y, boolean isRed, List<Piece> pieces) {
+         super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đầy đủ tham số
+@@ -52,13 +54,13 @@
+     }
+ 
+     @Override
+-    public void draw(Graphics g, int cellSize) {
++    public void draw(Graphics g, int cellSize,int boardX, int boardY) {
+         int imageWidth = icon.getIconWidth();
+         int imageHeight = icon.getIconHeight();
+ 
+         // Tính toán tọa độ để căn giữa quân cờ trong ô
+-        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+-        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
++        int drawX = (x * cellSize) + (cellSize - imageWidth) / 2 + boardX; // Cộng boardX
++        int drawY = (y * cellSize) + (cellSize - imageHeight) / 2 + boardY; // Cộng boardY
+ 
+         icon.paintIcon(null, g, drawX, drawY);
+     }
+Index: chess/src/quanco/si.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package quanco;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.List;\r\n\r\npublic class si extends Piece {\r\n    private ImageIcon icon;\r\n\r\n    public si(int x, int y, boolean isRed, List<Piece> pieces) {\r\n        super(x, y, isRed, pieces); // Gọi constructor của lớp cha\r\n        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? \"img/sido.gif\" : \"img/siden.gif\"));\r\n    }\r\n\r\n    @Override\r\n    public boolean isValidMove(int newX, int newY) {\r\n        // Kiểm tra xem quân có di chuyển trong khu vực hợp lệ không\r\n        if (isRed) {\r\n            // Quân đỏ: chỉ có thể di chuyển trong khu vực hàng 7, 8, 9\r\n            if (newY < 7 || newY > 9) {\r\n                return false; // Bên đen\r\n            }\r\n        } else {\r\n            // Quân đen: chỉ có thể di chuyển trong khu vực hàng 0, 1, 2\r\n            if (newY < 0 || newY > 2) {\r\n                return false; // Bên đỏ\r\n            }\r\n        }\r\n\r\n        // Kiểm tra di chuyển chéo\r\n        if ((newX == x - 1 && newY == y - 1) || (newX == x + 1 && newY == y - 1) ||\r\n                (newX == x - 1 && newY == y + 1) || (newX == x + 1 && newY == y + 1)) {\r\n            // Kiểm tra xem quân cờ có nằm trong khu vực cung không\r\n            if ((isRed && (newX < 3 || newX > 5 || newY < 7)) ||\r\n                    (!isRed && (newX < 3 || newX > 5 || newY > 2))) {\r\n                return false; // Nước đi ra ngoài cung\r\n            }\r\n            return true; // Nước đi hợp lệ\r\n        }\r\n\r\n        return false; // Nước đi không hợp lệ\r\n    }\r\n\r\n    @Override\r\n    public void draw(Graphics g, int cellSize) {\r\n        int imageWidth = icon.getIconWidth();\r\n        int imageHeight = icon.getIconHeight();\r\n\r\n        // Tính toán tọa độ để căn giữa quân cờ trong ô\r\n        int drawX = x * cellSize + (cellSize - imageWidth) / 2; // Căn giữa theo trục X\r\n        int drawY = y * cellSize + (cellSize - imageHeight) / 2; // Căn giữa theo trục Y\r\n\r\n        icon.paintIcon(null, g, drawX, drawY);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/quanco/si.java b/chess/src/quanco/si.java
+--- a/chess/src/quanco/si.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/quanco/si.java	(date 1731421707796)
+@@ -42,13 +42,13 @@
+     }
+ 
+     @Override
+-    public void draw(Graphics g, int cellSize) {
++    public void draw(Graphics g, int cellSize,int boardX, int boardY) {
+         int imageWidth = icon.getIconWidth();
+         int imageHeight = icon.getIconHeight();
+ 
+         // Tính toán tọa độ để căn giữa quân cờ trong ô
+-        int drawX = x * cellSize + (cellSize - imageWidth) / 2; // Căn giữa theo trục X
+-        int drawY = y * cellSize + (cellSize - imageHeight) / 2; // Căn giữa theo trục Y
++        int drawX = (x * cellSize) + (cellSize - imageWidth) / 2 + boardX; // Cộng boardX
++        int drawY = (y * cellSize) + (cellSize - imageHeight) / 2 + boardY; // Cộng boardY
+ 
+         icon.paintIcon(null, g, drawX, drawY);
+     }
+Index: chess/src/quanco/tuong.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package quanco;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.List;\r\n\r\npublic class tuong extends Piece {\r\n    private ImageIcon icon;\r\n\r\n    public tuong(int x, int y, boolean isRed, List<Piece> pieces) {\r\n        super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đủ tham số\r\n        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? \"img/Tuongdo.gif\" : \"img/Tuongden.gif\"));\r\n    }\r\n\r\n    @Override\r\n    public boolean isValidMove(int newX, int newY) {\r\n        // Kiểm tra di chuyển theo đường chéo 2 ô\r\n        int dx = Math.abs(newX - x);\r\n        int dy = Math.abs(newY - y);\r\n\r\n        if (dx == 2 && dy == 2) {\r\n            // Kiểm tra giới hạn sân\r\n            if ((isRed && newY >= 5) || (!isRed && newY < 5)) {\r\n                // Kiểm tra chặn đường di chuyển\r\n                int blockX = (newX + x) / 2;\r\n                int blockY = (newY + y) / 2;\r\n                if (getPieceAt(blockX, blockY) == null) {\r\n                    return true;  // Hợp lệ nếu không bị chặn\r\n                }\r\n            }\r\n        }\r\n        return false;  // Không hợp lệ nếu không thỏa điều kiện\r\n    }\r\n\r\n    // Kiểm tra xem có quân cờ nào tại vị trí cụ thể\r\n    @Override\r\n    public Piece getPieceAt(int x, int y) { // Đổi quyền truy cập thành public\r\n        for (Piece piece : pieces) {\r\n            if (piece.getX() == x && piece.getY() == y) {\r\n                return piece;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public void draw(Graphics g, int cellSize) {\r\n        int imageWidth = icon.getIconWidth();\r\n        int imageHeight = icon.getIconHeight();\r\n\r\n        // Tính toán tọa độ để căn giữa quân cờ trong ô\r\n        int drawX = x * cellSize + (cellSize - imageWidth) / 2;\r\n        int drawY = y * cellSize + (cellSize - imageHeight) / 2;\r\n\r\n        icon.paintIcon(null, g, drawX, drawY);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/quanco/tuong.java b/chess/src/quanco/tuong.java
+--- a/chess/src/quanco/tuong.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/quanco/tuong.java	(date 1731421707801)
+@@ -44,13 +44,13 @@
+     }
+ 
+     @Override
+-    public void draw(Graphics g, int cellSize) {
++    public void draw(Graphics g, int cellSize,int boardX, int boardY) {
+         int imageWidth = icon.getIconWidth();
+         int imageHeight = icon.getIconHeight();
+ 
+         // Tính toán tọa độ để căn giữa quân cờ trong ô
+-        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+-        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
++        int drawX = (x * cellSize) + (cellSize - imageWidth) / 2 + boardX; // Cộng boardX
++        int drawY = (y * cellSize) + (cellSize - imageHeight) / 2 + boardY; // Cộng boardY
+ 
+         icon.paintIcon(null, g, drawX, drawY);
+     }
+Index: chess/src/quanco/phao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package quanco;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.List;\r\n\r\npublic class phao extends Piece {\r\n    private ImageIcon icon;\r\n\r\n    public phao(int x, int y, boolean isRed, List<Piece> pieces) {\r\n        super(x, y, isRed, pieces); // Gọi constructor của lớp cha\r\n        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? \"img/phaodo.gif\" : \"img/phoaden.gif\"));\r\n    }\r\n\r\n    @Override\r\n    public boolean isValidMove(int newX, int newY) {\r\n        // Kiểm tra xem di chuyển có theo hàng hoặc cột không\r\n        if (x != newX && y != newY) {\r\n            return false; // Nước đi không hợp lệ nếu không theo hàng hoặc cột\r\n        }\r\n\r\n        // Đếm số quân cờ giữa vị trí hiện tại và vị trí đích\r\n        int countBetween = 0;\r\n        if (x == newX) { // Di chuyển dọc\r\n            int start = Math.min(y, newY) + 1;\r\n            int end = Math.max(y, newY);\r\n            for (int i = start; i < end; i++) {\r\n                if (getPieceAt(x, i) != null) {\r\n                    countBetween++;\r\n                }\r\n            }\r\n        } else if (y == newY) { // Di chuyển ngang\r\n            int start = Math.min(x, newX) + 1;\r\n            int end = Math.max(x, newX);\r\n            for (int i = start; i < end; i++) {\r\n                if (getPieceAt(i, y) != null) {\r\n                    countBetween++;\r\n                }\r\n            }\r\n        }\r\n\r\n        // Kiểm tra tính hợp lệ của nước đi\r\n        Piece destinationPiece = getPieceAt(newX, newY);\r\n        if (countBetween == 0) {\r\n            // Nếu không có quân nào ở giữa và đích không có quân\r\n            return destinationPiece == null;\r\n        } else if (countBetween == 1 && destinationPiece != null && destinationPiece.isRed != isRed) {\r\n            // Nếu có một quân ở giữa và đích có quân đối thủ\r\n            return true;\r\n        }\r\n\r\n        return false; // Nước đi không hợp lệ\r\n    }\r\n\r\n    @Override\r\n    public void draw(Graphics g, int cellSize) {\r\n        int imageWidth = icon.getIconWidth();\r\n        int imageHeight = icon.getIconHeight();\r\n        int drawX = x * cellSize + (cellSize - imageWidth) / 2; // Căn giữa theo trục X\r\n        int drawY = y * cellSize + (cellSize - imageHeight) / 2; // Căn giữa theo trục Y\r\n\r\n        icon.paintIcon(null, g, drawX, drawY);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/quanco/phao.java b/chess/src/quanco/phao.java
+--- a/chess/src/quanco/phao.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/quanco/phao.java	(date 1731421707816)
+@@ -53,11 +53,11 @@
+     }
+ 
+     @Override
+-    public void draw(Graphics g, int cellSize) {
++    public void draw(Graphics g, int cellSize,int boardX, int boardY) {
+         int imageWidth = icon.getIconWidth();
+         int imageHeight = icon.getIconHeight();
+-        int drawX = x * cellSize + (cellSize - imageWidth) / 2; // Căn giữa theo trục X
+-        int drawY = y * cellSize + (cellSize - imageHeight) / 2; // Căn giữa theo trục Y
++        int drawX = (x * cellSize) + (cellSize - imageWidth) / 2 + boardX; // Cộng boardX
++        int drawY = (y * cellSize) + (cellSize - imageHeight) / 2 + boardY; // Cộng boardY
+ 
+         icon.paintIcon(null, g, drawX, drawY);
+     }
+Index: chess/src/quanco/Piece.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package quanco;\r\n\r\nimport AI.Board;\r\nimport AI.Move;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic abstract class Piece {\r\n    protected int x, y; // Tọa độ quân cờ\r\n    protected boolean isRed; // True nếu quân cờ đỏ, false nếu quân cờ đen\r\n    protected List<Piece> pieces; // Danh sách các quân cờ\r\n    private boolean captured = false; // Trạng thái bị bắt\r\n\r\n    public boolean isCaptured() {\r\n        return captured;\r\n    }\r\n\r\n    public void setCaptured(boolean captured) {\r\n        this.captured = captured;\r\n    }\r\n    public Piece(int x, int y, boolean isRed, List<Piece> pieces) {\r\n        this.x = x;\r\n        this.y = y;\r\n        this.isRed = isRed; // Gán màu cho quân cờ\r\n        this.pieces = pieces; // Gán danh sách quân cờ\r\n    }\r\n\r\n    public int getX() {\r\n        return x; // Trả về tọa độ x\r\n    }\r\n\r\n    public int getY() {\r\n        return y; // Trả về tọa độ y\r\n    }\r\n\r\n    public void setPosition(int x, int y) {\r\n        this.x = x; // Cập nhật tọa độ x\r\n        this.y = y; // Cập nhật tọa độ y\r\n    }\r\n\r\n    public boolean isRed() {\r\n        return isRed; // Trả về màu của quân cờ\r\n    }\r\n\r\n    public abstract boolean isValidMove(int newX, int newY); // Kiểm tra tính hợp lệ của nước đi\r\n\r\n    public abstract void draw(Graphics g, int cellSize); // Phương thức vẽ quân cờ\r\n\r\n    // Phương thức lấy danh sách các nước đi hợp lệ\r\n    public List<int[]> getValidMoves() {\r\n        List<int[]> validMoves = new ArrayList<>();\r\n        for (int newX = 0; newX < 9; newX++) { // Duyệt qua tất cả các ô cờ\r\n            for (int newY = 0; newY < 10; newY++) {\r\n                if (isValidMove(newX, newY) && newY >= 0 && newY < 10) {\r\n                    // Kiểm tra nếu nước đi hợp lệ và trong giới hạn của bàn cờ\r\n                    Piece targetPiece = getPieceAt(newX, newY); // Lấy quân cờ tại vị trí mới\r\n                    if (targetPiece == null || targetPiece.isRed() != this.isRed()) {\r\n                        // Chỉ thêm nước đi hợp lệ nếu ô trống hoặc chứa quân địch\r\n                        validMoves.add(new int[]{newX, newY});\r\n                    }\r\n                }\r\n            }\r\n        }\r\n        return validMoves; // Trả về danh sách các nước đi hợp lệ\r\n    }\r\n\r\n    // Kiểm tra quân cờ tại vị trí cụ thể\r\n    protected Piece getPieceAt(int x, int y) {\r\n        // Kiểm tra nếu quân cờ tại vị trí đã cho\r\n        for (Piece piece : pieces) {\r\n            if (piece.getX() == x && piece.getY() == y) {\r\n                return piece; // Trả về quân cờ tại vị trí (x, y)\r\n            }\r\n        }\r\n        return null; // Không có quân cờ tại vị trí\r\n    }\r\n    public List<Move> getValidMoves(Board board) {\r\n        List<Move> validMoves = new ArrayList<>();\r\n        // Logic để tính toán các nước đi hợp lệ dựa trên trạng thái của bàn cờ\r\n        return validMoves;\r\n    }\r\n\r\n    public void setPosition(Move.Position startPosition) {\r\n        this.x = startPosition.getX(); // Lấy tọa độ x từ startPosition\r\n        this.y = startPosition.getY();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/quanco/Piece.java b/chess/src/quanco/Piece.java
+--- a/chess/src/quanco/Piece.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/quanco/Piece.java	(date 1731421487577)
+@@ -47,7 +47,7 @@
+ 
+     public abstract boolean isValidMove(int newX, int newY); // Kiểm tra tính hợp lệ của nước đi
+ 
+-    public abstract void draw(Graphics g, int cellSize); // Phương thức vẽ quân cờ
++    public abstract void draw(Graphics g, int cellSize,int boardX, int boardY); // Phương thức vẽ quân cờ
+ 
+     // Phương thức lấy danh sách các nước đi hợp lệ
+     public List<int[]> getValidMoves() {
+Index: chess/src/quanco/King.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package quanco;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.List;\r\n\r\npublic class King extends Piece {\r\n    private ImageIcon icon;\r\n\r\n    public King(int x, int y, boolean isRed, List<Piece> pieces) {\r\n        super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đầy đủ tham số\r\n        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? \"img/vuado.gif\" : \"img/vua.gif\"));\r\n    }\r\n\r\n    @Override\r\n    public boolean isValidMove(int newX, int newY) {\r\n        // Kiểm tra nếu di chuyển nằm ngoài bàn cờ\r\n        if (newX < 0 || newX >= 9 || newY < 0 || newY >= 10) {\r\n            return false;\r\n        }\r\n\r\n        // Kiểm tra di chuyển một ô ngang hoặc dọc\r\n        int dx = Math.abs(newX - x);\r\n        int dy = Math.abs(newY - y);\r\n        if (dx + dy != 1) {\r\n            return false; // Tướng chỉ có thể di chuyển 1 ô theo chiều ngang hoặc dọc\r\n        }\r\n\r\n        // Kiểm tra phạm vi Cửu cung\r\n        if (isRed) {\r\n            return newX >= 3 && newX <= 5 && newY >= 7 && newY <= 9;\r\n        } else {\r\n            return newX >= 3 && newX <= 5 && newY >= 0 && newY <= 2;\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void draw(Graphics g, int cellSize) {\r\n        int imageWidth = icon.getIconWidth();\r\n        int imageHeight = icon.getIconHeight();\r\n\r\n        // Tính toán tọa độ để căn giữa quân cờ trong ô\r\n        int drawX = x * cellSize + (cellSize - imageWidth) / 2;\r\n        int drawY = y * cellSize + (cellSize - imageHeight) / 2;\r\n\r\n        if (this.isRed && y >= 7) {\r\n            drawY -= 0.05 * cellSize;\r\n        } else if (!this.isRed && y <= 2) {\r\n            drawY += 0.05 * cellSize;\r\n        }\r\n\r\n        icon.paintIcon(null, g, drawX, drawY);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/quanco/King.java b/chess/src/quanco/King.java
+--- a/chess/src/quanco/King.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/quanco/King.java	(date 1731421707807)
+@@ -35,13 +35,13 @@
+     }
+ 
+     @Override
+-    public void draw(Graphics g, int cellSize) {
++    public void draw(Graphics g, int cellSize,int boardX, int boardY) {
+         int imageWidth = icon.getIconWidth();
+         int imageHeight = icon.getIconHeight();
+ 
+         // Tính toán tọa độ để căn giữa quân cờ trong ô
+-        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+-        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
++        int drawX = (x * cellSize) + (cellSize - imageWidth) / 2 + boardX; // Cộng boardX
++        int drawY = (y * cellSize) + (cellSize - imageHeight) / 2 + boardY; // Cộng boardY
+ 
+         if (this.isRed && y >= 7) {
+             drawY -= 0.05 * cellSize;
+Index: chess/src/quanco/ma.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package quanco;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.List;\r\n\r\npublic class ma extends Piece {\r\n    private ImageIcon icon;\r\n\r\n    public ma(int x, int y, boolean isRed, List<Piece> pieces) {\r\n        super(x, y, isRed, pieces); // Gọi đến constructor của lớp Piece với đầy đủ tham số\r\n        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? \"img/Mado.gif\" : \"img/Maden.gif\"));\r\n    }\r\n\r\n    @Override\r\n    public boolean isValidMove(int newX, int newY) {\r\n        // Tính toán độ lệch giữa vị trí hiện tại và vị trí đích\r\n        int dx = Math.abs(newX - x);\r\n        int dy = Math.abs(newY - y);\r\n\r\n        // Kiểm tra điều kiện nước đi hình chữ \"L\" của quân Mã\r\n        if ((dx == 2 && dy == 1) || (dx == 1 && dy == 2)) {\r\n            // Kiểm tra quân chặn theo hướng ban đầu\r\n            int blockX = x + (dx == 2 ? (newX - x) / 2 : 0);\r\n            int blockY = y + (dy == 2 ? (newY - y) / 2 : 0);\r\n\r\n            // Nếu có quân cờ chặn đường, nước đi không hợp lệ\r\n            if (getPieceAt(blockX, blockY) != null) {\r\n                return false;\r\n            }\r\n            // Nước đi hợp lệ nếu không có quân chặn\r\n            return true;\r\n        }\r\n        return false;\r\n    }\r\n\r\n    // Phương thức kiểm tra quân cờ tại vị trí cụ thể\r\n    @Override\r\n    public Piece getPieceAt(int x, int y) {\r\n        for (Piece piece : pieces) {\r\n            if (piece.getX() == x && piece.getY() == y) {\r\n                return piece;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public void draw(Graphics g, int cellSize) {\r\n        int imageWidth = icon.getIconWidth();\r\n        int imageHeight = icon.getIconHeight();\r\n\r\n        // Tính toán tọa độ để căn giữa quân cờ trong ô\r\n        int drawX = x * cellSize + (cellSize - imageWidth) / 2;\r\n        int drawY = y * cellSize + (cellSize - imageHeight) / 2;\r\n\r\n        icon.paintIcon(null, g, drawX, drawY);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/quanco/ma.java b/chess/src/quanco/ma.java
+--- a/chess/src/quanco/ma.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/quanco/ma.java	(date 1731421707822)
+@@ -46,13 +46,13 @@
+     }
+ 
+     @Override
+-    public void draw(Graphics g, int cellSize) {
++    public void draw(Graphics g, int cellSize,int boardX, int boardY) {
+         int imageWidth = icon.getIconWidth();
+         int imageHeight = icon.getIconHeight();
+ 
+         // Tính toán tọa độ để căn giữa quân cờ trong ô
+-        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+-        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
++        int drawX = (x * cellSize) + (cellSize - imageWidth) / 2 + boardX; // Cộng boardX
++        int drawY = (y * cellSize) + (cellSize - imageHeight) / 2 + boardY; // Cộng boardY
+ 
+         icon.paintIcon(null, g, drawX, drawY);
+     }
+Index: chess/src/AI/Board.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package AI;\r\n\r\nimport quanco.*;\r\nimport javax.imageio.ImageIO;\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.MouseAdapter;\r\nimport java.awt.event.MouseEvent;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport javax.swing.Timer;\r\nimport sounds.SoundPlayer;\r\n\r\npublic class Board extends JPanel {\r\n    private final int boardWidth = 9;  // Số cột\r\n    private final int boardHeight = 10; // Số hàng\r\n    private final int cellSize = 70;    // Kích thước của mỗi ô\r\n    private List<Piece> pieces;          // Danh sách các quân cờ\r\n    private Image boardImage;            // Hình ảnh bàn cờ\r\n    private Piece selectedPiece;          // Quân cờ đang được chọn\r\n    private int mouseX, mouseY;          // Vị trí chuột khi kéo\r\n    private boolean isRedTurn = true;    // Biến xác định lượt\r\n    private Timer timer;                  // Bộ đếm thời gian\r\n    private int timeLeft = 60;            // Thời gian còn lại\r\n    private JLabel timerLabel;            // Nhãn hiển thị thời gian\r\n    private List<MovePair> moveHistoryPairs;\r\n    private Move lastRedMove = null;\r\n    private Move lastBlackMove = null;\r\n    private boolean isAIEnabled;\r\n    private Piece[][] board;\r\n    private boolean gameOver = false;\r\n\r\n\r\n    public Board(boolean isAIEnabled,String difficulty) {\r\n        this.isAIEnabled = isAIEnabled;\r\n        board = new Piece[10][9];\r\n        setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));\r\n        pieces = new ArrayList<>();\r\n        moveHistoryPairs = new ArrayList<>(); // Khởi tạo danh sách lịch sử nước đi\r\n\r\n        // Thêm quân Tướng Đỏ và Đen vào danh sách\r\n        pieces.add(new King(4, 9, true, pieces));  // Tướng Đỏ ở vị trí (4, 9)\r\n        pieces.add(new King(4, 0, false, pieces)); // Tướng Đen ở vị trí (4, 0)\r\n\r\n        // Thêm các quân cờ khác...\r\n        pieces.add(new chot(0, 6, true, pieces));\r\n        pieces.add(new chot(0, 3, false, pieces));\r\n        pieces.add(new chot(2, 6, true, pieces));\r\n        pieces.add(new chot(2, 3, false, pieces));\r\n        pieces.add(new chot(4, 6, true, pieces));\r\n        pieces.add(new chot(4, 3, false, pieces));\r\n        pieces.add(new chot(6, 6, true, pieces));\r\n        pieces.add(new chot(6, 3, false, pieces));\r\n        pieces.add(new chot(8, 6, true, pieces));\r\n        pieces.add(new chot(8, 3, false, pieces));\r\n\r\n        // Thêm quân xe, mã, tướng, si, pháo...\r\n        pieces.add(new xe(0, 9, true, pieces));\r\n        pieces.add(new xe(0, 0, false, pieces));\r\n        pieces.add(new xe(8, 9, true, pieces));\r\n        pieces.add(new xe(8, 0, false, pieces));\r\n        pieces.add(new ma(1, 9, true, pieces));\r\n        pieces.add(new ma(1, 0, false, pieces));\r\n        pieces.add(new ma(7, 9, true, pieces));\r\n        pieces.add(new ma(7, 0, false, pieces));\r\n        pieces.add(new tuong(2, 9, true, pieces));\r\n        pieces.add(new tuong(2, 0, false, pieces));\r\n        pieces.add(new tuong(6, 9, true, pieces));\r\n        pieces.add(new tuong(6, 0, false, pieces));\r\n        pieces.add(new si(3, 9, true, pieces));\r\n        pieces.add(new si(3, 0, false, pieces));\r\n        pieces.add(new si(5, 9, true, pieces));\r\n        pieces.add(new si(5, 0, false, pieces));\r\n        pieces.add(new phao(1, 7, true, pieces));\r\n        pieces.add(new phao(1, 2, false, pieces));\r\n        pieces.add(new phao(7, 7, true, pieces));\r\n        pieces.add(new phao(7, 2, false, pieces));\r\n\r\n        // Khởi tạo nhãn thời gian\r\n        timerLabel = new JLabel(\"Time left: \" + timeLeft);\r\n        timerLabel.setFont(new Font(\"Arial\", Font.BOLD, 16));\r\n        timerLabel.setForeground(Color.RED);\r\n        add(timerLabel, BorderLayout.NORTH); // Thêm nhãn vào JPanel\r\n\r\n        // Khởi động bộ đếm thời gian\r\n        startTimer();\r\n\r\n        // Thêm các sự kiện chuột\r\n        addMouseListener(new MouseAdapter() {\r\n            @Override\r\n            public void mousePressed(MouseEvent e) {\r\n                int x = e.getX() / cellSize;\r\n                int y = e.getY() / cellSize;\r\n\r\n                for (Piece piece : pieces) {\r\n                    if (piece.getX() == x && piece.getY() == y && piece.isRed() == isRedTurn) {\r\n                        selectedPiece = piece; // Lưu quân cờ được chọn\r\n                        break;\r\n                    }\r\n                }\r\n                mouseX = e.getX();\r\n                mouseY = e.getY();\r\n                repaint(); // Vẽ lại bảng cờ\r\n            }\r\n\r\n            @Override\r\n            public void mouseReleased(MouseEvent e) {\r\n                if (selectedPiece != null) {\r\n                    int newX = e.getX() / cellSize;\r\n                    int newY = e.getY() / cellSize;\r\n\r\n                    if (isRedTurn) { // Nếu lượt là của người chơi đỏ\r\n                        // Kiểm tra xem di chuyển có hợp lệ không\r\n                        if (selectedPiece.isValidMove(newX, newY) && newY >= 0 && newY < boardHeight) {\r\n                            Piece targetPiece = getPieceAt(newX, newY); // Kiểm tra quân ở vị trí mới\r\n\r\n                            if (targetPiece == null || targetPiece.isRed() != selectedPiece.isRed()) {\r\n                                // Nếu không có quân cờ hoặc có quân địch\r\n                                if (targetPiece != null) {\r\n                                    pieces.remove(targetPiece); // Loại bỏ quân địch\r\n                                }\r\n\r\n                                // Lưu vị trí cũ để khôi phục nếu cần\r\n                                int originalX = selectedPiece.getX();\r\n                                int originalY = selectedPiece.getY();\r\n\r\n                                // Thực hiện di chuyển\r\n                                selectedPiece.setPosition(newX, newY);\r\n\r\n                                // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này\r\n                                if (isCheck(isRedTurn)) {\r\n                                    // Nếu nước đi không thoát khỏi chiếu, hoàn tác di chuyển\r\n                                    selectedPiece.setPosition(originalX, originalY);\r\n                                    if (targetPiece != null) {\r\n                                        pieces.add(targetPiece); // Khôi phục quân cờ địch\r\n                                    }\r\n                                } else {\r\n                                    // Nước đi hợp lệ\r\n                                    Move move = new Move(selectedPiece, originalX, originalY, newX, newY, targetPiece);\r\n                                    if (isRedTurn) {\r\n                                        lastRedMove = move;\r\n                                    } else {\r\n                                        lastBlackMove = move;\r\n                                        if (lastRedMove != null) {\r\n                                            moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));\r\n\r\n                                            lastRedMove = null;\r\n                                            lastBlackMove = null;\r\n                                        }\r\n                                    }\r\n\r\n                                    // Kiểm tra chiếu sau khi di chuyển\r\n                                    if (isCheck(!isRedTurn)) {\r\n                                        JOptionPane.showMessageDialog(Board.this,\r\n                                                (isRedTurn ? \"Đen\" : \"Đỏ\") + \" bị chiếu!\", \"Thông báo\", JOptionPane.WARNING_MESSAGE);\r\n                                    }\r\n\r\n                                    // Kiểm tra chiếu tướng\r\n                                    if (isCheckmate(!isRedTurn)) {\r\n                                        JOptionPane.showMessageDialog(Board.this,\r\n                                                (isRedTurn ? \"Đen\" : \"Đỏ\") + \" đã thua!\", \"Game Over\", JOptionPane.WARNING_MESSAGE);\r\n                                        System.exit(0); // Kết thúc trò chơi\r\n                                    }\r\n\r\n                                    isRedTurn = false; // Đổi lượt cho AI\r\n                                    timeLeft = 60; // Reset thời gian\r\n                                    if (isAIEnabled) {\r\n                                        AIPlayer aiPlayer = new AIPlayer();\r\n                                        aiPlayer.setDifficultyLevel(difficulty);\r\n                                        long timeLimit = 1000;  // 1 second\r\n                                        Move aiMove = aiPlayer.getBestMove(Board.this, isRedTurn, timeLimit);\r\n\r\n\r\n                                        if (aiMove != null) {\r\n                                            makeMove(aiMove); // Thực hiện nước đi của AI\r\n                                            lastBlackMove = aiMove; // Lưu lại nước đi của AI\r\n\r\n                                            // Thêm vào lịch sử nước đi nếu cả người và AI đều có nước đi\r\n                                            if (lastRedMove != null) {\r\n                                                moveHistoryPairs.add(new MovePair(lastRedMove, lastBlackMove));\r\n                                                lastRedMove = null;\r\n                                                lastBlackMove = null;\r\n                                            }\r\n                                        }\r\n                                    }\r\n                                    // Đổi lượt trở lại cho người chơi\r\n                                    isRedTurn = true;\r\n\r\n                                    // Vẽ lại bàn cờ sau khi di chuyển\r\n                                    repaint(); // Gọi repaint để cập nhật bàn cờ\r\n                                }\r\n                            }\r\n                        }\r\n\r\n\r\n                    }\r\n\r\n                    // Phát âm thanh khi di chuyển quân cờ\r\n                    SoundPlayer soundPlayer = new SoundPlayer();\r\n                    if (selectedPiece.isRed()) {\r\n                        soundPlayer.playSound(\"/sounds/move.wav\"); // Âm thanh cho quân đỏ\r\n                    } else {\r\n                        soundPlayer.playSound(\"/sounds/move2.wav\"); // Âm thanh cho quân đen\r\n                    }\r\n\r\n                    selectedPiece = null; // Đặt lại quân cờ được chọn\r\n                    repaint(); // Vẽ lại bảng cờ\r\n                }\r\n            }\r\n\r\n        });\r\n\r\n        addMouseMotionListener(new MouseAdapter() {\r\n            @Override\r\n            public void mouseDragged(MouseEvent e) {\r\n                if (selectedPiece != null) {\r\n                    mouseX = e.getX();\r\n                    mouseY = e.getY();\r\n                    repaint(); // Vẽ lại để quân cờ di chuyển theo chuột\r\n                }\r\n            }\r\n        });\r\n\r\n        // Tải hình ảnh bàn cờ\r\n        try {\r\n            boardImage = ImageIO.read(getClass().getResourceAsStream(\"/img/board.gif\")); // Sử dụng \"/\" để chỉ đường dẫn từ thư mục gốc\r\n            if (boardImage == null) {\r\n                System.out.println(\"Hình ảnh bàn cờ không thể tải!\");\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n    public List<Piece> getAllPieces() {\r\n        List<Piece> pieces = new ArrayList<>();\r\n        for (int row = 0; row < board.length; row++) {\r\n            for (int col = 0; col < board[row].length; col++) {\r\n                if (board[row][col] != null) {\r\n                    pieces.add(board[row][col]);\r\n                }\r\n            }\r\n        }\r\n        return pieces;\r\n    }\r\n\r\n    // Phương thức hoàn tác nước đi cuối cùng\r\n    public boolean undoLastMovePair() {\r\n        if (moveHistoryPairs.isEmpty()) {\r\n            return false;\r\n        }\r\n\r\n        MovePair lastPair = moveHistoryPairs.remove(moveHistoryPairs.size() - 1);\r\n\r\n        if (lastPair.getRedMove() != null) {\r\n            lastPair.getRedMove().getPiece().setPosition(lastPair.getRedMove().getOldX(), lastPair.getRedMove().getOldY());\r\n            if (lastPair.getRedMove().getCapturedPiece() != null) {\r\n                pieces.add(lastPair.getRedMove().getCapturedPiece());\r\n            }\r\n        }\r\n\r\n        if (lastPair.getBlackMove() != null) {\r\n            lastPair.getBlackMove().getPiece().setPosition(lastPair.getBlackMove().getOldX(), lastPair.getBlackMove().getOldY());\r\n            if (lastPair.getBlackMove().getCapturedPiece() != null) {\r\n                pieces.add(lastPair.getBlackMove().getCapturedPiece());\r\n            }\r\n        }\r\n\r\n        isRedTurn = !isRedTurn;\r\n        repaint();\r\n        return true;\r\n    }\r\n\r\n    public List<Move> getAllPossibleMoves(boolean isRed) {\r\n        List<Move> moves = new ArrayList<>();\r\n        for (Piece piece : pieces) {\r\n            if (piece.isRed() == isRed) {\r\n                for (int[] validMove : piece.getValidMoves()) {\r\n                    moves.add(new Move(piece, piece.getX(), piece.getY(), validMove[0], validMove[1], getPieceAt(validMove[0], validMove[1])));\r\n                }\r\n            }\r\n        }\r\n        return moves;\r\n    }\r\n\r\n    public void makeMove(Move move) {\r\n        Piece targetPiece = getPieceAt(move.getNewX(), move.getNewY());\r\n        if (targetPiece != null) {\r\n            pieces.remove(targetPiece); // Xóa quân cờ bị ăn\r\n        }\r\n        Piece movedPiece = move.getPiece(); // Lấy quân cờ cần di chuyển\r\n        if (movedPiece != null) {\r\n            movedPiece.setPosition(move.getNewX(), move.getNewY()); // Di chuyển quân cờ\r\n        } else {\r\n            System.out.println(\"Quân cờ không tồn tại.\");\r\n        }\r\n        repaint(); // Vẽ lại bàn cờ\r\n    }\r\n    private void startTimer() {\r\n        timer = new Timer(1000, e -> {\r\n            if (timeLeft > 0) {\r\n                timeLeft--;\r\n                timerLabel.setText(\"Time left: \" + timeLeft);\r\n            } else {\r\n                // Nếu thời gian hết, thông báo và kết thúc trò chơi\r\n                JOptionPane.showMessageDialog(this, (isRedTurn ? \"Đỏ\" : \"Đen\") + \" đã hết thời gian!\", \"Game Over\", JOptionPane.WARNING_MESSAGE);\r\n                System.exit(0); // Thoát trò chơi\r\n            }\r\n        });\r\n        timer.start();\r\n    }\r\n\r\n    // Phương thức vẽ bàn cờ\r\n    @Override\r\n    protected void paintComponent(Graphics g) {\r\n        super.paintComponent(g);\r\n\r\n        // Vẽ hình ảnh bàn cờ\r\n        if (boardImage != null) {\r\n            g.drawImage(boardImage, 0, 0, boardWidth * cellSize, boardHeight * cellSize, this);\r\n        }\r\n\r\n        // Nếu có quân cờ được chọn, vẽ dấu chấm vàng và các nước đi hợp lệ\r\n        if (selectedPiece != null) {\r\n            // Vẽ dấu chấm vàng cho quân cờ được chọn\r\n            g.setColor(Color.YELLOW);\r\n            g.fillOval(mouseX - cellSize / 4, mouseY - cellSize / 4, cellSize / 2, cellSize / 2);\r\n\r\n            // Vẽ các nước đi hợp lệ\r\n            List<int[]> validMoves = selectedPiece.getValidMoves();\r\n            g.setColor(new Color(0, 255, 0, 128)); // Màu xanh với độ trong suốt\r\n            for (int[] move : validMoves) {\r\n                int validX = move[0];\r\n                int validY = move[1];\r\n                g.fillRect(validX * cellSize + 10, validY * cellSize + 10, cellSize - 20, cellSize - 20); // Vẽ ô cho nước đi hợp lệ\r\n            }\r\n        }\r\n\r\n        // Vẽ các quân cờ\r\n        for (Piece piece : pieces) {\r\n            piece.draw(g, cellSize);\r\n        }\r\n    }\r\n\r\n    Piece getPieceAt(int x, int y) {\r\n        for (Piece piece : pieces) {\r\n            if (piece.getX() == x && piece.getY() == y) {\r\n                return piece;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    // Hàm kiểm tra chiếu\r\n    private boolean isCheck(boolean isRed) {\r\n        Piece king = null;\r\n        for (Piece piece : pieces) {\r\n            if (piece instanceof King && piece.isRed() == isRed) {\r\n                king = piece;\r\n                break;\r\n            }\r\n        }\r\n        if (king == null) return true;\r\n\r\n        for (Piece piece : pieces) {\r\n            if (piece.isRed() != isRed && piece.isValidMove(king.getX(), king.getY())) {\r\n                return true; // Quân địch có thể ăn Tướng\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    // Hàm kiểm tra chiếu tướng\r\n    private boolean isCheckmate(boolean isRed) {\r\n        if (!isCheck(isRed)) return false;\r\n\r\n        for (Piece piece : pieces) {\r\n            if (piece.isRed() == isRed) {\r\n                for (int[] move : piece.getValidMoves()) {\r\n                    int originalX = piece.getX();\r\n                    int originalY = piece.getY();\r\n\r\n                    piece.setPosition(move[0], move[1]);\r\n\r\n                    if (!isCheck(isRed)) {\r\n                        piece.setPosition(originalX, originalY);\r\n                        return false;\r\n                    }\r\n                    piece.setPosition(originalX, originalY);\r\n                }\r\n            }\r\n        }\r\n        return true;\r\n    }\r\n    // Lớp Move để lưu trữ thông tin của mỗi nước đi\r\n\r\n\r\n    class MovePair {\r\n        private final Move redMove;\r\n        private final Move blackMove;\r\n\r\n        public MovePair(Move redMove, Move blackMove) {\r\n            this.redMove = redMove;\r\n            this.blackMove = blackMove;\r\n        }\r\n\r\n        public Move getRedMove() {\r\n            return redMove;\r\n        }\r\n\r\n        public Move getBlackMove() {\r\n            return blackMove;\r\n        }\r\n    }\r\n    public boolean isGameOver() {\r\n        // Kiểm tra nếu một trong hai tướng đã bị bắt\r\n        for (Piece piece : pieces) {\r\n            if (piece instanceof King && piece.isCaptured()) {\r\n                return true; // Trò chơi kết thúc vì một bên bị mất tướng\r\n            }\r\n        }\r\n        // Kiểm tra nếu không còn nước đi hợp lệ cho người chơi hiện tại\r\n\r\n        return false; // Trò chơi chưa kết thúc\r\n    }\r\n\r\n    public void undoMove(Move move) {\r\n        if (move != null) {\r\n            Piece movedPiece = move.getMovedPiece();\r\n            if (movedPiece != null) {\r\n                movedPiece.setPosition(move.getStartPosition());\r\n                if (move.getCapturedPiece() != null) {\r\n                    pieces.add(move.getCapturedPiece());\r\n                }\r\n                // Cập nhật lại các trạng thái khác nếu cần\r\n            } else {\r\n                System.out.println(\"movedPiece is null. Check the logic when creating Move.\");\r\n            }\r\n        }\r\n\r\n    }\r\n\r\n    public List<Piece> getPieces() {\r\n        // Trả về danh sách các quân cờ hiện tại\r\n        return new ArrayList<>(pieces);\r\n    }\r\n    public List<Move> getAllValidMoves() {\r\n        List<Move> validMoves = new ArrayList<>();\r\n\r\n        for (Piece piece : pieces) {\r\n            if (!piece.isCaptured()) { // Kiểm tra xem quân cờ có đang trên bàn cờ hay không\r\n                List<Move> moves = piece.getValidMoves(this); // Giả sử Piece có phương thức getValidMoves\r\n                validMoves.addAll(moves);\r\n            }\r\n        }\r\n\r\n        return validMoves;\r\n    }\r\n    public void resetGame() {\r\n        pieces.clear();\r\n        moveHistoryPairs.clear();\r\n        lastRedMove = null;\r\n        lastBlackMove = null;\r\n        isRedTurn = true;\r\n        timeLeft = 60;\r\n\r\n        // Thêm lại các quân cờ vào bàn\r\n        pieces.add(new King(4, 9, true, pieces));  // Tướng Đỏ ở vị trí (4, 9)\r\n        pieces.add(new King(4, 0, false, pieces)); // Tướng Đen ở vị trí (4, 0)\r\n\r\n        // Thêm các quân cờ khác...\r\n        pieces.add(new chot(0, 6, true, pieces));\r\n        pieces.add(new chot(0, 3, false, pieces));\r\n        pieces.add(new chot(2, 6, true, pieces));\r\n        pieces.add(new chot(2, 3, false, pieces));\r\n        pieces.add(new chot(4, 6, true, pieces));\r\n        pieces.add(new chot(4, 3, false, pieces));\r\n        pieces.add(new chot(6, 6, true, pieces));\r\n        pieces.add(new chot(6, 3, false, pieces));\r\n        pieces.add(new chot(8, 6, true, pieces));\r\n        pieces.add(new chot(8, 3, false, pieces));\r\n\r\n        pieces.add(new xe(0, 9, true, pieces));\r\n        pieces.add(new xe(0, 0, false, pieces));\r\n        pieces.add(new xe(8, 9, true, pieces));\r\n        pieces.add(new xe(8, 0, false, pieces));\r\n        pieces.add(new ma(1, 9, true, pieces));\r\n        pieces.add(new ma(1, 0, false, pieces));\r\n        pieces.add(new ma(7, 9, true, pieces));\r\n        pieces.add(new ma(7, 0, false, pieces));\r\n        pieces.add(new tuong(2, 9, true, pieces));\r\n        pieces.add(new tuong(2, 0, false, pieces));\r\n        pieces.add(new tuong(6, 9, true, pieces));\r\n        pieces.add(new tuong(6, 0, false, pieces));\r\n        pieces.add(new si(3, 9, true, pieces));\r\n        pieces.add(new si(3, 0, false, pieces));\r\n        pieces.add(new si(5, 9, true, pieces));\r\n        pieces.add(new si(5, 0, false, pieces));\r\n        pieces.add(new phao(1, 7, true, pieces));\r\n        pieces.add(new phao(1, 2, false, pieces));\r\n        pieces.add(new phao(7, 7, true, pieces));\r\n        pieces.add(new phao(7, 2, false, pieces));\r\n\r\n        // Reset lại thời gian và nhãn\r\n        timerLabel.setText(\"Time left: \" + timeLeft);\r\n\r\n        repaint(); // Vẽ lại bàn cờ\r\n    }\r\n    // Hàm xử lý sự kiện đầu hàng\r\n    public void surrender() {\r\n        // Kiểm tra ai là người thua cuộc và thông báo\r\n        String loser = isRedTurn ? \"Đỏ\" : \"Đen\";\r\n        String winner = isRedTurn ? \"Đen\" : \"Đỏ\";\r\n\r\n        // Hiển thị thông báo và kết thúc trò chơi\r\n        JOptionPane.showMessageDialog(this, loser + \" đã đầu hàng. \" + winner + \" thắng!\", \"Game Over\", JOptionPane.INFORMATION_MESSAGE);\r\n        System.exit(0); // Kết thúc trò chơi\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/AI/Board.java b/chess/src/AI/Board.java
+--- a/chess/src/AI/Board.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/AI/Board.java	(date 1731422615000)
+@@ -18,6 +18,7 @@
+     private final int cellSize = 70;    // Kích thước của mỗi ô
+     private List<Piece> pieces;          // Danh sách các quân cờ
+     private Image boardImage;            // Hình ảnh bàn cờ
++    private Image backgroundImage;
+     private Piece selectedPiece;          // Quân cờ đang được chọn
+     private int mouseX, mouseY;          // Vị trí chuột khi kéo
+     private boolean isRedTurn = true;    // Biến xác định lượt
+@@ -90,18 +91,25 @@
+         addMouseListener(new MouseAdapter() {
+             @Override
+             public void mousePressed(MouseEvent e) {
+-                int x = e.getX() / cellSize;
+-                int y = e.getY() / cellSize;
++                // Tính toán vị trí ô trên bàn cờ mà chuột nhấn vào
++                int x = (e.getX()  ) / cellSize;  // Sử dụng offsetX thay vì trực tiếp e.getX()
++                int y = (e.getY() ) / cellSize;  // Sử dụng offsetY thay vì trực tiếp e.getY()
+ 
+-                for (Piece piece : pieces) {
+-                    if (piece.getX() == x && piece.getY() == y && piece.isRed() == isRedTurn) {
+-                        selectedPiece = piece; // Lưu quân cờ được chọn
+-                        break;
++                // Kiểm tra nếu chuột nhấn vào một ô hợp lệ trong bàn cờ (trong phạm vi 9x10)
++                if (x >= 0 && x < boardWidth && y >= 0 && y < boardHeight) {
++                    // Kiểm tra nếu quân cờ ở vị trí nhấn chuột và nếu đó là lượt của người chơi
++                    for (Piece piece : pieces) {
++                        if (piece.getX() == x && piece.getY() == y && piece.isRed() == isRedTurn) {
++                            selectedPiece = piece; // Lưu quân cờ được chọn
++                            break;
++                        }
+                     }
+                 }
++
++                // Lưu vị trí chuột để dùng khi di chuyển quân
+                 mouseX = e.getX();
+                 mouseY = e.getY();
+-                repaint(); // Vẽ lại bảng cờ
++                repaint(); // Vẽ lại bàn cờ
+             }
+ 
+             @Override
+@@ -224,13 +232,15 @@
+ 
+         // Tải hình ảnh bàn cờ
+         try {
+-            boardImage = ImageIO.read(getClass().getResourceAsStream("/img/board.gif")); // Sử dụng "/" để chỉ đường dẫn từ thư mục gốc
++            boardImage = ImageIO.read(getClass().getResourceAsStream("/img/board.gif"));
++            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/img/HinhNen/backgroundboard.jpg"));// Sử dụng "/" để chỉ đường dẫn từ thư mục gốc
+             if (boardImage == null) {
+                 System.out.println("Hình ảnh bàn cờ không thể tải!");
+             }
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
++
+     }
+     public List<Piece> getAllPieces() {
+         List<Piece> pieces = new ArrayList<>();
+@@ -315,16 +325,25 @@
+     protected void paintComponent(Graphics g) {
+         super.paintComponent(g);
+ 
+-        // Vẽ hình ảnh bàn cờ
++        // Tính toán vị trí vẽ bàn cờ sao cho nó nằm chính giữa màn hình
++        int x = (getWidth() - boardWidth * cellSize) / 2;
++        int y = (getHeight() - boardHeight * cellSize) / 2;
++
++        // Vẽ hình nền của bàn cờ
++        if (backgroundImage != null) {
++            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null); // Vẽ hình nền nền cho bàn cờ
++        }
++
++        // Vẽ hình ảnh bàn cờ lên chính giữa màn hình
+         if (boardImage != null) {
+-            g.drawImage(boardImage, 0, 0, boardWidth * cellSize, boardHeight * cellSize, this);
++            g.drawImage(boardImage, x, y, boardWidth * cellSize, boardHeight * cellSize, null); // Vẽ bàn cờ vào vị trí căn giữa
+         }
+ 
+         // Nếu có quân cờ được chọn, vẽ dấu chấm vàng và các nước đi hợp lệ
+         if (selectedPiece != null) {
+             // Vẽ dấu chấm vàng cho quân cờ được chọn
+             g.setColor(Color.YELLOW);
+-            g.fillOval(mouseX - cellSize / 4, mouseY - cellSize / 4, cellSize / 2, cellSize / 2);
++            g.fillOval(mouseX - cellSize / 4 + x, mouseY - cellSize / 4 + y, cellSize / 2, cellSize / 2);
+ 
+             // Vẽ các nước đi hợp lệ
+             List<int[]> validMoves = selectedPiece.getValidMoves();
+@@ -332,13 +351,13 @@
+             for (int[] move : validMoves) {
+                 int validX = move[0];
+                 int validY = move[1];
+-                g.fillRect(validX * cellSize + 10, validY * cellSize + 10, cellSize - 20, cellSize - 20); // Vẽ ô cho nước đi hợp lệ
++                g.fillRect(validX * cellSize + x + 10, validY * cellSize + y + 10, cellSize - 20, cellSize - 20); // Vẽ ô cho nước đi hợp lệ
+             }
+         }
+ 
+-        // Vẽ các quân cờ
++        // Vẽ các quân cờ lên chính giữa màn hình
+         for (Piece piece : pieces) {
+-            piece.draw(g, cellSize);
++            piece.draw(g, cellSize, x, y); // Đảm bảo vẽ quân cờ vào vị trí chính xác với offset
+         }
+     }
+ 
+Index: chess/src/quanco/chot.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package quanco;\r\n\r\nimport java.awt.Graphics;\r\nimport javax.swing.ImageIcon;\r\nimport java.util.List;\r\n\r\npublic class chot extends Piece {\r\n    private ImageIcon icon;\r\n\r\n    public chot(int x, int y, boolean isRed, List<Piece> pieces) {\r\n        super(x, y, isRed, pieces); // Gọi constructor của lớp cha\r\n        icon = new ImageIcon(getClass().getClassLoader().getResource(isRed ? \"img/chotdo.gif\" : \"img/chotden.gif\"));\r\n    }\r\n\r\n    @Override\r\n    public boolean isValidMove(int newX, int newY) {\r\n        // Nếu quân cờ đang ở phía trên sông (y < 5)\r\n        if (!isRed) { // Quân đen\r\n            if (y < 5) {\r\n                return (newX == x && newY == y + 1);\r\n            } else {\r\n                return (newX == x && newY == y + 1) || (Math.abs(newX - x) == 1 && newY == y);\r\n            }\r\n        } else { // Quân đỏ\r\n            if (y > 4) {\r\n                return (newX == x && newY == y - 1);\r\n            } else {\r\n                return (newX == x && newY == y - 1) || (Math.abs(newX - x) == 1 && newY == y);\r\n            }\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void draw(Graphics g, int cellSize) {\r\n        int imageWidth = icon.getIconWidth();\r\n        int imageHeight = icon.getIconHeight();\r\n\r\n        int drawX = x * cellSize + (cellSize - imageWidth) / 2;\r\n        int drawY = y * cellSize + (cellSize - imageHeight) / 2;\r\n\r\n        icon.paintIcon(null, g, drawX, drawY);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/chess/src/quanco/chot.java b/chess/src/quanco/chot.java
+--- a/chess/src/quanco/chot.java	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/chess/src/quanco/chot.java	(date 1731421661266)
+@@ -6,6 +6,8 @@
+ 
+ public class chot extends Piece {
+     private ImageIcon icon;
++    private int boardX;
++    private int boardY;
+ 
+     public chot(int x, int y, boolean isRed, List<Piece> pieces) {
+         super(x, y, isRed, pieces); // Gọi constructor của lớp cha
+@@ -31,12 +33,13 @@
+     }
+ 
+     @Override
+-    public void draw(Graphics g, int cellSize) {
++    public void draw(Graphics g, int cellSize,int boardX, int boardY) {
+         int imageWidth = icon.getIconWidth();
+         int imageHeight = icon.getIconHeight();
+ 
+-        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
+-        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
++        // Cập nhật vị trí vẽ quân cờ sao cho căn giữa bàn cờ
++        int drawX = (x * cellSize) + (cellSize - imageWidth) / 2 + boardX; // Cộng boardX
++        int drawY = (y * cellSize) + (cellSize - imageHeight) / 2 + boardY; // Cộng boardY
+ 
+         icon.paintIcon(null, g, drawX, drawY);
+     }
+Index: doancn.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doancn.iml b/doancn.iml
+new file mode 100644
+--- /dev/null	(date 1731416841867)
++++ b/doancn.iml	(date 1731416841867)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/chess/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5bf479a0-f22a-4493-92c7-6a033776c532\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/doancn.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/src/AI/Board.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/chess/src/AI/Board.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/src/FunctionPanel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/chess/src/FunctionPanel.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/chess/src/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/src/StartWindow.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/chess/src/StartWindow.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/src/sounds/BackgroundMusicPlayer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/chess/src/sounds/BackgroundMusicPlayer.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/AI/Board$1.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/AI/Board$1.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/AI/Board$2.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/AI/Board$2.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/AI/Board$MovePair.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/AI/Board$MovePair.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/AI/Board.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/AI/Board.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel$1.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel$1.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel$2.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel$2.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel$3.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel$3.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel$4.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/FunctionPanel.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/Main.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/Main.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/StartWindow.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/StartWindow.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/sounds/BackgroundMusicPlayer.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/sounds/BackgroundMusicPlayer.class\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\"><![CDATA[{\r\n  \"lastFilter\": {\r\n    \"state\": \"OPEN\",\r\n    \"assignee\": \"SeamussK\"\r\n  }\r\n}]]></component>\r\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\r\n  \"selectedUrlAndAccountId\": {\r\n    \"url\": \"https://github.com/binh2401/doancn.git\",\r\n    \"accountId\": \"f1471a14-9cc3-47a2-b4b9-accb54996364\"\r\n  }\r\n}]]></component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"customColor\": \"\",\r\n  \"associatedIndex\": 6\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2oamxtl7FXltohvLbrOuQz7YvX9\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.Client 2.executor\": \"Run\",\r\n    \"Application.Client.executor\": \"Run\",\r\n    \"Application.Server.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"kotlin-language-version-configured\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"Application.Client\">\r\n    <configuration name=\"Client 2\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Client\" />\r\n      <module name=\"doancn\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Client\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Client\" />\r\n      <module name=\"doancn\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"network.Server\" />\r\n      <module name=\"doancn\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.Server\" />\r\n      <item itemvalue=\"Application.Client\" />\r\n      <item itemvalue=\"Application.Client 2\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5bf479a0-f22a-4493-92c7-6a033776c532\" name=\"Changes\" comment=\"\" />\r\n      <created>1731116312351</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1731116312351</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 356de337b8175bd61bc82678ad64a602244e1307)
++++ b/.idea/workspace.xml	(date 1731511916198)
+@@ -4,26 +4,30 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="5bf479a0-f22a-4493-92c7-6a033776c532" name="Changes" comment="">
++    <list default="true" id="015c07c8-ad86-41f1-9c38-d4fe9ce57c36" name="Changes" comment="">
+       <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/chess/src/AI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/AI/Board.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/src/FunctionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/FunctionPanel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/Main.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/src/StartWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/StartWindow.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/src/sounds/BackgroundMusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/sounds/BackgroundMusicPlayer.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/chess/src/quanco/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/King.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/chess/src/quanco/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/Piece.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/chess/src/quanco/chot.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/chot.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/chess/src/quanco/ma.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/ma.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/chess/src/quanco/phao.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/phao.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/chess/src/quanco/si.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/si.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/chess/src/quanco/tuong.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/tuong.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/chess/src/quanco/xe.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/quanco/xe.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board$1.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board$2.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board$MovePair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board$MovePair.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/doancn/AI/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/AI/Board.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$1.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$2.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$3.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel$4.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/FunctionPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/FunctionPanel.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/Main.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/StartWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/StartWindow.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/sounds/BackgroundMusicPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/sounds/BackgroundMusicPlayer.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/King.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/Piece.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/chot.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/ma.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/phao.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/si.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/tuong.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/quanco/xe.class" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -33,38 +37,37 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+-  "lastFilter": {
+-    "state": "OPEN",
+-    "assignee": "SeamussK"
++  <component name="GitHubPullRequestSearchHistory">{
++  &quot;lastFilter&quot;: {
++    &quot;state&quot;: &quot;OPEN&quot;,
++    &quot;assignee&quot;: &quot;SeamussK&quot;
+   }
+-}]]></component>
+-  <component name="GithubPullRequestsUISettings"><![CDATA[{
+-  "selectedUrlAndAccountId": {
+-    "url": "https://github.com/binh2401/doancn.git",
+-    "accountId": "f1471a14-9cc3-47a2-b4b9-accb54996364"
++}</component>
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/binh2401/doancn.git&quot;,
++    &quot;accountId&quot;: &quot;f1471a14-9cc3-47a2-b4b9-accb54996364&quot;
+   }
+-}]]></component>
+-  <component name="ProjectColorInfo"><![CDATA[{
+-  "customColor": "",
+-  "associatedIndex": 6
+-}]]></component>
+-  <component name="ProjectId" id="2oamxtl7FXltohvLbrOuQz7YvX9" />
++}</component>
++  <component name="ProjectColorInfo">{
++  &quot;customColor&quot;: &quot;&quot;,
++  &quot;associatedIndex&quot;: 6
++}</component>
++  <component name="ProjectId" id="2okc4IyF4nFxBFogjcZw5khSFad" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.Client 2.executor": "Run",
+-    "Application.Client.executor": "Run",
+-    "Application.Server.executor": "Run",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "main",
+-    "kotlin-language-version-configured": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
++    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RunManager" selected="Application.Client">
+     <configuration name="Client 2" type="Application" factoryName="Application">
+       <option name="MAIN_CLASS_NAME" value="Client" />
+@@ -96,11 +99,11 @@
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+-      <changelist id="5bf479a0-f22a-4493-92c7-6a033776c532" name="Changes" comment="" />
+-      <created>1731116312351</created>
++      <changelist id="015c07c8-ad86-41f1-9c38-d4fe9ce57c36" name="Changes" comment="" />
++      <created>1731416824428</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+-      <updated>1731116312351</updated>
++      <updated>1731416824428</updated>
+     </task>
+     <servers />
+   </component>

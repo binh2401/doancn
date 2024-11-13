@@ -46,13 +46,13 @@ public class ma extends Piece {
     }
 
     @Override
-    public void draw(Graphics g, int cellSize) {
+    public void draw(Graphics g, int cellSize,int boardX, int boardY) {
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
 
         // Tính toán tọa độ để căn giữa quân cờ trong ô
-        int drawX = x * cellSize + (cellSize - imageWidth) / 2;
-        int drawY = y * cellSize + (cellSize - imageHeight) / 2;
+        int drawX = (x * cellSize) + (cellSize - imageWidth) / 2 + boardX; // Cộng boardX
+        int drawY = (y * cellSize) + (cellSize - imageHeight) / 2 + boardY; // Cộng boardY
 
         icon.paintIcon(null, g, drawX, drawY);
     }
