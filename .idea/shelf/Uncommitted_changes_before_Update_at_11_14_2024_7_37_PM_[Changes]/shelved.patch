@@ -1,0 +1,251 @@
+Index: .idea/libraries/mysql_connector_j_9_1.xml
+===================================================================
+diff --git a/.idea/libraries/mysql_connector_j_9_1.xml b/.idea/libraries/mysql_connector_j_9_1.xml
+deleted file mode 100644
+--- a/.idea/libraries/mysql_connector_j_9_1.xml	(revision 65f8395e69ece7f7a1b24b99c789ee4ac7ab5577)
++++ /dev/null	(revision 65f8395e69ece7f7a1b24b99c789ee4ac7ab5577)
+@@ -1,21 +0,0 @@
+-<component name="libraryTable">
+-  <library name="mysql-connector-j-9.1">
+-    <CLASSES>
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES>
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/build/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/demo/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/generated/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/legacy/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/main/core-api/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/main/core-impl/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/main/protocol-impl/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/main/user-api/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/main/user-impl/java" />
+-      <root url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0/src/test/java" />
+-    </SOURCES>
+-    <jarDirectory url="file://$USER_HOME$/Downloads/mysql-connector-j-9.1.0" recursive="false" />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"905d6d6f-785c-423d-80e1-651da732fde5\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_1.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/doancn.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/Client.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/ClientHandler.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/GameRoom.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/Server.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/shelved.patch\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM__Changes_.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_36_SA_[Changes]/Client.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_36_SA_[Changes]/ClientHandler.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_36_SA_[Changes]/GameRoom.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_36_SA_[Changes]/Server.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_37_SA_[Changes]/shelved.patch\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_37_SA__Changes_.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/.idea/modules.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/src/network/DatabaseManager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/chess/src/network/DatabaseManager.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/AI/AIPlayer$MoveEvaluation.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/AI/AIPlayer.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/AI/Board$1.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/AI/Board$2.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/AI/Board$MovePair.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/AI/Board.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/AI/Move$Position.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/AI/Move.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/Client.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/FunctionPanel$1.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/FunctionPanel$2.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/FunctionPanel$3.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/FunctionPanel.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/Main.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/StartWindow.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/auth/LoginWindow$1.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/auth/LoginWindow.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/auth/RegisterWindow$1.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/auth/RegisterWindow.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/Game-co-tuong-1-1.jpg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/avtnguoichoi.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/backgroundboard.jpg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/board1.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/board2.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/btn.jpg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/btn2.jpg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/btn3.jpg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/choi-co-tuong-voi-may.jpg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/hinhNenBanCo.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/hinhnencotuong.jpg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/khungtennguoichoi.jpg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/HinhNen/th.jpeg\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/Maden.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/Mado.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/Tuongden.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/Tuongdo.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/Xeden.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/Xedo.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/bkm.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/board.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/chotden.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/chotdo.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/phaodo.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/phoaden.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/rkm.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/siden.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/sido.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/vua.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/img/vuado.gif\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/network/ClientHandler.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/network/DatabaseManager.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/network/GameRoom.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/network/Server.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/quanco/King.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/quanco/Piece.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/quanco/chot.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/quanco/ma.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/quanco/phao.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/quanco/si.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/quanco/tuong.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/quanco/xe.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/BackgroundMusicPlayer.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/SoundPlayer.class\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/capture.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/capture2.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/check.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/check2.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/click.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/draw.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/illegal.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/loss.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/move.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/move2.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/newgame.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/nhacNen.mp3\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/nhacNen.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/nhacnen2.mp3\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/nhacnen2.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/chess/target/classes/sounds/win.wav\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/doancn/network/DatabaseManager.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/doancn/network/DatabaseManager.class\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\"><![CDATA[{\r\n  \"lastFilter\": {\r\n    \"state\": \"OPEN\",\r\n    \"assignee\": \"binh2401\"\r\n  }\r\n}]]></component>\r\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\r\n  \"selectedUrlAndAccountId\": {\r\n    \"url\": \"https://github.com/binh2401/doancn.git\",\r\n    \"accountId\": \"df78a172-c60b-4e92-89a6-55dc890ff87f\"\r\n  }\r\n}]]></component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"customColor\": \"\",\r\n  \"associatedIndex\": 6\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2ooDVTmIAKbIN0dLZLEuBUHPzkE\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.DatabaseManager.executor\": \"Run\",\r\n    \"Application.Main.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/PC/Downloads/mysql-connector-j-9.1.0\",\r\n    \"project.structure.last.edited\": \"Libraries\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.2\",\r\n    \"settings.editor.selected.configurable\": \"preferences.lookFeel\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"Application.DatabaseManager\">\r\n    <configuration name=\"DatabaseManager\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"network.DatabaseManager\" />\r\n      <module name=\"doancn\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"network.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n        <option name=\"com.soywiz.korge.intellij.UpdateResourceBeforeRunTask\" enabled=\"false\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"doancn\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n        <option name=\"com.soywiz.korge.intellij.UpdateResourceBeforeRunTask\" enabled=\"false\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.DatabaseManager\" />\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"905d6d6f-785c-423d-80e1-651da732fde5\" name=\"Changes\" comment=\"\" />\r\n      <created>1731527058826</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1731527058826</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 65f8395e69ece7f7a1b24b99c789ee4ac7ab5577)
++++ b/.idea/workspace.xml	(date 1731537648082)
+@@ -4,109 +4,22 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="905d6d6f-785c-423d-80e1-651da732fde5" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_1.xml" afterDir="false" />
++    <list default="true" id="f63223bc-1ff4-42fe-967e-a4295610d8ac" name="Changes" comment="">
+       <change afterPath="$PROJECT_DIR$/doancn.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/Client.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/ClientHandler.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/GameRoom.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/Server.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM_[Changes]/shelved.patch" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14_2024_1_58_AM__Changes_.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_36_SA_[Changes]/Client.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_36_SA_[Changes]/ClientHandler.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_36_SA_[Changes]/GameRoom.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_36_SA_[Changes]/Server.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_37_SA_[Changes]/shelved.patch" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2024_2_37_SA__Changes_.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/.idea/modules.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/src/network/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/network/DatabaseManager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/AI/AIPlayer$MoveEvaluation.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/AI/AIPlayer.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/AI/Board$1.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/AI/Board$2.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/AI/Board$MovePair.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/AI/Board.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/AI/Move$Position.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/AI/Move.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/Client.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/FunctionPanel$1.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/FunctionPanel$2.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/FunctionPanel$3.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/FunctionPanel.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/Main.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/StartWindow.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/auth/LoginWindow$1.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/auth/LoginWindow.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/auth/RegisterWindow$1.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/auth/RegisterWindow.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/Game-co-tuong-1-1.jpg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/avtnguoichoi.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/backgroundboard.jpg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/board1.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/board2.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/btn.jpg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/btn2.jpg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/btn3.jpg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/choi-co-tuong-voi-may.jpg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/hinhNenBanCo.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/hinhnencotuong.jpg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/khungtennguoichoi.jpg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/HinhNen/th.jpeg" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/Maden.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/Mado.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/Tuongden.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/Tuongdo.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/Xeden.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/Xedo.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/bkm.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/board.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/chotden.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/chotdo.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/phaodo.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/phoaden.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/rkm.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/siden.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/sido.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/vua.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/img/vuado.gif" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/network/ClientHandler.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/network/DatabaseManager.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/network/GameRoom.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/network/Server.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/quanco/King.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/quanco/Piece.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/quanco/chot.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/quanco/ma.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/quanco/phao.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/quanco/si.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/quanco/tuong.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/quanco/xe.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/BackgroundMusicPlayer.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/SoundPlayer.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/capture.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/capture2.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/check.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/check2.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/click.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/draw.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/illegal.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/loss.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/move.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/move2.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/newgame.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/nhacNen.mp3" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/nhacNen.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/nhacnen2.mp3" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/nhacnen2.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/chess/target/classes/sounds/win.wav" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/doancn/network/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/doancn/network/DatabaseManager.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_1.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Class" />
++      </list>
++    </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -127,7 +40,7 @@
+   "customColor": "",
+   "associatedIndex": 6
+ }]]></component>
+-  <component name="ProjectId" id="2ooDVTmIAKbIN0dLZLEuBUHPzkE" />
++  <component name="ProjectId" id="2ooPWy0goJNCV1HJYwmsyDZVG6M" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+@@ -135,56 +48,20 @@
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
+     "Application.DatabaseManager.executor": "Run",
+-    "Application.Main.executor": "Run",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "git-widget-placeholder": "main",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/PC/Downloads/mysql-connector-j-9.1.0",
+-    "project.structure.last.edited": "Libraries",
+-    "project.structure.proportion": "0.15",
+-    "project.structure.side.proportion": "0.2",
+-    "settings.editor.selected.configurable": "preferences.lookFeel"
++    "kotlin-language-version-configured": "true"
+   }
+ }]]></component>
+-  <component name="RunManager" selected="Application.DatabaseManager">
+-    <configuration name="DatabaseManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="network.DatabaseManager" />
+-      <module name="doancn" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="network.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+-      </method>
+-    </configuration>
+-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="Main" />
+-      <module name="doancn" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+-      </method>
+-    </configuration>
+-    <recent_temporary>
+-      <list>
+-        <item itemvalue="Application.DatabaseManager" />
+-        <item itemvalue="Application.Main" />
+-      </list>
+-    </recent_temporary>
+-  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+-      <changelist id="905d6d6f-785c-423d-80e1-651da732fde5" name="Changes" comment="" />
+-      <created>1731527058826</created>
++      <changelist id="f63223bc-1ff4-42fe-967e-a4295610d8ac" name="Changes" comment="" />
++      <created>1731532990976</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+-      <updated>1731527058826</updated>
++      <updated>1731532990976</updated>
+     </task>
+     <servers />
+   </component>
+Index: doancn.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/doancn.iml b/doancn.iml
+new file mode 100644
+--- /dev/null	(date 1731533004212)
++++ b/doancn.iml	(date 1731533004212)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/chess/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file

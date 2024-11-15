@@ -1,6 +1,8 @@
 import AI.Board;
 import AI.FunctionPanel;
 import auth.StartWindow;
+import dao.UserDAO;
+import model.User;
 import network.Client;
 
 import javax.swing.*;
@@ -12,6 +14,11 @@ public class Main {
     private StartWindow startWindow;
 
     public static void main(String[] args) {
+        User newUser = new User(); // Tạo User mới
+        UserDAO userDAO = new UserDAO();
+        userDAO.saveUser(newUser); // Lưu User vào cơ sở dữ liệu
+
+        System.out.println("User created: " + newUser.getUsername());
         // Khởi chạy ứng dụng bằng cách gọi phương thức khởi tạo GUI
         SwingUtilities.invokeLater(() -> {
             Main main = new Main(); // Khởi tạo Main

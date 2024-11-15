@@ -7,15 +7,15 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
     public static void main(String[] args) {
-        // Kết nối tới MySQL với tài khoản root (hoặc tài khoản có quyền admin)
-        String rootUrl = "jdbc:mysql://localhost:3306/"; // Không cần chỉ định database
-        String rootUser = "root"; // Tài khoản admin mặc định
-        String rootPassword = ""; // Mật khẩu mặc định (trống với XAMPP)
+        // Kết nối tới MySQL trên Laragon với tài khoản root
+        String rootUrl = "jdbc:mysql://localhost:3306/"; // Nếu Laragon dùng cổng khác, thêm ?serverTimezone=UTC vào cuối URL
+        String rootUser = "root"; // Tài khoản mặc định của Laragon
+        String rootPassword = ""; // Mật khẩu mặc định của Laragon (trống)
 
         // Tên user và database sẽ được tạo
         String newUsername = "new_user";
         String newPassword = "password123";
-        String newDatabase = "new_database";
+        String newDatabase = "cheessss";
 
         try (Connection connection = DriverManager.getConnection(rootUrl, rootUser, rootPassword);
              Statement statement = connection.createStatement()) {
