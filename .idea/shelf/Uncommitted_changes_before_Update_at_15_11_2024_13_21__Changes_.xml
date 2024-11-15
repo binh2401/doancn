@@ -1,0 +1,29 @@
+<changelist name="Uncommitted_changes_before_Update_at_15_11_2024_13_21_[Changes]" date="1731651768897" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_11_2024_13_21_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 15/11/2024 13:21 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/doancn/network/Client.class" />
+    <option name="AFTER_PATH" value="out/production/doancn/network/Client.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_11_2024_13_21_[Changes]/Client.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/doancn/network/Server.class" />
+    <option name="AFTER_PATH" value="out/production/doancn/network/Server.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_11_2024_13_21_[Changes]/Server.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/doancn/auth/StartWindow.class" />
+    <option name="AFTER_PATH" value="out/production/doancn/auth/StartWindow.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_11_2024_13_21_[Changes]/StartWindow.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/doancn/network/ClientHandler.class" />
+    <option name="AFTER_PATH" value="out/production/doancn/network/ClientHandler.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_11_2024_13_21_[Changes]/ClientHandler.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/doancn/network/GameRoom.class" />
+    <option name="AFTER_PATH" value="out/production/doancn/network/GameRoom.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_11_2024_13_21_[Changes]/GameRoom.class" />
+  </binary>
+</changelist>

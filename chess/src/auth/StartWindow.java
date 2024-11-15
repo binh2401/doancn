@@ -236,5 +236,34 @@ public class StartWindow extends JFrame {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
     }
+    public void notifyOpponentFound() {
+        // Cập nhật giao diện khi tìm thấy đối thủ
+        JOptionPane.showMessageDialog(this, "Đối thủ đã được tìm thấy!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+        // Kích hoạt lại nút và thay đổi tên nút
+        startButton.setEnabled(true);
+        startButton.setText("Chơi ngay");
+
+        // Bắt đầu trò chơi
+        startGame();
+    }
+    public void startGame() {
+        System.out.println("Bắt đầu trò chơi!");
+
+        // Logic bắt đầu trò chơi
+        // Ví dụ: chuyển sang cửa sổ chơi hoặc khởi tạo một game room mới nếu chơi đối kháng với người khác
+
+        // Bạn có thể thêm mã để chuyển sang giao diện chính của trò chơi
+        // Giả sử bạn chuyển sang JFrame cho phần chơi với đối thủ
+        // Đây chỉ là ví dụ minh họa
+        JFrame gameFrame = new JFrame("Trò chơi Cờ Tướng");
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setSize(800, 600);
+        gameFrame.setVisible(true);
+
+        // Ẩn cửa sổ start
+        this.setVisible(false);
+    }
+
 
 }

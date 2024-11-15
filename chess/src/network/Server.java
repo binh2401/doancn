@@ -1,8 +1,13 @@
 package network;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.UUID;
 
 public class Server {
     private static final int PORT = 12345;
@@ -27,6 +32,13 @@ public class Server {
         }
     }
 
+    public static GameRoom createNewRoom(ClientHandler client) {
+        String roomId = UUID.randomUUID().toString(); // Tạo ID phòng duy nhất
+        GameRoom newRoom = new GameRoom(roomId, client, null);  // Tạo phòng mới với chỉ một player
+        rooms.put(roomId, newRoom);
+        return newRoom;
+    }
+
     // Tìm đối thủ và tạo phòng chơi
     public static synchronized void findOpponent(ClientHandler client) {
         System.out.println("Searching for opponent for client: " + client);  // Log khi server bắt đầu tìm đối thủ
@@ -42,14 +54,15 @@ public class Server {
             // Thông báo cho cả hai client về phòng chơi và bắt đầu trò chơi
             client.setRoom(room);
             opponent.setRoom(room);
-            client.sendMessage("GAME_START " + roomId);
-            opponent.sendMessage("GAME_START " + roomId);
+            client.sendMessage("GAME_START RED " + room.getBoardState());
+            opponent.sendMessage("GAME_START BLACK " + room.getBoardState());
+            room.startGame(); // Bắt đầu trò chơi
             System.out.println("Game started in room: " + roomId);  // Log khi phòng được tạo và trò chơi bắt đầu
         } else {
             // Nếu không có đối thủ, thêm vào hàng đợi
             waitingClients.add(client);
             client.sendMessage("WAIT_FOR_OPPONENT");
-            System.out.println("network.Client added to waiting list: " + client);
+            System.out.println("Client added to waiting list: " + client);
         }
     }
 
@@ -63,12 +76,14 @@ public class Server {
 
                 // Xử lý nước đi và gửi cho đối thủ
                 room.broadcastMove(move, sender);  // Gửi nước đi cho đối thủ
+                System.out.println("Move handled for room: " + roomId + " Move: " + move);
 
                 // Đổi lượt cho người chơi
                 room.switchTurn();
             } else {
                 // Gửi thông báo yêu cầu chờ lượt
                 sender.sendMessage("WAIT_FOR_YOUR_TURN");
+                System.out.println("Client tried to move out of turn: " + sender);
             }
         }
     }
