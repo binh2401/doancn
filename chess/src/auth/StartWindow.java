@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import AI.Board;
 import AI.FunctionPanel;
+import model.UserManager;
 import network.Client;
 import sounds.BackgroundMusicPlayer;
 
@@ -22,7 +23,7 @@ public class StartWindow extends JFrame {
     private BackgroundMusicPlayer musicPlayer; // Biến cho lớp âm thanh
     private Client client;
     private JFrame frame; // Khai báo frame cho trò chơi AI
-
+    private UserManager userManager;
     private boolean isAIEnabled;
     private String difficulty;
 
@@ -125,8 +126,10 @@ public class StartWindow extends JFrame {
 
         // Tương tự cho nút đăng ký
         registerButton.addActionListener(e -> {
-            // Mở cửa sổ đăng ký
-            new auth.RegisterWindow().setVisible(true);
+            // Mở cửa sổ đăng ký và truyền userManager
+            UserManager userManager = new UserManager();
+            RegisterWindow registerWindow = new RegisterWindow(userManager);
+            registerWindow.setVisible(true);
         });
 
         // Thêm nút vào panel
@@ -247,20 +250,27 @@ public class StartWindow extends JFrame {
         // Bắt đầu trò chơi
         startGame();
     }
+
     public void startGame() {
-        System.out.println("Bắt đầu trò chơi!");
+        if (frame == null) {
+            frame = new JFrame("Đồ án cờ tướng"); // Khởi tạo frame nếu chưa có
+            frame.setLayout(new BorderLayout());
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } else {
+            frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
+        }
 
-        // Logic bắt đầu trò chơi
-        // Ví dụ: chuyển sang cửa sổ chơi hoặc khởi tạo một game room mới nếu chơi đối kháng với người khác
+        // Tạo đối tượng Board và FunctionPanel
+        Board board = new Board(false, difficulty); // Không có AI, độ khó từ tham số
+        FunctionPanel functionPanel = new FunctionPanel(board);
 
-        // Bạn có thể thêm mã để chuyển sang giao diện chính của trò chơi
-        // Giả sử bạn chuyển sang JFrame cho phần chơi với đối thủ
-        // Đây chỉ là ví dụ minh họa
-        JFrame gameFrame = new JFrame("Trò chơi Cờ Tướng");
-        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize(800, 600);
-        gameFrame.setVisible(true);
+        // Thêm các thành phần vào JFrame
+        frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
+        frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng bên phải
 
+        // Tự động điều chỉnh kích thước cửa sổ
+        frame.pack();
+        frame.setVisible(true); // Hiển thị cửa sổ chính
         // Ẩn cửa sổ start
         this.setVisible(false);
     }

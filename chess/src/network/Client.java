@@ -3,6 +3,8 @@ package network;
 import java.io.*;
 import java.net.*;
 import auth.StartWindow;
+import dao.UserDAO;
+import model.User;
 
 import javax.swing.*;
 
@@ -15,7 +17,8 @@ public class Client {
     private String roomId;
     private boolean isGameStarted;
     private Runnable onOpponentFound; // Khai báo biến onOpponentFound
-
+    private String username;
+    private String password;
     // Phương thức khởi tạo để bắt đầu kết nối
     public void start() {
         try {
@@ -124,6 +127,7 @@ public class Client {
 
     // Phương thức main để chạy Client
     public static void main(String[] args) {
+
         Client client = new Client();  // Tạo đối tượng Client
         client.start();  // Bắt đầu kết nối và khởi tạo mọi thứ
     }

@@ -6,7 +6,27 @@ import util.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 public class UserDAO {
+    private void createTableIfNotExists() {
+        String createTableSQL = """
+                CREATE TABLE IF NOT EXISTS Users (
+                    id VARCHAR(255) PRIMARY KEY,
+                    username VARCHAR(255) NOT NULL,
+                    gamesPlayed INT DEFAULT 0,
+                    gamesWon INT DEFAULT 0
+                )
+                """;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement statement = connection.createStatement()) {
+            statement.execute(createTableSQL);
+            System.out.println("Checked and ensured table Users exists.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void saveUser(User user) {
         String sql = "INSERT INTO Users (id, username, gamesPlayed, gamesWon) VALUES (?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();

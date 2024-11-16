@@ -1,10 +1,12 @@
 package auth;
 
+import util.DatabaseConnection;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.sql.*;
 public class LoginWindow extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -55,9 +57,24 @@ public class LoginWindow extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    // Giả sử phương thức này kiểm tra thông tin đăng nhập (có thể thay thế bằng cách kết nối database)
+    // Phương thức kiểm tra thông tin đăng nhập từ cơ sở dữ liệu
     private boolean authenticate(String username, String password) {
-        // Kiểm tra thông tin tài khoản mẫu (thay thế bằng kiểm tra database thực tế)
-        return "user".equals(username) && "password".equals(password);
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            // Kiểm tra nếu có dữ liệu trả về, tức là tài khoản hợp lệ
+            return rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 }

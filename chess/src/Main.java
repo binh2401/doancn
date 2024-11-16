@@ -14,11 +14,8 @@ public class Main {
     private StartWindow startWindow;
 
     public static void main(String[] args) {
-        User newUser = new User(); // Tạo User mới
-        UserDAO userDAO = new UserDAO();
-        userDAO.saveUser(newUser); // Lưu User vào cơ sở dữ liệu
 
-        System.out.println("User created: " + newUser.getUsername());
+
         // Khởi chạy ứng dụng bằng cách gọi phương thức khởi tạo GUI
         SwingUtilities.invokeLater(() -> {
             Main main = new Main(); // Khởi tạo Main
@@ -43,25 +40,7 @@ public class Main {
     }
 
     public void startGameForPlayer(String difficulty) {
-        if (frame == null) {
-            frame = new JFrame("Đồ án cờ tướng"); // Khởi tạo frame nếu chưa có
-            frame.setLayout(new BorderLayout());
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        } else {
-            frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
-        }
 
-        // Tạo đối tượng Board và FunctionPanel
-        Board board = new Board(false, difficulty); // Không có AI, độ khó từ tham số
-        FunctionPanel functionPanel = new FunctionPanel(board);
-
-        // Thêm các thành phần vào JFrame
-        frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
-        frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng bên phải
-
-        // Tự động điều chỉnh kích thước cửa sổ
-        frame.pack();
-        frame.setVisible(true); // Hiển thị cửa sổ chính
     }
 
     public void startGameForAI() {
