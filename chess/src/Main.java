@@ -1,7 +1,7 @@
 import AI.Board;
 import AI.FunctionPanel;
 import auth.StartWindow;
-import dao.UserDAO;
+
 import model.User;
 import network.Client;
 

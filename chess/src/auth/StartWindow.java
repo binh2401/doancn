@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import AI.Board;
 import AI.FunctionPanel;
-import model.UserManager;
+import dao.UserManager;
 import network.Client;
 import sounds.BackgroundMusicPlayer;
 

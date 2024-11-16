@@ -3,7 +3,7 @@ package network;
 import java.io.*;
 import java.net.*;
 import auth.StartWindow;
-import dao.UserDAO;
+
 import model.User;
 
 import javax.swing.*;

@@ -1,12 +1,10 @@
 package auth;
 
 import model.User;
-import model.UserManager;
+import dao.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class RegisterWindow extends JFrame {
     private JTextField usernameField;
