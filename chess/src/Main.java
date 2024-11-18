@@ -78,9 +78,9 @@ public class Main {
                 System.out.println("Người chơi đã hủy chọn độ khó.");
                 return; // Nếu người chơi hủy chọn, kết thúc phương thức
         }
-
+        network.Client client = new network.Client();
         // Tạo đối tượng Board với độ khó đã chọn
-        Board board = new Board(true, difficulty); // Truyền thông tin độ khó vào Board
+        Board board = new Board(true, difficulty,client); // Truyền thông tin độ khó vào Board
         FunctionPanel functionPanel = new FunctionPanel(board); // Tạo AI.FunctionPanel
 
         // Thêm các thành phần vào JFrame

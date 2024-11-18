@@ -90,12 +90,7 @@ public class Client {
     }
 
     // Cập nhật bàn cờ khi nhận được thông điệp từ server
-    private void updateBoard(String move) {
-        System.out.println("Updating board with move: " + move);
-        SwingUtilities.invokeLater(() -> {
-            startWindow.updateBoard(move); // Cập nhật bàn cờ trong StartWindow
-        });
-    }
+
 
     // Gửi thông điệp đến server
     public void sendMessage(String message) {
@@ -104,9 +99,10 @@ public class Client {
             out.println(message);
             out.flush();
         } else {
-            System.out.println("Out stream is null, cannot send message.");
+            System.err.println("Out stream is null. Make sure the client is connected to the server.");
         }
     }
+
 
     // Tìm đối thủ
     public void findOpponent() {
@@ -137,5 +133,11 @@ public class Client {
         if (onOpponentFound != null) {
             onOpponentFound.run(); // Thực thi callback khi đối thủ được tìm thấy
         }
+    }
+    private void updateBoard(String move) {
+        System.out.println("Updating board with move: " + move);
+        SwingUtilities.invokeLater(() -> {
+            startWindow.updateBoard(move); // Cập nhật bàn cờ trong StartWindow
+        });
     }
 }

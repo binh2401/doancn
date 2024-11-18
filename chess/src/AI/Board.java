@@ -1,5 +1,6 @@
 package AI;
 
+import network.Client;
 import quanco.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -31,9 +32,11 @@ public class Board extends JPanel {
     private boolean isAIEnabled;
     private Piece[][] board;
     private boolean gameOver = false;
+    private Client client;
 
 
-    public Board(boolean isAIEnabled,String difficulty) {
+    public Board(boolean isAIEnabled,String difficulty,Client client) {
+        this.client = client;
         this.isAIEnabled = isAIEnabled;
         board = new Piece[10][9];
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
@@ -138,7 +141,13 @@ public class Board extends JPanel {
                                 // Thực hiện di chuyển
                                 selectedPiece.setPosition(newX, newY);
 
+                                String moveData = "MOVE " + selectedPiece.getX() + " " + selectedPiece.getY() + " " + newX + " " + newY;
+                                client.sendMessage(moveData); // Giả sử `client` là đối tượng đang quản lý kết nối với server
+
+
                                 // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này
+
+
                                 if (isCheck(isRedTurn)) {
                                     // Nếu nước đi không thoát khỏi chiếu, hoàn tác di chuyển
                                     selectedPiece.setPosition(originalX, originalY);

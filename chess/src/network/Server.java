@@ -39,7 +39,6 @@ public class Server {
         return newRoom;
     }
 
-    // Tìm đối thủ và tạo phòng chơi
     public static synchronized void findOpponent(ClientHandler client) {
         System.out.println("Searching for opponent for client: " + client);  // Log khi server bắt đầu tìm đối thủ
 
@@ -56,6 +55,11 @@ public class Server {
             opponent.setRoom(room);
             client.sendMessage("GAME_START RED " + room.getBoardState());
             opponent.sendMessage("GAME_START BLACK " + room.getBoardState());
+
+            // Thông báo rằng đối thủ đã được tìm thấy
+            client.sendMessage("OPPONENT_FOUND");
+            opponent.sendMessage("OPPONENT_FOUND");
+
             room.startGame(); // Bắt đầu trò chơi
             System.out.println("Game started in room: " + roomId);  // Log khi phòng được tạo và trò chơi bắt đầu
         } else {
@@ -65,9 +69,8 @@ public class Server {
             System.out.println("Client added to waiting list: " + client);
         }
     }
-
     // Xử lý nước đi
-    public static synchronized void handleMove(String roomId, String move, ClientHandler sender) {
+    public static synchronized void handleMove(String roomId, String playerMove, ClientHandler sender) {
         GameRoom room = rooms.get(roomId);
         if (room != null) {
             // Kiểm tra xem có phải lượt của người chơi không
@@ -75,8 +78,8 @@ public class Server {
                     (sender == room.getPlayer2() && !room.isPlayer1Turn())) {
 
                 // Xử lý nước đi và gửi cho đối thủ
-                room.broadcastMove(move, sender);  // Gửi nước đi cho đối thủ
-                System.out.println("Move handled for room: " + roomId + " Move: " + move);
+                room.broadcastMove(playerMove, sender);  // Gửi nước đi cho đối thủ
+                System.out.println("Move handled for room: " + roomId + " Move: " + playerMove);
 
                 // Đổi lượt cho người chơi
                 room.switchTurn();

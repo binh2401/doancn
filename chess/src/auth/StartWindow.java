@@ -26,6 +26,8 @@ public class StartWindow extends JFrame {
     private UserManager userManager;
     private boolean isAIEnabled;
     private String difficulty;
+    private JButton avataname;
+
 
     // Constructor chỉ nhận client và không còn phương thức main
     public StartWindow(Client client) {
@@ -45,6 +47,7 @@ public class StartWindow extends JFrame {
             if (input == null) {
                 throw new IOException("Không tìm thấy hình ảnh: /img/HinhNen/choi-co-tuong-voi-may.jpg");
             }
+
             backgroundImage = ImageIO.read(input);
         } catch (IOException e) {
             System.out.println("Không thể tải hình ảnh nền");
@@ -59,6 +62,7 @@ public class StartWindow extends JFrame {
         title.setFont(new Font("Serif", Font.BOLD, 24));
         add(title, BorderLayout.NORTH);
 
+        avataname = createButtonWithBackground("/img/HinhNen/btn3.jpg","xin chao");
         // Khởi tạo các nút với văn bản và hình nền
         startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "play now");
 
@@ -74,6 +78,7 @@ public class StartWindow extends JFrame {
                 startButton.setText("Chơi ngay"); // Đổi lại văn bản
                 startButton.setEnabled(true); // Bật lại nút
                 musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
+                startGame();
                 setVisible(false); // Ẩn auth.StartWindow
             });
         });
@@ -226,7 +231,8 @@ public class StartWindow extends JFrame {
                 difficulty = "hard";
                 break;
         }
-        Board board = new Board(true, difficulty); // Truyền thông tin độ khó vào Board
+        network.Client client = new network.Client();
+        Board board = new Board(true, difficulty,client); // Truyền thông tin độ khó vào Board
         // Tạo một FunctionPanel mới cho trò chơi AI
         FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel
         frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
@@ -259,9 +265,9 @@ public class StartWindow extends JFrame {
         } else {
             frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
         }
-
+        network.Client client = new network.Client();
         // Tạo đối tượng Board và FunctionPanel
-        Board board = new Board(false, difficulty); // Không có AI, độ khó từ tham số
+        Board board = new Board(false, difficulty,client); // Không có AI, độ khó từ tham số
         FunctionPanel functionPanel = new FunctionPanel(board);
 
         // Thêm các thành phần vào JFrame
