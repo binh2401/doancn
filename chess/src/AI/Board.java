@@ -141,8 +141,13 @@ public class Board extends JPanel {
                                 // Thực hiện di chuyển
                                 selectedPiece.setPosition(newX, newY);
 
-                                String moveData = "MOVE " + selectedPiece.getX() + " " + selectedPiece.getY() + " " + newX + " " + newY;
-                                client.sendMessage(moveData); // Giả sử `client` là đối tượng đang quản lý kết nối với server
+                                if (client != null ) { // Đảm bảo client và out không phải là null
+                                    String moveData = "MOVE " + originalX + " " + originalY + " " + newX + " " + newY;
+                                    System.out.println("Move Data: " + moveData);
+                                    client.sendMessage(moveData);
+                                } else {
+                                    System.err.println("Client not connected or output stream is null.");
+                                }
 
 
                                 // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này
