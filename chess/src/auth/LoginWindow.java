@@ -12,7 +12,7 @@ public class LoginWindow extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton cancelButton;
-
+    private String loggedInUsername;
     public LoginWindow() {
         setTitle("Đăng nhập");
         setSize(300, 200);
@@ -45,10 +45,12 @@ public class LoginWindow extends JFrame {
                 // Kiểm tra logic đăng nhập
                 if (authenticate(username, password)) {
                     JOptionPane.showMessageDialog(LoginWindow.this, "Đăng nhập thành công!");
-                    dispose(); // Đóng cửa sổ sau khi đăng nhập thành công
+                    loggedInUsername = username; // Lưu tên người dùng
+                    dispose(); // Đóng cửa sổ đăng nhập
                 } else {
                     JOptionPane.showMessageDialog(LoginWindow.this, "Sai thông tin đăng nhập!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
         });
 
@@ -76,5 +78,8 @@ public class LoginWindow extends JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+    }
+    public String getLoggedInUsername() {
+        return loggedInUsername;
     }
 }

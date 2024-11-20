@@ -11,7 +11,7 @@ public class ClientHandler implements Runnable {
     private PrintWriter out;
     private BufferedReader in;
     private GameRoom room;
-
+    private Server server;
     public ClientHandler(Socket socket) {
         this.socket = socket;
     }
@@ -35,8 +35,16 @@ public class ClientHandler implements Runnable {
                     System.out.println("Creating room for client: " + socket.getInetAddress());  // Log khi client yêu cầu tạo phòng
                     createRoom();  // Tạo phòng mới
                 } else if (message.startsWith("MOVE")) {
+
                     System.out.println("Move received: " + message);  // Log nước đi nhận được từ client
-                    handleMove(message);  // Xử lý nước đi
+
+                    if (room != null) {
+                        String roomId = room.getId(); // Lấy ID phòng
+                        String playerMove = message.substring(5); // Bỏ tiền tố "MOVE " để lấy nước đi
+                        server.handleMove(roomId, playerMove, this); // Gọi phương thức với đủ tham số
+                    } else {
+                        sendMessage("NO_ACTIVE_ROOM"); // Nếu client chưa trong phòng nào
+                    }
                 } else if (message.equals("EXIT")) {
                     System.out.println("Client exiting: " + socket.getInetAddress());  // Log khi client thoát
                     closeConnection();
@@ -90,23 +98,7 @@ public class ClientHandler implements Runnable {
     }
 
     // Xử lý nước đi từ client
-    private void handleMove(String message) {
-        if (room != null && room.isPlayer1Turn() == (this == room.getPlayer1())) {
-            String move = message.substring(5);  // Lấy nước đi sau từ khóa "MOVE "
 
-            try {
-                // Gửi nước đi tới đối thủ và đổi lượt cho người chơi
-                room.broadcastMove(move, this);
-                room.switchTurn();  // Đổi lượt cho người chơi
-                System.out.println("Move handled: " + move);  // Log khi nước đi được xử lý
-            } catch (Exception e) {
-                e.printStackTrace();  // In lỗi nếu có
-            }
-        } else {
-            // Nếu không phải lượt của client, gửi thông báo lỗi
-            sendMessage("WAIT_FOR_YOUR_TURN");
-        }
-    }
 
     // Gửi thông báo khi tìm được đối thủ và bắt đầu trò chơi
     public void notifyOpponentFound(ClientHandler opponent) {

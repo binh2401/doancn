@@ -28,7 +28,7 @@ public class StartWindow extends JFrame {
     private String difficulty;
     private JButton avataname;
 
-
+    private String loggedInUser = null;
     // Constructor chỉ nhận client và không còn phương thức main
     public StartWindow(Client client) {
         this.client = client;
@@ -67,6 +67,10 @@ public class StartWindow extends JFrame {
         startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "play now");
 
         startButton.addActionListener(e -> {
+            if (loggedInUser == null) {
+                JOptionPane.showMessageDialog(this, "Vui lòng đăng nhập trước khi chơi!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             startButton.setEnabled(false); // Tạm thời vô hiệu hóa nút
             startButton.setText("Vui lòng chờ..."); // Thay đổi văn bản nút
 
@@ -125,10 +129,21 @@ public class StartWindow extends JFrame {
         registerButton.setPreferredSize(new Dimension(100, 30));
         // Thêm các hành động cho nút đăng nhập
         loginButton.addActionListener(e -> {
-            // Mở cửa sổ đăng nhập
-            new auth.LoginWindow().setVisible(true);
-        });
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.setVisible(true);
 
+            // Sau khi đăng nhập, kiểm tra nếu có người dùng đã đăng nhập
+            loginWindow.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                    String username = loginWindow.getLoggedInUsername();
+                    if (username != null) {
+                        loggedInUser = username; // Lưu thông tin người dùng
+                        updateLoginButton();    // Cập nhật giao diện
+                    }
+                }
+            });
+        });
         // Tương tự cho nút đăng ký
         registerButton.addActionListener(e -> {
             // Mở cửa sổ đăng ký và truyền userManager
@@ -147,7 +162,12 @@ public class StartWindow extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
+    private void updateLoginButton() {
+        if (loggedInUser != null) {
+            loginButton.setText(" " + loggedInUser); // Hiển thị tên người dùng
+            loginButton.setEnabled(false); // Vô hiệu hóa nút
+        }
+    }
     // Phương thức tạo nút với hình nền và văn bản
     private JButton createButtonWithBackground(String imagePath, String text) {
         JButton button = new JButton();
