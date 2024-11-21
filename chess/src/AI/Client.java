@@ -1,10 +1,8 @@
-package network;
+package AI;
 
 import java.io.*;
 import java.net.*;
-import auth.StartWindow;
-
-import model.User;
+import giaodien.StartWindow;
 
 import javax.swing.*;
 
@@ -18,7 +16,10 @@ public class Client {
     private String roomId;
     private boolean isGameStarted;
     private Runnable onOpponentFound; // Khai báo biến onOpponentFound
-
+    private String opponentName;
+    public String getOpponentName() {
+        return this.opponentName;
+    }
     // Phương thức khởi tạo để bắt đầu kết nối
     public void start() {
         try {
@@ -63,18 +64,36 @@ public class Client {
         System.out.println("Received message: " + message);
 
         if (message.startsWith("GAME_START")) {
-            roomId = message.split(" ")[1]; // Lưu ID phòng
+            String[] parts = message.split(" ");
+            roomId = parts[1]; // Lưu ID phòng từ thông điệp "GAME_START"
             System.out.println("Game started in room: " + roomId);
             SwingUtilities.invokeLater(() -> startWindow.enablePlayButton()); // Kích hoạt nút
-        } else if (message.startsWith("MOVE")) {
-            updateBoard(message.substring(5)); // Cập nhật bàn cờ với nước đi
-        } else if (message.startsWith("OPPONENT_FOUND")) {
-            System.out.println("Opponent found, notifying client...");
+        } else if (message.startsWith("ROOM_ID")) {
+            // Lấy roomId từ thông điệp ROOM_ID
+            roomId = message.split(" ")[1];
+            System.out.println("Room ID received: " + roomId);
             SwingUtilities.invokeLater(() -> {
                 if (startWindow != null) {
-                    startWindow.notifyOpponentFound(); // Thông báo tìm thấy đối thủ
+                    startWindow.setRoomId(roomId);  // Cập nhật roomId trong StartWindow
                 }
             });
+        }else
+            if (message.startsWith("MOVE")) {
+            updateBoard(message.substring(5)); // Cập nhật bàn cờ với nước đi
+        } else if (message.startsWith("OPPONENT_FOUND")) {
+
+            String[] parts = message.split(" "); // Phân tách thông điệp
+            if (parts.length > 1) {
+                this.opponentName = parts[1]; // Gán tên đối thủ
+                System.out.println("Opponent found: " + opponentName);
+                SwingUtilities.invokeLater(() -> {
+                    if (startWindow != null) {
+                        startWindow.notifyOpponentFound(); // Gọi hàm thông báo
+                    }
+                });
+            } else {
+                System.err.println("Invalid OPPONENT_FOUND message format.");
+            }
         }
     }
 
@@ -148,4 +167,5 @@ public class Client {
         Client client = new Client();  // Tạo đối tượng Client
         client.start();  // Bắt đầu kết nối và khởi tạo mọi thứ
     }
+
 }

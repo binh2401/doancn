@@ -12,6 +12,7 @@ public class ClientHandler implements Runnable {
     private BufferedReader in;
     private GameRoom room;
     private Server server;
+    private String name;
     public ClientHandler(Socket socket) {
         this.socket = socket;
     }
@@ -69,6 +70,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    public String getName() {
+        return this.name;
+    }
     // Gán phòng cho client
     public void setRoom(GameRoom room) {
         this.room = room;

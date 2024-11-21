@@ -1,15 +1,18 @@
-package auth;
+package giaodien;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import AI.Board;
-import AI.FunctionPanel;
+import auth.LoginWindow;
+import auth.RegisterWindow;
 import dao.UserManager;
-import network.Client;
+import AI.Client;
 import sounds.BackgroundMusicPlayer;
 
 public class StartWindow extends JFrame {
@@ -27,7 +30,11 @@ public class StartWindow extends JFrame {
     private boolean isAIEnabled;
     private String difficulty;
     private JButton avataname;
+    private String roomId;
+    private JLabel roomIdLabel;
 
+    private String player1Name = "Người chơi 1";
+    private String player2Name = "Người chơi 2";
     private String loggedInUser = null;
     // Constructor chỉ nhận client và không còn phương thức main
     public StartWindow(Client client) {
@@ -56,21 +63,21 @@ public class StartWindow extends JFrame {
 
         // Khởi tạo âm thanh nền
         musicPlayer = new BackgroundMusicPlayer();
-        musicPlayer.playBackgroundMusic("/sounds/nhacnen2.wav"); // Đường dẫn đến âm thanh nền
+    //    musicPlayer.playBackgroundMusic("/sounds/nhacnen2.wav"); // Đường dẫn đến âm thanh nền
 
         JLabel title = new JLabel("Cờ Tướng AI", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
         add(title, BorderLayout.NORTH);
 
-        avataname = createButtonWithBackground("/img/HinhNen/btn3.jpg","xin chao");
+
         // Khởi tạo các nút với văn bản và hình nền
         startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "play now");
 
         startButton.addActionListener(e -> {
-            if (loggedInUser == null) {
-                JOptionPane.showMessageDialog(this, "Vui lòng đăng nhập trước khi chơi!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+//            if (loggedInUser == null) {
+//                JOptionPane.showMessageDialog(this, "Vui lòng đăng nhập trước khi chơi!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+//                return;
+//            }
             startButton.setEnabled(false); // Tạm thời vô hiệu hóa nút
             startButton.setText("Vui lòng chờ..."); // Thay đổi văn bản nút
 
@@ -79,6 +86,9 @@ public class StartWindow extends JFrame {
 
             // Xử lý khi người chơi khác đã kết nối
             client.setOnOpponentFound(() -> {
+                player1Name = loggedInUser; // Tên người chơi hiện tại
+                player2Name = client.getOpponentName(); // Tên đối thủ từ server
+
                 startButton.setText("Chơi ngay"); // Đổi lại văn bản
                 startButton.setEnabled(true); // Bật lại nút
                 musicPlayer.stopBackgroundMusic(); // Dừng nhạc nền
@@ -133,9 +143,9 @@ public class StartWindow extends JFrame {
             loginWindow.setVisible(true);
 
             // Sau khi đăng nhập, kiểm tra nếu có người dùng đã đăng nhập
-            loginWindow.addWindowListener(new java.awt.event.WindowAdapter() {
+            loginWindow.addWindowListener(new WindowAdapter() {
                 @Override
-                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                public void windowClosed(WindowEvent windowEvent) {
                     String username = loginWindow.getLoggedInUsername();
                     if (username != null) {
                         loggedInUser = username; // Lưu thông tin người dùng
@@ -207,6 +217,11 @@ public class StartWindow extends JFrame {
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
+        if (loggedInUser != null) {
+            g.setFont(new Font("Arial", Font.BOLD, 20)); // Thiết lập font chữ
+            g.setColor(Color.blue); // Thiết lập màu chữ
+            g.drawString("Xin chào, " + loggedInUser, 20, 50); // Vẽ tên người dùng
+        }
     }
 
     public void enablePlayButton() {
@@ -251,7 +266,7 @@ public class StartWindow extends JFrame {
                 difficulty = "hard";
                 break;
         }
-        network.Client client = new network.Client();
+        Client client = new Client();
         Board board = new Board(true, difficulty,client); // Truyền thông tin độ khó vào Board
         // Tạo một FunctionPanel mới cho trò chơi AI
         FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel
@@ -285,21 +300,57 @@ public class StartWindow extends JFrame {
         } else {
             frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
         }
-        network.Client client = new network.Client();
-        // Tạo đối tượng Board và FunctionPanel
-        Board board = new Board(false, difficulty,client); // Không có AI, độ khó từ tham số
-        FunctionPanel functionPanel = new FunctionPanel(board);
 
-        // Thêm các thành phần vào JFrame
-        frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
-        frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng bên phải
+        Client client = new Client();
+        Board board = new Board(false, difficulty, client); // Không có AI, độ khó từ tham số
+        ;
+        // Gán ID phòng (giả sử client đã có thông tin ID phòng từ server)
 
-        // Tự động điều chỉnh kích thước cửa sổ
+        setRoomId(roomId);
+
+        // Tạo panel chứa thông tin người chơi và ID phòng
+        JPanel playerInfoPanel = new JPanel();
+        playerInfoPanel.setLayout(new BorderLayout());
+        playerInfoPanel.setBackground(Color.LIGHT_GRAY);
+
+        // Hiển thị tên người chơi 1 (bên trái)
+        JLabel player1Label = new JLabel(player1Name, SwingConstants.CENTER);
+        player1Label.setFont(new Font("Arial", Font.BOLD, 16));
+        player1Label.setForeground(Color.BLUE);
+
+        // Hiển thị tên người chơi 2 (bên phải)
+        JLabel player2Label = new JLabel(player2Name, SwingConstants.CENTER);
+        player2Label.setFont(new Font("Arial", Font.BOLD, 16));
+        player2Label.setForeground(Color.RED);
+
+        // Hiển thị ID phòng ở giữa
+        roomIdLabel  = new JLabel("Phòng: " + roomId, SwingConstants.CENTER);
+        roomIdLabel.setFont(new Font("Arial", Font.ITALIC, 14));
+        roomIdLabel.setForeground(Color.DARK_GRAY);
+
+        // Thêm các thành phần vào playerInfoPanel
+        playerInfoPanel.add(player1Label, BorderLayout.WEST);
+        playerInfoPanel.add(roomIdLabel, BorderLayout.CENTER); // Hiển thị ID phòng ở giữa
+        playerInfoPanel.add(player2Label, BorderLayout.EAST);
+
+        // Thêm playerInfoPanel và bàn cờ vào JFrame
+        frame.add(playerInfoPanel, BorderLayout.NORTH);
+        frame.add(board, BorderLayout.CENTER);
+
         frame.pack();
         frame.setVisible(true); // Hiển thị cửa sổ chính
-        // Ẩn cửa sổ start
-        this.setVisible(false);
+        this.setVisible(false); // Ẩn cửa sổ start
     }
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;  // Lưu roomId vào biến
+        System.out.println("Room ID set in StartWindow: " + roomId);
 
+        // Kiểm tra roomIdLabel để tránh NullPointerException
+        if (roomIdLabel != null) {
+            roomIdLabel.setText("Room ID: " + roomId);  // Cập nhật JLabel với roomId mới
+        } else {
+            System.err.println("roomIdLabel is null");
+        }
+    }
 
 }

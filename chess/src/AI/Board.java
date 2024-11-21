@@ -1,6 +1,5 @@
 package AI;
 
-import network.Client;
 import quanco.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -34,7 +33,7 @@ public class Board extends JPanel {
     private boolean gameOver = false;
     private Client client;
 
-
+    private String roomId;
     public Board(boolean isAIEnabled,String difficulty,Client client) {
         this.client = client;
         this.isAIEnabled = isAIEnabled;
@@ -545,5 +544,11 @@ public class Board extends JPanel {
         // Hiển thị thông báo và kết thúc trò chơi
         JOptionPane.showMessageDialog(this, loser + " đã đầu hàng. " + winner + " thắng!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0); // Kết thúc trò chơi
+    }
+
+
+    // Phương thức để lấy ID phòng
+    public String getRoomId() {
+        return this.roomId;
     }
 }

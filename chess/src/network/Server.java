@@ -42,7 +42,7 @@ public class Server {
     public static synchronized void findOpponent(ClientHandler client) {
         System.out.println("Searching for opponent for client: " + client);  // Log khi server bắt đầu tìm đối thủ
 
-        // Nếu có client khác trong hàng đợi, ghép cặp ngay
+        // Nếu có client khác trong hàng đợi, ghép cặp ngaya
         if (!waitingClients.isEmpty()) {
             // Lấy đối thủ từ hàng đợi
             ClientHandler opponent = waitingClients.poll();
@@ -55,11 +55,13 @@ public class Server {
             opponent.setRoom(room);
             client.sendMessage("GAME_START RED " + room.getBoardState());
             opponent.sendMessage("GAME_START BLACK " + room.getBoardState());
-
+            client.sendMessage("ROOM_ID " + roomId); // Gửi ID phòng cho client
+            opponent.sendMessage("ROOM_ID " + roomId); // Gửi ID phòng cho đối thủ
             // Thông báo rằng đối thủ đã được tìm thấy
             client.sendMessage("OPPONENT_FOUND");
             opponent.sendMessage("OPPONENT_FOUND");
-
+            client.sendMessage("OPPONENT_FOUND " + opponent.getName()); // Gửi tên đối thủ
+            opponent.sendMessage("OPPONENT_FOUND " + client.getName()); // Gửi tên đối thủ
             room.startGame(); // Bắt đầu trò chơi
             System.out.println("Game started in room: " + roomId);  // Log khi phòng được tạo và trò chơi bắt đầu
         } else {

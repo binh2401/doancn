@@ -1,4 +1,6 @@
-package AI;
+package giaodien;
+
+import AI.Board;
 
 import javax.swing.*;
 import java.awt.*;

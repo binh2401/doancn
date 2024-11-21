@@ -1,9 +1,8 @@
 import AI.Board;
-import AI.FunctionPanel;
-import auth.StartWindow;
+import giaodien.FunctionPanel;
+import giaodien.StartWindow;
 
-import model.User;
-import network.Client;
+import AI.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -78,7 +77,7 @@ public class Main {
                 System.out.println("Người chơi đã hủy chọn độ khó.");
                 return; // Nếu người chơi hủy chọn, kết thúc phương thức
         }
-        network.Client client = new network.Client();
+        Client client = new Client();
         // Tạo đối tượng Board với độ khó đã chọn
         Board board = new Board(true, difficulty,client); // Truyền thông tin độ khó vào Board
         FunctionPanel functionPanel = new FunctionPanel(board); // Tạo AI.FunctionPanel
