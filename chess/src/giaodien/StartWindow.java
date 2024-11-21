@@ -43,6 +43,13 @@ public class StartWindow extends JFrame {
     }
 
     private void initialize() {
+        // Thiết lập giao diện Nimbus trước khi tạo các thành phần GUI
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         setTitle("Chào mừng đến với Cờ Tướng AI");
         setSize(700, 700);
         setLayout(new BorderLayout());
@@ -129,14 +136,27 @@ public class StartWindow extends JFrame {
         add(buttonPanel, BorderLayout.CENTER);
 
         // Tạo panel cho các nút đăng nhập và đăng ký
-        JPanel authPanel = new JPanel();
+        JPanel authPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Thêm hình nền cho authPanel
+                try {
+                    InputStream input = getClass().getResourceAsStream("/img/HinhNen/auth-background.jpg");
+                    if (input != null) {
+                        Image img = ImageIO.read(input);
+                        g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
         authPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Bố trí ở bên trái
-        loginButton = new JButton("Đăng nhập");
-        registerButton = new JButton("Đăng ký");
+        loginButton = createStyledButton("/img/icons/login-icon.png", "Đăng nhập");
+        registerButton = createStyledButton("/img/icons/register-icon.png", "Đăng ký");
 
-        // Đặt kích thước cho các nút đăng nhập và đăng ký
-        loginButton.setPreferredSize(new Dimension(100, 30));
-        registerButton.setPreferredSize(new Dimension(100, 30));
+
         // Thêm các hành động cho nút đăng nhập
         loginButton.addActionListener(e -> {
             LoginWindow loginWindow = new LoginWindow();
@@ -352,5 +372,26 @@ public class StartWindow extends JFrame {
             System.err.println("roomIdLabel is null");
         }
     }
+    private JButton createStyledButton(String iconPath, String text) {
+        JButton button = new JButton(text);
+        try {
+            InputStream input = getClass().getResourceAsStream(iconPath);
+            if (input != null) {
+                ImageIcon icon = new ImageIcon(ImageIO.read(input));
+                button.setIcon(icon);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(70, 130, 180)); // Màu xanh nhạt
+        button.setOpaque(true);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setPreferredSize(new Dimension(150, 40)); // Kích thước chuẩn
+        return button;
+    }
+
 
 }
