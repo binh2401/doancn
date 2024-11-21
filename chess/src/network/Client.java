@@ -1,4 +1,4 @@
-package AI;
+package network;
 
 import java.io.*;
 import java.net.*;
@@ -64,9 +64,7 @@ public class Client {
         System.out.println("Received message: " + message);
 
         if (message.startsWith("GAME_START")) {
-            String[] parts = message.split(" ");
-            roomId = parts[1]; // Lưu ID phòng từ thông điệp "GAME_START"
-            System.out.println("Game started in room: " + roomId);
+
             SwingUtilities.invokeLater(() -> startWindow.enablePlayButton()); // Kích hoạt nút
         } else if (message.startsWith("ROOM_ID")) {
             // Lấy roomId từ thông điệp ROOM_ID

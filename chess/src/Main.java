@@ -2,7 +2,7 @@ import AI.Board;
 import giaodien.FunctionPanel;
 import giaodien.StartWindow;
 
-import AI.Client;
+import network.Client;
 
 import javax.swing.*;
 import java.awt.*;

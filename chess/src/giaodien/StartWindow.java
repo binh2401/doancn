@@ -12,7 +12,7 @@ import AI.Board;
 import auth.LoginWindow;
 import auth.RegisterWindow;
 import dao.UserManager;
-import AI.Client;
+import network.Client;
 import sounds.BackgroundMusicPlayer;
 
 public class StartWindow extends JFrame {

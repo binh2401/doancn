@@ -1,5 +1,6 @@
 package AI;
 
+import network.Client;
 import quanco.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
