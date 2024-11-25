@@ -35,8 +35,9 @@ public class Board extends JPanel {
     private Client client;
 
     private String roomId;
-    public Board(boolean isAIEnabled,String difficulty,Client client) {
+    public Board(boolean isAIEnabled,String difficulty,Client client,String roomId) {
         this.client = client;
+        this.roomId = roomId;
         this.isAIEnabled = isAIEnabled;
         board = new Piece[10][9];
         setPreferredSize(new Dimension(boardWidth * cellSize, boardHeight * cellSize));
@@ -141,14 +142,18 @@ public class Board extends JPanel {
                                 // Thực hiện di chuyển
                                 selectedPiece.setPosition(newX, newY);
 
-                                if (client != null ) { // Đảm bảo client và out không phải là null
-                                    String moveData = "MOVE " + originalX + " " + originalY + " " + newX + " " + newY;
-                                    System.out.println("Move Data: " + moveData);
-                                    client.sendMessage(moveData);
+                                if (client != null) {
+                                    String roomIdFromClient = getRoomId(roomId);
+                                    if (roomIdFromClient != null) {
+                                        String moveData = "MOVE " + originalX + " " + originalY + " " + newX + " " + newY;
+                                        System.out.println("Move Data: " + moveData);
+                                        client.sendMessage(moveData, roomIdFromClient); // Gửi thông điệp và roomId
+                                    } else {
+                                        System.err.println("Room ID not found for the client.");
+                                    }
                                 } else {
-                                    System.err.println("Client not connected or output stream is null.");
+                                    System.err.println("Client not connected.");
                                 }
-
 
                                 // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này
 
@@ -549,7 +554,7 @@ public class Board extends JPanel {
 
 
     // Phương thức để lấy ID phòng
-    public String getRoomId() {
+    public String getRoomId(String roomId) {
         return this.roomId;
     }
 }

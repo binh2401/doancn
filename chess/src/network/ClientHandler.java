@@ -27,7 +27,27 @@ public class ClientHandler implements Runnable {
             String message;
             while ((message = in.readLine()) != null) {
                 System.out.println("Received message from client: " + message);  // Log message nhận từ client
+                if (message.startsWith("ROOM_ID:") && message.contains("MOVE")) {
+                    // Tách thông điệp
+                    String[] parts = message.split(",");
+                    if (parts.length == 2) {
+                        String roomId = parts[0].substring(9).trim(); // Lấy Room ID (bỏ "ROOM_ID:" 9 ký tự đầu)
+                        String moveData = parts[1].substring(5).trim(); // Lấy nước đi (bỏ "MOVE" 5 ký tự đầu)
 
+                        System.out.println("Processing Room ID: " + roomId + ", Move: " + moveData); // Log thông tin xử lý
+
+                        // Kiểm tra phòng tồn tại
+                        GameRoom room = server.getRoomById(roomId);
+                        if (room != null) {
+                            // Xử lý nước đi trong phòng
+                            room.broadcastMove(moveData, this);
+                        } else {
+                            sendMessage("INVALID_ROOM_ID");
+                        }
+                    } else {
+                        sendMessage("INVALID_FORMAT");
+                    }
+                }else
                 // Phân loại thông điệp và xử lý tương ứng
                 if (message.equals("FIND_OPPONENT")) {
                     System.out.println("Finding opponent for client: " + socket.getInetAddress());  // Log khi client yêu cầu tìm đối thủ
@@ -37,14 +57,15 @@ public class ClientHandler implements Runnable {
                     createRoom();  // Tạo phòng mới
                 } else if (message.startsWith("MOVE")) {
 
-                    System.out.println("Move received: " + message);  // Log nước đi nhận được từ client
+                    String roomId = message.split(",")[0].split(":")[1].trim(); // Lấy Room ID
+                    String move = message.split(",")[1].split(":")[1].trim(); // Lấy nước đi
 
+                    GameRoom room = Server.getRoomById(roomId); // Lấy phòng từ Room ID
                     if (room != null) {
-                        String roomId = room.getId(); // Lấy ID phòng
-                        String playerMove = message.substring(5); // Bỏ tiền tố "MOVE " để lấy nước đi
-                        server.handleMove(roomId, playerMove, this); // Gọi phương thức với đủ tham số
+                        // Xử lý nước đi
+                        server.handleMove(roomId, move, this);
                     } else {
-                        sendMessage("NO_ACTIVE_ROOM"); // Nếu client chưa trong phòng nào
+                        sendMessage("ROOM_NOT_FOUND"); // Nếu không tìm thấy phòng
                     }
                 } else if (message.equals("EXIT")) {
                     System.out.println("Client exiting: " + socket.getInetAddress());  // Log khi client thoát

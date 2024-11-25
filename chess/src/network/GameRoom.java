@@ -1,4 +1,10 @@
 package network;
+import util.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class GameRoom {
     private final String id;
@@ -7,7 +13,9 @@ public class GameRoom {
     private boolean isPlayer1Turn; // Biến theo dõi lượt đi của player1
     private String boardState; // Trạng thái bàn cờ ban đầu
     private boolean gameOver; // Biến theo dõi tình trạng trò chơi (kết thúc hay chưa)
-
+    private static final String URL = "jdbc:mysql://localhost:3306/chess?serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
     public GameRoom(String id, ClientHandler player1, ClientHandler player2) {
         this.id = id;
         this.player1 = player1;
@@ -15,8 +23,54 @@ public class GameRoom {
         this.isPlayer1Turn = true; // Player 1 đi trước
         this.boardState = initializeBoard(); // Khởi tạo trạng thái bàn cờ ban đầu
         this.gameOver = false; // Ban đầu trò chơi chưa kết thúc
-    }
 
+
+    }
+    public void saveRoomToDatabase() {
+        createTableIfNotExists();
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "INSERT INTO rooms (id, player1, player2, board_state, is_player1_turn, game_over) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, id);
+            stmt.setString(2, player1.getName());
+            stmt.setString(3, player2.getName());
+            stmt.setString(4, boardState);
+            stmt.setBoolean(5, isPlayer1Turn);
+            stmt.setBoolean(6, gameOver);
+            stmt.executeUpdate();
+            System.out.println("Room saved to database: " + id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private void createTableIfNotExists() {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS rooms (" +
+                    "id VARCHAR(255) PRIMARY KEY, " +
+                    "player1 VARCHAR(255), " +
+                    "player2 VARCHAR(255), " +
+                    "board_state TEXT, " +
+                    "is_player1_turn BOOLEAN, " +
+                    "game_over BOOLEAN)";
+
+            Statement stmt = conn.createStatement();
+            stmt.execute(createTableSQL);
+            System.out.println("Table 'rooms' is ready.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private void deleteRoom() {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "DELETE FROM rooms WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+            System.out.println("Room deleted from database: " + id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     // Phương thức để khởi tạo trạng thái bàn cờ
     private String initializeBoard() {
         // Khởi tạo trạng thái bàn cờ mặc định dưới dạng chuỗi (ví dụ: vị trí các quân cờ)
@@ -53,7 +107,9 @@ public class GameRoom {
         // Cập nhật trạng thái bàn cờ (bạn cần viết logic cụ thể để cập nhật trạng thái bàn cờ)
         boardState = "UpdatedBoardState";  // Thay đổi trạng thái bàn cờ sau mỗi nước đi
     }
-
+    public boolean isGameOver() {
+        return gameOver;  // Return the value of the gameOver field
+    }
     // Phương thức kiểm tra tình trạng trò chơi (thắng, thua, hòa)
     private void checkGameStatus() {
         // Kiểm tra điều kiện thắng thua hoặc hòa (cần logic cụ thể về game rules)
@@ -62,16 +118,19 @@ public class GameRoom {
             player1.sendMessage("GAME_OVER YOU_LOSE");
             player2.sendMessage("GAME_OVER YOU_WIN");
             System.out.println("Game over. Player1 loses.");
+            deleteRoom();
         } else if (isCheckmate(false)) { // Kiểm tra nếu player2 thua (vì player2 là quân đen)
             gameOver = true;
             player1.sendMessage("GAME_OVER YOU_WIN");
             player2.sendMessage("GAME_OVER YOU_LOSE");
             System.out.println("Game over. Player2 loses.");
+            deleteRoom();
         } else if (isDrawCondition()) {
             gameOver = true;
             player1.sendMessage("GAME_OVER DRAW");
             player2.sendMessage("GAME_OVER DRAW");
             System.out.println("Game over. It's a draw.");
+            deleteRoom();
         }
     }
 

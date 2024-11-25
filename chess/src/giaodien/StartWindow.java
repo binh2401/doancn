@@ -286,8 +286,9 @@ public class StartWindow extends JFrame {
                 difficulty = "hard";
                 break;
         }
+        this.roomId= roomId;
         Client client = new Client();
-        Board board = new Board(true, difficulty,client); // Truyền thông tin độ khó vào Board
+        Board board = new Board(true, difficulty,client,roomId); // Truyền thông tin độ khó vào Board
         // Tạo một FunctionPanel mới cho trò chơi AI
         FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel
         frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
@@ -320,9 +321,9 @@ public class StartWindow extends JFrame {
         } else {
             frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
         }
-
+        this.roomId=roomId;
         Client client = new Client();
-        Board board = new Board(false, difficulty, client); // Không có AI, độ khó từ tham số
+        Board board = new Board(false, difficulty, client,roomId); // Không có AI, độ khó từ tham số
         ;
         // Gán ID phòng (giả sử client đã có thông tin ID phòng từ server)
 

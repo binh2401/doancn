@@ -8,7 +8,11 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.UUID;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import util.DatabaseConnection;
 public class Server {
     private static final int PORT = 12345;
     private static final Map<String, GameRoom> rooms = new HashMap<>(); // Quản lý các phòng chơi
@@ -31,6 +35,9 @@ public class Server {
             e.printStackTrace();
         }
     }
+    public static GameRoom getRoomById(String roomId) {
+        return rooms.get(roomId); // Trả về GameRoom tương ứng với Room ID
+    }
 
     public static GameRoom createNewRoom(ClientHandler client) {
         String roomId = UUID.randomUUID().toString(); // Tạo ID phòng duy nhất
@@ -49,7 +56,7 @@ public class Server {
             String roomId = UUID.randomUUID().toString(); // Tạo ID phòng duy nhất
             GameRoom room = new GameRoom(roomId, client, opponent);
             rooms.put(roomId, room);
-
+            room.saveRoomToDatabase();
             // Thông báo cho cả hai client về phòng chơi và bắt đầu trò chơi
             client.setRoom(room);
             opponent.setRoom(room);
@@ -69,6 +76,22 @@ public class Server {
             waitingClients.add(client);
             client.sendMessage("WAIT_FOR_OPPONENT");
             System.out.println("Client added to waiting list: " + client);
+        }
+    }
+    private static void saveRoomToDatabase(GameRoom room) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "INSERT INTO rooms (id, player1, player2, board_state, is_player1_turn, game_over) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, room.getId());
+            stmt.setString(2, room.getPlayer1().getName());
+            stmt.setString(3, room.getPlayer2().getName());
+            stmt.setString(4, room.getBoardState());
+            stmt.setBoolean(5, room.isPlayer1Turn());
+            stmt.setBoolean(6, room.isGameOver());
+            stmt.executeUpdate();
+            System.out.println("Room saved to database: " + room.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     // Xử lý nước đi

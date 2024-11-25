@@ -2,6 +2,8 @@ package network;
 
 import java.io.*;
 import java.net.*;
+
+import AI.Board;
 import giaodien.StartWindow;
 
 import javax.swing.*;
@@ -14,6 +16,7 @@ public class Client {
     private BufferedReader in;
     private Socket socket;
     private String roomId;
+    private Board board;
     private boolean isGameStarted;
     private Runnable onOpponentFound; // Khai báo biến onOpponentFound
     private String opponentName;
@@ -122,14 +125,21 @@ public class Client {
 
             SwingUtilities.invokeLater(() -> startWindow.enablePlayButton()); // Kích hoạt nút
         } else if (message.startsWith("ROOM_ID")) {
-            // Lấy roomId từ thông điệp ROOM_ID
-            roomId = message.split(" ")[1];
-            System.out.println("Room ID received: " + roomId);
-            SwingUtilities.invokeLater(() -> {
-                if (startWindow != null) {
-                    startWindow.setRoomId(roomId);  // Cập nhật roomId trong StartWindow
-                }
-            });
+            String[] parts = message.split(" ");
+            if (parts.length > 1) {
+                roomId = parts[1]; // Gán roomId từ phần thứ hai trong thông điệp
+                 getRoomId(roomId);
+
+                System.out.println("Room ID received: " + roomId);
+
+                SwingUtilities.invokeLater(() -> {
+                    if (startWindow != null) {
+                        startWindow.setRoomId(roomId);  // Cập nhật roomId trong StartWindow
+                    }
+                });
+            } else {
+                System.err.println("Invalid ROOM_ID message format. No room ID found.");
+            }
         }else
             if (message.startsWith("MOVE")) {
                 System.out.println("message");
@@ -155,14 +165,14 @@ public class Client {
     }
 
     // Gửi nước đi đến server
-    public void sendMove(String move) {
-        if (roomId != null && isGameStarted) {
-            System.out.println("Sending move to server: " + move);
-            sendMessage("MOVE " + roomId + " " + move); // Gửi nước đi cùng ID phòng
-        } else {
-            System.out.println("Game not started or room ID is null. Cannot send move.");
-        }
-    }
+//    public void sendMove(String move) {
+//        if (roomId != null && isGameStarted) {
+//            System.out.println("Sending move to server: " + move);
+//            sendMessage("MOVE " + roomId + " " + move); // Gửi nước đi cùng ID phòng
+//        } else {
+//            System.out.println("Game not started or room ID is null. Cannot send move.");
+//        }
+//    }
 
     // Cập nhật bàn cờ khi nhận được thông điệp từ server
     private void updateBoard(String move) {
@@ -173,7 +183,7 @@ public class Client {
     }
 
     // Gửi thông điệp đến server
-    public void sendMessage(String message) {
+    public void sendMessage(String message, String roomId) {
         // Kiểm tra nếu output stream hoặc socket không còn hoạt động
         if (out == null || !isSocketActive()) {
             System.err.println("Output stream is null or socket is not active. Reinitializing connection...");
@@ -199,16 +209,22 @@ public class Client {
                 return;  // Nếu không tái kết nối được, dừng việc gửi tin nhắn
             }
         }
-
+        String a = "ROOM_ID:" + roomId + "," + message;
         // Sau khi đảm bảo rằng output stream vẫn hoạt động, gửi tin nhắn
         if (out != null && isSocketActive()) {
+            if(roomId==null){
             try {
-                System.out.println("Sending message to server: " + message);
+                System.out.println("Sending message to server: " + a);
                 out.println(message);
                 out.flush();
             } catch (Exception e) {
                 System.err.println("Error sending message to server: " + e.getMessage());
                 e.printStackTrace();
+            }}
+            else {
+                System.out.println("Sending message to server: " + a);
+                out.println(a);
+                out.flush();
             }
         } else {
             System.err.println("Out stream is null or socket is not active. Make sure the client is connected to the server.");
@@ -255,13 +271,13 @@ public class Client {
     // Tìm đối thủ
     public void findOpponent() {
         System.out.println("Requesting to find an opponent...");
-        sendMessage("FIND_OPPONENT");
+        sendMessage("FIND_OPPONENT", null);
     }
 
     // Tạo phòng đấu
     public void createRoom() {
         System.out.println("Creating a new room...");
-        sendMessage("CREATE_ROOM");
+        sendMessage("CREATE_ROOM",null);
     }
 
     // Đặt callback khi tìm được đối thủ
@@ -287,7 +303,14 @@ public class Client {
             System.err.println("Error while closing resources: " + e.getMessage());
         }
     }
-
+    public String getRoomId(String roomid) {
+        if (roomid == null) {
+            System.out.println("Room ID is not set yet.");
+        } else {
+            System.out.println("Room ID is: " + roomid);
+        }
+        return roomid;
+    }
     // Phương thức main để chạy Client
     public static void main(String[] args) {
         Client client = new Client();  // Tạo đối tượng Client
