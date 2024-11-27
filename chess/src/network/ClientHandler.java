@@ -47,8 +47,8 @@ public class ClientHandler implements Runnable {
                         GameRoom room = server.getRoomById(roomId);
                         // Kiểm tra phòng tồn tại trong cơ sở dữ liệu
                         // Gửi nước đi đến đối thủ
-                        if (room != null && opponent != null) {
-                            opponent.sendMessage("OPPONENT_MOVE " + moveData);
+                        if (this.room != null && this.opponent != null) {
+                            this.opponent.sendMessage("MOVE " + moveData);
                         } else {
                             sendMessage("NO_OPPONENT"); // Không tìm thấy đối thủ
                         }
