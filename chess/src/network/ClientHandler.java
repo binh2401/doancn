@@ -1,10 +1,13 @@
 package network;
 
+import util.DatabaseConnection;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.*;
 
 public class ClientHandler implements Runnable {
     private Socket socket;
@@ -13,8 +16,14 @@ public class ClientHandler implements Runnable {
     private GameRoom room;
     private Server server;
     private String name;
+    private ClientHandler opponent;
     public ClientHandler(Socket socket) {
         this.socket = socket;
+    }
+
+
+    public void setOpponent(ClientHandler opponent) {
+        this.opponent = opponent;
     }
 
     @Override
@@ -35,15 +44,15 @@ public class ClientHandler implements Runnable {
                         String moveData = parts[1].substring(5).trim(); // Lấy nước đi (bỏ "MOVE" 5 ký tự đầu)
 
                         System.out.println("Processing Room ID: " + roomId + ", Move: " + moveData); // Log thông tin xử lý
-
-                        // Kiểm tra phòng tồn tại
                         GameRoom room = server.getRoomById(roomId);
-                        if (room != null) {
-                            // Xử lý nước đi trong phòng
-                            room.broadcastMove(moveData, this);
+                        // Kiểm tra phòng tồn tại trong cơ sở dữ liệu
+                        // Gửi nước đi đến đối thủ
+                        if (room != null && opponent != null) {
+                            opponent.sendMessage("OPPONENT_MOVE " + moveData);
                         } else {
-                            sendMessage("INVALID_ROOM_ID");
+                            sendMessage("NO_OPPONENT"); // Không tìm thấy đối thủ
                         }
+
                     } else {
                         sendMessage("INVALID_FORMAT");
                     }
@@ -82,7 +91,27 @@ public class ClientHandler implements Runnable {
             closeConnection();
         }
     }
+    private boolean isRoomExist(String roomId) {
+        System.out.println("Checking if room exists: " + roomId);  // In giá trị roomId nhận được từ client
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "SELECT * FROM rooms WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, roomId);
+            ResultSet rs = stmt.executeQuery();
 
+            // Kiểm tra xem có kết quả trả về không
+            if (rs.next()) {
+                System.out.println("Room found with ID: " + roomId);
+                return true;  // Nếu có kết quả, phòng tồn tại
+            } else {
+                System.out.println("Room not found with ID: " + roomId);
+                return false;  // Nếu không có kết quả, phòng không tồn tại
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     // Phương thức gửi thông điệp cho client
     public void sendMessage(String message) {
         if (out != null) {

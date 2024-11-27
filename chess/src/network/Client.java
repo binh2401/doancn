@@ -66,7 +66,8 @@ public class Client {
                         // Kiểm tra trạng thái Output Stream
                         System.out.println("Output stream status: " + (out != null ? "Initialized" : "Null"));
 
-                        processMessage(message);
+                        String finalMessage = message;
+                        SwingUtilities.invokeLater(() -> processMessage(finalMessage));
                     }} catch (IOException e) {
                     System.err.println("Error reading from server: " + e.getMessage());
                     e.printStackTrace();
@@ -185,31 +186,7 @@ public class Client {
     // Gửi thông điệp đến server
     public void sendMessage(String message, String roomId) {
         // Kiểm tra nếu output stream hoặc socket không còn hoạt động
-        if (out == null || !isSocketActive()) {
-            System.err.println("Output stream is null or socket is not active. Reinitializing connection...");
-
-            try {
-                // Kiểm tra trạng thái socket
-                if (socket == null || socket.isClosed()) {
-                    System.out.println("Socket is closed, attempting to reconnect...");
-                    startConnection(); // Tái kết nối lại
-                } else {
-                    // Nếu socket vẫn mở, chỉ cần khởi tạo lại output stream
-                    // Đảm bảo đóng stream cũ trước khi tạo stream mới
-                    if (out != null) {
-                        out.close();
-                        System.out.println("Previous output stream closed.");
-                    }
-                    out = new PrintWriter(socket.getOutputStream(), true);
-                    System.out.println("Output stream reinitialized.");
-                }
-            } catch (IOException e) {
-                System.err.println("Failed to reinitialize output stream: " + e.getMessage());
-                e.printStackTrace();
-                return;  // Nếu không tái kết nối được, dừng việc gửi tin nhắn
-            }
-        }
-        String a = "ROOM_ID:" + roomId + "," + message;
+        String a = (roomId != null && !roomId.isEmpty()) ? "ROOM_ID:" + roomId + "," + message : message;
         // Sau khi đảm bảo rằng output stream vẫn hoạt động, gửi tin nhắn
         if (out != null && isSocketActive()) {
             if(roomId==null){
@@ -233,39 +210,13 @@ public class Client {
             }
         }
     }
-    private void startConnection() {
-        try {
-            // Đảm bảo không khởi tạo lại StartWindow khi tái kết nối
-            if (socket != null && !socket.isClosed()) {
-                System.out.println("Closing existing socket before reconnecting...");
-                closeSocket();  // Đóng socket cũ nếu có
-            }
-
-            // Tạo kết nối mới tới server
-            socket = new Socket(SERVER_ADDRESS, PORT);
-            this.out = new PrintWriter(socket.getOutputStream(), true);
-            this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-            System.out.println("Reconnected to server at " + SERVER_ADDRESS + ":" + PORT);
-
-            // Tạo luồng nhận nước đi từ đối thủ
-            new Thread(() -> {
-                String message;
-                try {
-                    while ((message = in.readLine()) != null) {
-                        System.out.println("Received message: " + message);
-                        processMessage(message);  // Xử lý tin nhắn
-                    }
-                } catch (IOException e) {
-                    System.err.println("Error reading from server: " + e.getMessage());
-                    e.printStackTrace();
-                } finally {
-                    closeSocket(); // Đảm bảo socket được đóng khi hoàn thành công việc
-                }
-            }).start();
-        } catch (IOException e) {
-            System.err.println("Failed to reconnect to server at " + SERVER_ADDRESS + ":" + PORT);
-            e.printStackTrace();
+    private void sendPing() {
+        if (out != null && isSocketActive()) {
+            System.out.println("Sending ping to server.");
+            out.println("ping");
+            out.flush();
+        } else {
+            System.err.println("Output stream is null or socket is not active.");
         }
     }
     // Tìm đối thủ

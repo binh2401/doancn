@@ -49,27 +49,40 @@ public class Server {
     public static synchronized void findOpponent(ClientHandler client) {
         System.out.println("Searching for opponent for client: " + client);  // Log khi server bắt đầu tìm đối thủ
 
-        // Nếu có client khác trong hàng đợi, ghép cặp ngaya
+        // Nếu có client khác trong hàng đợi, ghép cặp ngay
         if (!waitingClients.isEmpty()) {
             // Lấy đối thủ từ hàng đợi
             ClientHandler opponent = waitingClients.poll();
+
+            // Lấy tên người chơi của cả client và đối thủ
+            String clientName = client.getName(); // Lấy tên người chơi 1
+            String opponentName = opponent.getName(); // Lấy tên người chơi 2
+
             String roomId = UUID.randomUUID().toString(); // Tạo ID phòng duy nhất
-            GameRoom room = new GameRoom(roomId, client, opponent);
+            GameRoom room = new GameRoom(roomId, client, opponent); // Thêm tên người chơi vào phòng
+
+            opponent.setOpponent(client);
             rooms.put(roomId, room);
-            room.saveRoomToDatabase();
+            room.saveRoomToDatabase(); // Lưu phòng vào cơ sở dữ liệu
+
             // Thông báo cho cả hai client về phòng chơi và bắt đầu trò chơi
             client.setRoom(room);
             opponent.setRoom(room);
+
+            // Gửi thông báo về trò chơi
             client.sendMessage("GAME_START RED " + room.getBoardState());
             opponent.sendMessage("GAME_START BLACK " + room.getBoardState());
             client.sendMessage("ROOM_ID " + roomId); // Gửi ID phòng cho client
             opponent.sendMessage("ROOM_ID " + roomId); // Gửi ID phòng cho đối thủ
+
             // Thông báo rằng đối thủ đã được tìm thấy
             client.sendMessage("OPPONENT_FOUND");
             opponent.sendMessage("OPPONENT_FOUND");
             client.sendMessage("OPPONENT_FOUND " + opponent.getName()); // Gửi tên đối thủ
             opponent.sendMessage("OPPONENT_FOUND " + client.getName()); // Gửi tên đối thủ
-            room.startGame(); // Bắt đầu trò chơi
+
+            // Bắt đầu trò chơi
+            room.startGame();
             System.out.println("Game started in room: " + roomId);  // Log khi phòng được tạo và trò chơi bắt đầu
         } else {
             // Nếu không có đối thủ, thêm vào hàng đợi

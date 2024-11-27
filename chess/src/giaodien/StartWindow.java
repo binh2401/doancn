@@ -323,7 +323,7 @@ public class StartWindow extends JFrame {
         }
         this.roomId=roomId;
         Client client = new Client();
-        Board board = new Board(false, difficulty, client,roomId); // Không có AI, độ khó từ tham số
+        Board board = new Board(false, difficulty, this.client, roomId); // Không có AI, độ khó từ tham số
         ;
         // Gán ID phòng (giả sử client đã có thông tin ID phòng từ server)
 

@@ -142,19 +142,8 @@ public class Board extends JPanel {
                                 // Thực hiện di chuyển
                                 selectedPiece.setPosition(newX, newY);
 
-                                if (client != null) {
-                                    String roomIdFromClient = getRoomId(roomId);
-                                    if (roomIdFromClient != null) {
-                                        String moveData = "MOVE " + originalX + " " + originalY + " " + newX + " " + newY;
-                                        System.out.println("Move Data: " + moveData);
-                                        client.sendMessage(moveData, roomIdFromClient); // Gửi thông điệp và roomId
-                                    } else {
-                                        System.err.println("Room ID not found for the client.");
-                                    }
-                                } else {
-                                    System.err.println("Client not connected.");
-                                }
 
+                                sendMoveData(originalX, originalY, newX, newY);
                                 // Kiểm tra nếu quân cờ vẫn bị chiếu sau nước đi này
 
 
@@ -260,6 +249,20 @@ public class Board extends JPanel {
             e.printStackTrace();
         }
 
+    }
+    private void sendMoveData(int originalX, int originalY, int newX, int newY) {
+        if (client != null || roomId!= null) {
+            String roomIdFromClient = getRoomId(roomId);
+            if (roomIdFromClient != null) {
+                String moveData = "MOVE " + originalX + " " + originalY + " " + newX + " " + newY;
+                System.out.println("Move Data: " + moveData);
+                client.sendMessage(moveData, roomIdFromClient); // Gửi thông điệp và roomId
+            } else {
+                System.err.println("Room ID not found for the client.");
+            }
+        } else {
+            System.err.println("Client not connected.");
+        }
     }
     public List<Piece> getAllPieces() {
         List<Piece> pieces = new ArrayList<>();
