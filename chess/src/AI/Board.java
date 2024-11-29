@@ -200,6 +200,17 @@ public class Board extends JPanel {
                                                 lastBlackMove = null;
                                             }
                                         }
+                                        if (isCheck(!isRedTurn)) {
+                                            JOptionPane.showMessageDialog(Board.this,
+                                                    (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                                        }
+
+                                        // Kiểm tra chiếu tướng
+                                        if (isCheckmate(!isRedTurn)) {
+                                            JOptionPane.showMessageDialog(Board.this,
+                                                    (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
+                                            System.exit(0); // Kết thúc trò chơi
+                                        }
                                     }
                                     // Đổi lượt trở lại cho người chơi
                                     isRedTurn = true;
@@ -279,28 +290,37 @@ public class Board extends JPanel {
     // Phương thức hoàn tác nước đi cuối cùng
     public boolean undoLastMovePair() {
         if (moveHistoryPairs.isEmpty()) {
-            return false;
+            return false; // Không có nước đi nào để hoàn tác
         }
 
+        // Lấy cặp nước đi cuối cùng
         MovePair lastPair = moveHistoryPairs.remove(moveHistoryPairs.size() - 1);
 
+        // Hoàn tác nước đi của Đỏ
         if (lastPair.getRedMove() != null) {
-            lastPair.getRedMove().getPiece().setPosition(lastPair.getRedMove().getOldX(), lastPair.getRedMove().getOldY());
-            if (lastPair.getRedMove().getCapturedPiece() != null) {
-                pieces.add(lastPair.getRedMove().getCapturedPiece());
+            Move redMove = lastPair.getRedMove();
+            redMove.getPiece().setPosition(redMove.getOldX(), redMove.getOldY());
+            if (redMove.getCapturedPiece() != null) {
+                pieces.add(redMove.getCapturedPiece()); // Khôi phục quân cờ bị bắt
             }
         }
 
+        // Hoàn tác nước đi của Đen
         if (lastPair.getBlackMove() != null) {
-            lastPair.getBlackMove().getPiece().setPosition(lastPair.getBlackMove().getOldX(), lastPair.getBlackMove().getOldY());
-            if (lastPair.getBlackMove().getCapturedPiece() != null) {
-                pieces.add(lastPair.getBlackMove().getCapturedPiece());
+            Move blackMove = lastPair.getBlackMove();
+            blackMove.getPiece().setPosition(blackMove.getOldX(), blackMove.getOldY());
+            if (blackMove.getCapturedPiece() != null) {
+                pieces.add(blackMove.getCapturedPiece()); // Khôi phục quân cờ bị bắt
             }
         }
 
-        isRedTurn = !isRedTurn;
+        // Đặt lượt chơi về Đỏ
+        isRedTurn = true;
+
+        // Vẽ lại bàn cờ sau khi hoàn tác
         repaint();
-        return true;
+
+        return true; // Hoàn tác thành công
     }
 
     public List<Move> getAllPossibleMoves(boolean isRed) {

@@ -298,7 +298,7 @@ public class StartWindow extends JFrame {
         frame.pack();
         frame.setVisible(true); // Hiện cửa sổ chính
         // Thiết lập JFrame hiển thị toàn màn hình
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
     public void notifyOpponentFound() {
