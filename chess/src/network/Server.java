@@ -62,6 +62,7 @@ public class Server {
             GameRoom room = new GameRoom(roomId, client, opponent); // Thêm tên người chơi vào phòng
 
             opponent.setOpponent(client);
+            client.setOpponent(opponent);
             rooms.put(roomId, room);
             room.saveRoomToDatabase(); // Lưu phòng vào cơ sở dữ liệu
 
