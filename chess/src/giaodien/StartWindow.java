@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import javax.imageio.ImageIO;
 
 import AI.Board;
@@ -13,8 +14,8 @@ import auth.LoginWindow;
 import auth.RegisterWindow;
 import dao.UserManager;
 import network.Client;
+import quanco.Piece;
 import sounds.BackgroundMusicPlayer;
-
 public class StartWindow extends JFrame {
     private JButton startButton;
     private JButton playWithComputerButton;
@@ -25,6 +26,7 @@ public class StartWindow extends JFrame {
     private Image backgroundImage;
     private BackgroundMusicPlayer musicPlayer; // Biến cho lớp âm thanh
     private Client client;
+    private Board board;
     private JFrame frame; // Khai báo frame cho trò chơi AI
     private UserManager userManager;
     private boolean isAIEnabled;
@@ -32,13 +34,15 @@ public class StartWindow extends JFrame {
     private JButton avataname;
     private String roomId;
     private JLabel roomIdLabel;
-
     private String player1Name = "Người chơi 1";
     private String player2Name = "Người chơi 2";
     private String loggedInUser = null;
+    private List<Piece> pieces;
+
     // Constructor chỉ nhận client và không còn phương thức main
     public StartWindow(Client client) {
         this.client = client;
+        this.board = new Board(false, difficulty,client,roomId);
         initialize();
     }
 
@@ -249,8 +253,52 @@ public class StartWindow extends JFrame {
     }
 
     public void updateBoard(String move) {
+
+        if (board == null) {
+            System.err.println("Board chưa được khởi tạo.");
+            return;
+        }
+        move = move.trim();
+        System.out.println("Raw message: '" + move + "'");
         System.out.println("Cập nhật bàn cờ với nước đi: " + move);
-        // Cập nhật GUI hoặc bàn cờ ở đây
+        if (!move.startsWith("MOVE ")) {
+            move = "MOVE " + move;
+            System.out.println("Thêm tiền tố 'MOVE ': '" + move + "'");
+        }
+        String[] parts = move.split(" ");
+        if (parts.length == 5 && "MOVE".equals(parts[0])) {
+            try {
+                int startX = Integer.parseInt(parts[1]);
+                int startY = Integer.parseInt(parts[2]);
+                int endX = Integer.parseInt(parts[3]);
+                int endY = Integer.parseInt(parts[4]);
+
+                System.out.println("Đang kiểm tra quân cờ tại vị trí: (" + startX + ", " + startY + ")");
+                Piece piece = board.getPieceAt(startX, startY);
+                if (piece == null) {
+                    System.err.println("Không tìm thấy quân cờ tại vị trí: " + startX + ", " + startY);
+                    return;
+                }
+
+                System.out.println("Di chuyển quân cờ: " + piece + " từ (" + startX + ", " + startY + ") đến (" + endX + ", " + endY + ")");
+                Piece capturedPiece = board.getPieceAt(endX, endY);
+                if (capturedPiece != null) {
+                    System.out.println("Loại bỏ quân cờ tại đích: " + capturedPiece);
+                    board.getPieces().remove(capturedPiece);
+                }
+
+                piece.setPosition(endX, endY);
+                System.out.println("Danh sách quân cờ sau khi di chuyển:");
+                for (Piece p : board.getPieces()) {
+                    System.out.println("Piece at (" + p.getX() + ", " + p.getY() + "): " + p);
+                }
+                board.repaint();
+            } catch (NumberFormatException e) {
+                System.err.println("Lỗi định dạng nước đi: " + move);
+            }
+        } else {
+            System.err.println("Nước đi không hợp lệ: " + move);
+        }
     }
 
     // Phương thức bắt đầu trò chơi với AI
