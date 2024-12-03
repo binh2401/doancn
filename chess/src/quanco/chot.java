@@ -34,6 +34,10 @@ public class chot extends Piece {
 
     @Override
     public void draw(Graphics g, int cellSize,int boardX, int boardY) {
+        if (icon == null) {
+            System.err.println("Icon chưa được khởi tạo.");
+            return;
+        }
         int imageWidth = icon.getIconWidth();
         int imageHeight = icon.getIconHeight();
 
