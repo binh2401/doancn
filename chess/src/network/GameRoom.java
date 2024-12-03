@@ -87,11 +87,14 @@ public class GameRoom {
         // Kiểm tra lượt đi có hợp lệ không
         if ((sender == player1 && isPlayer1Turn) || (sender == player2 && !isPlayer1Turn)) {
             ClientHandler recipient = (sender == player1) ? player2 : player1;
+            sender.sendMessage("MOVE " + move);
             if (recipient != null) {
                 recipient.sendMessage("MOVE " + move); // Gửi nước đi cho đối thủ
                 System.out.println("Broadcasting move to opponent: " + move);  // Log việc gửi nước đi
                 updateBoardState(move); // Cập nhật trạng thái bàn cờ sau mỗi nước đi
             }
+            System.out.println("Broadcasting move to both players: " + move);
+            updateBoardState(move); // Cập nhật trạng thái bàn cờ sau mỗi nước đi
             // Kiểm tra kết thúc trò chơi
             checkGameStatus();
             // Đổi lượt sau khi phát sóng nước đi

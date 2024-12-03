@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import javax.imageio.ImageIO;
 
 import AI.Board;
@@ -13,8 +14,8 @@ import auth.LoginWindow;
 import auth.RegisterWindow;
 import dao.UserManager;
 import network.Client;
+import quanco.Piece;
 import sounds.BackgroundMusicPlayer;
-
 public class StartWindow extends JFrame {
     private JButton startButton;
     private JButton playWithComputerButton;
@@ -32,13 +33,15 @@ public class StartWindow extends JFrame {
     private JButton avataname;
     private String roomId;
     private JLabel roomIdLabel;
-
     private String player1Name = "Người chơi 1";
     private String player2Name = "Người chơi 2";
     private String loggedInUser = null;
+    private List<Piece> pieces;
+    private  Board board;
     // Constructor chỉ nhận client và không còn phương thức main
     public StartWindow(Client client) {
         this.client = client;
+         this.board = new Board(true, difficulty,client,roomId);
         initialize();
     }
 
@@ -249,9 +252,56 @@ public class StartWindow extends JFrame {
     }
 
     public void updateBoard(String move) {
+
+        if (board == null) {
+            System.err.println("Board chưa được khởi tạo.");
+            return;
+        }
+        move = move.trim();
+        System.out.println("Raw message: '" + move + "'");
         System.out.println("Cập nhật bàn cờ với nước đi: " + move);
-        // Cập nhật GUI hoặc bàn cờ ở đây
+        if (!move.startsWith("MOVE ")) {
+            move = "MOVE " + move;
+            System.out.println("Thêm tiền tố 'MOVE ': '" + move + "'");
+        }
+        String[] parts = move.split(" ");
+        if (parts.length == 5 && "MOVE".equals(parts[0])) {
+            try {
+                int startX = Integer.parseInt(parts[1]);
+                int startY = Integer.parseInt(parts[2]);
+                int endX = Integer.parseInt(parts[3]);
+                int endY = Integer.parseInt(parts[4]);
+
+
+                System.out.println("Đang kiểm tra quân cờ tại vị trí: (" + startX + ", " + startY + ")");
+                Piece piece = board.getPieceAt(startX, startY);
+                if (piece == null) {
+                    System.err.println("Không tìm thấy quân cờ tại vị trí: " + startX + ", " + startY);
+                    return;
+                }
+
+                System.out.println("Di chuyển quân cờ: " + piece + " từ (" + startX + ", " + startY + ") đến (" + endX + ", " + endY + ")");
+                Piece capturedPiece = board.getPieceAt(endX, endY);
+                if (capturedPiece != null) {
+                    System.out.println("Loại bỏ quân cờ tại đích: " + capturedPiece);
+                    board.getPieces().remove(capturedPiece);
+                }
+
+                piece.setPosition(endX, endY);
+                board.repaint(); // Vẽ lại bàn cờ
+                if (board.getParent() == null) {
+                    System.err.println("Board chưa được thêm vào giao diện.");
+                } else {
+                    System.out.println("Board đã được thêm vào giao diện.");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Lỗi định dạng nước đi: " + move);
+            }
+        } else {
+            System.err.println("Nước đi không hợp lệ: " + move);
+        }
     }
+
 
     // Phương thức bắt đầu trò chơi với AI
     public void startGameForAI() {
@@ -324,7 +374,7 @@ public class StartWindow extends JFrame {
         this.roomId=roomId;
         Client client = new Client();
         Board board = new Board(false, difficulty, this.client, this.roomId); // Không có AI, độ khó từ tham số
-        ;
+
         // Gán ID phòng (giả sử client đã có thông tin ID phòng từ server)
 
         setRoomId(roomId);
@@ -361,6 +411,7 @@ public class StartWindow extends JFrame {
         frame.pack();
         frame.setVisible(true); // Hiển thị cửa sổ chính
         this.setVisible(false); // Ẩn cửa sổ start
+
     }
     public void setRoomId(String roomId) {
         this.roomId = roomId;  // Lưu roomId vào biến
