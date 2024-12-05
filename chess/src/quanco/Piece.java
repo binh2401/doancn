@@ -13,7 +13,7 @@ public abstract class Piece {
     protected boolean isRed; // True nếu quân cờ đỏ, false nếu quân cờ đen
     protected List<Piece> pieces; // Danh sách các quân cờ
     private boolean captured = false; // Trạng thái bị bắt
-
+    protected Image image;
     public boolean isCaptured() {
         return captured;
     }
@@ -27,7 +27,9 @@ public abstract class Piece {
         this.isRed = isRed; // Gán màu cho quân cờ
         this.pieces = pieces; // Gán danh sách quân cờ
     }
-
+    public Image getImage() {
+        return image;
+    }
     public int getX() {
         return x; // Trả về tọa độ x
     }

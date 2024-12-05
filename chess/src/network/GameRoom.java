@@ -21,7 +21,7 @@ public class GameRoom {
         this.player1 = player1;
         this.player2 = player2;
         this.isPlayer1Turn = true; // Player 1 đi trước
-        this.boardState = initializeBoard(); // Khởi tạo trạng thái bàn cờ ban đầu
+//        this.boardState = initializeBoard(); // Khởi tạo trạng thái bàn cờ ban đầu
         this.gameOver = false; // Ban đầu trò chơi chưa kết thúc
 
 
@@ -72,10 +72,10 @@ public class GameRoom {
         }
     }
     // Phương thức để khởi tạo trạng thái bàn cờ
-    private String initializeBoard() {
-        // Khởi tạo trạng thái bàn cờ mặc định dưới dạng chuỗi (ví dụ: vị trí các quân cờ)
-        return "InitialBoardState"; // Thay bằng trạng thái bàn cờ thật
-    }
+//    private String initializeBoard() {
+//        // Khởi tạo trạng thái bàn cờ mặc định dưới dạng chuỗi (ví dụ: vị trí các quân cờ)
+//        return "InitialBoardState"; // Thay bằng trạng thái bàn cờ thật
+//    }
 
     // Phương thức gửi nước đi cho đối thủ
     public void broadcastMove(String move, ClientHandler sender) {

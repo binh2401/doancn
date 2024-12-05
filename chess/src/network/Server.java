@@ -71,8 +71,7 @@ public class Server {
             opponent.setRoom(room);
 
             // Gửi thông báo về trò chơi
-            client.sendMessage("GAME_START RED " + room.getBoardState());
-            opponent.sendMessage("GAME_START BLACK " + room.getBoardState());
+
             client.sendMessage("ROOM_ID " + roomId); // Gửi ID phòng cho client
             opponent.sendMessage("ROOM_ID " + roomId); // Gửi ID phòng cho đối thủ
 

@@ -16,8 +16,19 @@ public class FunctionPanel extends JPanel {
         setLayout(new BorderLayout()); // Sử dụng BorderLayout
 
         // Panel để chứa các nút chức năng và nhãn thông báo
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel() {
+            private Image backgroundImage = new ImageIcon(getClass().getResource("/img/HinhNen/nen.jpg")).getImage();
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Vẽ hình nền với kích thước bằng với panel
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); // Sắp xếp theo chiều dọc
+        buttonPanel.setPreferredSize(new Dimension(200, 0)); // Chiều rộng cố định
 
         // Tạo các nút chức năng với kích thước cố định
         JButton resetButton = new JButton("Reset Game");
@@ -108,8 +119,8 @@ public class FunctionPanel extends JPanel {
                 notificationLabel.setText("Bạn đã đầu hàng.");
             }
         });
-
-        // Sự kiện cho nút Draw (Hòa)
+    }
+    // Sự kiện cho nút Draw (Hòa)
 //        drawButton.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
@@ -117,7 +128,7 @@ public class FunctionPanel extends JPanel {
 //                notificationLabel.setText("Trận đấu đã hòa.");
 //            }
 //        });
-        // Sự kiện cho nút Save
+    // Sự kiện cho nút Save
 //        saveButton.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
@@ -134,5 +145,5 @@ public class FunctionPanel extends JPanel {
 //                notificationLabel.setText("Đã load game.");
 //            }
 //        });
-    }
 }
+

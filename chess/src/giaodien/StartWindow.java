@@ -251,7 +251,7 @@ public class StartWindow extends JFrame {
         startButton.setEnabled(true); // Bật nút khi nhận được tín hiệu "READY_TO_START"
     }
 
-    public void updateBoard(String move) {
+    public  void updateBoard(String move)  {
 
         if (board == null) {
             System.err.println("Board chưa được khởi tạo.");
@@ -287,13 +287,18 @@ public class StartWindow extends JFrame {
                     board.getPieces().remove(capturedPiece);
                 }
 
-                piece.setPosition(endX, endY);
-                board.repaint(); // Vẽ lại bàn cờ
-                if (board.getParent() == null) {
-                    System.err.println("Board chưa được thêm vào giao diện.");
-                } else {
-                    System.out.println("Board đã được thêm vào giao diện.");
-                }
+
+
+                // Đặt quân cờ tại vị trí mới
+            piece.setPosition(endX, endY);        // Cập nhật vị trí quân cờ
+                board.setPieceAt(endX, endY, piece); // Đặt quân cờ tại vị trí mới
+                board.setPieceAt(startX, startY, null); // Xóa quân cờ tại vị trí cũ
+//                System.out.println("Toàn bộ vị trí quân cờ trên bàn cờ:");
+//                for (Piece p : board.getPieces()) {
+//                    System.out.println(p + " tại vị trí (" + p.getX() + ", " + p.getY() + ")");
+//                }
+
+                board.repaint();
             } catch (NumberFormatException e) {
                 System.err.println("Lỗi định dạng nước đi: " + move);
             }
@@ -343,7 +348,8 @@ public class StartWindow extends JFrame {
         FunctionPanel functionPanel = new FunctionPanel(board); // Tạo FunctionPanel
         frame.add(board, BorderLayout.CENTER); // Bàn cờ ở giữa
         frame.add(functionPanel, BorderLayout.EAST); // Bảng chức năng ở bên phải
-
+        frame.validate();
+        frame.repaint();
         // Sử dụng pack() để tự động điều chỉnh kích thước cửa sổ phù hợp
         frame.pack();
         frame.setVisible(true); // Hiện cửa sổ chính

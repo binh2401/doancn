@@ -214,7 +214,7 @@ public class Board extends JPanel {
                                     }
                                     // Đổi lượt trở lại cho người chơi
                                     isRedTurn = true;
-
+                                    timeLeft = 60;
                                     // Vẽ lại bàn cờ sau khi di chuyển
                                     repaint(); // Gọi repaint để cập nhật bàn cờ
                                 }
@@ -224,6 +224,7 @@ public class Board extends JPanel {
 
                     // Phát âm thanh khi di chuyển quân cờ
                     SoundPlayer soundPlayer = new SoundPlayer();
+
                     if (selectedPiece.isRed()) {
                         soundPlayer.playSound("/sounds/move.wav"); // Âm thanh cho quân đỏ
                     } else {
@@ -392,11 +393,19 @@ public class Board extends JPanel {
                 g.fillRect(validX * cellSize + x + 10, validY * cellSize + y + 10, cellSize - 20, cellSize - 20); // Vẽ ô cho nước đi hợp lệ
             }
         }
-
+        // Vẽ các quân cờ
+        if (pieces != null) {
+            for (Piece piece : pieces) {
+                if (piece != null) {
+                    piece.draw(g, cellSize, x, y); // Gọi phương thức draw của quân cờ
+                }
+            }
+        }
         // Vẽ các quân cờ lên chính giữa màn hình
         for (Piece piece : pieces) {
             piece.draw(g, cellSize, x, y); // Đảm bảo vẽ quân cờ vào vị trí chính xác với offset
         }
+
     }
 
 
@@ -580,4 +589,15 @@ public class Board extends JPanel {
     public String getRoomId(String roomId) {
         return this.roomId;
     }
+    public void clearPieceAt(int x, int y) {
+        pieces = new ArrayList<>();
+        pieces.removeIf(piece -> piece.getX() == x && piece.getY() == y);
+    }
+    public void setPieceAt(int x, int y, Piece piece) {
+        piece.setPosition(x, y);
+        if (!pieces.contains(piece)) {
+            pieces.add(piece);
+        }
+    }
+
 }
