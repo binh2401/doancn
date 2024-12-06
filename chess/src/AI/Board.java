@@ -593,11 +593,6 @@ public class Board extends JPanel {
         pieces = new ArrayList<>();
         pieces.removeIf(piece -> piece.getX() == x && piece.getY() == y);
     }
-    public void setPieceAt(int x, int y, Piece piece) {
-        piece.setPosition(x, y);
-        if (!pieces.contains(piece)) {
-            pieces.add(piece);
-        }
-    }
+
 
 }

@@ -41,11 +41,12 @@ public class StartWindow extends JFrame {
     // Constructor chỉ nhận client và không còn phương thức main
     public StartWindow(Client client) {
         this.client = client;
-         this.board = new Board(true, difficulty,client,roomId);
+
         initialize();
     }
 
     private void initialize() {
+        this.board = new Board(true, difficulty,client,roomId);
         // Thiết lập giao diện Nimbus trước khi tạo các thành phần GUI
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -253,10 +254,7 @@ public class StartWindow extends JFrame {
 
     public  void updateBoard(String move)  {
 
-        if (board == null) {
-            System.err.println("Board chưa được khởi tạo.");
-            return;
-        }
+
         move = move.trim();
         System.out.println("Raw message: '" + move + "'");
         System.out.println("Cập nhật bàn cờ với nước đi: " + move);
@@ -291,14 +289,16 @@ public class StartWindow extends JFrame {
 
                 // Đặt quân cờ tại vị trí mới
             piece.setPosition(endX, endY);        // Cập nhật vị trí quân cờ
-                board.setPieceAt(endX, endY, piece); // Đặt quân cờ tại vị trí mới
-                board.setPieceAt(startX, startY, null); // Xóa quân cờ tại vị trí cũ
+
 //                System.out.println("Toàn bộ vị trí quân cờ trên bàn cờ:");
 //                for (Piece p : board.getPieces()) {
 //                    System.out.println(p + " tại vị trí (" + p.getX() + ", " + p.getY() + ")");
 //                }
-
+              //  frame.add(this.board, BorderLayout.CENTER);
+                board.revalidate();
                 board.repaint();
+
+
             } catch (NumberFormatException e) {
                 System.err.println("Lỗi định dạng nước đi: " + move);
             }
@@ -379,7 +379,7 @@ public class StartWindow extends JFrame {
         }
         this.roomId=roomId;
         Client client = new Client();
-        Board board = new Board(false, difficulty, this.client, this.roomId); // Không có AI, độ khó từ tham số
+         this.board = new Board(false, "medium", this.client, this.roomId); // Không có AI, độ khó từ tham số
 
         // Gán ID phòng (giả sử client đã có thông tin ID phòng từ server)
 
@@ -412,9 +412,14 @@ public class StartWindow extends JFrame {
 
         // Thêm playerInfoPanel và bàn cờ vào JFrame
         frame.add(playerInfoPanel, BorderLayout.NORTH);
-        frame.add(board, BorderLayout.CENTER);
+        frame.add(this.board, BorderLayout.CENTER);
 
         frame.pack();
+
+
+        // Làm mới giao diện để cập nhật
+        frame.revalidate();
+        frame.repaint();
         frame.setVisible(true); // Hiển thị cửa sổ chính
         this.setVisible(false); // Ẩn cửa sổ start
 
