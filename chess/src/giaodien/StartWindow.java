@@ -295,6 +295,7 @@ public class StartWindow extends JFrame {
 //                    System.out.println(p + " tại vị trí (" + p.getX() + ", " + p.getY() + ")");
 //                }
               //  frame.add(this.board, BorderLayout.CENTER);
+                board.resetTimer();
                 board.revalidate();
                 board.repaint();
 

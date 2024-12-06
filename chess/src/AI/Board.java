@@ -509,7 +509,7 @@ public class Board extends JPanel {
 
     public List<Piece> getPieces() {
         // Trả về danh sách các quân cờ hiện tại
-        return new ArrayList<>(pieces);
+        return pieces;
     }
     public List<Move> getAllValidMoves() {
         List<Move> validMoves = new ArrayList<>();
@@ -593,6 +593,13 @@ public class Board extends JPanel {
         pieces = new ArrayList<>();
         pieces.removeIf(piece -> piece.getX() == x && piece.getY() == y);
     }
-
+    public void resetTimer() {
+        timeLeft = 60; // Thiết lập lại thời gian về 60 giây
+        timerLabel.setText("Time left: " + timeLeft); // Cập nhật giao diện
+        if (timer != null && timer.isRunning()) {
+            timer.stop();  // Dừng bộ đếm thời gian hiện tại
+        }
+        startTimer();  // Khởi động lại bộ đếm thời gian mới từ 60 giây
+    }
 
 }
