@@ -22,7 +22,7 @@ public class Board extends JPanel {
     private Image backgroundImage;
     private Piece selectedPiece;          // Quân cờ đang được chọn
     private int mouseX, mouseY;          // Vị trí chuột khi kéo
-    private boolean isRedTurn = true;    // Biến xác định lượt
+    public boolean isRedTurn = true;    // Biến xác định lượt
     private Timer timer;                  // Bộ đếm thời gian
     private int timeLeft = 60;            // Thời gian còn lại
     private JLabel timerLabel;            // Nhãn hiển thị thời gian
@@ -419,7 +419,7 @@ public class Board extends JPanel {
     }
 
     // Hàm kiểm tra chiếu
-    private boolean isCheck(boolean isRed) {
+    public boolean isCheck(boolean isRed) {
         Piece king = null;
         for (Piece piece : pieces) {
             if (piece instanceof King && piece.isRed() == isRed) {
@@ -438,7 +438,7 @@ public class Board extends JPanel {
     }
 
     // Hàm kiểm tra chiếu tướng
-    private boolean isCheckmate(boolean isRed) {
+    public boolean isCheckmate(boolean isRed) {
         if (!isCheck(isRed)) return false;
 
         for (Piece piece : pieces) {

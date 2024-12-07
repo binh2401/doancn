@@ -30,6 +30,7 @@ public class StartWindow extends JFrame {
     private UserManager userManager;
     private boolean isAIEnabled;
     private String difficulty;
+    private boolean isRedTurn = true;
     private JButton avataname;
     private String roomId;
     private JLabel roomIdLabel;
@@ -46,7 +47,7 @@ public class StartWindow extends JFrame {
     }
 
     private void initialize() {
-        this.board = new Board(true, difficulty,client,roomId);
+
         // Thiết lập giao diện Nimbus trước khi tạo các thành phần GUI
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -271,6 +272,11 @@ public class StartWindow extends JFrame {
                 int endY = Integer.parseInt(parts[4]);
 
 
+                startX = 8 - startX;
+                startY = 9 - startY;
+                endX = 8 - endX;
+                endY = 9 - endY;
+
                 System.out.println("Đang kiểm tra quân cờ tại vị trí: (" + startX + ", " + startY + ")");
                 Piece piece = board.getPieceAt(startX, startY);
                 if (piece == null) {
@@ -295,6 +301,19 @@ public class StartWindow extends JFrame {
 //                    System.out.println(p + " tại vị trí (" + p.getX() + ", " + p.getY() + ")");
 //                }
               //  frame.add(this.board, BorderLayout.CENTER);
+                // Kiểm tra chiếu sau khi di chuyển
+
+                if (board.isCheck(!board.isRedTurn)) {
+                    JOptionPane.showMessageDialog(this.board,
+                            (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                }
+
+                // Kiểm tra chiếu tướng
+                if (board.isCheckmate(!board.isRedTurn)) {
+                    JOptionPane.showMessageDialog(this.board,
+                            (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
+                    System.exit(0); // Kết thúc trò chơi
+                }
                 board.resetTimer();
                 board.revalidate();
                 board.repaint();
@@ -379,7 +398,7 @@ public class StartWindow extends JFrame {
             frame.getContentPane().removeAll(); // Xóa cửa sổ hiện tại
         }
         this.roomId=roomId;
-        Client client = new Client();
+
          this.board = new Board(false, "medium", this.client, this.roomId); // Không có AI, độ khó từ tham số
 
         // Gán ID phòng (giả sử client đã có thông tin ID phòng từ server)
@@ -419,8 +438,8 @@ public class StartWindow extends JFrame {
 
 
         // Làm mới giao diện để cập nhật
-        frame.revalidate();
-        frame.repaint();
+//        frame.revalidate();
+//        frame.repaint();
         frame.setVisible(true); // Hiển thị cửa sổ chính
         this.setVisible(false); // Ẩn cửa sổ start
 
