@@ -9,6 +9,28 @@ import java.awt.event.ActionListener;
 
 public class FunctionPanel extends JPanel {
     private Board board; // Biến để lưu tham chiếu đến Board
+    // Phương thức tạo nút với hình ảnh
+    private JButton createImageButton(String imagePath, String tooltip) {
+        JButton button = new JButton();
+        try {
+            // Tải hình ảnh từ tài nguyên
+            ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+            // Điều chỉnh kích thước hình ảnh
+            int buttonWidth = 70;
+            int buttonHeight = 40;
+            Image scaledImage = icon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+            button.setIcon(new ImageIcon(scaledImage)); // Đặt biểu tượng cho nút
+        } catch (Exception e) {
+            System.err.println("Không thể tải hình ảnh từ đường dẫn: " + imagePath);
+            e.printStackTrace();
+        }
+        button.setToolTipText(tooltip);
+        button.setContentAreaFilled(false); // Loại bỏ nền mặc định
+        button.setBorderPainted(false); // Loại bỏ viền mặc định
+        button.setFocusPainted(false); // Loại bỏ hiệu ứng khi chọn
+        button.setPreferredSize(new Dimension(120, 40)); // Đặt kích thước cố định
+        return button;
+    }
 
     public FunctionPanel(Board board) {
         this.board = board; // Lưu tham chiếu đến Board
@@ -31,10 +53,10 @@ public class FunctionPanel extends JPanel {
         buttonPanel.setPreferredSize(new Dimension(200, 0)); // Chiều rộng cố định
 
         // Tạo các nút chức năng với kích thước cố định
-        JButton resetButton = new JButton("Reset Game");
-        JButton surrenderButton = new JButton("Surrender");
-        JButton drawButton = new JButton("Draw");
-        JButton backButton = new JButton("Roll Back");
+        JButton resetButton = createImageButton("/img/HinhNen/reset.png", "Reset Game");
+        JButton surrenderButton = createImageButton("/img/HinhNen/surrender.png", "Surrender");
+        JButton drawButton = createImageButton("/img/HinhNen/peace.png", "Draw");
+        JButton backButton = createImageButton("/img/HinhNen/rollback.png", "Roll Back");
         JButton saveButton = new JButton("Save Game");
         JButton loadButton = new JButton("Load Game");
 
