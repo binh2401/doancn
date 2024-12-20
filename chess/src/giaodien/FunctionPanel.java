@@ -68,6 +68,7 @@ public class FunctionPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Tạo cửa sổ StartWindow
+                board.stopBoard();
                 JFrame startWindow = new StartWindow(client); // Giả sử bạn đã có lớp StartWindow mở giao diện chính
 
                 // Hiển thị cửa sổ StartWindow

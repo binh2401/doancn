@@ -1,5 +1,6 @@
 package AI;
 
+import giaodien.StartWindow;
 import network.Client;
 import quanco.*;
 import javax.imageio.ImageIO;
@@ -174,11 +175,27 @@ public class Board extends JPanel {
                                                 (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                                     }
 
-                                    // Kiểm tra chiếu tướng
+// Kiểm tra chiếu tướng
                                     if (isCheckmate(!isRedTurn)) {
-                                        JOptionPane.showMessageDialog(Board.this,
-                                                (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
-                                        System.exit(0); // Kết thúc trò chơi
+                                        int option = JOptionPane.showOptionDialog(Board.this,
+                                                (isRedTurn ? "Đen" : "Đỏ") + " đã thua! Bạn muốn làm gì tiếp theo?",
+                                                "Game Over",
+                                                JOptionPane.YES_NO_OPTION,
+                                                JOptionPane.QUESTION_MESSAGE,
+                                                null,
+                                                new String[]{"Chơi Tiếp", "Về Trang Chính"}, // Tên các nút
+                                                "Chơi Tiếp"); // Nút mặc định
+
+                                        if (option == JOptionPane.YES_OPTION) {
+                                            // Chơi tiếp: Reset lại trò chơi
+                                            resetGame();
+                                        } else if (option == JOptionPane.NO_OPTION) {
+                                            stopBoard();
+                                            // Về trang chính: Đóng cửa sổ hiện tại và mở StartWindow
+                                            JFrame startWindow = new StartWindow(client); // Giả sử StartWindow là giao diện chính
+                                            startWindow.setVisible(true);
+                                            SwingUtilities.getWindowAncestor(Board.this).dispose(); // Đóng cửa sổ hiện tại
+                                        }
                                     }
 
                                     isRedTurn = false; // Đổi lượt cho AI
@@ -355,9 +372,30 @@ public class Board extends JPanel {
                 timeLeft--;
                 timerLabel.setText("Time left: " + timeLeft);
             } else {
-                // Nếu thời gian hết, thông báo và kết thúc trò chơi
-                JOptionPane.showMessageDialog(this, (isRedTurn ? "Đỏ" : "Đen") + " đã hết thời gian!", "Game Over", JOptionPane.WARNING_MESSAGE);
-                System.exit(0); // Thoát trò chơi
+                // Nếu thời gian hết, hiển thị hộp thoại với 2 tùy chọn
+                int option = JOptionPane.showOptionDialog(this,
+                        (isRedTurn ? "Đỏ" : "Đen") + " đã hết thời gian! Bạn muốn làm gì tiếp theo?",
+                        "Game Over",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new String[]{"Chơi Tiếp", "Về Trang Chính"}, // Các nút tùy chọn
+                        "Chơi Tiếp"); // Nút mặc định
+
+                if (option == JOptionPane.YES_OPTION) {
+                    // Nếu người chơi chọn "Chơi Tiếp", bắt đầu lại thời gian hoặc tiếp tục trò chơi
+                    timeLeft = 60; // Reset lại thời gian (hoặc thiết lập thời gian mới)
+                    timerLabel.setText("Time left: " + timeLeft);
+                    startTimer(); // Bắt đầu lại timer
+                } else if (option == JOptionPane.NO_OPTION) {
+                    if (timer != null) {
+                        timer.stop(); // Dừng Timer
+                    }
+                    // Nếu người chơi chọn "Về Trang Chính", đóng cửa sổ hiện tại và mở StartWindow
+                    JFrame startWindow = new StartWindow(client); // Giả sử bạn đã có lớp StartWindow mở giao diện chính
+                    startWindow.setVisible(true);
+                    SwingUtilities.getWindowAncestor(this).dispose(); // Đóng cửa sổ hiện tại
+                }
             }
         });
         timer.start();
@@ -577,11 +615,41 @@ public class Board extends JPanel {
     public void surrender() {
         // Kiểm tra ai là người thua cuộc và thông báo
         String loser = isRedTurn ? "Đỏ" : "Đen";
-        String winner = isRedTurn ? "Đen" : "Đỏ";
 
-        // Hiển thị thông báo và kết thúc trò chơi
-        JOptionPane.showMessageDialog(this, loser + " đã đầu hàng. " + winner + " thắng!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-        System.exit(0); // Kết thúc trò chơi
+
+        // Hiển thị hộp thoại với hai tùy chọn: Chơi Tiếp hoặc Về Trang Chính
+        int option = JOptionPane.showOptionDialog(this,
+                loser + " đã đầu hàng. "  + " thắng! Bạn muốn làm gì tiếp theo?",
+                "Game Over",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Chơi Tiếp", "Về Trang Chính"}, // Tên các nút
+                "Chơi Tiếp"); // Nút mặc định
+
+        if (option == JOptionPane.YES_OPTION) {
+            // Chơi tiếp: Reset lại trò chơi
+            resetGame();
+        } else if (option == JOptionPane.NO_OPTION) {
+            // Dừng tất cả hoạt động của Board trước khi quay lại StartWindow
+            stopBoard();
+
+            // Về trang chính: Đóng cửa sổ hiện tại và mở StartWindow
+            JFrame startWindow = new StartWindow(client); // Truyền tham chiếu client nếu cần
+            startWindow.setVisible(true);
+            SwingUtilities.getWindowAncestor(this).dispose(); // Đóng cửa sổ hiện tại
+        }
+    }
+
+    // Phương thức dừng các hoạt động của Board
+    public void stopBoard() {
+        // Hủy bỏ các luồng, bộ đếm thời gian hoặc bất kỳ tác vụ nào đang chạy
+        if (timer != null) {
+            timer.stop(); // Dừng Timer
+        }
+
+        // Dọn dẹp các tài nguyên khác nếu cần
+        // ...
     }
 
 
