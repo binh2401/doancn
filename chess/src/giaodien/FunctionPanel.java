@@ -58,7 +58,7 @@ public class FunctionPanel extends JPanel {
         // Tạo các nút chức năng với kích thước cố định
         JButton resetButton = createImageButton("/img/HinhNen/reset.png", "Reset Game");
         JButton surrenderButton = createImageButton("/img/HinhNen/surrender.png", "Surrender");
-        JButton drawButton = createImageButton("/img/HinhNen/peace.png", "Draw");
+       // JButton drawButton = createImageButton("/img/HinhNen/peace.png", "Draw");
         JButton backButton = createImageButton("/img/HinhNen/rollback.png", "Roll Back");
 //        JButton saveButton = new JButton("Save Game");
 
@@ -83,14 +83,14 @@ public class FunctionPanel extends JPanel {
         resetButton.setPreferredSize(buttonSize);
         backButton.setPreferredSize(buttonSize);
         surrenderButton.setPreferredSize(buttonSize);
-        drawButton.setPreferredSize(buttonSize);
+      //  drawButton.setPreferredSize(buttonSize);
 //        saveButton.setPreferredSize(buttonSize);
 //        loadButton.setPreferredSize(buttonSize);
 
         // Đảm bảo nút không bị giãn
         resetButton.setMaximumSize(buttonSize);
         surrenderButton.setMaximumSize(buttonSize);
-        drawButton.setMaximumSize(buttonSize);
+    //    drawButton.setMaximumSize(buttonSize);
         backButton.setMaximumSize(buttonSize);
 //        saveButton.setPreferredSize(buttonSize);
        loadButton.setPreferredSize(buttonSize);
@@ -99,7 +99,7 @@ public class FunctionPanel extends JPanel {
         resetButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         surrenderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        drawButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+      //  drawButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 //        saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         loadButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -110,7 +110,7 @@ public class FunctionPanel extends JPanel {
         buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(surrenderButton);
         buttonPanel.add(Box.createVerticalStrut(10));
-        buttonPanel.add(drawButton);
+ //       buttonPanel.add(drawButton);
         buttonPanel.add(Box.createVerticalStrut(10));
 
 

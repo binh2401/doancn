@@ -222,11 +222,31 @@ public class Board extends JPanel {
                                                     (isRedTurn ? "Đen" : "Đỏ") + " bị chiếu!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                                         }
 
-                                        // Kiểm tra chiếu tướng
+// Kiểm tra chiếu tướng
                                         if (isCheckmate(!isRedTurn)) {
-                                            JOptionPane.showMessageDialog(Board.this,
-                                                    (isRedTurn ? "Đen" : "Đỏ") + " đã thua!", "Game Over", JOptionPane.WARNING_MESSAGE);
-                                            System.exit(0); // Kết thúc trò chơi
+                                            int option = JOptionPane.showOptionDialog(Board.this,
+                                                    (isRedTurn ? "Đen" : "Đỏ") + " đã thua! Bạn muốn làm gì?", // Nội dung thông báo
+                                                    "Game Over", // Tiêu đề
+                                                    JOptionPane.DEFAULT_OPTION, // Loại hộp thoại
+                                                    JOptionPane.WARNING_MESSAGE, // Icon cảnh báo
+                                                    null, // Icon tùy chỉnh (để null dùng mặc định)
+                                                    new Object[]{"Chơi tiếp", "Quay về StartWindow"}, // Các lựa chọn nút
+                                                    "Chơi tiếp" // Nút mặc định
+                                            );
+
+                                            // Xử lý lựa chọn
+                                            if (option == 0) {
+                                                // Người chơi chọn "Chơi tiếp"
+                                                resetGame(); // Hàm để reset bàn cờ và chơi lại
+                                            } else if (option == 1) {
+                                                // Người chơi chọn "Quay về StartWindow"
+                                                stopBoard();
+
+                                                // Về trang chính: Đóng cửa sổ hiện tại và mở StartWindow
+                                                JFrame startWindow = new StartWindow(client); // Truyền tham chiếu client nếu cần
+                                                startWindow.setVisible(true);
+                                                SwingUtilities.getWindowAncestor(Board.this).dispose();
+                                            }
                                         }
                                     }
                                     // Đổi lượt trở lại cho người chơi
