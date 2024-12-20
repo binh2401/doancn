@@ -61,7 +61,9 @@ public class FunctionPanel extends JPanel {
         JButton drawButton = createImageButton("/img/HinhNen/peace.png", "Draw");
         JButton backButton = createImageButton("/img/HinhNen/rollback.png", "Roll Back");
 //        JButton saveButton = new JButton("Save Game");
-        JButton loadButton = new JButton("rời khỏi");
+
+        //nut out phong`
+        JButton loadButton = createImageButton("/img/HinhNen/home.png", "Rời khỏi");
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -129,6 +131,7 @@ public class FunctionPanel extends JPanel {
 
         buttonPanel.add(Box.createVerticalGlue());
         buttonPanel.add(loadButton);
+
 
 
 

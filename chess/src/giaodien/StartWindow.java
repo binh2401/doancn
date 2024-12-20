@@ -2,6 +2,8 @@ package giaodien;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -39,6 +41,8 @@ public class StartWindow extends JFrame {
     private String loggedInUser = null;
     private List<Piece> pieces;
     private  Board board;
+    private JToggleButton soundToggleButton; // Nút bật/tắt âm thanh
+
     // Constructor chỉ nhận client và không còn phương thức main
     public StartWindow(Client client) {
         this.client = client;
@@ -75,21 +79,37 @@ public class StartWindow extends JFrame {
 
         // Khởi tạo âm thanh nền
         musicPlayer = new BackgroundMusicPlayer();
-    //    musicPlayer.playBackgroundMusic("/sounds/nhacnen2.wav"); // Đường dẫn đến âm thanh nền
+        musicPlayer.playBackgroundMusic("/sounds/nhacnen2.wav"); // Đường dẫn đến âm thanh nền
 
         JLabel title = new JLabel("Cờ Tướng AI", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
         add(title, BorderLayout.NORTH);
 
+        // Tạo nút bật/tắt âm thanh
+        soundToggleButton = new JToggleButton("Tắt âm thanh");
+        soundToggleButton.setBounds(600, 10, 90, 30); // Đặt vị trí góc trên cùng bên phải
+        soundToggleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (soundToggleButton.isSelected()) {
+                    musicPlayer.stopBackgroundMusic();
+                    soundToggleButton.setText("Bật âm thanh");
+                } else {
+                    musicPlayer.playBackgroundMusic("/sounds/nhacnen2.wav");
+                    soundToggleButton.setText("Tắt âm thanh");
+                }
+            }
+        });
+        add(soundToggleButton);
 
         // Khởi tạo các nút với văn bản và hình nền
-        startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "play now");
+        startButton = createButtonWithBackground("/img/HinhNen/btn3.jpg", "Chơi ngay");
 
         startButton.addActionListener(e -> {
-//            if (loggedInUser == null) {
-//                JOptionPane.showMessageDialog(this, "Vui lòng đăng nhập trước khi chơi!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-//                return;
-//            }
+            if (loggedInUser == null) {
+                JOptionPane.showMessageDialog(this, "Vui lòng đăng nhập trước khi chơi!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             startButton.setEnabled(false); // Tạm thời vô hiệu hóa nút
             startButton.setText("Vui lòng chờ..."); // Thay đổi văn bản nút
 
